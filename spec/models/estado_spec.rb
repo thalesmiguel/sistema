@@ -1,0 +1,33 @@
+require 'rails_helper'
+
+RSpec.describe Estado, type: :model do
+
+  describe 'validações' do
+    it 'exige nome' do
+      estado = Estado.new(FactoryGirl.attributes_for(:estado, nome: ''))
+      expect(estado.valid?).to be_falsy
+    end
+
+    it 'exige sigla' do
+      estado = Estado.new(FactoryGirl.attributes_for(:estado, sigla: ''))
+      expect(estado.valid?).to be_falsy
+    end
+
+    it 'sigla não pode ter mais do que 2 caracteres' do
+      estado = Estado.new(FactoryGirl.attributes_for(:estado, sigla: 'ABC'))
+      estado.valid?
+      expect(estado.errors[:sigla]).to include('deve ter 2 caracteres')
+    end
+  end
+
+  describe 'associações' do
+    it 'has_many Cidades' do
+      primeiro_estado = FactoryGirl.create(:estado)
+      segundo_estado = FactoryGirl.create(:estado)
+      primeira_cidade = FactoryGirl.create(:cidade, estado: primeiro_estado)
+      segunda_cidade = FactoryGirl.create(:cidade, estado: primeiro_estado)
+      terceira_cidade = FactoryGirl.create(:cidade, estado: segundo_estado)
+      expect(primeiro_estado.cidades).to eq([primeira_cidade, segunda_cidade])
+    end
+  end
+end
