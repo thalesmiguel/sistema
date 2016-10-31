@@ -36,7 +36,7 @@ RSpec.describe Endereco, type: :model do
       primeiro_endereco = FactoryGirl.create(:endereco, primario: true, cidade: cidade, cliente: cliente)
       segundo_endereco = Endereco.new(FactoryGirl.attributes_for(:endereco, primario: true, cidade: cidade, cliente: cliente))
       segundo_endereco.valid?
-      expect(segundo_endereco.errors[:primario]).to include('somente 1 endereço deve ser primário')
+      expect(segundo_endereco.errors[:primario]).to include('somente 1 deve ser primário')
     end
 
   end

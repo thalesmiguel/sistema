@@ -19,6 +19,9 @@ RSpec.describe Cidade, type: :model do
   end
 
   describe 'associações' do
+    let(:estado) { FactoryGirl.create(:estado) }
+    let(:cidade) { Cidade.new(FactoryGirl.attributes_for(:cidade, estado: estado)) }
+    let(:cliente) { FactoryGirl.create(:cliente) }
 
     it 'belongs_to Estado' do
       cidade = Cidade.new(FactoryGirl.attributes_for(:cidade, estado: nil))
@@ -26,21 +29,23 @@ RSpec.describe Cidade, type: :model do
     end
 
     it 'has_many Endereços' do
-      estado = FactoryGirl.create(:estado)
-      cidade = Cidade.new(FactoryGirl.attributes_for(:cidade, estado: estado))
-      cliente = FactoryGirl.create(:cliente)
       primeiro_endereco = FactoryGirl.create(:endereco, cidade: cidade, cliente: cliente)
       segundo_endereco = FactoryGirl.create(:endereco, primario: false, cidade: cidade, cliente: cliente)
       expect(cidade.enderecos).to eq([primeiro_endereco, segundo_endereco])
     end
 
     it 'has_many Fazendas' do
-      estado = FactoryGirl.create(:estado)
-      cidade = Cidade.new(FactoryGirl.attributes_for(:cidade, estado: estado))
-      cliente = FactoryGirl.create(:cliente)
       primeira_fazenda = FactoryGirl.create(:fazenda, cidade: cidade, cliente: cliente)
       segunda_fazenda = FactoryGirl.create(:fazenda, cidade: cidade, cliente: cliente)
       expect(cidade.fazendas).to eq([primeira_fazenda, segunda_fazenda])
     end
+
+    it 'has_many Cliente_Bancos' do
+      banco = FactoryGirl.create(:banco)
+      primeiro_cliente_banco = FactoryGirl.create(:cliente_banco, banco: banco, cidade: cidade, cliente: cliente)
+      segundo_cliente_banco = FactoryGirl.create(:cliente_banco, primario: false, banco: banco, cidade: cidade, cliente: cliente)
+      expect(cidade.cliente_bancos).to eq([primeiro_cliente_banco, segundo_cliente_banco])
+    end
+
   end
 end

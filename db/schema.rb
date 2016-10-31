@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161031132349) do
+ActiveRecord::Schema.define(version: 20161031165205) do
+
+  create_table "bancos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "codigo"
+    t.string   "nome"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "cidades", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "nome"
@@ -18,6 +25,25 @@ ActiveRecord::Schema.define(version: 20161031132349) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["estado_id"], name: "index_cidades_on_estado_id", using: :btree
+  end
+
+  create_table "cliente_bancos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "banco_id"
+    t.string   "agencia"
+    t.string   "conta_corrente"
+    t.integer  "cidade_id"
+    t.date     "data_abertura_conta"
+    t.text     "observacao",           limit: 65535
+    t.string   "correntista_nome"
+    t.string   "correntista_cpf_cnpj"
+    t.boolean  "primario"
+    t.boolean  "ativo"
+    t.integer  "cliente_id"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.index ["banco_id"], name: "index_cliente_bancos_on_banco_id", using: :btree
+    t.index ["cidade_id"], name: "index_cliente_bancos_on_cidade_id", using: :btree
+    t.index ["cliente_id"], name: "index_cliente_bancos_on_cliente_id", using: :btree
   end
 
   create_table "clientes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -118,6 +144,9 @@ ActiveRecord::Schema.define(version: 20161031132349) do
   end
 
   add_foreign_key "cidades", "estados"
+  add_foreign_key "cliente_bancos", "bancos"
+  add_foreign_key "cliente_bancos", "cidades"
+  add_foreign_key "cliente_bancos", "clientes"
   add_foreign_key "emails", "clientes"
   add_foreign_key "enderecos", "cidades"
   add_foreign_key "enderecos", "clientes"

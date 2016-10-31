@@ -95,5 +95,12 @@ RSpec.describe Cliente, type: :model do
       expect(cliente.fazendas).to eq([primeira_fazenda, segunda_fazenda])
     end
 
+    it 'has_many ClienteBancos' do
+      banco = FactoryGirl.create(:banco)
+      primeiro_cliente_banco = FactoryGirl.create(:cliente_banco, banco: banco, cidade: cidade, cliente: cliente)
+      segundo_cliente_banco = FactoryGirl.create(:cliente_banco, primario: false, banco: banco, cidade: cidade, cliente: cliente)
+      expect(cliente.cliente_bancos).to eq([primeiro_cliente_banco, segundo_cliente_banco])
+    end
+
   end
 end
