@@ -1,5 +1,8 @@
 class Cliente < ApplicationRecord
   has_many :enderecos
+  has_many :telefones
+  has_many :emails
+  has_many :fazendas
 
   validates :nome, presence: true
   validates :cpf_cnpj, uniqueness: true
@@ -16,5 +19,10 @@ class Cliente < ApplicationRecord
 
   def self.busca_por_campo(campo, string)
     where("#{campo} LIKE ?", "#{string}%").order("#{campo}")
+  end
+
+  def self.busca_por_associacao(tabela, campo, string)
+    includes(tabela).where("#{tabela}.#{campo} LIKE ?", "#{string}%").order("#{tabela}.#{campo}").references(:fazendas)
+    # joins(tabela.to_sym).where("#{tabela}.#{campo} LIKE ?", "#{string}%").order("#{tabela}.#{campo}")
   end
 end

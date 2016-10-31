@@ -2,10 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Endereco, type: :model do
 
+  let(:estado) { FactoryGirl.create(:estado) }
+  let(:cidade) { FactoryGirl.create(:cidade, estado: estado) }
+  let(:cliente) { FactoryGirl.create(:cliente) }
+
   describe 'validações' do
-    let(:estado) { FactoryGirl.create(:estado) }
-    let(:cidade) { FactoryGirl.create(:cidade, estado: estado) }
-    let(:cliente) { FactoryGirl.create(:cliente) }
 
     it 'exige logradouro' do
       endereco = Endereco.new(FactoryGirl.attributes_for(:endereco, logradouro: '', cidade: cidade, cliente: cliente))
@@ -23,7 +24,7 @@ RSpec.describe Endereco, type: :model do
       primeiro_endereco.update(ativo: false)
       segundo_endereco.update(ativo: false)
       segundo_endereco.valid?
-      expect(segundo_endereco.errors[:ativo]).to include('pelo menos 1 endereço deve estar ativo')
+      expect(segundo_endereco.errors[:ativo]).to include('pelo menos 1 deve estar ativo')
     end
 
     it 'exige que o primeiro adicionado seja primario' do
@@ -41,9 +42,6 @@ RSpec.describe Endereco, type: :model do
   end
 
   describe 'associações' do
-    let(:estado) { FactoryGirl.create(:estado) }
-    let(:cidade) { FactoryGirl.create(:cidade, estado: estado) }
-    let(:cliente) { FactoryGirl.create(:cliente) }
 
     it 'belongs_to Cliente' do
       endereco = Endereco.new(FactoryGirl.attributes_for(:endereco, cliente: nil, cidade: cidade))

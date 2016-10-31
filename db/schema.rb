@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161028175516) do
+ActiveRecord::Schema.define(version: 20161031132349) do
 
   create_table "cidades", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "nome"
@@ -36,6 +36,19 @@ ActiveRecord::Schema.define(version: 20161028175516) do
     t.text     "marketing_tipos",    limit: 65535
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
+  end
+
+  create_table "emails", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "email"
+    t.string   "contato"
+    t.boolean  "mala_direta"
+    t.boolean  "solicitacao_email"
+    t.boolean  "envio_contratos"
+    t.boolean  "ativo"
+    t.integer  "cliente_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["cliente_id"], name: "index_emails_on_cliente_id", using: :btree
   end
 
   create_table "enderecos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -65,7 +78,50 @@ ActiveRecord::Schema.define(version: 20161028175516) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "fazendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "nome"
+    t.integer  "cidade_id"
+    t.string   "cep"
+    t.integer  "tipo"
+    t.string   "endereco"
+    t.string   "area"
+    t.text     "observacao",         limit: 65535
+    t.string   "inscricao_estadual"
+    t.string   "cnpj_fazenda"
+    t.string   "incra"
+    t.string   "cnpj_produtor"
+    t.string   "nome_nf"
+    t.string   "cpf_cnpj_nf"
+    t.boolean  "ativo"
+    t.integer  "cliente_id"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.index ["cidade_id"], name: "index_fazendas_on_cidade_id", using: :btree
+    t.index ["cliente_id"], name: "index_fazendas_on_cliente_id", using: :btree
+  end
+
+  create_table "telefones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "tipo"
+    t.string   "ddi"
+    t.string   "ddd"
+    t.string   "numero"
+    t.string   "ramal"
+    t.string   "nome_contato"
+    t.integer  "importancia"
+    t.boolean  "telemarketing"
+    t.boolean  "divulgar"
+    t.boolean  "ativo"
+    t.integer  "cliente_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["cliente_id"], name: "index_telefones_on_cliente_id", using: :btree
+  end
+
   add_foreign_key "cidades", "estados"
+  add_foreign_key "emails", "clientes"
   add_foreign_key "enderecos", "cidades"
   add_foreign_key "enderecos", "clientes"
+  add_foreign_key "fazendas", "cidades"
+  add_foreign_key "fazendas", "clientes"
+  add_foreign_key "telefones", "clientes"
 end

@@ -50,7 +50,12 @@ RSpec.describe Cliente, type: :model do
         expect(Cliente.busca_por_campo("cpf_cnpj", "370.")).to eq([primeiro_cliente])
       end
 
-      it 'por fazenda'
+      it 'por fazendas' do
+        estado = FactoryGirl.create(:estado)
+        cidade = FactoryGirl.create(:cidade, estado: estado)
+        fazenda = FactoryGirl.create(:fazenda, nome: "Minha Fazenda", cidade: cidade, cliente: primeiro_cliente)
+        expect(Cliente.busca_por_associacao("fazendas", "nome", "Minh")).to eq([primeiro_cliente])
+      end
     end
 
     it 'deve ordenar busca por ordem alfabética' do
@@ -58,5 +63,37 @@ RSpec.describe Cliente, type: :model do
       segundo_cliente = FactoryGirl.create(:cliente, nome: 'Thales Martinez')
       expect(Cliente.busca_por_campo("nome", "Thales")).to eq([segundo_cliente, primeiro_cliente])
     end
+  end
+
+  describe 'associações' do
+
+    let(:cliente) { FactoryGirl.create(:cliente) }
+    let(:estado) { FactoryGirl.create(:estado) }
+    let(:cidade) { FactoryGirl.create(:cidade, estado: estado) }
+
+    it 'has_many Enderecos' do
+      primeiro_endereco = FactoryGirl.create(:endereco, cidade: cidade, cliente: cliente)
+      segundo_endereco = FactoryGirl.create(:endereco, primario: false, cidade: cidade, cliente: cliente)
+      expect(cliente.enderecos).to eq([primeiro_endereco, segundo_endereco])
+    end
+
+    it 'has_many Telefones' do
+      primerio_telefone = FactoryGirl.create(:telefone, cliente: cliente)
+      segundo_telefone = FactoryGirl.create(:telefone, cliente: cliente)
+      expect(cliente.telefones).to eq([primerio_telefone, segundo_telefone])
+    end
+
+    it 'has_many Emails' do
+      primeiro_email = FactoryGirl.create(:email, cliente: cliente)
+      segundo_email = FactoryGirl.create(:email, cliente: cliente)
+      expect(cliente.emails).to eq([primeiro_email, segundo_email])
+    end
+
+    it 'has_many Fazendas' do
+      primeira_fazenda = FactoryGirl.create(:fazenda, cidade: cidade, cliente: cliente)
+      segunda_fazenda = FactoryGirl.create(:fazenda, cidade: cidade, cliente: cliente)
+      expect(cliente.fazendas).to eq([primeira_fazenda, segunda_fazenda])
+    end
+
   end
 end
