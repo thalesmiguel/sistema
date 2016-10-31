@@ -4,6 +4,7 @@ class Cliente < ApplicationRecord
   has_many :emails
   has_many :fazendas
   has_many :cliente_bancos
+  has_many :referencias
 
   validates :nome, presence: true
   validates :cpf_cnpj, uniqueness: true

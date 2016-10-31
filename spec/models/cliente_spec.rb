@@ -102,5 +102,11 @@ RSpec.describe Cliente, type: :model do
       expect(cliente.cliente_bancos).to eq([primeiro_cliente_banco, segundo_cliente_banco])
     end
 
+    it 'has_many Referências' do
+      primeira_referencia = FactoryGirl.create(:referencia, cliente: cliente)
+      segunda_referencia = FactoryGirl.create(:referencia, cliente: cliente)
+      expect(cliente.referencias).to eq([primeira_referencia, segunda_referencia])
+    end
+
   end
 end

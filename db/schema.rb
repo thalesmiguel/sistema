@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161031165205) do
+ActiveRecord::Schema.define(version: 20161031181410) do
 
   create_table "bancos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "codigo"
@@ -126,6 +126,16 @@ ActiveRecord::Schema.define(version: 20161031165205) do
     t.index ["cliente_id"], name: "index_fazendas_on_cliente_id", using: :btree
   end
 
+  create_table "referencias", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "nome"
+    t.string   "telefone"
+    t.string   "observacao"
+    t.integer  "cliente_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cliente_id"], name: "index_referencias_on_cliente_id", using: :btree
+  end
+
   create_table "telefones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "tipo"
     t.string   "ddi"
@@ -152,5 +162,6 @@ ActiveRecord::Schema.define(version: 20161031165205) do
   add_foreign_key "enderecos", "clientes"
   add_foreign_key "fazendas", "cidades"
   add_foreign_key "fazendas", "clientes"
+  add_foreign_key "referencias", "clientes"
   add_foreign_key "telefones", "clientes"
 end
