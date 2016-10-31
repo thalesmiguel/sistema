@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161031183348) do
+ActiveRecord::Schema.define(version: 20161031192247) do
 
   create_table "bancos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "codigo"
@@ -60,6 +60,8 @@ ActiveRecord::Schema.define(version: 20161031183348) do
     t.integer  "pessoa_tipo"
     t.integer  "cadastro_tipo"
     t.text     "marketing_tipos",    limit: 65535
+    t.text     "obsevacao",          limit: 65535
+    t.string   "cadastrado_por"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
   end
@@ -75,6 +77,24 @@ ActiveRecord::Schema.define(version: 20161031183348) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.index ["cliente_id"], name: "index_emails_on_cliente_id", using: :btree
+  end
+
+  create_table "empresas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "nome"
+    t.string   "cnpj"
+    t.string   "cargo"
+    t.string   "logradouro"
+    t.string   "numero"
+    t.string   "complemento"
+    t.string   "bairro"
+    t.integer  "cidade_id"
+    t.string   "cep"
+    t.string   "caixa_postal"
+    t.integer  "cliente_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["cidade_id"], name: "index_empresas_on_cidade_id", using: :btree
+    t.index ["cliente_id"], name: "index_empresas_on_cliente_id", using: :btree
   end
 
   create_table "enderecos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -148,6 +168,15 @@ ActiveRecord::Schema.define(version: 20161031183348) do
     t.index ["cliente_id"], name: "index_referencias_on_cliente_id", using: :btree
   end
 
+  create_table "tags", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "codigo"
+    t.string   "nome"
+    t.integer  "cliente_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cliente_id"], name: "index_tags_on_cliente_id", using: :btree
+  end
+
   create_table "telefones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "tipo"
     t.string   "ddi"
@@ -170,11 +199,14 @@ ActiveRecord::Schema.define(version: 20161031183348) do
   add_foreign_key "cliente_bancos", "cidades"
   add_foreign_key "cliente_bancos", "clientes"
   add_foreign_key "emails", "clientes"
+  add_foreign_key "empresas", "cidades"
+  add_foreign_key "empresas", "clientes"
   add_foreign_key "enderecos", "cidades"
   add_foreign_key "enderecos", "clientes"
   add_foreign_key "fazendas", "cidades"
   add_foreign_key "fazendas", "clientes"
   add_foreign_key "lancar_autorizados", "clientes"
   add_foreign_key "referencias", "clientes"
+  add_foreign_key "tags", "clientes"
   add_foreign_key "telefones", "clientes"
 end

@@ -34,7 +34,7 @@ RSpec.describe Cliente, type: :model do
   end
 
   describe 'métodos' do
-    describe 'deve buscar Cliente' do
+    context 'deve buscar Cliente' do
       let(:primeiro_cliente) { FactoryGirl.create(:cliente, nome: 'Alberto Silva', apelido: 'Alberto Silva', cpf_cnpj: '370.629.888-04') }
       let(:segundo_cliente) { FactoryGirl.create(:cliente, nome: 'Kleber Carvalho', apelido: 'Kleber Carvalho', cpf_cnpj: '999.999.999-04') }
 
@@ -114,5 +114,21 @@ RSpec.describe Cliente, type: :model do
       expect(cliente.lancar_autorizados).to eq([primeiro_autorizado_a_lancar, segundo_autorizado_a_lancar])
     end
 
+    it 'has_many Tags' do
+      primeira_tag = FactoryGirl.create(:tag, cliente: cliente)
+      segunda_tag = FactoryGirl.create(:tag, cliente: cliente)
+      expect(cliente.tags).to eq([primeira_tag, segunda_tag])
+    end
+
+    it 'has_many Empresas' do
+      primeira_empresa = FactoryGirl.create(:empresa, cidade: cidade, cliente: cliente)
+      segunda_empresa = FactoryGirl.create(:empresa, cidade: cidade, cliente: cliente)
+      expect(cliente.empresas).to eq([primeira_empresa, segunda_empresa])
+    end
+
+  end
+
+  describe 'atributos' do
+    it 'adiciona o usuário atual ao campo cadastrado_por'
   end
 end

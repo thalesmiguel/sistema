@@ -47,5 +47,10 @@ RSpec.describe Cidade, type: :model do
       expect(cidade.cliente_bancos).to eq([primeiro_cliente_banco, segundo_cliente_banco])
     end
 
+    it 'has_many Empresas' do
+      primeira_empresa = FactoryGirl.create(:empresa, cidade: cidade, cliente: cliente)
+      segunda_empresa = FactoryGirl.create(:empresa, cidade: cidade, cliente: cliente)
+      expect(cidade.empresas).to eq([primeira_empresa, segunda_empresa])
+    end
   end
 end

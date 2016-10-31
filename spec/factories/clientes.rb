@@ -13,5 +13,6 @@ FactoryGirl.define do
     pessoa_tipo Cliente.pessoa_tipos[:física]
     cadastro_tipo Cliente.cadastro_tipos[:cliente]
     marketing_tipos ["mala_direta", "fax", "e-mail"]
+    obsevacao "dçfjnsdçfkgjnsdgkjnsdfçgkjnsdfçgjksdnfgçjsdnçjksndfg"
   end
 end
