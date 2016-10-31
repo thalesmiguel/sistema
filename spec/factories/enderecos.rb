@@ -10,7 +10,7 @@ FactoryGirl.define do
     pais "MyString"
     cep "MyString"
     aos_cuidados "MyString"
-    primario false
+    primario true
     ativo true
     cliente nil
   end
