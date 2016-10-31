@@ -108,5 +108,11 @@ RSpec.describe Cliente, type: :model do
       expect(cliente.referencias).to eq([primeira_referencia, segunda_referencia])
     end
 
+    it 'has_many Autorizados a Lançar' do
+      primeiro_autorizado_a_lancar = FactoryGirl.create(:lancar_autorizado, cliente: cliente)
+      segundo_autorizado_a_lancar = FactoryGirl.create(:lancar_autorizado, cliente: cliente)
+      expect(cliente.lancar_autorizados).to eq([primeiro_autorizado_a_lancar, segundo_autorizado_a_lancar])
+    end
+
   end
 end

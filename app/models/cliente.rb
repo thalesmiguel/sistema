@@ -5,6 +5,7 @@ class Cliente < ApplicationRecord
   has_many :fazendas
   has_many :cliente_bancos
   has_many :referencias
+  has_many :lancar_autorizados
 
   validates :nome, presence: true
   validates :cpf_cnpj, uniqueness: true
