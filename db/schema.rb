@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161031192247) do
+ActiveRecord::Schema.define(version: 20161101134252) do
+
+  create_table "alertas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "tipo"
+    t.text     "descricao",  limit: 65535
+    t.boolean  "ativo"
+    t.integer  "cliente_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["cliente_id"], name: "index_alertas_on_cliente_id", using: :btree
+  end
 
   create_table "bancos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "codigo"
@@ -198,6 +208,7 @@ ActiveRecord::Schema.define(version: 20161031192247) do
     t.index ["cliente_id"], name: "index_telefones_on_cliente_id", using: :btree
   end
 
+  add_foreign_key "alertas", "clientes"
   add_foreign_key "cidades", "estados"
   add_foreign_key "cliente_bancos", "bancos"
   add_foreign_key "cliente_bancos", "cidades"

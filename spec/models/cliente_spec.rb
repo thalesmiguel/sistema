@@ -126,6 +126,12 @@ RSpec.describe Cliente, type: :model do
       expect(cliente.empresas).to eq([primeira_empresa, segunda_empresa])
     end
 
+    it 'has_many Alertas' do
+      primeiro_alerta = FactoryGirl.create(:alerta, cliente: cliente)
+      segundo_alerta = FactoryGirl.create(:alerta, cliente: cliente)
+      expect(cliente.alertas).to eq([primeiro_alerta, segundo_alerta])
+    end
+
   end
 
   describe 'atributos' do

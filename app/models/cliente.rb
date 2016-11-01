@@ -8,6 +8,7 @@ class Cliente < ApplicationRecord
   has_many :lancar_autorizados
   has_many :tags
   has_many :empresas
+  has_many :alertas
 
   validates :nome, presence: true
   validates :cpf_cnpj, uniqueness: true
