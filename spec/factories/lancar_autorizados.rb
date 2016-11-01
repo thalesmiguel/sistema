@@ -5,6 +5,7 @@ FactoryGirl.define do
     observacao "MyString"
     tem_procuracao false
     ativo true
+    procuracao { File.new("#{Rails.root}/spec/support/fixtures/arquivo.pdf") }
     cliente nil
   end
 end

@@ -152,9 +152,13 @@ ActiveRecord::Schema.define(version: 20161031192247) do
     t.string   "observacao"
     t.boolean  "tem_procuracao"
     t.boolean  "ativo"
+    t.string   "procuracao_file_name"
+    t.string   "procuracao_content_type"
+    t.integer  "procuracao_file_size"
+    t.datetime "procuracao_updated_at"
     t.integer  "cliente_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.index ["cliente_id"], name: "index_lancar_autorizados_on_cliente_id", using: :btree
   end
 
