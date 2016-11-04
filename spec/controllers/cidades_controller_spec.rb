@@ -36,13 +36,13 @@ RSpec.describe CidadesController, type: :controller do
       let(:estado) { FactoryGirl.create(:estado) }
 
       it 'redireciona para cidades#index' do
-        post :create, params: { cidade: FactoryGirl.attributes_for(:cidade, estado: estado) }
+        post :create, params: { cidade: FactoryGirl.attributes_for(:cidade, estado_id: estado) }
         expect(response).to redirect_to(cidades_path)
       end
 
       it 'cria nova cidade no banco de dados' do
         expect {
-          post :create, params: { cidade: FactoryGirl.attributes_for(:cidade, estado: estado) }
+          post :create, params: { cidade: FactoryGirl.attributes_for(:cidade, estado_id: estado) }
         }.to change(Cidade, :count).by(1)
       end
     end
@@ -83,7 +83,7 @@ RSpec.describe CidadesController, type: :controller do
     let(:cidade) { FactoryGirl.create(:cidade, estado: estado) }
 
     context 'dados válidos' do
-      let(:dados_validos) { FactoryGirl.attributes_for(:cidade, nome: "Novo nome") }
+      let(:dados_validos) { FactoryGirl.attributes_for(:cidade, nome: "Novo nome", estado: estado) }
 
       it 'redireciona para cidades#index' do
         put :update, params: { id: cidade, cidade: dados_validos }
@@ -91,15 +91,14 @@ RSpec.describe CidadesController, type: :controller do
       end
 
       it 'altera a cidade no banco de dados' do
-        put :update, params: { id:cidade, cidade: dados_validos }
+        put :update, params: { id: cidade, cidade: dados_validos }
         cidade.reload
         expect(cidade.nome).to eq("Novo nome")
       end
     end
 
     context 'dados inválidos' do
-      let(:estado) { FactoryGirl.create(:estado) }
-      let(:dados_invalidos) { FactoryGirl.attributes_for(:cidade, nome: "", sigla: "XX", estado: estado) }
+      let(:dados_invalidos) { FactoryGirl.attributes_for(:cidade, nome: "", estado: estado) }
 
       it 'renderiza template :edit' do
         put :update, params: { id: cidade, cidade: dados_invalidos }
@@ -109,7 +108,7 @@ RSpec.describe CidadesController, type: :controller do
       it 'não altera a cidade no banco de dados' do
         put :update, params: { id: cidade, cidade: dados_invalidos }
         cidade.reload
-        expect(cidade.sigla).not_to eq("XX")
+        expect(cidade.nome).not_to eq("")
       end
 
     end

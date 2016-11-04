@@ -8,15 +8,11 @@ RSpec.describe CidadesController, type: :routing do
     end
 
     it "routes to #new" do
-      expect(:get => "/cidades/new").to route_to("cidades#new")
-    end
-
-    it "routes to #show" do
-      expect(:get => "/cidades/1").to route_to("cidades#show", :id => "1")
+      expect(:get => "/cidades/novo").to route_to("cidades#new")
     end
 
     it "routes to #edit" do
-      expect(:get => "/cidades/1/edit").to route_to("cidades#edit", :id => "1")
+      expect(:get => "/cidades/1/editar").to route_to("cidades#edit", :id => "1")
     end
 
     it "routes to #create" do

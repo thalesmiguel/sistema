@@ -14,7 +14,6 @@ class CidadesController < ApplicationController
 
   def create
     @cidade = Cidade.new(cidade_params)
-
     respond_to do |format|
       if @cidade.save
         format.html { redirect_to cidades_path, notice: 'Cidade foi criada com sucesso' }
@@ -29,11 +28,11 @@ class CidadesController < ApplicationController
   def update
     respond_to do |format|
       if @cidade.update(cidade_params)
-        format.html { redirect_to @cidade, notice: 'Cidade was successfully updated.' }
-        format.json { render :show, status: :ok, location: @cidade }
+        format.html { redirect_to cidades_path, notice: 'Cidade foi alterada com sucesso.' }
+        # format.json { render :show, status: :ok, location: @cidade }
       else
         format.html { render :edit }
-        format.json { render json: @cidade.errors, status: :unprocessable_entity }
+        # format.json { render json: @cidade.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -41,7 +40,7 @@ class CidadesController < ApplicationController
   def destroy
     @cidade.destroy
     respond_to do |format|
-      format.html { redirect_to cidades_url, notice: 'Cidade was successfully destroyed.' }
+      format.html { redirect_to cidades_url, notice: 'Cidade foi excluída com sucesso.' }
       format.json { head :no_content }
     end
   end
