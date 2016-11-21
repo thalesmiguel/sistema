@@ -1,0 +1,10 @@
+<tr id= "estado_<%= estado.id %>" >
+  <td> <%= estado.nome %> </td>
+  <td> <%= estado.sigla %> </td>
+  <td> <%= estado.created_at %> </td>
+  <td> <%= 'placeholder' %> </td>
+  <td>
+    <%= link_to '<i class="material-icons secondary-color-text">edit</i>'.html_safe, edit_estado_path(estado), remote: true, class: 'tooltipped', data: {tooltip:"Editar"} %>
+    <%= link_to '<i class="material-icons secondary-color-text">delete</i>'.html_safe, estado, remote: true, method: :delete, data: { confirm: 'Tem certeza?', tooltip:"Excluir" }, class: 'tooltipped' %>
+  </td>
+</tr>

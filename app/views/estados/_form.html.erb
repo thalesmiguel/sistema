@@ -1,0 +1,33 @@
+<%= form_for @estado, remote: true, class: "col s12" do |f| %>
+  <div class="modal-content">
+    <div class="p-20">
+      <div class="row card-content m-b-0 p-b-0 p-l-30 p-r-30">
+        <div class="row">
+          <div class="input-field col s12">
+            <%= f.text_field :nome %>
+            <%= f.label :nome, class: "active"%>
+          </div>
+
+          <div class="input-field col s12">
+            <%= f.text_field :sigla %>
+            <%= f.label :sigla, class: "active"%>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <%= button_tag "Salvar", class:"btn waves-effect waves-light" %>
+        <%= button_tag "Cancelar", class:"btn-flat waves-effect waves-light", onclick: "$('#estado_modal').closeModal()", type: 'button'%>
+        <%#= button_tag "Cancelar", class:"btn-flat waves-effect waves-light btn-cancelar ", type: :reset %>
+
+        <% if !@estado.new_record? %>
+          <%= link_to "Excluir", estado_path(@estado), method: 'delete', remote: true, class: 'btn red darken-3 waves-effect waves-light',
+                data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a exclusão?')) } %>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+
+
+<% end %>
