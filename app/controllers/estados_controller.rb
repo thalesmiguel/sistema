@@ -3,6 +3,10 @@ class EstadosController < ApplicationController
 
   def index
     @estados = Estado.all.order(:nome)
+    respond_to do |format|
+      format.html
+      format.json { render json: EstadoDatatable.new(view_context) }
+    end
   end
 
   def new

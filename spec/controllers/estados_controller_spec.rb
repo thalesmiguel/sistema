@@ -9,6 +9,11 @@ RSpec.describe EstadosController, type: :controller do
       expect(response).to render_template(:index)
     end
 
+    it 'renderiza json' do
+      get :index, xhr: true, format: :json
+      expect(response).to_not be_nil
+    end
+
     it 'atribui todos os estados para @estados em ordem alfabética' do
       primeiro_estado = FactoryGirl.create(:estado, nome: 'Z')
       segundo_estado = FactoryGirl.create(:estado, nome: 'A')

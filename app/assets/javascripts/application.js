@@ -16,5 +16,6 @@
 //= require extenso
 //= require materialize-sprockets
 //= require pace.min
+//= require dataTables/jquery.dataTables
 
 //= require_tree .

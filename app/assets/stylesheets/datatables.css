@@ -1,0 +1,30 @@
+.dataTables_wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+.dataTables_length {
+  width: 8.33333%;
+  margin-left: auto;
+  left: auto;
+  right: auto;
+  float: left;
+}
+
+.dataTables_filter {
+  width: 16.66667%;
+  margin-left: auto;
+  left: auto;
+  right: auto;
+}
+
+.dataTables_info {
+  margin-top: 2em;
+  float: left;
+}
+
+.dataTables_paginate {
+  margin-top: 2em;
+  float: right;
+}

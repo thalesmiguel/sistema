@@ -1,6 +1,6 @@
 <div id="estado_modal" class="modal bottom-sheet modal-grande"></div>
 
-<div class="row">
+<div class="row m-b-0">
   <div class="valign-wrapper">
     <div class="col s6 valign">
       <h1>Estados</h1>
@@ -11,7 +11,21 @@
   </div>
 </div>
 
-<table class="bordered highlight">
+<table id="users-table", class="highlight bordered", data-source="<%= estados_path(format: :json) %>">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Sigla</th>
+      <th>Criado em</th>
+      <th>Criado por</th>
+      <th>Opções</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+<!-- <table class="bordered highlight">
   <thead>
     <tr>
       <th>Nome</th>
@@ -22,8 +36,8 @@
     </tr>
   </thead>
   <tbody id='estados'>
-    <% @estados.each do |estado| %>
-      <%= render partial: 'estado', locals: { estado: estado } %>
-    <% end %>
+    <%# @estados.each do |estado| %>
+      <%#= render partial: 'estado', locals: { estado: estado } %>
+    <%# end %>
   </tbody>
-</table>
+</table> -->
