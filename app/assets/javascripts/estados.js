@@ -1,8 +1,8 @@
-jQuery(document).ready(function() {
-  $('#users-table').dataTable({
+$(document).ready(function() {
+  var estadosTable = $('#estados-table').dataTable({
     "processing": true,
     "serverSide": true,
-    "ajax": $('#users-table').data('source'),
+    "ajax": $('#estados-table').data('source'),
     "pagingType": "full_numbers",
     "language": {
         "decimal":        "",
@@ -14,7 +14,7 @@ jQuery(document).ready(function() {
         "thousands":      ",",
         "lengthMenu":     "Mostrar _MENU_",
         "loadingRecords": "Carregando...",
-        "processing":     "Processando...",
+        "processing":     "<div class='progress secondary-color'> <div class='indeterminate'></div> </div>",
         "search":         "Pesquisar:",
         "zeroRecords":    "Sem registros para mostrar",
         "paginate": {
@@ -27,9 +27,17 @@ jQuery(document).ready(function() {
             "sortAscending":  ": ative para ordenar a coluna de forma ascendente",
             "sortDescending": ": ative para ordenar a coluna de forma descendente"
         }
-    },
+    }
     // optional, if you want full pagination controls.
     // Check dataTables documentation to learn more about
     // available options.
   });
+
+  $(document).on('ajax:complete', ".estado-form", function(){
+    estadosTable.fnUpdate();
+  });
+  $(document).on('ajax:complete', ".estado-excluir", function(){
+    estadosTable.fnUpdate();
+  });
+
 });

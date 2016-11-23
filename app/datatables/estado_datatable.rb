@@ -21,11 +21,8 @@ class EstadoDatatable < AjaxDatatablesRails::Base
         record.nome,
         record.sigla,
         record.created_at,
-        'criado por',
-        [
-          link_to('<i class="material-icons secondary-color-text">edit</i>'.html_safe, edit_estado_path(record), remote: true, data: { tooltip:"Editar" }, class: 'tooltipped'),
-          link_to('<i class="material-icons secondary-color-text">delete</i>'.html_safe, record, remote: true, method: :delete, data: { confirm: 'Tem certeza?', tooltip:"Excluir" }, class: 'tooltipped')
-        ]
+        "criado por",
+        "#{link_to('<i class="material-icons secondary-color-text">edit</i>'.html_safe, edit_estado_path(record), remote: true, data: { tooltip:"Editar" }, class: 'tooltipped')}" "#{link_to('<i class="material-icons secondary-color-text">delete</i>'.html_safe, record, remote: true, method: :delete, data: { confirm: 'Tem certeza?', tooltip:"Excluir" }, class: 'tooltipped estado-excluir')}"
       ]
     end
   end

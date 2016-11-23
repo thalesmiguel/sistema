@@ -35,7 +35,7 @@ gem "paperclip", "~> 5.0.0"
 gem 'materialize-sass', "0.97.7"
 gem 'money-rails'
 
-gem 'jquery-datatables-rails'
+gem 'jquery-datatables-rails', '~> 3.4.0'
 gem 'ajax-datatables-rails'
 
 
