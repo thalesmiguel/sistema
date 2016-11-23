@@ -771,6 +771,18 @@ body.small-sidebar {
   text-align: left;
 }
 
+.input-field label {
+  font-size: 1.2em;
+}
+
+.input-field label.active {
+  font-size: 1em;
+}
+
+label {
+  font-size: 1em;
+}
+
 .actions {
   padding-bottom: 30px;
 }

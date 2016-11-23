@@ -1,8 +1,8 @@
 class Estado < ApplicationRecord
   has_many :cidades
 
-  validates :nome, presence: true
-  validates :sigla, presence: true
+  validates :nome, presence: true, uniqueness: true
+  validates :sigla, presence: true, uniqueness: true
   validate :sigla_deve_ter_dois_caracteres
 
 

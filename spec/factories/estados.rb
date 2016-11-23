@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :estado do
     sequence(:nome) { |n| "Nome#{n}" }
-    sigla "SP"
+    sequence(:sigla) { [*('A'..'Z')].sample(2).join }
   end
 end

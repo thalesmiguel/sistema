@@ -8,9 +8,21 @@ RSpec.describe Estado, type: :model do
       expect(estado.valid?).to be_falsy
     end
 
+    it 'nome deve ser único' do
+      primeiro_estado = FactoryGirl.create(:estado, nome: 'São Paulo')
+      segundo_estado = Estado.new(FactoryGirl.attributes_for(:estado, nome: 'São Paulo'))
+      expect(segundo_estado.valid?).to be_falsy
+    end
+
     it 'exige sigla' do
       estado = Estado.new(FactoryGirl.attributes_for(:estado, sigla: ''))
       expect(estado.valid?).to be_falsy
+    end
+
+    it 'sigla deve ser única' do
+      primeiro_estado = FactoryGirl.create(:estado, sigla: 'SP')
+      segundo_estado = Estado.new(FactoryGirl.attributes_for(:estado, sigla: 'SP'))
+      expect(segundo_estado.valid?).to be_falsy
     end
 
     it 'sigla não pode ter mais do que 2 caracteres' do

@@ -33,3 +33,7 @@ footer {
 .modal-content {
   cursor: default;
 }
+
+th:focus {
+  outline: none;
+}

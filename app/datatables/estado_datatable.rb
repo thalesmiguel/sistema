@@ -4,7 +4,7 @@ class EstadoDatatable < AjaxDatatablesRails::Base
 
   def sortable_columns
     # Declare strings in this format: ModelName.column_name
-    @sortable_columns ||= ['estados.nome', 'estados.sigla', 'estados.created_at', 'estados.sigla']
+    @sortable_columns ||= ['estados.nome', 'estados.sigla', 'estados.created_at']
   end
 
   def searchable_columns
