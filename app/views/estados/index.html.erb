@@ -1,43 +1,46 @@
-<div id="estado_modal" class="modal bottom-sheet modal-grande"></div>
+<div class="card p-t-0 p-b-70 p-l-30 p-r-30">
 
-<div class="row m-b-0">
-  <div class="valign-wrapper">
-    <div class="col s6 valign">
-      <h1>Estados</h1>
-    </div>
-    <div class="col s6 valign right-align">
-      <%= link_to '<i class="small material-icons right">add_circle_outline</i> Novo'.html_safe, new_estado_path, remote: true, class: 'btn waves-effect waves-light' %>
+  <div id="estado_modal" class="modal bottom-sheet modal-grande"></div>
+
+  <div class="row m-b-0">
+    <div class="valign-wrapper">
+      <div class="col s6 valign">
+        <h1>Estados</h1>
+      </div>
+      <div class="col s6 valign right-align">
+        <%= link_to '<i class="small material-icons right">add_circle_outline</i> Novo'.html_safe, new_estado_path, remote: true, class: 'btn waves-effect waves-light' %>
+      </div>
     </div>
   </div>
+
+  <table id="estados-table" class="highlight bordered" data-source="<%= estados_path(format: :json) %>">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Sigla</th>
+        <th>Criado em</th>
+        <th>Criado por</th>
+        <th>Opções</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
 </div>
-
-<table id="estados-table", class="highlight bordered", data-source="<%= estados_path(format: :json) %>">
-  <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Sigla</th>
-      <th>Criado em</th>
-      <th>Criado por</th>
-      <th>Opções</th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
-
-<!-- <table class="bordered highlight">
-  <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Sigla</th>
-      <th>Criado em</th>
-      <th>Criado por</th>
-      <th>Opções</th>
-    </tr>
-  </thead>
-  <tbody id='estados'>
-    <%# @estados.each do |estado| %>
-      <%#= render partial: 'estado', locals: { estado: estado } %>
-    <%# end %>
-  </tbody>
-</table> -->
+  <!-- <table class="bordered highlight">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Sigla</th>
+        <th>Criado em</th>
+        <th>Criado por</th>
+        <th>Opções</th>
+      </tr>
+    </thead>
+    <tbody id='estados'>
+      <%# @estados.each do |estado| %>
+        <%#= render partial: 'estado', locals: { estado: estado } %>
+      <%# end %>
+    </tbody>
+  </table> -->

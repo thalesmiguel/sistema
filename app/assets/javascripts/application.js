@@ -17,5 +17,6 @@
 //= require materialize-sprockets
 //= require pace.min
 //= require dataTables/jquery.dataTables
+//= require fnStandingRedraw
 
 //= require_tree .

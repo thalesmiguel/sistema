@@ -1,22 +1,25 @@
-$(document).ready(function() {
+$(document).on('turbolinks:load', function(){
   var estadosTable = $('#estados-table').dataTable({
-    "processing": true,
-    "serverSide": true,
-    "ajax": $('#estados-table').data('source'),
-    "pagingType": "full_numbers",
+    processing: true,
+    serverSide: true,
+    ajax: $('#estados-table').data('source'),
+    pagingType: "full_numbers",
+    autoWidth: false,
     columnDefs: [ { orderable: false, targets: [3,4] } ],
-    "language": {
-      "sUrl": "datatable_i18n"
+    language: {
+      sUrl: "datatable_i18n"
     },
-    "initComplete": function(settings, json) { $('select').material_select(); },
-    "drawCallback": function( settings ) { $('.paginate_button').addClass("waves-effect"); },
+    drawCallback: function( settings ) {
+      $('.paginate_button').addClass("waves-effect");
+      $('select').material_select();
+    },
   });
 
   $(document).on('ajax:complete', ".estado-form", function(){
-    estadosTable.fnUpdate();
+    estadosTable.fnStandingRedraw();
   });
   $(document).on('ajax:complete', ".estado-excluir", function(){
-    estadosTable.fnUpdate();
+    estadosTable.fnStandingRedraw();
   });
 
 });
