@@ -1,0 +1,36 @@
+<div class="login-overlay">
+	<div class="logo animated fadeInDown">
+		Sistema <br> <span class="smaller">Central</span>
+	</div>
+	<div id="form-login" class="form-container shadow animated fadeIn">
+		<div class="icon">
+				<i class="material-icons">account_circle</i>
+			<div class="header">
+					Login
+			</div>
+		</div>
+		<div class="inputs">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="input-field">
+          <%= f.text_field :login, autofocus: true, class: "validate", required: {required: ""}, aria: {required: "true"} %>
+          <%= f.label :usuário %>
+        </div>
+        <div class="input-field">
+          <%= f.password_field :password, autocomplete: "off", class: "validate", required: {required: ""}, aria: {required: "true"} %>
+          <%= f.label :senha %>
+        </div>
+        <div class="actions">
+          <%= button_tag "Login", class:"btn waves-effect waves-light" %>
+        </div>
+      <% end %>
+
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).on("ready", function(){
+		Materialize.toast('<%= content_tag(:div, flash[:error], id: 'flash_error') if flash[:error] %>', 4000, 'yellow darken-2');
+		Materialize.toast('<%= content_tag(:div, flash[:notice], id: 'flash_notice') if flash[:notice] %>', 4000, 'green darken-2');
+		Materialize.toast('<%= content_tag(:div, flash[:alert], id: 'flash_alert') if flash[:alert] %>', 4000, 'red darken-2');
+	});
+</script>

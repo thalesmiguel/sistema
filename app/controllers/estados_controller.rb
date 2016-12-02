@@ -2,10 +2,10 @@ class EstadosController < ApplicationController
   before_action :set_estado, only: [:edit, :update, :destroy]
 
   def index
-    @estados = Estado.all.order(:nome)
+    # @estados = Estado.all.order(:nome)
     respond_to do |format|
       format.html
-      format.json { render json: EstadoDatatable.new(view_context) }
+      format.json { render json: EstadoDatatable.new(view_context, { permitido: permitido? }) }
     end
   end
 
@@ -49,4 +49,5 @@ class EstadosController < ApplicationController
     def estado_params
       params.require(:estado).permit(:nome, :sigla)
     end
+
 end

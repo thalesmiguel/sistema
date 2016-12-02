@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe CidadesController, type: :controller do
 
+  before(:each) do
+    signed_in_as_a_valid_user
+  end
+
   describe "GET index" do
 
     it 'renderiza template :index' do

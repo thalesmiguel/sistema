@@ -25,7 +25,7 @@ RSpec.describe Cidade, type: :model do
 
     it 'belongs_to Estado' do
       cidade = Cidade.new(FactoryGirl.attributes_for(:cidade, estado: nil))
-      expect(cidade.valid?).to be_falsy
+      expect(cidade.valid?).to be_truthy
     end
 
     it 'has_many Endereços' do

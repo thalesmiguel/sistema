@@ -8,11 +8,10 @@
         <h1>Estados</h1>
       </div>
       <div class="col s6 valign right-align">
-        <%= link_to '<i class="small material-icons right">add_circle_outline</i> Novo'.html_safe, new_estado_path, remote: true, class: 'btn waves-effect waves-light' %>
+        <%= link_to_new new_estado_path if can? :manage, :estado %>
       </div>
     </div>
   </div>
-
   <table id="estados-table" class="highlight bordered" data-source="<%= estados_path(format: :json) %>">
     <thead>
       <tr>
@@ -20,7 +19,9 @@
         <th>Sigla</th>
         <th>Criado em</th>
         <th>Criado por</th>
-        <th>Opções</th>
+        <% if can? :manage, :estado %>
+          <th>Opções</th>
+        <% end %>
       </tr>
     </thead>
     <tbody>
@@ -28,19 +29,3 @@
   </table>
 
 </div>
-  <!-- <table class="bordered highlight">
-    <thead>
-      <tr>
-        <th>Nome</th>
-        <th>Sigla</th>
-        <th>Criado em</th>
-        <th>Criado por</th>
-        <th>Opções</th>
-      </tr>
-    </thead>
-    <tbody id='estados'>
-      <%# @estados.each do |estado| %>
-        <%#= render partial: 'estado', locals: { estado: estado } %>
-      <%# end %>
-    </tbody>
-  </table> -->

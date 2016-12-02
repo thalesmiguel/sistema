@@ -1,4 +1,6 @@
 class Estado < ApplicationRecord
+  # resourcify
+
   has_many :cidades
 
   validates :nome, presence: true, uniqueness: true

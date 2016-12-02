@@ -37,7 +37,7 @@ $(function() {
   $.rails.showConfirmDialog = function(link) {
     var html, message;
     message = link.attr('data-confirm');
-    html = "<div id=\"modal1\" class=\"modal\" style=\"z-index: 1003; width: 30%; display: block; opacity: 1; transform: scaleX(1); top: 10%;\"> <div class=\"modal-content\"><h4>Atenção</h4><p>" + message + "</p></div><div class=\"modal-footer\"><a class=\"modal-action modal-close waves-effect waves-light btn secondary-color close\">Cancelar</a><a class=\"modal-action modal-close btn danger-color waves-effect waves-light confirm m-r-5\">Confirmar</a></div></div>";
+    html = "<div id=\"modal1\" class=\"modal\" style=\"z-index: 1003; width: 30%; display: block; opacity: 1; transform: scaleX(1); top: 10%;\"> <div class=\"modal-content\"><h4>Atenção</h4><p>" + message + "</p></div><div class=\"modal-footer\"><a class=\"modal-action modal-close btn danger-color waves-effect waves-light confirm\">Confirmar</a><a class=\"modal-action modal-close waves-effect waves-light btn secondary-color close m-r-5\">Cancelar</a></div></div>";
     $('body').append(html);
     $('#modal1').openModal({
       complete: function() {

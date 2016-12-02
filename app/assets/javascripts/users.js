@@ -1,8 +1,8 @@
 $(document).on('turbolinks:load', function(){
-  var estadosTable = $('#estados-table').dataTable({
+  var usersTable = $('#users-table').dataTable({
     processing: true,
     serverSide: true,
-    ajax: $('#estados-table').data('source'),
+    ajax: $('#users-table').data('source'),
     pagingType: "full_numbers",
     autoWidth: false,
     columnDefs: [ { orderable: false, targets: [3,4] } ],
@@ -16,11 +16,11 @@ $(document).on('turbolinks:load', function(){
     },
   });
 
-  $(document).on('ajax:complete', ".estado-form", function(){
-    estadosTable.fnStandingRedraw();
+  $(document).on('ajax:complete', ".user-form", function(){
+    usersTable.fnStandingRedraw();
   });
-  $(document).on('ajax:complete', ".excluir-estado", function(){
-    estadosTable.fnStandingRedraw();
+  $(document).on('ajax:complete', ".excluir-user", function(){
+    usersTable.fnStandingRedraw();
   });
 
 });

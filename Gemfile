@@ -30,6 +30,8 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'devise'
+gem 'cancancan'
+gem 'rolify'
 
 gem "paperclip", "~> 5.0.0"
 gem 'materialize-sass', "0.97.7"
@@ -37,6 +39,7 @@ gem 'money-rails'
 
 gem 'jquery-datatables-rails', '~> 3.4.0'
 gem 'ajax-datatables-rails'
+# gem 'ajax-datatables-rails', git: 'git://github.com/antillas21/ajax-datatables-rails.git', branch: 'v-0-4-0'
 
 
 group :development, :test do
