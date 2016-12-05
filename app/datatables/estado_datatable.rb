@@ -5,7 +5,7 @@ class EstadoDatatable < AjaxDatatablesRails::Base
 
   def sortable_columns
     # Declare strings in this format: ModelName.column_name
-    @sortable_columns ||= ['Estado.nome', 'Estado.sigla', 'Estado.created_at']
+    @sortable_columns ||= ['Estado.nome', 'Estado.sigla']
   end
 
   def searchable_columns
@@ -22,7 +22,9 @@ class EstadoDatatable < AjaxDatatablesRails::Base
         record.nome,
         record.sigla,
         record.created_at.to_s(:data_formatada),
-        "placeholder",
+        record.audits.first.user.username,
+        record.updated_at.to_s(:data_formatada),
+        record.audits.last.user.username,
         "#{link_to_edit edit_estado_path(record) if permitido?}" "#{link_to_destroy record, 'excluir-estado' if permitido?}"
       ]
     end

@@ -1,5 +1,5 @@
 class Estado < ApplicationRecord
-  # resourcify
+  audited
 
   has_many :cidades
 

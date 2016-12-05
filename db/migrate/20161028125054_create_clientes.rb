@@ -15,7 +15,6 @@ class CreateClientes < ActiveRecord::Migration[5.0]
       t.integer :cadastro_tipo
       t.text :marketing_tipos
       t.text :obsevacao
-      t.string :cadastrado_por
 
       t.timestamps
     end

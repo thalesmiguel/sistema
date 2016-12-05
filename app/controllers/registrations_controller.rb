@@ -1,19 +1,32 @@
-# registrations_controller.rb
 # Overrides default Devise::RegistrationsController to allow users to register users
-
 class RegistrationsController < Devise::RegistrationsController
-  # disable default no_authentication action
   skip_before_action :require_no_authentication, only: [:new, :create, :cancel]
-
-
-  def edit
-    @user = User.find(params[:id])
-    mostra_modal(@user, 'user')
-  end
+  before_action :set_user, only: [:edit, :update]
 
   def new
     @user = User.new
     mostra_modal(@user, 'user')
+  end
+
+  def edit
+    mostra_modal(@user, 'user')
+  end
+
+  def create
+    @user = User.new(registration_params)
+    if @user.save
+      renderiza_crud_js(@user, 'Usuário criado com sucesso.')
+    else
+      renderiza_crud_js(@user)
+    end
+  end
+
+  def update
+    if @user.update(registration_params)
+      renderiza_crud_js(@user, 'Usuário alterado com sucesso.')
+    else
+      renderiza_crud_js(@user)
+    end
   end
 
   protected
@@ -31,4 +44,16 @@ class RegistrationsController < Devise::RegistrationsController
   def account_update_params
     params.require(:user).permit(:username, :email, :password, :password_confirmation, :current_password)
   end
+
+
+  private
+
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def registration_params
+    params.require(:user).permit(:username, :email, :password, :password_confirmation)
+  end
+
 end

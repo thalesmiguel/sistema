@@ -22,7 +22,7 @@ class UserDatatable < AjaxDatatablesRails::Base
         record.username,
         record.email,
         record.created_at.to_s(:data_formatada),
-        "placeholder",
+        record.updated_at.to_s(:data_formatada),
         "#{link_to_edit edit_user_path(record) if permitido?}" "#{link_to_destroy record, 'excluir-user' if permitido?}"
       ]
     end

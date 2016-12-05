@@ -15,10 +15,12 @@
   <table id="estados-table" class="highlight bordered" data-source="<%= estados_path(format: :json) %>">
     <thead>
       <tr>
-        <th>Nome</th>
-        <th>Sigla</th>
-        <th>Criado em</th>
-        <th>Criado por</th>
+        <th width="30%">Nome</th>
+        <th width="30%">Sigla</th>
+        <th width="10%">Criado em</th>
+        <th width="10%">Criado por</th>
+        <th width="10%">Alterado em</th>
+        <th width="10%">Alterado por</th>
         <% if can? :manage, :estado %>
           <th>Opções</th>
         <% end %>

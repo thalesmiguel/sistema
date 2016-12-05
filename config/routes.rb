@@ -3,11 +3,11 @@ Rails.application.routes.draw do
   root to: 'estados#index'
 
   # Devise
-  # devise_for :users, controllers: { sessions: 'users/sessions', registrations: "users/registrations" }
   devise_for :users, controllers: { registrations: "registrations" }
   resources :users, only: [:index, :destroy]
   devise_scope :user do
     get "users/:id/edit" => "registrations#edit", as: 'edit_user'
+    patch "users/:id" => "registrations#update"
   end
   # Devise
 

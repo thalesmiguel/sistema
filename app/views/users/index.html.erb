@@ -17,41 +17,16 @@
   <table id="users-table" class="highlight bordered" data-source="<%= users_path(format: :json) %>">
     <thead>
       <tr>
-        <th>Usuário</th>
-        <th>Email</th>
-        <th>Criado em</th>
-        <th>Criado por</th>
+        <th width="40%">Usuário</th>
+        <th width="30%">Email</th>
+        <th width="10%">Alterado em</th>
+        <th width="10%">Alterado por</th>
         <% if can? :manage, :user %>
-          <th>Opções</th>
+          <th width="10%">Opções</th>
         <% end %>
       </tr>
     </thead>
     <tbody>
     </tbody>
   </table>
-
-  <!-- <table class="bordered highlight">
-    <thead>
-      <tr>
-        <th>Usuário</th>
-        <th>Email</th>
-        <th>Opções</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <%# @users.each do |user| %>
-        <tr>
-          <td> <%#= user.username %> </td>
-          <td> <%#= user.email %> </td>
-          <td>
-            <%#= link_to_edit edit_user_path(user) %>
-            <%#= link_to_destroy user, 'excluir-user'%>
-          </td>
-          <td><%#= link_to 'Show', user %></td>
-          <td><%#= link_to 'Edit', edit_user_path(user) %></td>
-        </tr>
-      <%# end %>
-    </tbody>
-  </table> -->
 </div>

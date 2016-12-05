@@ -29,7 +29,7 @@ class EstadosController < ApplicationController
 
   def update
     if @estado.update(estado_params)
-      renderiza_crud_js(@estado, 'Comprovante alterado com sucesso.')
+      renderiza_crud_js(@estado, 'Estado alterado com sucesso.')
     else
       renderiza_crud_js(@estado)
     end

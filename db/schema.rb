@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161128193611) do
+ActiveRecord::Schema.define(version: 20161101134252) do
 
   create_table "alertas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "tipo"
@@ -20,6 +20,28 @@ ActiveRecord::Schema.define(version: 20161128193611) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.index ["cliente_id"], name: "index_alertas_on_cliente_id", using: :btree
+  end
+
+  create_table "audits", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "auditable_id"
+    t.string   "auditable_type"
+    t.integer  "associated_id"
+    t.string   "associated_type"
+    t.integer  "user_id"
+    t.string   "user_type"
+    t.string   "username"
+    t.string   "action"
+    t.text     "audited_changes", limit: 65535
+    t.integer  "version",                       default: 0
+    t.string   "comment"
+    t.string   "remote_address"
+    t.string   "request_uuid"
+    t.datetime "created_at"
+    t.index ["associated_id", "associated_type"], name: "associated_index", using: :btree
+    t.index ["auditable_id", "auditable_type"], name: "auditable_index", using: :btree
+    t.index ["created_at"], name: "index_audits_on_created_at", using: :btree
+    t.index ["request_uuid"], name: "index_audits_on_request_uuid", using: :btree
+    t.index ["user_id", "user_type"], name: "user_index", using: :btree
   end
 
   create_table "bancos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -71,7 +93,6 @@ ActiveRecord::Schema.define(version: 20161128193611) do
     t.integer  "cadastro_tipo"
     t.text     "marketing_tipos",    limit: 65535
     t.text     "obsevacao",          limit: 65535
-    t.string   "cadastrado_por"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
   end
@@ -219,7 +240,7 @@ ActiveRecord::Schema.define(version: 20161128193611) do
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "email",                  default: "", null: false
+    t.string   "email",                  default: ""
     t.string   "username",               default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -232,7 +253,6 @@ ActiveRecord::Schema.define(version: 20161128193611) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
     t.index ["username"], name: "index_users_on_username", unique: true, using: :btree
   end

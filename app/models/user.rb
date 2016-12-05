@@ -1,5 +1,7 @@
 class User < ApplicationRecord
+  audited
   rolify
+  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -7,6 +9,7 @@ class User < ApplicationRecord
 
   validates :username, :presence => true, :uniqueness => { :case_sensitive => false }
   validate :validate_username
+  validate :validate_email
 
   attr_accessor :login
 
@@ -30,12 +33,20 @@ class User < ApplicationRecord
     end
   end
 
- def email_required?
-   false
- end
+  def validate_email
+    if !email.empty?
+      if User.where(email: email).exists?
+        errors.add(:email, :invalid)
+      end
+    end
+  end
 
- def email_changed?
-   false
- end
+  def email_required?
+    false
+  end
+
+  def email_changed?
+    false
+  end
 
 end
