@@ -53,4 +53,29 @@ RSpec.describe Cidade, type: :model do
       expect(cidade.empresas).to eq([primeira_empresa, segunda_empresa])
     end
   end
+
+  describe 'log' do
+
+    describe 'gera log de' do
+
+      it 'criação de Cidade' do
+        cidade = FactoryGirl.create(:cidade)
+        expect(cidade.audits.count).to eq 1
+      end
+
+      it 'alteração de Cidade' do
+        cidade = FactoryGirl.create(:cidade)
+        cidade.nome = "Novo nome"
+        cidade.save
+        expect(cidade.audits.count).to eq 2
+      end
+
+      it 'exclusão de Cidade' do
+        cidade = FactoryGirl.create(:cidade)
+        cidade.destroy
+        expect(cidade.audits.count).to eq 2
+      end
+
+    end
+  end
 end

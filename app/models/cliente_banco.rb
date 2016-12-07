@@ -1,4 +1,5 @@
 class ClienteBanco < ApplicationRecord
+  audited
 
   belongs_to :banco
   belongs_to :cidade

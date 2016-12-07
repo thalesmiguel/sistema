@@ -1,4 +1,5 @@
 class Cidade < ApplicationRecord
+  audited
 
   belongs_to :estado
   has_many :enderecos

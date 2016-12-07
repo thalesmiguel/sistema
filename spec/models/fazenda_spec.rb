@@ -35,4 +35,26 @@ RSpec.describe Fazenda, type: :model do
     end
 
   end
+
+  describe 'log' do
+    describe 'gera log de' do
+      let(:estado) { FactoryGirl.create(:estado) }
+      let(:cidade) { FactoryGirl.create(:cidade, estado: estado) }
+      let(:cliente) { FactoryGirl.create(:cliente) }
+      let(:fazenda) { FactoryGirl.create(:fazenda, cliente: cliente, cidade: cidade) }
+      
+      it 'criação de Tag' do
+        expect(fazenda.audits.count).to eq 1
+      end
+      it 'alteração de Tag' do
+        fazenda.nome = "Novo nome"
+        fazenda.save
+        expect(fazenda.audits.count).to eq 2
+      end
+      it 'exclusão de Tag' do
+        fazenda.destroy
+        expect(fazenda.audits.count).to eq 2
+      end
+    end
+  end
 end

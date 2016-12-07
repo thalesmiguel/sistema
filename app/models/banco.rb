@@ -1,4 +1,5 @@
 class Banco < ApplicationRecord
+  audited
 
   has_many :cliente_bancos
 

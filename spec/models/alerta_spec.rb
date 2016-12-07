@@ -21,4 +21,28 @@ RSpec.describe Alerta, type: :model do
 
   end
 
+  describe 'log' do
+
+    describe 'gera log de' do
+      let(:cliente) { FactoryGirl.create(:cliente) }
+      let(:alerta) { FactoryGirl.create(:alerta, cliente: cliente) }
+
+      it 'criação de Telefone' do
+        expect(alerta.audits.count).to eq 1
+      end
+
+      it 'alteração de Telefone' do
+        alerta.descricao = "Nova descrição"
+        alerta.save
+        expect(alerta.audits.count).to eq 2
+      end
+
+      it 'exclusão de Telefone' do
+        alerta.destroy
+        expect(alerta.audits.count).to eq 2
+      end
+
+    end
+  end
+
 end

@@ -1,56 +1,57 @@
 class CidadesController < ApplicationController
   before_action :set_cidade, only: [:edit, :update, :destroy]
+  before_action :set_estados, only: [:new, :edit]
 
   def index
-    @cidades = Cidade.all
+    respond_to do |format|
+      format.html
+      format.json { render json: CidadeDatatable.new(view_context, { permitido: permitido? }) }
+    end
   end
 
   def new
     @cidade = Cidade.new
+    mostra_modal(@cidade)
   end
 
   def edit
+    mostra_modal(@cidade)
   end
 
   def create
     @cidade = Cidade.new(cidade_params)
-    respond_to do |format|
-      if @cidade.save
-        format.html { redirect_to cidades_path, notice: 'Cidade foi criada com sucesso' }
-        # format.json { render :show, status: :created, location: @cidade }
-      else
-        format.html { render :new, notice: 'Erro ao criar nova Cidade' }
-        # format.json { render json: @cidade.errors, status: :unprocessable_entity }
-      end
+    if @cidade.save
+      renderiza_crud_js(@cidade, 'Cidade criada com sucesso.')
+    else
+      renderiza_crud_js(@cidade)
     end
   end
 
   def update
-    respond_to do |format|
-      if @cidade.update(cidade_params)
-        format.html { redirect_to cidades_path, notice: 'Cidade foi alterada com sucesso.' }
-        # format.json { render :show, status: :ok, location: @cidade }
-      else
-        format.html { render :edit }
-        # format.json { render json: @cidade.errors, status: :unprocessable_entity }
-      end
+    if @cidade.update(cidade_params)
+      renderiza_crud_js(@cidade, 'Cidade alterada com sucesso.')
+    else
+      renderiza_crud_js(@cidade)
     end
   end
 
   def destroy
     @cidade.destroy
-    respond_to do |format|
-      format.html { redirect_to cidades_url, notice: 'Cidade foi excluída com sucesso.' }
-      format.json { head :no_content }
-    end
+    renderiza_crud_js(@cidade, 'Cidade excluída com sucesso.')
   end
 
   private
+
     def set_cidade
       @cidade = Cidade.find(params[:id])
+    end
+
+    def set_estados
+      @estados = Estado.all
     end
 
     def cidade_params
       params.require(:cidade).permit(:nome, :estado_id)
     end
+
 end

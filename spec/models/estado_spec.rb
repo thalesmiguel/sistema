@@ -42,4 +42,28 @@ RSpec.describe Estado, type: :model do
       expect(primeiro_estado.cidades).to eq([primeira_cidade, segunda_cidade])
     end
   end
+
+  describe 'log' do
+
+    describe 'gera log de' do
+
+      let(:estado) { FactoryGirl.create(:estado) }
+
+      it 'criação de Estado' do
+        expect(estado.audits.count).to eq 1
+      end
+
+      it 'alteração de Estado' do
+        estado.nome = "Novo nome"
+        estado.save
+        expect(estado.audits.count).to eq 2
+      end
+
+      it 'exclusão de Estado' do
+        estado.destroy
+        expect(estado.audits.count).to eq 2
+      end
+
+    end
+  end
 end

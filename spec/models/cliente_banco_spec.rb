@@ -8,7 +8,7 @@ RSpec.describe ClienteBanco, type: :model do
   let(:banco) { FactoryGirl.create(:banco) }
 
   describe 'validações' do
-    
+
     it 'exige que o primeiro adicionado seja ativo' do
       cliente_banco = ClienteBanco.new(FactoryGirl.attributes_for(:cliente_banco, ativo: false, banco: banco, cidade: cidade, cliente: cliente))
       expect(cliente_banco.valid?).to be_falsy
@@ -54,6 +54,25 @@ RSpec.describe ClienteBanco, type: :model do
       expect(cliente_banco.valid?).to be_falsy
     end
 
+  end
+
+  describe 'log' do
+    let(:cliente_banco) { FactoryGirl.create(:cliente_banco, banco: banco, cidade: cidade, cliente: cliente) }
+    describe 'gera log de' do
+
+      it 'criação de Tag' do
+        expect(cliente_banco.audits.count).to eq 1
+      end
+      it 'alteração de Tag' do
+        cliente_banco.agencia = "Novo cliente_banco"
+        cliente_banco.save
+        expect(cliente_banco.audits.count).to eq 2
+      end
+      it 'exclusão de Tag' do
+        cliente_banco.destroy
+        expect(cliente_banco.audits.count).to eq 2
+      end
+    end
   end
 
 end

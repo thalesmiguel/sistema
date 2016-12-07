@@ -24,4 +24,23 @@ RSpec.describe Tag, type: :model do
     end
   end
 
+  describe 'log' do
+    describe 'gera log de' do
+      let(:cliente) { FactoryGirl.create(:cliente) }
+      let(:tag) { FactoryGirl.create(:tag, cliente: cliente) }
+      it 'criação de Tag' do
+        expect(tag.audits.count).to eq 1
+      end
+      it 'alteração de Tag' do
+        tag.nome = "Novo nome"
+        tag.save
+        expect(tag.audits.count).to eq 2
+      end
+      it 'exclusão de Tag' do
+        tag.destroy
+        expect(tag.audits.count).to eq 2
+      end
+    end
+  end
+
 end

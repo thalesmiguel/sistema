@@ -1,0 +1,57 @@
+<ul id="slide-out" class="side-nav">
+
+  <li>
+    <div class="userView">
+      <div class="background">
+        <%= image_tag "forest.jpg" %>
+      </div>
+      <a class='dropdown-button' data-activates='user-dropdown'><%= image_tag "bull-icon.png", class: "circle" %></a>
+      <ul id='user-dropdown' class='dropdown-content'>
+        <li><%= link_to('Sair', destroy_user_session_path, :method => :delete) %></li>
+      </ul>
+      <span class="white-text name"><%= current_user.username %></span>
+      <span class="white-text email"><%= current_user.email %></span>
+    </div>
+  </li>
+
+  <li><%= link_to "<i class='small material-icons right'>people</i> Clientes".html_safe, clientes_path, class:"waves-effect" %></li>
+
+  <li><a href="#!">Second Link</a></li>
+
+  <li><div class="divider"></div></li>
+  <li><a class="subheader">Subheader</a></li>
+
+  <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+
+  <% if current_user.has_role? :admin  %>
+    <li class="no-padding">
+      <ul class="collapsible collapsible-accordion">
+        <li>
+          <a class="collapsible-header waves-effect">Cadastros<i class="material-icons">arrow_drop_down</i></a>
+          <div class="collapsible-body">
+            <ul>
+              <li><%= link_to "<i class='small material-icons right'>place</i> Cidades".html_safe, cidades_path, class:"waves-effect" %></li>
+              <li><%= link_to "<i class='small material-icons right'>satellite</i> Estados".html_safe, estados_path, class:"waves-effect" %></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </li>
+  <% end %>
+
+  <% if current_user.has_role? :admin  %>
+    <li class="no-padding">
+      <ul class="collapsible collapsible-accordion">
+        <li>
+          <a class="collapsible-header waves-effect">Administração<i class="material-icons">arrow_drop_down</i></a>
+          <div class="collapsible-body">
+            <ul>
+              <li><%= link_to "<i class='small material-icons right'>account_circle</i> Usuários".html_safe, users_path, class:"waves-effect" %></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </li>
+  <% end %>
+
+</ul>

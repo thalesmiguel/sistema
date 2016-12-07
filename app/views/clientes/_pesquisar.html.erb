@@ -1,0 +1,29 @@
+<div class="card-panel p-t-0 p-b-70 p-l-30 p-r-30">
+  <div class="row m-b-0">
+    <div class="valign-wrapper">
+      <div class="col s6 valign">
+        <h1>Clientes</h1>
+      </div>
+      <div class="col s6 valign right-align">
+        <%= link_to_new new_cliente_path if can? :manage, :cliente %>
+      </div>
+    </div>
+  </div>
+
+  <table id="clientes-table" class="highlight bordered" data-source="<%= clientes_path(format: :json) %>">
+    <thead>
+      <tr>
+        <th width="5%">Ativo</th>
+        <th width="10%">Pré-Cadastro</th>
+        <th width="10%">CPF/CNPJ</th>
+        <th width="20%">Nome</th>
+        <th width="20%">Apelido</th>
+        <th width="20%">Fictício</th>
+        <th width="10%">Cidade</th>
+        <th width="5%">UF</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>

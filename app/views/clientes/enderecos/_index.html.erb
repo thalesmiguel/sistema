@@ -1,0 +1,22 @@
+<table id="enderecos-table" class="highlight bordered" data-source="<%= cliente_enderecos_path(1, format: :json) %>">
+  <thead>
+    <tr>
+      <th width="">Tipo</th>
+      <th width="">Logradouro</th>
+      <th width="">Numero</th>
+      <th width="">Complemento</th>
+      <th width="">Bairro</th>
+      <th width="">CEP</th>
+      <th width="">Cx. Postal</th>
+      <th width="">Cidade</th>
+      <th width="">UF</th>
+      <th width="">Ativo</th>
+      <th width="">Primário</th>
+      <% if can? :manage, :endereco %>
+        <th>Opções</th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>

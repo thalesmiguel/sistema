@@ -13,53 +13,54 @@ RSpec.describe CidadesController, type: :controller do
       expect(response).to render_template(:index)
     end
 
-    it 'atribui todos as cidades para @cidades' do
-      estado = FactoryGirl.create(:estado)
-      cidades = FactoryGirl.create(:cidade, estado: estado)
-      get :index
-      expect(assigns(:cidades)).to match_array([cidades])
+    it 'renderiza json' do
+      get :index, xhr: true, format: :json
+      expect(response).to_not be_nil
     end
+
   end
 
   describe "GET new" do
 
-    it 'renderiza o template :new' do
-      get :new
-      expect(response).to render_template(:new)
+    it 'renderiza modal :new' do
+      get :new, xhr: true, params: {}
+      expect(response).to render_template('ajax/application/mostra_modal.js.erb')
     end
 
     it 'atribui nova Cidade para @cidade' do
-      get :new
+      get :new, xhr: true, params: {}
       expect(assigns(:cidade)).to be_a_new(Cidade)
     end
   end
 
   describe "POST create" do
+    let(:estado) { FactoryGirl.create(:estado) }
+    let(:dados_validos) { FactoryGirl.attributes_for(:cidade, estado: estado) }
+    let(:dados_invalidos) { FactoryGirl.attributes_for(:cidade, estado: estado, nome: '') }
 
     context 'dados válidos' do
-      let(:estado) { FactoryGirl.create(:estado) }
-
-      it 'redireciona para cidades#index' do
-        post :create, params: { cidade: FactoryGirl.attributes_for(:cidade, estado_id: estado) }
-        expect(response).to redirect_to(cidades_path)
+      it 'renderiza nova Cidade' do
+        post :create, xhr: true, params: { cidade: dados_validos }
+        expect(response).to render_template("ajax/application/crud.js.erb")
       end
 
       it 'cria nova cidade no banco de dados' do
         expect {
-          post :create, params: { cidade: FactoryGirl.attributes_for(:cidade, estado_id: estado) }
+          post :create, xhr: true, params: { cidade: dados_validos }
         }.to change(Cidade, :count).by(1)
       end
+
     end
 
     context 'dados inválidos' do
-      it 'renderiza template :new' do
-        post :create, params: { cidade: FactoryGirl.attributes_for(:cidade, nome: '') }
-        expect(response).to render_template(:new)
+      it 'renderiza mensagem de erro' do
+        post :create, xhr: true, params: { cidade: dados_invalidos }
+        expect(response).to render_template("ajax/application/crud.js.erb")
       end
 
       it 'não cria nova cidade no banco de dados' do
         expect {
-          post :create, params: { cidade: FactoryGirl.attributes_for(:cidade, nome: '') }
+          post :create, xhr: true, params: { cidade: dados_invalidos }
         }.not_to change(Cidade, :count)
       end
     end
@@ -70,13 +71,13 @@ RSpec.describe CidadesController, type: :controller do
     let(:estado) { FactoryGirl.create(:estado) }
     let(:cidade) { FactoryGirl.create(:cidade, estado: estado) }
 
-    it 'renderiza template :edit' do
-      get :edit, params: { id: cidade }
-      expect(response).to render_template(:edit)
+    it 'renderiza modal :edit' do
+      get :edit, xhr: true, params: { id: cidade }
+      expect(response).to render_template('ajax/application/mostra_modal.js.erb')
     end
 
-    it 'atribui a cidade selecionado para @cidade' do
-      get :edit, params: { id: cidade }
+    it 'atribui a cidade selecionada para @cidade' do
+      get :edit, xhr: true, params: { id: cidade }
       expect(assigns(:cidade)).to eq(cidade)
     end
 
@@ -84,53 +85,56 @@ RSpec.describe CidadesController, type: :controller do
 
   describe "PUT update" do
     let(:estado) { FactoryGirl.create(:estado) }
-    let(:cidade) { FactoryGirl.create(:cidade, estado: estado) }
+    let(:cidade) { FactoryGirl.create(:cidade, estado: estado, nome: "Nome antigo") }
+
+    let(:dados_validos) { FactoryGirl.attributes_for(:cidade, estado: estado, nome: "Novo nome") }
+    let(:dados_invalidos) { FactoryGirl.attributes_for(:cidade, estado: estado, nome: '') }
 
     context 'dados válidos' do
-      let(:dados_validos) { FactoryGirl.attributes_for(:cidade, nome: "Novo nome", estado: estado) }
 
-      it 'redireciona para cidades#index' do
-        put :update, params: { id: cidade, cidade: dados_validos }
-        expect(response).to redirect_to(cidades_path)
+      it 'renderiza Cidade alterada' do
+        put :update, xhr: true, params: { id: cidade, cidade: dados_validos }
+        expect(response).to render_template("ajax/application/crud.js.erb")
       end
 
       it 'altera a cidade no banco de dados' do
-        put :update, params: { id: cidade, cidade: dados_validos }
+        put :update, xhr: true, params: { id: cidade, cidade: dados_validos }
         cidade.reload
         expect(cidade.nome).to eq("Novo nome")
       end
     end
 
     context 'dados inválidos' do
-      let(:dados_invalidos) { FactoryGirl.attributes_for(:cidade, nome: "", estado: estado) }
 
-      it 'renderiza template :edit' do
-        put :update, params: { id: cidade, cidade: dados_invalidos }
-        expect(response).to render_template(:edit)
+      it 'renderiza mensagem de erro' do
+        put :update, xhr: true, params: { id: cidade, cidade: dados_invalidos }
+        expect(response).to render_template("ajax/application/crud.js.erb")
       end
 
       it 'não altera a cidade no banco de dados' do
-        put :update, params: { id: cidade, cidade: dados_invalidos }
+        put :update, xhr: true, params: { id: cidade, cidade: dados_invalidos }
         cidade.reload
-        expect(cidade.nome).not_to eq("")
+        expect(cidade.nome).to eq("Nome antigo")
       end
 
     end
+
   end
 
   describe "DELETE destroy" do
     let(:estado) { FactoryGirl.create(:estado) }
     let(:cidade) { FactoryGirl.create(:cidade, estado: estado) }
 
-    it 'redireciona para cidade#index' do
-      delete :destroy, params: { id: cidade }
-      expect(response).to redirect_to(cidades_path)
+    it 'deleta Cidade da tabela' do
+      delete :destroy, xhr: true, params: { id: cidade }
+      expect(response).to render_template("ajax/application/crud.js.erb")
     end
 
     it 'deleta cidade do banco de dados' do
-      delete :destroy, params: { id: cidade }
+      delete :destroy, xhr: true, params: { id: cidade }
       expect(Cidade.exists?(cidade.id)).to be_falsy
     end
+
 
   end
 

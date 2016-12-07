@@ -53,4 +53,27 @@ RSpec.describe Endereco, type: :model do
       expect(endereco.valid?).to be_falsy
     end
   end
+
+  describe 'log' do
+    describe 'gera log de' do
+      let(:estado) { FactoryGirl.create(:estado) }
+      let(:cidade) { FactoryGirl.create(:cidade, estado: estado) }
+      let(:cliente) { FactoryGirl.create(:cliente) }
+      let(:endereco) { FactoryGirl.create(:endereco, cliente: cliente, cidade: cidade) }
+
+      it 'criação de Tag' do
+        expect(endereco.audits.count).to eq 1
+      end
+      it 'alteração de Tag' do
+        endereco.logradouro = "Novo nome"
+        endereco.save
+        expect(endereco.audits.count).to eq 2
+      end
+      it 'exclusão de Tag' do
+        endereco.destroy
+        expect(endereco.audits.count).to eq 2
+      end
+    end
+  end
+
 end

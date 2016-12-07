@@ -1,0 +1,58 @@
+<div id="cliente_modal" class="modal bottom-sheet modal-grande"></div>
+
+<div class="row">
+
+  <button type="button" name="button" id="bozo"> Teste </button>
+
+  <div class="col s12 m2">
+    <div class="card">
+      <div class="card-image">
+        <div class="opt-background">
+        </div>
+        <span class="card-title">Opções</span>
+      </div>
+      <div class="card-content p-0">
+        <div class="tabs-vertical" id="clientes-tabs">
+          <ul class="tabs">
+            <li class="tab">
+              <a class="waves-effect" href="#cliente-pesquisar"><i class='small material-icons right'>search</i> Pesquisar </a>
+            </li>
+            <li class="tab disabled">
+              <a href="#cliente-visualizar"><i class='small material-icons right'>visibility</i> Visualizar </a>
+            </li>
+            <li><div class="divider"></div></li>
+            <li class="tab disabled">
+              <a href="#cliente-alertas"><i class='small material-icons right'>error_outline</i> Alertas </a>
+            </li>
+            <li class="tab disabled">
+              <a href="#cliente-contatos"><i class='small material-icons right'>message</i> Contatos </a>
+            </li>
+            <li class="tab disabled">
+              <a href="#cliente-relatorios"><i class='small material-icons right'>assessment</i> Relatórios </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col s12 m10">
+
+    <div id="cliente-pesquisar" class="tab-content">
+      <%= render partial: "pesquisar" %>
+    </div>
+    <div id="cliente-visualizar" class="tab-content">
+      <%#= render partial: "form" %>
+    </div>
+    <div id="cliente-alertas" class="tab-content">
+      <%= render partial: "alertas" %>
+    </div>
+    <div id="cliente-contatos" class="tab-content">
+      <%= render partial: "contatos" %>
+    </div>
+    <div id="cliente-relatorios" class="tab-content">
+      <%= render partial: "relatorios" %>
+    </div>
+
+  </div>
+</div>

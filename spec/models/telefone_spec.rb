@@ -42,4 +42,28 @@ RSpec.describe Telefone, type: :model do
       expect(telefone.valid?).to be_falsy
     end
   end
+
+  describe 'log' do
+
+    describe 'gera log de' do
+      let(:cliente) { FactoryGirl.create(:cliente) }
+      let(:telefone) { FactoryGirl.create(:telefone, cliente: cliente) }
+
+      it 'criação de Telefone' do
+        expect(telefone.audits.count).to eq 1
+      end
+
+      it 'alteração de Telefone' do
+        telefone.numero = "Novo número"
+        telefone.save
+        expect(telefone.audits.count).to eq 2
+      end
+
+      it 'exclusão de Telefone' do
+        telefone.destroy
+        expect(telefone.audits.count).to eq 2
+      end
+
+    end
+  end
 end

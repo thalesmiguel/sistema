@@ -1,4 +1,6 @@
 class Empresa < ApplicationRecord
+  audited
+
   belongs_to :cidade, optional: true
   belongs_to :cliente
 

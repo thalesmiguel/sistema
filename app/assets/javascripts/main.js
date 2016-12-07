@@ -1,9 +1,14 @@
 $(document).on('turbolinks:load', function(){
   // $('.modal-trigger').leanModal();
+
+  $(".button-collapse").sideNav();
   $('select').material_select();
   $('.collapsible').collapsible();
   $(".dropdown-button").dropdown();
   $('.tooltipped').tooltip({delay: 1000});
+  $('ul.tabs').tabs();
+  Waves.displayEffect()
+  Materialize.updateTextFields();
 
 
   $(document).ajaxStart(function() { Pace.restart(); });
@@ -17,6 +22,7 @@ $(document).on('turbolinks:load', function(){
   // });
 
   valida_formulario();
+  limita_text_area();
 });
 
 // Material Design Alert
@@ -68,3 +74,21 @@ function valida_formulario() {
       $(this).find('input:submit, button:submit, input:reset, button:reset').prop('disabled', true);
     });
 }
+
+// text_area
+function limita_text_area() {
+  $('.limita-text-area').bind('change keyup', function(event) {
+    //Option 1: Limit to # of rows in textarea
+    rows = $(this).attr('rows');
+
+    var value = '';
+    var splitval = $(this).val().split("\n");
+
+    for(var a=0;a<rows && typeof splitval[a] != 'undefined';a++) {
+      if(a>0) value += "\n";
+      value += splitval[a];
+    }
+    $(this).val(value);
+  });
+}
+// text_area

@@ -1,17 +1,31 @@
-<%= form_for(cidade) do |f| %>
-  <% if cidade.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(cidade.errors.count, "error") %> prohibited this cidade from being saved:</h2>
+<%= form_for obj, remote: true, html: { class: "cidade-form col s12" } do |f| %>
+  <div class="modal-content">
+    <div class="p-20">
+      <div class="row card-content m-b-0 p-b-0 p-l-30 p-r-30">
+        <div class="row">
+          <div class="input-field col s12">
+            <%= f.text_field :nome %>
+            <%= f.label :nome %>
+          </div>
 
-      <ul>
-      <% cidade.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+          <div class="input-field col s12">
+            <%= f.select :estado_id, @estados.collect {|estado| [(estado.nome), estado.id]} %>
+            <%= f.label :estado_id, class: "active" %>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <%= button_tag "Salvar", class:"btn waves-effect waves-light" %>
+        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#cidade_modal').closeModal()", type: 'button' %>
+        <%#= button_tag "Cancelar", class:"btn-flat waves-effect waves-light btn-cancelar ", type: :reset %>
+
+        <% if !obj.new_record? %>
+          <%= link_to "Excluir", cidade_path(obj), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',
+                data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a exclusão?')) } %>
+        <% end %>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
   </div>
 <% end %>

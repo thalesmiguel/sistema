@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root to: 'estados#index'
+  root to: 'clientes#index'
 
   # Devise
   devise_for :users, controllers: { registrations: "registrations" }
@@ -14,7 +14,11 @@ Rails.application.routes.draw do
 
   scope path_names: { new: "novo", edit: "editar" } do
     resources :estados, except: [:show]
-    resources :cidades
+    resources :cidades, except: [:show]
+    resources :clientes, except: [:show] do
+      resources :enderecos, except: [:show]
+      resources :telefones, except: [:show]
+    end
   end
 
   scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do

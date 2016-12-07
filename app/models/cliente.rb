@@ -31,4 +31,8 @@ class Cliente < ApplicationRecord
     includes(tabela).where("#{tabela}.#{campo} LIKE ?", "#{string}%").order("#{tabela}.#{campo}").references(:fazendas)
     # joins(tabela.to_sym).where("#{tabela}.#{campo} LIKE ?", "#{string}%").order("#{tabela}.#{campo}")
   end
+
+  def self.marketing_tipos_array
+    ["E-mail", "Fax", "Mala_Direta", "SMS", "Telefone"]
+  end
 end

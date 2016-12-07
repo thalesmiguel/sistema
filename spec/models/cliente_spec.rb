@@ -134,7 +134,4 @@ RSpec.describe Cliente, type: :model do
 
   end
 
-  describe 'atributos' do
-    it 'adiciona o usuário atual ao campo cadastrado_por'
-  end
 end

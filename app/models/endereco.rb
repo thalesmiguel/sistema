@@ -1,4 +1,6 @@
 class Endereco < ApplicationRecord
+  audited
+
   belongs_to :cliente
   belongs_to :cidade
 

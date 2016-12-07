@@ -1,4 +1,6 @@
 class Email < ApplicationRecord
+  audited
+
   belongs_to :cliente
 
   validates :email, presence: true

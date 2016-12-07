@@ -31,4 +31,25 @@ RSpec.describe Email, type: :model do
       expect(email.valid?).to be_falsy
     end
   end
+
+  describe 'log' do
+    describe 'gera log de' do
+      let(:cliente) { FactoryGirl.create(:cliente) }
+      let(:email) { FactoryGirl.create(:email, cliente: cliente) }
+
+      it 'criação de Tag' do
+        expect(email.audits.count).to eq 1
+      end
+      it 'alteração de Tag' do
+        email.email = "Novo email"
+        email.save
+        expect(email.audits.count).to eq 2
+      end
+      it 'exclusão de Tag' do
+        email.destroy
+        expect(email.audits.count).to eq 2
+      end
+    end
+  end
+
 end

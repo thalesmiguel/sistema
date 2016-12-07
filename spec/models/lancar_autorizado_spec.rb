@@ -25,4 +25,24 @@ RSpec.describe LancarAutorizado, type: :model do
     end
 
   end
+
+  describe 'log' do
+    describe 'gera log de' do
+      let(:cliente) { FactoryGirl.create(:cliente) }
+      let(:lancar_autorizado) { FactoryGirl.create(:lancar_autorizado, cliente: cliente) }
+      it 'criação de Tag' do
+        expect(lancar_autorizado.audits.count).to eq 1
+      end
+      it 'alteração de Tag' do
+        lancar_autorizado.nome = "Novo nome"
+        lancar_autorizado.save
+        expect(lancar_autorizado.audits.count).to eq 2
+      end
+      it 'exclusão de Tag' do
+        lancar_autorizado.destroy
+        expect(lancar_autorizado.audits.count).to eq 2
+      end
+    end
+  end
+
 end

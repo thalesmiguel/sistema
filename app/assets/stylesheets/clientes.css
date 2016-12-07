@@ -1,0 +1,6 @@
+.opt-background {
+  background-image: url(opt-background.png);
+  min-height: 5em;
+  background-size: cover;
+  background-repeat: no-repeat;
+}

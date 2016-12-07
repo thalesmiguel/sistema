@@ -28,4 +28,28 @@ RSpec.describe Banco, type: :model do
       expect(banco.cliente_bancos).to eq([primeiro_cliente_banco, segundo_cliente_banco])
     end
   end
+
+  describe 'log' do
+
+    describe 'gera log de' do
+      let(:banco) { FactoryGirl.create(:banco) }
+
+      it 'criação de Telefone' do
+        expect(banco.audits.count).to eq 1
+      end
+
+      it 'alteração de Telefone' do
+        banco.codigo = "Novo código"
+        banco.save
+        expect(banco.audits.count).to eq 2
+      end
+
+      it 'exclusão de Telefone' do
+        banco.destroy
+        expect(banco.audits.count).to eq 2
+      end
+
+    end
+  end
+
 end

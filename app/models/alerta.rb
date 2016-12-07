@@ -1,4 +1,6 @@
 class Alerta < ApplicationRecord
+  audited
+
   belongs_to :cliente
 
   validates :descricao, presence: true

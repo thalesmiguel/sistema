@@ -1,0 +1,17 @@
+$("#clientes-tabs .tab.disabled").removeClass("disabled").addClass("waves-effect");
+$("#clientes-tabs ul").tabs('select_tab', 'cliente-visualizar');
+
+$("#cliente-visualizar").html("<%= escape_javascript(render partial: 'form', locals: { cliente: @cliente } ) %>");
+
+
+$('select').material_select();
+$('.collapsible').collapsible();
+$(".dropdown-button").dropdown();
+$('.tooltipped').tooltip({delay: 1000});
+$('ul.tabs').tabs();
+Waves.displayEffect()
+
+valida_formulario();
+limita_text_area();
+
+Materialize.updateTextFields();

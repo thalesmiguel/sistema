@@ -17,4 +17,24 @@ RSpec.describe Referencia, type: :model do
       expect(referencia.valid?).to be_falsy
     end
   end
+
+  describe 'log' do
+    describe 'gera log de' do
+      let(:cliente) { FactoryGirl.create(:cliente) }
+      let(:referencia) { FactoryGirl.create(:referencia, cliente: cliente) }
+      it 'criação de Tag' do
+        expect(referencia.audits.count).to eq 1
+      end
+      it 'alteração de Tag' do
+        referencia.nome = "Novo nome"
+        referencia.save
+        expect(referencia.audits.count).to eq 2
+      end
+      it 'exclusão de Tag' do
+        referencia.destroy
+        expect(referencia.audits.count).to eq 2
+      end
+    end
+  end
+
 end

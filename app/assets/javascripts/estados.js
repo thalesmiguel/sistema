@@ -5,7 +5,7 @@ $(document).on('turbolinks:load', function(){
     ajax: $('#estados-table').data('source'),
     pagingType: "full_numbers",
     autoWidth: false,
-    columnDefs: [ { orderable: false, targets: [3,4] } ],
+    columnDefs: [ { orderable: false, targets: [2,3,4,5,6] } ],
     language: {
       sUrl: "datatable_i18n"
     },

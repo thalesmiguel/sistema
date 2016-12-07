@@ -1,4 +1,6 @@
 class Tag < ApplicationRecord
+  audited
+
   belongs_to :cliente
 
   validates :codigo, presence: true

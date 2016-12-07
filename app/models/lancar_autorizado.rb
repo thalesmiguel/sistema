@@ -1,4 +1,6 @@
 class LancarAutorizado < ApplicationRecord
+  audited
+
   has_attached_file :procuracao
   validates_attachment_content_type :procuracao, content_type: "application/pdf"
 
