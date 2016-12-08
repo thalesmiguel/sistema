@@ -1,4 +1,4 @@
-<%= form_for(obj, as: resource_name, remote: true, html: { class: "user-form col s12"}) do |f| %>
+<%= form_for(@user, as: resource_name, remote: true, html: { class: "user-form col s12"}) do |f| %>
   <div class="modal-content">
     <div class="p-20">
       <div class="row card-content m-b-0 p-b-0 p-l-30 p-r-30">
@@ -23,7 +23,7 @@
             <%= f.label :confirmar_senha %>
           </div>
           <!-- TODO: Verificar a documentação do Devise para unificar as telas padrões de CREATE e UPDATE -->
-          <!-- <%# if !obj.new_record? %>
+          <!-- <%# if !@user.new_record? %>
             <div class="input-field col s12">
               <%#= f.password_field :current_password, autocomplete: "off" %>
               <%#= f.label :senha_atual %> <em class="aviso">(Senha atual para confirmar as alterações)</em>
@@ -37,8 +37,8 @@
         <%= button_tag "Salvar", class:"btn waves-effect waves-light" %>
         <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#user_modal').closeModal()", type: 'button' %>
 
-        <% if !obj.new_record? %>
-          <%= link_to "Excluir", user_path(obj), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',
+        <% if !@user.new_record? %>
+          <%= link_to "Excluir", user_path(@user), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',
                 data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a exclusão?')) } %>
         <% end %>
       </div>

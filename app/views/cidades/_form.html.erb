@@ -1,4 +1,4 @@
-<%= form_for obj, remote: true, html: { class: "cidade-form col s12" } do |f| %>
+<%= form_for @cidade, remote: true, html: { class: "cidade-form col s12" } do |f| %>
   <div class="modal-content">
     <div class="p-20">
       <div class="row card-content m-b-0 p-b-0 p-l-30 p-r-30">
@@ -21,8 +21,8 @@
         <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#cidade_modal').closeModal()", type: 'button' %>
         <%#= button_tag "Cancelar", class:"btn-flat waves-effect waves-light btn-cancelar ", type: :reset %>
 
-        <% if !obj.new_record? %>
-          <%= link_to "Excluir", cidade_path(obj), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',
+        <% if !@cidade.new_record? %>
+          <%= link_to "Excluir", cidade_path(@cidade), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',
                 data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a exclusão?')) } %>
         <% end %>
       </div>

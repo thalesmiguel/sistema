@@ -5,11 +5,11 @@ class RegistrationsController < Devise::RegistrationsController
 
   def new
     @user = User.new
-    mostra_modal(@user, 'user')
+    mostra_modal('user')
   end
 
   def edit
-    mostra_modal(@user, 'user')
+    mostra_modal('user')
   end
 
   def create

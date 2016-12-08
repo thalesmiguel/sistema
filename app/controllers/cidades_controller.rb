@@ -5,17 +5,17 @@ class CidadesController < ApplicationController
   def index
     respond_to do |format|
       format.html
-      format.json { render json: CidadeDatatable.new(view_context, { permitido: permitido? }) }
+      format.json { renderiza_datatable }
     end
   end
 
   def new
     @cidade = Cidade.new
-    mostra_modal(@cidade)
+    mostra_modal
   end
 
   def edit
-    mostra_modal(@cidade)
+    mostra_modal
   end
 
   def create

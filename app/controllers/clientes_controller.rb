@@ -6,7 +6,7 @@ class ClientesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: ClienteDatatable.new(view_context, { permitido: permitido? }) }
+      format.json { renderiza_datatable }
     end
   end
 

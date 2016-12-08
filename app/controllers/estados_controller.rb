@@ -4,17 +4,17 @@ class EstadosController < ApplicationController
   def index
     respond_to do |format|
       format.html
-      format.json { render json: EstadoDatatable.new(view_context, { permitido: permitido? }) }
+      format.json { renderiza_datatable }
     end
   end
 
   def new
     @estado = Estado.new
-    mostra_modal(@estado)
+    mostra_modal
   end
 
   def edit
-    mostra_modal(@estado)
+    mostra_modal
   end
 
   def create

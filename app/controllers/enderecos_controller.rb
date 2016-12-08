@@ -2,19 +2,20 @@ class EnderecosController < ApplicationController
   before_action :set_endereco, only: [:edit, :update, :destroy]
 
   def index
+    @enderecos = Endereco.where(cliente_id: params[:cliente_id])
     respond_to do |format|
-      format.html
       format.json { render json: EnderecoDatatable.new(view_context, { permitido: permitido? }) }
+      format.js { mostra_enderecos(@enderecos) }
     end
   end
 
   def new
     @endereco = Endereco.new
-    mostra_modal(@endereco)
+    mostra_modal(@endereco, 'endereco', "clientes/enderecos/form")
   end
 
   def edit
-    mostra_modal(@endereco)
+    mostra_modal('endereco', "clientes/enderecos/form")
   end
 
   def create
@@ -41,12 +42,18 @@ class EnderecosController < ApplicationController
 
   private
 
+    def mostra_enderecos(obj, model = params[:controller].singularize)
+      render file: "ajax/clientes/enderecos/index.js.erb", locals: {obj: obj, model: model}
+    end
+
     def set_endereco
       @endereco = Endereco.find(params[:id])
+      @cliente = @endereco.cliente
     end
 
     def endereco_params
-      params.require(:endereco).permit(:tipo, :logradouro, :numero, :complemento, :caixa_postal, :bairro, :pais, :cep, :aos_cuidados, :primario, :ativo)
+      params.require(:endereco).permit(:tipo, :logradouro, :numero, :complemento, :caixa_postal, :bairro, :pais,
+                                       :cep, :aos_cuidados, :primario, :ativo, :cliente_id, :cidade_id)
     end
 
 end

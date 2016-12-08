@@ -1,13 +1,17 @@
+$("#cliente-visualizar").html("<%= escape_javascript(render partial: 'form', locals: { cliente: @cliente } ) %>");
+
+$.ajax({
+  type: "GET",
+  url: '<%= "/clientes/#{@cliente.id}/enderecos" %>',
+  dataType : 'script'
+}).success(function(){
+  carrega_datatable("#enderecos-table", ".endereco-form", ".excluir-endereco", [11]);
+});
+
 $("#clientes-tabs .tab.disabled").removeClass("disabled").addClass("waves-effect");
 $("#clientes-tabs ul").tabs('select_tab', 'cliente-visualizar');
 
-$("#cliente-visualizar").html("<%= escape_javascript(render partial: 'form', locals: { cliente: @cliente } ) %>");
 
-
-$('select').material_select();
-$('.collapsible').collapsible();
-$(".dropdown-button").dropdown();
-$('.tooltipped').tooltip({delay: 1000});
 $('ul.tabs').tabs();
 Waves.displayEffect()
 

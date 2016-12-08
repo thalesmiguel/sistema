@@ -6,15 +6,18 @@ RSpec.describe EnderecosController, type: :controller do
     signed_in_as_a_valid_user
   end
 
-  describe "GET index" do
+  let(:cliente) { FactoryGirl.create(:cliente) }
+  let(:estado) { FactoryGirl.create(:estado) }
+  let(:cidade) { FactoryGirl.create(:cidade, estado: estado) }
 
+  describe "GET index" do
     it 'renderiza template :index' do
-      get :index
-      expect(response).to render_template(:index)
+      get :index, xhr: true, params: { cliente_id: cliente.id }
+      expect(response).to render_template('ajax/clientes/enderecos/index.js.erb')
     end
 
     it 'renderiza json' do
-      get :index, xhr: true, format: :json
+      get :index, xhr: true, format: :json, params: { cliente_id: cliente.id }
       expect(response).to_not be_nil
     end
 
@@ -23,41 +26,45 @@ RSpec.describe EnderecosController, type: :controller do
   describe "GET new" do
 
     it 'renderiza modal :new' do
-      get :new, xhr: true, params: {}
+      get :new, xhr: true, params: { cliente_id: cliente.id }
       expect(response).to render_template('ajax/application/mostra_modal.js.erb')
     end
 
-    it 'atribui novo Endereco para @estado' do
-      get :new, xhr: true, params: {}
-      expect(assigns(:estado)).to be_a_new(Endereco)
+    it 'atribui novo Endereco para @endereco' do
+      get :new, xhr: true, params: { cliente_id: cliente.id }
+      expect(assigns(:endereco)).to be_a_new(Endereco)
     end
   end
 
   describe "POST create" do
 
     context 'dados válidos' do
+      let(:dados_validos) { FactoryGirl.attributes_for(:endereco, cidade_id: cidade, cliente_id: cliente) }
+
       it 'renderiza novo Endereco' do
-        post :create, xhr: true, params: { estado: FactoryGirl.attributes_for(:estado) }
+        post :create, xhr: true, params: { cliente_id: cliente.id, endereco: dados_validos }
         expect(response).to render_template("ajax/application/crud.js.erb")
       end
 
-      it 'cria novo estado no banco de dados' do
+      it 'cria novo endereco no banco de dados' do
         expect {
-          post :create, xhr: true, params: { estado: FactoryGirl.attributes_for(:estado) }
+          post :create, xhr: true, params: { cliente_id: cliente.id, endereco: dados_validos }
         }.to change(Endereco, :count).by(1)
       end
 
     end
 
     context 'dados inválidos' do
+      let(:dados_invalidos) { FactoryGirl.attributes_for(:endereco, cidade_id: cidade, cliente_id: cliente, logradouro: '') }
+
       it 'renderiza mensagem de erro' do
-        post :create, xhr: true, params: { estado: FactoryGirl.attributes_for(:estado, nome: '') }
+        post :create, xhr: true, params: { cliente_id: cliente.id, endereco: dados_invalidos }
         expect(response).to render_template("ajax/application/crud.js.erb")
       end
 
-      it 'não cria novo estado no banco de dados' do
+      it 'não cria novo endereco no banco de dados' do
         expect {
-          post :create, xhr: true, params: { estado: FactoryGirl.attributes_for(:estado, nome: '') }
+          post :create, xhr: true, params: { cliente_id: cliente.id, endereco: dados_invalidos }
         }.not_to change(Endereco, :count)
       end
     end
@@ -65,66 +72,66 @@ RSpec.describe EnderecosController, type: :controller do
   end
 
   describe "GET edit" do
-    let(:estado) { FactoryGirl.create(:estado) }
+    let(:endereco) { FactoryGirl.create(:endereco, cliente: cliente, cidade: cidade) }
 
     it 'renderiza modal :edit' do
-      get :edit, xhr: true, params: { id: estado }
+      get :edit, xhr: true, params: { cliente_id: cliente.id, id: endereco }
       expect(response).to render_template('ajax/application/mostra_modal.js.erb')
     end
 
-    it 'atribui o estado selecionado para @estado' do
-      get :edit, xhr: true, params: { id: estado }
-      expect(assigns(:estado)).to eq(estado)
+    it 'atribui o endereco selecionado para @endereco' do
+      get :edit, xhr: true, params: { cliente_id: cliente.id, id: endereco }
+      expect(assigns(:endereco)).to eq(endereco)
     end
 
   end
 
   describe "PUT update" do
-    let(:estado) { FactoryGirl.create(:estado) }
+    let(:endereco) { FactoryGirl.create(:endereco, cliente: cliente, cidade: cidade) }
 
     context 'dados válidos' do
-      let(:dados_validos) { FactoryGirl.attributes_for(:estado, nome: "Novo nome") }
+      let(:dados_validos) { FactoryGirl.attributes_for(:endereco, cidade_id: cidade, cliente_id: cliente, logradouro: "Novo Logradouro", numero: "111") }
 
       it 'renderiza Endereco alterado' do
-        put :update, xhr: true, params: { id: estado, estado: dados_validos }
+        put :update, xhr: true, params: { cliente_id: cliente.id, id: endereco, endereco: dados_validos }
         expect(response).to render_template("ajax/application/crud.js.erb")
       end
 
-      it 'altera o estado no banco de dados' do
-        put :update, xhr: true, params: { id:estado, estado: dados_validos }
-        estado.reload
-        expect(estado.nome).to eq("Novo nome")
+      it 'altera o endereco no banco de dados' do
+        put :update, xhr: true, params: { cliente_id: cliente.id, id: endereco, endereco: dados_validos }
+        endereco.reload
+        expect(endereco.logradouro).to eq("Novo Logradouro")
       end
     end
 
     context 'dados inválidos' do
-      let(:dados_invalidos) { FactoryGirl.attributes_for(:estado, nome: "", sigla: "XX") }
+      let(:dados_invalidos) { FactoryGirl.attributes_for(:endereco, cidade_id: cidade, cliente_id: cliente, logradouro: "", numero: "222") }
 
       it 'renderiza mensagem de erro' do
-        put :update, xhr: true, params: { id: estado, estado: dados_invalidos }
+        put :update, xhr: true, params: { cliente_id: cliente.id, id: endereco, endereco: dados_invalidos }
         expect(response).to render_template("ajax/application/crud.js.erb")
       end
 
-      it 'não altera o estado no banco de dados' do
-        put :update, xhr: true, params: { id: estado, estado: dados_invalidos }
-        estado.reload
-        expect(estado.sigla).not_to eq("XX")
+      it 'não altera o endereco no banco de dados' do
+        put :update, xhr: true, params: { cliente_id: cliente.id, id: endereco, endereco: dados_invalidos }
+        endereco.reload
+        expect(endereco.numero).not_to eq("222")
       end
 
     end
   end
 
   describe "DELETE destroy" do
-    let(:estado) { FactoryGirl.create(:estado) }
+    let(:endereco) { FactoryGirl.create(:endereco, cliente: cliente, cidade: cidade) }
 
     it 'deleta Endereco da tabela' do
-      delete :destroy, xhr: true, params: { id: estado }
+      delete :destroy, xhr: true, params: { cliente_id: cliente.id, id: endereco }
       expect(response).to render_template("ajax/application/crud.js.erb")
     end
 
-    it 'deleta estado do banco de dados' do
-      delete :destroy, xhr: true, params: { id: estado }
-      expect(Endereco.exists?(estado.id)).to be_falsy
+    it 'deleta endereco do banco de dados' do
+      delete :destroy, xhr: true, params: { cliente_id: cliente.id, id: endereco }
+      expect(Endereco.exists?(endereco.id)).to be_falsy
     end
 
   end

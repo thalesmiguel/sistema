@@ -1,7 +1,7 @@
 class EnderecoDatatable < AjaxDatatablesRails::Base
   include ApplicationHelper
 
-  def_delegators :@view
+  def_delegators :@view, :link_to, :edit_cliente_endereco_path, :cliente_endereco_path
 
   def sortable_columns
     # Declare strings in this format: ModelName.column_name
@@ -31,7 +31,8 @@ class EnderecoDatatable < AjaxDatatablesRails::Base
         "record.cidade",
         "record.cidade",
         record.ativo,
-        record.primario
+        record.primario,
+        "#{link_to_edit edit_cliente_endereco_path(record.cliente, record) if permitido?}" "#{link_to_destroy cliente_endereco_path(record.cliente, record), 'excluir-endereco' if permitido?}"
       ]
     end
   end

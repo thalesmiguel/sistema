@@ -3,9 +3,9 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def mostra_modal(obj, model = params[:controller].singularize)
+  def mostra_modal(model = params[:controller].singularize, caminho = 'form')
     respond_to do |format|
-      format.js { render file: "ajax/application/mostra_modal.js.erb", locals: {obj: obj, model: model} }
+      format.js { render file: "ajax/application/mostra_modal.js.erb", locals: { model: model, caminho: caminho } }
     end
   end
 
@@ -15,7 +15,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+
   # Usado nos Data Tables
+  def renderiza_datatable(classe = params[:controller].singularize.capitalize)
+    render json: "#{classe}Datatable".constantize.new(view_context, { permitido: permitido? })
+  end
+
   def permitido?
     ability = Ability.new(current_user)
     ability.can? :manage, params[:controller].singularize

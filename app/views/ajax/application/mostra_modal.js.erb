@@ -1,5 +1,5 @@
 var modal = $("#<%= model %>_modal");
-modal.html("<%= escape_javascript(render partial: 'form', locals: { obj: obj } ) %>");
+modal.html("<%= escape_javascript(render partial: caminho ) %>");
 modal.openModal();
 
 Materialize.updateTextFields();
