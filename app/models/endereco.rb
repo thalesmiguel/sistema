@@ -12,4 +12,12 @@ class Endereco < ApplicationRecord
 
   enum tipo: [:correspondência, :faturamento]
 
+  def estado
+    cidade.nil? ? 0 : cidade.estado_id
+  end
+
+  def self.primario
+    where(primario: true).first
+  end
+
 end

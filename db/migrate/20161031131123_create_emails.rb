@@ -6,7 +6,7 @@ class CreateEmails < ActiveRecord::Migration[5.0]
       t.boolean :mala_direta
       t.boolean :solicitacao_email
       t.boolean :envio_contratos
-      t.boolean :ativo
+      t.boolean :ativo, default: true
       t.references :cliente, foreign_key: true
 
       t.timestamps

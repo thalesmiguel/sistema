@@ -63,6 +63,39 @@ RSpec.describe Cliente, type: :model do
       segundo_cliente = FactoryGirl.create(:cliente, nome: 'Thales Martinez')
       expect(Cliente.busca_por_campo("nome", "Thales")).to eq([segundo_cliente, primeiro_cliente])
     end
+
+    it 'busca cidade primário' do
+      cliente = FactoryGirl.create(:cliente)
+      estado = FactoryGirl.create(:estado)
+      cidade = FactoryGirl.create(:cidade, estado: estado)
+      endereco = FactoryGirl.create(:endereco, cliente: cliente, cidade: cidade, primario: true)
+
+      expect(cliente.cidade_primaria).to eq cidade
+      expect(cliente.cidade_primaria("nome")).to eq cidade.nome
+    end
+
+    it 'retorna cidade nula caso não existam endereços cadastrados' do
+      cliente = FactoryGirl.create(:cliente)
+
+      expect(cliente.cidade_primaria).to eq ""
+    end
+
+    it 'busca estado primário' do
+      cliente = FactoryGirl.create(:cliente)
+      estado = FactoryGirl.create(:estado)
+      cidade = FactoryGirl.create(:cidade, estado: estado)
+      endereco = FactoryGirl.create(:endereco, cliente: cliente, cidade: cidade, primario: true)
+
+      expect(cliente.estado_primario).to eq estado
+      expect(cliente.estado_primario("sigla")).to eq estado.sigla
+    end
+
+    it 'retorna estado nulo caso não existam endereços cadastrados' do
+      cliente = FactoryGirl.create(:cliente)
+
+      expect(cliente.estado_primario).to eq ""
+    end
+
   end
 
   describe 'associações' do

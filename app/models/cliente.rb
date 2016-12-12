@@ -23,6 +23,22 @@ class Cliente < ApplicationRecord
   enum cadastro_tipo: [ :cliente, :fornecedor, :funcionário, :prestador_de_serviço, :visitante ]
 
 
+  def estado_primario(campo = "")
+    if campo == "sigla"
+      enderecos.exists? ? enderecos.primario.cidade.estado.sigla : ""
+    else
+      enderecos.exists? ? enderecos.primario.cidade.estado : ""
+    end
+  end
+
+  def cidade_primaria(campo = "")
+    if campo == "nome"
+      enderecos.exists? ? enderecos.primario.cidade.nome : ""
+    else
+      enderecos.exists? ? enderecos.primario.cidade : ""
+    end
+  end
+
   def self.busca_por_campo(campo, string)
     where("#{campo} LIKE ?", "#{string}%").order("#{campo}")
   end

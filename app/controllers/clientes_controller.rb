@@ -12,7 +12,9 @@ class ClientesController < ApplicationController
 
   def new
     @cliente = Cliente.new
-    mostra_modal(@cliente)
+    respond_to do |format|
+      format.js { render file: "ajax/clientes/mostra_cliente.js.erb" }
+    end
   end
 
   def edit

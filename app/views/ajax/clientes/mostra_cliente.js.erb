@@ -5,7 +5,7 @@ $.ajax({
   url: '<%= "/clientes/#{@cliente.id}/enderecos" %>',
   dataType : 'script'
 }).success(function(){
-  carrega_datatable("#enderecos-table", ".endereco-form", ".excluir-endereco", [11]);
+  carrega_datatable_id_automatico("#enderecos-table", ".endereco-form", ".excluir-endereco", [], [0,1,2,3,4,5,6,7,8,9,10]);
 });
 
 $("#clientes-tabs .tab.disabled").removeClass("disabled").addClass("waves-effect");
@@ -13,6 +13,7 @@ $("#clientes-tabs ul").tabs('select_tab', 'cliente-visualizar');
 
 
 $('ul.tabs').tabs();
+$('.collapsible').collapsible();
 Waves.displayEffect()
 
 valida_formulario();

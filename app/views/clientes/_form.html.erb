@@ -1,16 +1,4 @@
-<!-- Modals -->
-<div id="endereco_modal" class="modal bottom-sheet modal-grande"></div>
-<div id="telefone_modal" class="modal bottom-sheet modal-grande"></div>
-<div id="email_modal" class="modal bottom-sheet modal-grande"></div>
-<div id="fazenda_modal" class="modal bottom-sheet modal-grande"></div>
-<div id="banco_modal" class="modal bottom-sheet modal-grande"></div>
-<div id="referencia_modal" class="modal bottom-sheet modal-grande"></div>
-<div id="autorizado_modal" class="modal bottom-sheet modal-grande"></div>
-<div id="raca_modal" class="modal bottom-sheet modal-grande"></div>
-<div id="empresa_modal" class="modal bottom-sheet modal-grande"></div>
-<!-- Modals -->
-
-<div class="card-panel p-t-0 p-b-30 p-l-30 p-r-30">
+<div class="card-panel p-b-30 p-l-30 p-r-30">
   <div class="row m-b-0">
     <div class="valign-wrapper">
 
@@ -70,15 +58,17 @@
                   <%= f.label :inscricao_estadual, "Inscr. Estadual" %>
                 </div>
 
-                <div class="input-field col s12 m2 offset-m6">
-                  <%= f.text_field :created_at, disabled: true, value: cliente.created_at.to_s(:data_formatada) %>
-                  <%= f.label :created_at, "Criado em" %>
-                </div>
+                <% if !cliente.new_record? %>
+                  <div class="input-field col s12 m2 offset-m6">
+                    <%= f.text_field :created_at, disabled: true, value: cliente.created_at.to_s(:data_formatada) %>
+                    <%= f.label :created_at, "Criado em" %>
+                  </div>
 
-                <div class="input-field col s12 m2">
-                  <%= f.text_field :updated_at, disabled: true, value: cliente.updated_at.to_s(:data_formatada) %>
-                  <%= f.label :updated_at, "Alterado em" %>
-                </div>
+                  <div class="input-field col s12 m2">
+                    <%= f.text_field :updated_at, disabled: true, value: cliente.updated_at.to_s(:data_formatada) %>
+                    <%= f.label :updated_at, "Alterado em" %>
+                  </div>
+                <% end %>
 
                 <div class="input-field col s12">
                   <ul class="collapsible z-depth-0" data-collapsible="expandable">

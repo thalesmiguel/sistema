@@ -1,5 +1,8 @@
+<div>
+  <%= link_to_new new_cliente_endereco_path, true, "btn-100" if can? :manage, :endereco %>
+</div>
 
-<table id="enderecos-table" class="highlight bordered" data-source="<%= cliente_enderecos_path(1, format: :json) %>">
+<table id="enderecos-table" class="highlight bordered" data-source="<%= cliente_enderecos_path(@cliente_endereco, format: :json) %>" data-cliente-endereco="<%= @cliente_endereco %>">
   <thead>
     <tr>
       <th width="">Tipo</th>
@@ -13,9 +16,6 @@
       <th width="">UF</th>
       <th width="">Ativo</th>
       <th width="">Primário</th>
-      <% if can? :manage, :endereco %>
-        <th>Opções</th>
-      <% end %>
     </tr>
   </thead>
   <tbody>

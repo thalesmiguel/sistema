@@ -5,7 +5,7 @@ class CreateLancarAutorizados < ActiveRecord::Migration[5.0]
       t.string :cpf
       t.string :observacao
       t.boolean :tem_procuracao
-      t.boolean :ativo
+      t.boolean :ativo, default: true
       t.attachment :procuracao
       t.references :cliente, foreign_key: true
 

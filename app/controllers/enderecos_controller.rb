@@ -2,24 +2,35 @@ class EnderecosController < ApplicationController
   before_action :set_endereco, only: [:edit, :update, :destroy]
 
   def index
+    @cliente_endereco = params[:cliente_id]
     @enderecos = Endereco.where(cliente_id: params[:cliente_id])
     respond_to do |format|
-      format.json { render json: EnderecoDatatable.new(view_context, { permitido: permitido? }) }
+      format.json { render json: EnderecoDatatable.new(view_context, { enderecos: @enderecos, permitido: permitido? }) }
       format.js { mostra_enderecos(@enderecos) }
     end
   end
 
   def new
-    @endereco = Endereco.new
-    mostra_modal(@endereco, 'endereco', "clientes/enderecos/form")
+    @estados = Estado.all
+    @cidades = Cidade.where("estado_id = ?", @estados.first)
+
+    @cliente = Cliente.find(params[:cliente_id])
+    @endereco = @cliente.enderecos.build
+    # @endereco = Endereco.new(cliente: @cliente)
+    mostra_modal(caminho: "clientes/enderecos/form")
   end
 
   def edit
-    mostra_modal('endereco', "clientes/enderecos/form")
+    @estados = Estado.all
+    @cidades = Cidade.where("estado_id = ?", @endereco.cidade.estado_id)
+
+    mostra_modal(caminho: "clientes/enderecos/form")
   end
 
   def create
-    @endereco = Endereco.new(endereco_params)
+    @cliente = Cliente.find(params[:cliente_id])
+    @endereco = @cliente.enderecos.new(endereco_params)
+    # @endereco = Endereco.new(endereco_params)
     if @endereco.save
       renderiza_crud_js(@endereco, 'Endereço criado com sucesso.')
     else

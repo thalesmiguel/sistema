@@ -9,8 +9,8 @@ class CreateClienteBancos < ActiveRecord::Migration[5.0]
       t.text :observacao
       t.string :correntista_nome
       t.string :correntista_cpf_cnpj
-      t.boolean :primario
-      t.boolean :ativo
+      t.boolean :primario, default: true
+      t.boolean :ativo, default: true
       t.references :cliente, foreign_key: true
 
       t.timestamps

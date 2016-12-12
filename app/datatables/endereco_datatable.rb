@@ -1,7 +1,7 @@
 class EnderecoDatatable < AjaxDatatablesRails::Base
   include ApplicationHelper
 
-  def_delegators :@view, :link_to, :edit_cliente_endereco_path, :cliente_endereco_path
+  def_delegators :@view
 
   def sortable_columns
     # Declare strings in this format: ModelName.column_name
@@ -20,25 +20,27 @@ class EnderecoDatatable < AjaxDatatablesRails::Base
 
   def data
     records.map do |record|
-      [
-        record.tipo,
-        record.logradouro,
-        record.numero,
-        record.complemento,
-        record.bairro,
-        record.cep,
-        record.caixa_postal,
-        "record.cidade",
-        "record.cidade",
-        record.ativo,
-        record.primario,
-        "#{link_to_edit edit_cliente_endereco_path(record.cliente, record) if permitido?}" "#{link_to_destroy cliente_endereco_path(record.cliente, record), 'excluir-endereco' if permitido?}"
-      ]
+      {
+        '0': record.tipo,
+        '1': record.logradouro,
+        '2': record.numero,
+        '3': record.complemento,
+        '4': record.bairro,
+        '5': record.cep,
+        '6': record.caixa_postal,
+        '7': record.cidade.nome,
+        '8': record.cidade.estado.sigla,
+        '9': material_check_box(record.ativo),
+        '10': material_check_box(record.primario),
+
+        'DT_RowId' => "endereco_#{record.id}",
+      }
     end
   end
 
   def get_raw_records
-    Endereco.all
+    # Endereco.all
+    options[:enderecos]
   end
 
   def permitido?

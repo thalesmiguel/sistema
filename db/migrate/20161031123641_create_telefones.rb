@@ -10,7 +10,7 @@ class CreateTelefones < ActiveRecord::Migration[5.0]
       t.integer :importancia
       t.boolean :telemarketing
       t.boolean :divulgar
-      t.boolean :ativo
+      t.boolean :ativo, default: true
 
       t.references :cliente, foreign_key: true
 

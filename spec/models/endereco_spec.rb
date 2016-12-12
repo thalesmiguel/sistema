@@ -54,6 +54,15 @@ RSpec.describe Endereco, type: :model do
     end
   end
 
+  describe 'métodos' do
+    it 'retorna o endereço ativo' do
+      primeiro_endereco = FactoryGirl.create(:endereco, cidade: cidade, cliente: cliente, primario: true)
+      segundo_endereco = FactoryGirl.create(:endereco, cidade: cidade, cliente: cliente, primario: false)
+
+      expect(cliente.enderecos.primario).to eq(primeiro_endereco)
+    end
+  end
+
   describe 'log' do
     describe 'gera log de' do
       let(:estado) { FactoryGirl.create(:estado) }

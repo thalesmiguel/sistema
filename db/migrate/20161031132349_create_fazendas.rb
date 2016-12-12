@@ -14,7 +14,7 @@ class CreateFazendas < ActiveRecord::Migration[5.0]
       t.string :cnpj_produtor
       t.string :nome_nf
       t.string :cpf_cnpj_nf
-      t.boolean :ativo
+      t.boolean :ativo, default: true
       t.references :cliente, foreign_key: true
 
       t.timestamps

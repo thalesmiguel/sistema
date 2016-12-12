@@ -15,10 +15,10 @@ ActiveRecord::Schema.define(version: 20161101134252) do
   create_table "alertas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "tipo"
     t.text     "descricao",  limit: 65535
-    t.boolean  "ativo"
+    t.boolean  "ativo",                    default: true
     t.integer  "cliente_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.index ["cliente_id"], name: "index_alertas_on_cliente_id", using: :btree
   end
 
@@ -68,11 +68,11 @@ ActiveRecord::Schema.define(version: 20161101134252) do
     t.text     "observacao",           limit: 65535
     t.string   "correntista_nome"
     t.string   "correntista_cpf_cnpj"
-    t.boolean  "primario"
-    t.boolean  "ativo"
+    t.boolean  "primario",                           default: true
+    t.boolean  "ativo",                              default: true
     t.integer  "cliente_id"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
     t.index ["banco_id"], name: "index_cliente_bancos_on_banco_id", using: :btree
     t.index ["cidade_id"], name: "index_cliente_bancos_on_cidade_id", using: :btree
     t.index ["cliente_id"], name: "index_cliente_bancos_on_cliente_id", using: :btree
@@ -103,10 +103,10 @@ ActiveRecord::Schema.define(version: 20161101134252) do
     t.boolean  "mala_direta"
     t.boolean  "solicitacao_email"
     t.boolean  "envio_contratos"
-    t.boolean  "ativo"
+    t.boolean  "ativo",             default: true
     t.integer  "cliente_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.index ["cliente_id"], name: "index_emails_on_cliente_id", using: :btree
   end
 
@@ -139,11 +139,11 @@ ActiveRecord::Schema.define(version: 20161101134252) do
     t.string   "pais"
     t.string   "cep"
     t.string   "aos_cuidados"
-    t.boolean  "primario"
-    t.boolean  "ativo"
+    t.boolean  "primario",     default: true
+    t.boolean  "ativo",        default: true
     t.integer  "cliente_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.index ["cidade_id"], name: "index_enderecos_on_cidade_id", using: :btree
     t.index ["cliente_id"], name: "index_enderecos_on_cliente_id", using: :btree
   end
@@ -169,10 +169,10 @@ ActiveRecord::Schema.define(version: 20161101134252) do
     t.string   "cnpj_produtor"
     t.string   "nome_nf"
     t.string   "cpf_cnpj_nf"
-    t.boolean  "ativo"
+    t.boolean  "ativo",                            default: true
     t.integer  "cliente_id"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.index ["cidade_id"], name: "index_fazendas_on_cidade_id", using: :btree
     t.index ["cliente_id"], name: "index_fazendas_on_cliente_id", using: :btree
   end
@@ -182,14 +182,14 @@ ActiveRecord::Schema.define(version: 20161101134252) do
     t.string   "cpf"
     t.string   "observacao"
     t.boolean  "tem_procuracao"
-    t.boolean  "ativo"
+    t.boolean  "ativo",                   default: true
     t.string   "procuracao_file_name"
     t.string   "procuracao_content_type"
     t.integer  "procuracao_file_size"
     t.datetime "procuracao_updated_at"
     t.integer  "cliente_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.index ["cliente_id"], name: "index_lancar_autorizados_on_cliente_id", using: :btree
   end
 
@@ -232,10 +232,10 @@ ActiveRecord::Schema.define(version: 20161101134252) do
     t.integer  "importancia"
     t.boolean  "telemarketing"
     t.boolean  "divulgar"
-    t.boolean  "ativo"
+    t.boolean  "ativo",         default: true
     t.integer  "cliente_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.index ["cliente_id"], name: "index_telefones_on_cliente_id", using: :btree
   end
 

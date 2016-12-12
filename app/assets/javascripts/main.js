@@ -92,7 +92,6 @@ function limita_text_area() {
 }
 // text_area
 
-// function carrega_datatable(tela, colunas_nao_clicaveis) {
 function carrega_datatable(id_tabela, classe_formulario, classe_excluir, colunas_nao_clicaveis) {
   var tabela = $(id_tabela).dataTable({
     processing: true,
@@ -101,6 +100,40 @@ function carrega_datatable(id_tabela, classe_formulario, classe_excluir, colunas
     pagingType: "full_numbers",
     autoWidth: false,
     columnDefs: [ { orderable: false, targets: colunas_nao_clicaveis } ],
+    language: {
+      sUrl: "datatable_i18n"
+    },
+    drawCallback: function( settings ) {
+      $('.paginate_button').addClass("waves-effect");
+      $('select').material_select();
+      // $('.tooltipped').tooltip({delay: 1000});
+    },
+  });
+
+  $(document).on('ajax:complete', classe_formulario, function(){
+    tabela.fnDraw();
+    // tabela.fnStandingRedraw();
+  });
+  $(document).on('ajax:complete', classe_excluir, function(){
+    tabela.fnDraw();
+  });
+}
+
+function carrega_datatable_id_automatico(id_tabela, classe_formulario, classe_excluir, colunas_nao_clicaveis, calunas_com_dados) {
+
+  var lista_calunas_com_dados = []
+  $.each(calunas_com_dados, function( index, value ) {
+    lista_calunas_com_dados.push({data: value.toString()})
+  });
+
+  var tabela = $(id_tabela).dataTable({
+    processing: true,
+    serverSide: true,
+    ajax: $(id_tabela).data('source'),
+    pagingType: "full_numbers",
+    autoWidth: false,
+    columnDefs: [ { orderable: false, targets: colunas_nao_clicaveis } ],
+    columns: lista_calunas_com_dados,
     language: {
       sUrl: "datatable_i18n"
     },

@@ -1,7 +1,7 @@
 class ClienteDatatable < AjaxDatatablesRails::Base
   include ApplicationHelper
 
-  def_delegators :@view, :link_to, :edit_cliente_path
+  def_delegators :@view
 
   def sortable_columns
     # Declare strings in this format: ModelName.column_name
@@ -18,16 +18,18 @@ class ClienteDatatable < AjaxDatatablesRails::Base
 
   def data
     records.map do |record|
-      [
-        "ativo",
-        record.cadastro_tipo,
-        record.cpf_cnpj,
-        record.nome,
-        record.apelido,
-        record.ficticio,
-        "cidade",
-        "uf",
-      ]
+      {
+        '0': "ativo",
+        '1': record.cadastro_tipo,
+        '2': record.cpf_cnpj,
+        '3': record.nome,
+        '4': record.apelido,
+        '5': record.ficticio,
+        '6': record.cidade_primaria("nome"),
+        '7': record.estado_primario("sigla"),
+
+        'DT_RowId' => "cliente_#{record.id}",
+      }
     end
   end
 

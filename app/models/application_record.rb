@@ -6,7 +6,7 @@ class ApplicationRecord < ActiveRecord::Base
   # Validações
   def pelo_menos_um_deve_estar_ativo
     existentes = self.class.where(cliente_id: cliente_id).where.not(id: id)
-    if (existentes.exists? && !existentes.exists?(ativo: true)) || (!existentes.exists? && ativo == false)
+    if (existentes.exists? && !existentes.exists?(ativo: true)) || (!existentes.exists? && (ativo == false || ativo.nil?))
       errors.add(:ativo, 'pelo menos 1 deve estar ativo')
     end
   end

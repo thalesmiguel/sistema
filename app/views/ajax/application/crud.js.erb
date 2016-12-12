@@ -4,14 +4,5 @@
   <% end %>
 <% else %>
   Materialize.toast("<%= notice %>", 5000, 'rounded deep-purple');
-  <% case acao %>
-  <% when 'create' %>
-    <%= render file: "ajax/#{controller}/incluir.js.erb", locals: { obj: obj } %>
-  <% when 'update' %>
-    <%= render file: "ajax/#{controller}/alterar.js.erb", locals: { obj: obj } %>
-  <% when 'destroy' %>
-    <%= render file: "ajax/#{controller}/excluir.js.erb", locals: { obj: obj } %>
-  <% else %>
-    alert('erro');
-  <% end %>
+  <%= render file: "ajax/application/esconde_modal.js.erb", locals: { model: model } %>
 <% end %>

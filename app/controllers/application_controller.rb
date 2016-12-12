@@ -3,17 +3,23 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def mostra_modal(model = params[:controller].singularize, caminho = 'form')
+  def mostra_modal(model: params[:controller].singularize, caminho: 'form')
     respond_to do |format|
       format.js { render file: "ajax/application/mostra_modal.js.erb", locals: { model: model, caminho: caminho } }
     end
   end
 
-  def renderiza_crud_js(obj, mensagem = '', acao = action_name, controller = params[:controller])
+  def renderiza_crud_js(obj, mensagem = '', model = params[:controller].singularize)
     respond_to do |format|
-      format.js { render file: 'ajax/application/crud.js.erb', locals: { notice: mensagem, obj: obj, acao: acao, controller: controller } }
+      format.js { render file: 'ajax/application/crud.js.erb', locals: { notice: mensagem, obj: obj, model: model } }
     end
   end
+
+  # def renderiza_crud_js(obj, mensagem = '', acao = action_name, controller = params[:controller])
+  #   respond_to do |format|
+  #     format.js { render file: 'ajax/application/crud.js.erb', locals: { notice: mensagem, obj: obj, acao: acao, controller: controller } }
+  #   end
+  # end
 
 
   # Usado nos Data Tables

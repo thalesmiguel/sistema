@@ -34,6 +34,19 @@ RSpec.describe EnderecosController, type: :controller do
       get :new, xhr: true, params: { cliente_id: cliente.id }
       expect(assigns(:endereco)).to be_a_new(Endereco)
     end
+
+    it 'atribui todos os estados para @estados' do
+      estados = Estado.all
+      get :new, xhr: true, params: { cliente_id: cliente.id }
+      expect(assigns(:estados)).to eq(estados)
+    end
+
+    it 'atribui cidades do estado atual para @cidades' do
+      cidades = Cidade.where("estado_id = ?", estado)
+      get :new, xhr: true, params: { cliente_id: cliente.id }
+      expect(assigns(:cidades)).to eq(cidades)
+    end
+
   end
 
   describe "POST create" do
@@ -82,6 +95,18 @@ RSpec.describe EnderecosController, type: :controller do
     it 'atribui o endereco selecionado para @endereco' do
       get :edit, xhr: true, params: { cliente_id: cliente.id, id: endereco }
       expect(assigns(:endereco)).to eq(endereco)
+    end
+
+    it 'atribui todos os estados para @estados' do
+      estados = Estado.all
+      get :edit, xhr: true, params: { cliente_id: cliente.id, id: endereco }
+      expect(assigns(:estados)).to eq(estados)
+    end
+
+    it 'atribui cidades do estado atual para @cidades' do
+      cidades = Cidade.where("estado_id = ?", endereco.cidade.estado_id)
+      get :edit, xhr: true, params: { cliente_id: cliente.id, id: endereco }
+      expect(assigns(:cidades)).to eq(cidades)
     end
 
   end

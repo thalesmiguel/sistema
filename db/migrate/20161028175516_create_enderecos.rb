@@ -11,8 +11,8 @@ class CreateEnderecos < ActiveRecord::Migration[5.0]
       t.string :pais
       t.string :cep
       t.string :aos_cuidados
-      t.boolean :primario
-      t.boolean :ativo
+      t.boolean :primario, default: true
+      t.boolean :ativo, default: true
 
       t.references :cliente, foreign_key: true
 
