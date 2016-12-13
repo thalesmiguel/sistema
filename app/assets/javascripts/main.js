@@ -22,6 +22,8 @@ $(document).on('turbolinks:load', function(){
 
   valida_formulario();
   limita_text_area();
+
+
 });
 
 // Material Design Alert
@@ -72,6 +74,48 @@ function valida_formulario() {
     $('form').bind('reset', function() {
       $(this).find('input:submit, button:submit, input:reset, button:reset').prop('disabled', true);
     });
+
+  // Jquery Validation
+  $.validator.setDefaults({
+    onkeyup: false,
+    errorClass: 'invalid',
+    validClass: 'valid',
+    submitHandler: function(form) {
+      $(form).find("input[type='submit']").prop('disabled', true);
+      $(form).find("button[type='submit']").addClass("disabled");
+      $(form).find("button[type='submit']").prop('disabled', true);
+      form.submit();
+    },
+    errorPlacement: function(error, element) {
+      error.insertAfter($(element).siblings('label'));
+    }
+  });
+
+  $(document).ready(function(){
+  	$("form[class~='validate']").each(function(){
+  		$(this).validate();
+  	});
+  });
+
+  jQuery.extend(jQuery.validator.messages, {
+    required: "Campo obrigatório.",
+    remote: "Por favor, corrija o campo.",
+    email: "Por favor, digite um endereço de e-mail válido.",
+    url: "Por favor, digite uma URL válida.",
+    date: "Por favor, digite uma data válida.",
+    dateISO: "Por favor, digite uma data válida (ISO).",
+    number: "Por favor, digite um número válido.",
+    digits: "Por favor, digite apenas números.",
+    creditcard: "Por favor, digite um número de cartão válido.",
+    equalTo: "Por favor, digite o mesmo valor novamente.",
+    accept: "Por favor, digite um valor com extensão válida.",
+    maxlength: jQuery.validator.format("Por favor, não digite mais do que {0} caracteres."),
+    minlength: jQuery.validator.format("Por favor, digite pelo menos {0} caracteres."),
+    rangelength: jQuery.validator.format("Por favor, digite entre {0} e {1} caracteres."),
+    range: jQuery.validator.format("Por favor, digite entre {0} e {1} caracteres."),
+    max: jQuery.validator.format("Por favor, digite um valor MENOR ou igual a {0}."),
+    min: jQuery.validator.format("Por favor, digite um valor MAIOR ou igual a {0}.")
+  });
 }
 
 // text_area

@@ -15,6 +15,7 @@ class CreateClientes < ActiveRecord::Migration[5.0]
       t.integer :cadastro_tipo
       t.text :marketing_tipos
       t.text :obsevacao
+      t.boolean :ativo, default: true
 
       t.timestamps
     end

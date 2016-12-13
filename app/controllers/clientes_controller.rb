@@ -29,7 +29,9 @@ class ClientesController < ApplicationController
     @cliente.marketing_tipos << params[:marketing_tipos] #rever
 
     if @cliente.save
-      renderiza_crud_js(@cliente, 'Cliente criado com sucesso.')
+      respond_to do |format|
+        format.js { render file: "ajax/clientes/mostra_novo_cliente.js.erb" }
+      end
     else
       renderiza_crud_js(@cliente)
     end
@@ -45,7 +47,10 @@ class ClientesController < ApplicationController
 
   def destroy
     @cliente.destroy
-    renderiza_crud_js(@cliente, 'Cliente excluído com sucesso.')
+    # renderiza_crud_js(@cliente, 'Cliente excluído com sucesso.')
+    respond_to do |format|
+      format.js { render file: "ajax/clientes/mostra_pesquisa.js.erb" }
+    end
   end
 
   private

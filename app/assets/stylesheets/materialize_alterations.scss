@@ -859,3 +859,12 @@ span.name, span.email {
   padding-bottom: 1em;
   padding-top: 2em;
 }
+
+label.invalid {
+  color: red;
+  font-size: 1rem;
+  left: 0;
+  position: relative;
+  top: -15px;
+  transform: none !important;
+}

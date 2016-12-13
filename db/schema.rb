@@ -93,8 +93,9 @@ ActiveRecord::Schema.define(version: 20161101134252) do
     t.integer  "cadastro_tipo"
     t.text     "marketing_tipos",    limit: 65535
     t.text     "obsevacao",          limit: 65535
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.boolean  "ativo",                            default: true
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
   end
 
   create_table "emails", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

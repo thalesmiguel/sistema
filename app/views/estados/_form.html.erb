@@ -1,15 +1,17 @@
-<%= form_for @estado, remote: true, html: { class: "estado-form col s12" } do |f| %>
+<%= form_for @estado, remote: true, html: { class: "estado-form col s12 validate" } do |f| %>
   <div class="modal-content">
     <div class="p-20">
       <div class="row card-content m-b-0 p-b-0 p-l-30 p-r-30">
         <div class="row">
+
+
           <div class="input-field col s12">
-            <%= f.text_field :nome %>
+            <%= f.text_field :nome, required:"" %>
             <%= f.label :nome %>
           </div>
 
           <div class="input-field col s12">
-            <%= f.text_field :sigla %>
+            <%= f.text_field :sigla, required:"", minlength:"2" %>
             <%= f.label :sigla %>
           </div>
         </div>
@@ -27,3 +29,29 @@
     </div>
   </div>
 <% end %>
+
+
+<script>
+
+$.validator.setDefaults({
+  onkeyup: false,
+  errorClass: 'invalid',
+  validClass: 'valid',
+  submitHandler: function(form) {
+    $(form).find("input[type='submit']").prop('disabled', true);
+    $(form).find("button[type='submit']").addClass("disabled");
+    $(form).find("button[type='submit']").prop('disabled', true);
+    form.submit();
+  },
+  errorPlacement: function(error, element) {
+    error.insertAfter($(element).siblings('label'));
+  }
+});
+
+$(document).ready(function(){
+	$("form[class~='validate']").each(function(){
+		$(this).validate();
+	});
+});
+
+</script>

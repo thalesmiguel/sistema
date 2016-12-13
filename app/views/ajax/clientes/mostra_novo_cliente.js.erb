@@ -1,0 +1,23 @@
+Materialize.toast("Cliente cadastrado com sucesso.", 5000, 'rounded deep-purple');
+
+$("#cliente-visualizar").html("<%= escape_javascript(render partial: 'form', locals: { cliente: @cliente } ) %>");
+
+$.ajax({
+  type: "GET",
+  url: '<%= "/clientes/#{@cliente.id}/enderecos" %>',
+  dataType : 'script'
+}).success(function(){
+  carrega_datatable_id_automatico("#enderecos-table", ".endereco-form", ".excluir-endereco", [], [0,1,2,3,4,5,6,7,8,9,10]);
+});
+
+$('ul.tabs').tabs();
+$('.collapsible').collapsible();
+$('select').material_select();
+Waves.displayEffect()
+
+valida_formulario();
+limita_text_area();
+
+Materialize.updateTextFields();
+
+$("#clientes-table").dataTable().fnDraw()

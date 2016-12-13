@@ -1,16 +1,16 @@
-<%= form_for [@cliente, @endereco], remote: true, html: { class: "endereco-form col s12" } do |f| %>
+<%= form_for [@cliente, @endereco], remote: true, html: { class: "endereco-form col s12 validate" } do |f| %>
   <div class="modal-content">
     <div class="p-20">
       <div class="row card-content m-b-0 p-b-0 p-l-30 p-r-30">
-        <div class="row">
 
+        <div class="row">
           <div class="input-field col s12 m2">
             <%= f.select :tipo, Endereco.tipos.map { |k, v| [k.humanize, k]} %>
             <%= f.label :tipo, class: "active" %>
           </div>
 
           <div class="input-field col s12 m4">
-            <%= f.text_field :logradouro %>
+            <%= f.text_field :logradouro, required:"" %>
             <%= f.label :logradouro %>
           </div>
 
@@ -28,7 +28,9 @@
             <%= f.text_field :caixa_postal %>
             <%= f.label :caixa_postal %>
           </div>
+        </div>
 
+        <div class="row">
           <div class="input-field col s12 m2">
             <%= f.text_field :pais %>
             <%= f.label :pais, "País" %>
@@ -53,12 +55,16 @@
             <%= f.text_field :cep %>
             <%= f.label :cep %>
           </div>
+        </div>
 
+        <div class="row">
           <div class="input-field col s12">
             <%= f.text_field :aos_cuidados %>
             <%= f.label :aos_cuidados, "Aos Cuidados De" %>
           </div>
+        </div>
 
+        <div class="row">
           <div class="input-field col s12 m1">
             <%= f.check_box :primario, class: 'filled-in' %>
             <%= f.label :primario, "Primário"  %>
@@ -68,8 +74,8 @@
             <%= f.check_box :ativo, class: 'filled-in'  %>
             <%= f.label :ativo %>
           </div>
-
         </div>
+
       </div>
 
       <div class="modal-footer">

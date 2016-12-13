@@ -19,7 +19,7 @@ class ClienteDatatable < AjaxDatatablesRails::Base
   def data
     records.map do |record|
       {
-        '0': "ativo",
+        '0': material_check_box(record.ativo),
         '1': record.cadastro_tipo,
         '2': record.cpf_cnpj,
         '3': record.nome,

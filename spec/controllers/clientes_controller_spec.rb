@@ -22,9 +22,9 @@ RSpec.describe ClientesController, type: :controller do
 
   describe "GET new" do
 
-    it 'renderiza modal :new' do
+    it 'renderiza aba :new' do
       get :new, xhr: true, params: {}
-      expect(response).to render_template('ajax/application/mostra_modal.js.erb')
+      expect(response).to render_template('ajax/clientes/mostra_cliente.js.erb')
     end
 
     it 'atribui novo Cliente para @cliente' do
@@ -40,7 +40,8 @@ RSpec.describe ClientesController, type: :controller do
     context 'dados válidos' do
       it 'renderiza novo Cliente' do
         post :create, xhr: true, params: { cliente: dados_validos }
-        expect(response).to render_template("ajax/application/crud.js.erb")
+        expect(response).to render_template("ajax/clientes/mostra_novo_cliente.js.erb")
+        # expect(response).to render_template("ajax/application/crud.js.erb")
       end
 
       it 'cria novo cliente no banco de dados' do
@@ -123,7 +124,7 @@ RSpec.describe ClientesController, type: :controller do
 
     it 'deleta Cliente da tabela' do
       delete :destroy, xhr: true, params: { id: cliente }
-      expect(response).to render_template("ajax/application/crud.js.erb")
+      expect(response).to render_template("ajax/clientes/mostra_pesquisa.js.erb")
     end
 
     it 'deleta cliente do banco de dados' do

@@ -1,10 +1,10 @@
-<%= form_for @cidade, remote: true, html: { class: "cidade-form col s12" } do |f| %>
+<%= form_for @cidade, remote: true, html: { class: "cidade-form col s12 validate" } do |f| %>
   <div class="modal-content">
     <div class="p-20">
       <div class="row card-content m-b-0 p-b-0 p-l-30 p-r-30">
         <div class="row">
           <div class="input-field col s12">
-            <%= f.text_field :nome %>
+            <%= f.text_field :nome, required:"" %>
             <%= f.label :nome %>
           </div>
 
