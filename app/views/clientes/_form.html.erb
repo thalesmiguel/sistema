@@ -7,7 +7,7 @@
           <div class="p-20">
             <div class="row card-content">
 
-              <div class="row bordas p-15">
+              <div class="row bordas-laterais p-b-0 p-t-15 p-l-15 p-r-15">
                 <div class="row">
                   <div class="input-field col s12 m4">
                     <%= f.text_field :nome, required:"" %>
@@ -91,9 +91,9 @@
                   <% end %>
                 </div>
 
-                <div class="row">
-                  <div class="input-field col s12">
-                    <ul class="collapsible z-depth-0" data-collapsible="expandable">
+                <div class="row m-0">
+                  <div class="col s12 p-0">
+                    <ul class="collapsible z-depth-0 m-b-0 m-estreita" data-collapsible="expandable">
                       <li>
                         <div class="collapsible-header"><i class="material-icons">picture_in_picture</i>Tipo de Cadastro & Opções de Marketing</div>
                         <div class="collapsible-body">
@@ -113,14 +113,15 @@
                               <ul>
                                 <li>
                                   <!-- Verificar se os checkboxes são marcados corretamente em relação às informações do banco de dados, passando TRUE como terceiro argumento -->
-                                  <%#= check_box_tag "cliente[marketing_tipos][]", marketing_tipo, @cliente.marketing_tipos.include?(marketing_tipo), id: "cliente_marketing_tipos_#{marketing_tipo}", class: 'filled-in' %>
-                                  <%= check_box_tag "cliente[marketing_tipos][]", marketing_tipo, true, id: "cliente_marketing_tipos_#{marketing_tipo}", class: 'filled-in' %>
+                                  <%= check_box_tag "cliente[marketing_tipos][]", marketing_tipo, @cliente.marketing_tipos.include?(marketing_tipo), id: "cliente_marketing_tipos_#{marketing_tipo}", class: 'filled-in' %>
+                                  <%#= check_box_tag "cliente[marketing_tipos][]", marketing_tipo, true, id: "cliente_marketing_tipos_#{marketing_tipo}", class: 'filled-in' %>
                                   <%= label_tag "cliente_marketing_tipos_#{marketing_tipo}", marketing_tipo.humanize %>
                                 </li>
                               </ul>
                             <% end %>
                             <%= f.label :marketing_tipos, "Tipos de Marketing", class: "active p-t-25" %>
-                          </div>
+                            <%= check_box_tag "cliente[marketing_tipos][]", "", true, id: "cliente_marketing_tipos_#{""}", class: 'filled-in hide' %>
+                            </div>
                           <p>&zwnj;</p>
                           <p>&zwnj;</p>
                           <p>&zwnj;</p>
@@ -136,6 +137,24 @@
                           </div>
                           <p>&zwnj;</p>
                           <p>&zwnj;</p>
+                          <p>&zwnj;</p>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="collapsible-header"><i class="material-icons">picture_in_picture</i>Detalhes Complementares</div>
+                        <div class="collapsible-body">
+                          <div class="input-field col s12 m2">
+                            <%= text_field_tag 'Cadastrado por', '', disabled: true %>
+                            <%= label_tag 'Cadastrado por' %>
+                          </div>
+                          <div class="input-field col s12 m5">
+                            <%= text_field_tag 'Ultima Compra', '', disabled: true  %>
+                            <%= label_tag 'Última Compra' %>
+                          </div>
+                          <div class="input-field col s12 m5">
+                            <%= text_field_tag 'Ultima Venda', '', disabled: true  %>
+                            <%= label_tag 'Última Venda' %>
+                          </div>
                           <p>&zwnj;</p>
                         </div>
                       </li>
@@ -176,10 +195,6 @@
               </div>
 
             </div>
-
-            <ul class="tabs tabs-divider">
-              <li><div class="divider"></div></li>
-            </ul>
 
             <%= button_tag "Salvar", class:"btn waves-effect waves-light btn-right" %>
             <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5 btn-right", type: 'reset' %>

@@ -12,7 +12,24 @@ $(document).on('turbolinks:load', function(){
   });
 
   $(document).on("click", "a[href='#cliente-pesquisar']", function(){
-    $("#clientes-table").dataTable().fnDraw()
+    $("#clientes-table").dataTable().fnDraw();
+    $("#cliente-dados-adicionais").addClass("hide");
+  });
+
+  $(document).on("click", "a[href='#cliente-visualizar']", function(){
+    $("#cliente-dados-adicionais").removeClass("hide");
+  });
+
+  $(document).on("click", "a[href='#cliente-alertas']", function(){
+    $("#cliente-dados-adicionais").removeClass("hide");
+  });
+
+  $(document).on("click", "a[href='#cliente-contatos']", function(){
+    $("#cliente-dados-adicionais").removeClass("hide");
+  });
+
+  $(document).on("click", "a[href='#cliente-relatorios']", function(){
+    $("#cliente-dados-adicionais").removeClass("hide");
   });
 
 });

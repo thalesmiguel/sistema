@@ -207,7 +207,7 @@ function mascaras() {
   $(".data").mask("99/99/9999", {placeholder: " "});
   $(".cpf").mask("999.999.999-**", {placeholder: " "});
   $(".cnpj").mask("99.999.999/9999-**", {placeholder: " "});
-  $(".rg").mask("99.999.999-9", {placeholder: " "});
+  $(".rg").mask("99.999.999-*", {placeholder: " "});
   $(".cep").mask("99.999-999", {placeholder: " "});
 }
 
