@@ -1,5 +1,6 @@
 class Endereco < ApplicationRecord
   audited
+  trimmed_fields :logradouro, :numero, :complemento, :caixa_postal, :bairro, :pais, :cep, :aos_cuidados
 
   belongs_to :cliente
   belongs_to :cidade

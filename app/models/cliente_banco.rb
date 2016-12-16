@@ -1,5 +1,6 @@
 class ClienteBanco < ApplicationRecord
   audited
+  trimmed_fields :agencia, :conta_corrente, :obsevacao, :correntista_nome, correntista_cpf_cnpj
 
   belongs_to :banco
   belongs_to :cidade

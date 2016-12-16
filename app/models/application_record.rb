@@ -1,4 +1,7 @@
+require 'trimmer'
+
 class ApplicationRecord < ActiveRecord::Base
+  include Trimmer
   self.abstract_class = true
 
 

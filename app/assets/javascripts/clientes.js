@@ -9,6 +9,27 @@ $(document).on('turbolinks:load', function(){
       type: "GET",
       url: url
     });
-  })
+  });
+
+  $(document).on("click", "a[href='#cliente-pesquisar']", function(){
+    $("#clientes-table").dataTable().fnDraw()
+  });
 
 });
+
+function altera_mascara_cpf_cnpj(){
+  $("#cliente_pessoa_tipo").on("change", function(){
+    var selecionado = $('#cliente_pessoa_tipo option:selected').text();
+    var cpf_cnpj = $("#cliente_cpf_cnpj");
+    var label = $("label[for='cliente_cpf_cnpj']");
+
+    if ( selecionado == "Física" ) {
+      cpf_cnpj.removeClass("cnpj").addClass("cpf");
+      label.html("CPF")
+    } else  {
+      cpf_cnpj.removeClass("cpf").addClass("cnpj");
+      label.html("CNPJ")
+    };
+    mascaras();
+  });
+}

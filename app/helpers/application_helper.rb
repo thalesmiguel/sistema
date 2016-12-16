@@ -1,7 +1,11 @@
 module ApplicationHelper
 
-  def link_to_new(link_source, remote = true, classes = "")
-    link_to "<i class='small material-icons right'>add_circle_outline</i> Novo".html_safe, link_source, remote: remote, class: "btn waves-effect waves-light #{classes}"
+  def link_to_new(link_source, remote = true, classes = "", texto = "")
+    if texto == ""
+      link_to "<i class='small material-icons right'>add_circle_outline</i> Novo".html_safe, link_source, remote: remote, class: "btn waves-effect waves-light #{classes}"
+    else
+      link_to "<i class='small material-icons right'>add_circle_outline</i> #{texto}".html_safe, link_source, remote: remote, class: "btn waves-effect waves-light #{classes}"
+    end
   end
 
   def link_to_edit(link_source, remote = true)

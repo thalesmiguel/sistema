@@ -40,6 +40,13 @@ class CidadesController < ApplicationController
     renderiza_crud_js(@cidade, 'Cidade excluída com sucesso.')
   end
 
+  def update_cidades
+    @cidades = Cidade.where("estado_id = ?", params[:estado_id]).order(:nome)
+    respond_to do |format|
+      format.js { render file: "ajax/application/update_cidades.js.erb" }
+    end
+  end
+
   private
 
     def set_cidade

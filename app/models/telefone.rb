@@ -1,6 +1,7 @@
 class Telefone < ApplicationRecord
   audited
-  
+  trimmed_fields :ddi, :ddd, :numero, :ramal, :nome_contato
+
   belongs_to :cliente
 
   validates :cliente, presence: true

@@ -11,16 +11,19 @@ Rails.application.routes.draw do
   end
   # Devise
 
+  get 'cidades/update_cidades', as: 'update_cidades'
 
   scope path_names: { new: "novo", edit: "editar" } do
     resources :estados, except: [:show]
     resources :cidades, except: [:show]
 
+    put 'clientes/:id/ativar', to: 'clientes#ativar', as: 'ativar_cliente'
+    put 'clientes/:id/inativar', to: 'clientes#inativar', as: 'inativar_cliente'
     resources :clientes, except: [:show] do
       resources :enderecos, except: [:show]
       resources :telefones, except: [:show]
     end
-    
+
   end
 
   scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do

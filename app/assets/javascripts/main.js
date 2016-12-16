@@ -2,12 +2,12 @@ $(document).on('turbolinks:load', function(){
   // $('.modal-trigger').leanModal();
 
   $(".button-collapse").sideNav();
-  $('select').material_select();
+  // $('select').material_select();
   $('.collapsible').collapsible();
-  $(".dropdown-button").dropdown();
+  // $(".dropdown-button").dropdown();
   $('ul.tabs').tabs();
   Waves.displayEffect()
-  Materialize.updateTextFields();
+  // Materialize.updateTextFields();
 
 
   $(document).ajaxStart(function() { Pace.restart(); });
@@ -20,8 +20,8 @@ $(document).on('turbolinks:load', function(){
   //   return false;
   // });
 
-  valida_formulario();
-  limita_text_area();
+  // valida_formulario();
+  // limita_text_area();
 
 
 });
@@ -76,47 +76,47 @@ function valida_formulario() {
     });
 
   // Jquery Validation
-  $.validator.setDefaults({
-    onkeyup: false,
-    errorClass: 'invalid',
-    validClass: 'valid',
-    submitHandler: function(form) {
-      $(form).find("input[type='submit']").prop('disabled', true);
-      $(form).find("button[type='submit']").addClass("disabled");
-      $(form).find("button[type='submit']").prop('disabled', true);
-      form.submit();
-    },
-    errorPlacement: function(error, element) {
-      error.insertAfter($(element).siblings('label'));
-    }
-  });
-
-  $(document).ready(function(){
-  	$("form[class~='validate']").each(function(){
-  		$(this).validate();
-  	});
-  });
-
-  jQuery.extend(jQuery.validator.messages, {
-    required: "Campo obrigatório.",
-    remote: "Por favor, corrija o campo.",
-    email: "Por favor, digite um endereço de e-mail válido.",
-    url: "Por favor, digite uma URL válida.",
-    date: "Por favor, digite uma data válida.",
-    dateISO: "Por favor, digite uma data válida (ISO).",
-    number: "Por favor, digite um número válido.",
-    digits: "Por favor, digite apenas números.",
-    creditcard: "Por favor, digite um número de cartão válido.",
-    equalTo: "Por favor, digite o mesmo valor novamente.",
-    accept: "Por favor, digite um valor com extensão válida.",
-    maxlength: jQuery.validator.format("Por favor, não digite mais do que {0} caracteres."),
-    minlength: jQuery.validator.format("Por favor, digite pelo menos {0} caracteres."),
-    rangelength: jQuery.validator.format("Por favor, digite entre {0} e {1} caracteres."),
-    range: jQuery.validator.format("Por favor, digite entre {0} e {1} caracteres."),
-    max: jQuery.validator.format("Por favor, digite um valor MENOR ou igual a {0}."),
-    min: jQuery.validator.format("Por favor, digite um valor MAIOR ou igual a {0}.")
-  });
-}
+  // $.validator.setDefaults({
+  //   onkeyup: false,
+  //   errorClass: 'invalid',
+  //   validClass: 'valid',
+  //   submitHandler: function(form) {
+  //     $(form).find("input[type='submit']").prop('disabled', true);
+  //     $(form).find("button[type='submit']").addClass("disabled");
+  //     $(form).find("button[type='submit']").prop('disabled', true);
+  //     form.submit();
+  //   },
+  //   errorPlacement: function(error, element) {
+  //     error.insertAfter($(element).siblings('label'));
+  //   }
+  // });
+  //
+  // $(document).ready(function(){
+  // 	$("form[class~='validate']").each(function(){
+  // 		$(this).validate();
+  // 	});
+  // });
+  //
+  // jQuery.extend(jQuery.validator.messages, {
+  //   required: "Campo obrigatório.",
+  //   remote: "Por favor, corrija o campo.",
+  //   email: "Por favor, digite um endereço de e-mail válido.",
+  //   url: "Por favor, digite uma URL válida.",
+  //   date: "Por favor, digite uma data válida.",
+  //   dateISO: "Por favor, digite uma data válida (ISO).",
+  //   number: "Por favor, digite um número válido.",
+  //   digits: "Por favor, digite apenas números.",
+  //   creditcard: "Por favor, digite um número de cartão válido.",
+  //   equalTo: "Por favor, digite o mesmo valor novamente.",
+  //   accept: "Por favor, digite um valor com extensão válida.",
+  //   maxlength: jQuery.validator.format("Por favor, não digite mais do que {0} caracteres."),
+  //   minlength: jQuery.validator.format("Por favor, digite pelo menos {0} caracteres."),
+  //   rangelength: jQuery.validator.format("Por favor, digite entre {0} e {1} caracteres."),
+  //   range: jQuery.validator.format("Por favor, digite entre {0} e {1} caracteres."),
+  //   max: jQuery.validator.format("Por favor, digite um valor MENOR ou igual a {0}."),
+  //   min: jQuery.validator.format("Por favor, digite um valor MAIOR ou igual a {0}.")
+  // });
+};
 
 // text_area
 function limita_text_area() {
@@ -133,7 +133,7 @@ function limita_text_area() {
     }
     $(this).val(value);
   });
-}
+};
 // text_area
 
 function carrega_datatable(id_tabela, classe_formulario, classe_excluir, colunas_nao_clicaveis) {
@@ -161,7 +161,7 @@ function carrega_datatable(id_tabela, classe_formulario, classe_excluir, colunas
   $(document).on('ajax:complete', classe_excluir, function(){
     tabela.fnDraw();
   });
-}
+};
 
 function carrega_datatable_id_automatico(id_tabela, classe_formulario, classe_excluir, colunas_nao_clicaveis, calunas_com_dados) {
 
@@ -194,5 +194,38 @@ function carrega_datatable_id_automatico(id_tabela, classe_formulario, classe_ex
   });
   $(document).on('ajax:complete', classe_excluir, function(){
     tabela.fnDraw();
+  });
+};
+
+function mascaras() {
+  $(".data").unmask();
+  $(".cpf").unmask();
+  $(".cnpj").unmask();
+  $(".rg").unmask();
+  $(".cep").unmask();
+
+  $(".data").mask("99/99/9999", {placeholder: " "});
+  $(".cpf").mask("999.999.999-**", {placeholder: " "});
+  $(".cnpj").mask("99.999.999/9999-**", {placeholder: " "});
+  $(".rg").mask("99.999.999-9", {placeholder: " "});
+  $(".cep").mask("99.999-999", {placeholder: " "});
+}
+
+function cidades_dropdown(){
+  return $(document).on('change', '#endereco_estado', function(evt) {
+    return $.ajax('cidades/update_cidades', {
+      format: 'js',
+      type: 'GET',
+      dataType: 'script',
+      data: {
+        estado_id: $("#endereco_estado option:selected").val()
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        // return console.log("AJAX Error: " + textStatus);
+      },
+      success: function(data, textStatus, jqXHR) {
+        // return console.log("Dynamic state select OK!");
+      }
+    });
   });
 }

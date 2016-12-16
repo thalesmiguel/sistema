@@ -119,20 +119,38 @@ RSpec.describe ClientesController, type: :controller do
 
   end
 
-  describe "DELETE destroy" do
-    let(:cliente) { FactoryGirl.create(:cliente) }
+  describe "PUT inativar" do
+    let(:cliente) { FactoryGirl.create(:cliente, ativo: true) }
 
-    it 'deleta Cliente da tabela' do
-      delete :destroy, xhr: true, params: { id: cliente }
-      expect(response).to render_template("ajax/clientes/mostra_pesquisa.js.erb")
+    it 'altera o atributo ativo para falso' do
+      put :inativar, xhr: true, params: { id: cliente }
+      cliente.reload
+      expect(cliente.ativo).to eq(false)
     end
-
-    it 'deleta cliente do banco de dados' do
-      delete :destroy, xhr: true, params: { id: cliente }
-      expect(Cliente.exists?(cliente.id)).to be_falsy
-    end
-
-
   end
+
+  describe "PUT ativar" do
+    let(:cliente) { FactoryGirl.create(:cliente, ativo: false) }
+
+    it 'altera o atributo ativo para verdadeiro' do
+      put :ativar, xhr: true, params: { id: cliente }
+      cliente.reload
+      expect(cliente.ativo).to eq(true)
+    end
+  end
+
+  # describe "DELETE destroy" do
+  #   let(:cliente) { FactoryGirl.create(:cliente) }
+  #
+  #   it 'deleta Cliente da tabela' do
+  #     delete :destroy, xhr: true, params: { id: cliente }
+  #     expect(response).to render_template("ajax/clientes/mostra_pesquisa.js.erb")
+  #   end
+  #
+  #   it 'deleta cliente do banco de dados' do
+  #     delete :destroy, xhr: true, params: { id: cliente }
+  #     expect(Cliente.exists?(cliente.id)).to be_falsy
+  #   end
+  # end
 
 end

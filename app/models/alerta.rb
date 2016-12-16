@@ -1,6 +1,8 @@
 class Alerta < ApplicationRecord
   audited
 
+  trimmed_fields :descricao
+
   belongs_to :cliente
 
   validates :descricao, presence: true

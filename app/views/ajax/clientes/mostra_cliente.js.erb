@@ -14,14 +14,19 @@ if (<%= !@cliente.new_record? %>) {
 
 $("#clientes-tabs .tab.disabled").removeClass("disabled").addClass("enabled").addClass("waves-effect");
 $("#clientes-tabs ul").tabs('select_tab', 'cliente-visualizar');
+$("#cliente-dados-adicionais").removeClass("hide");
 
 
 $('ul.tabs').tabs();
 $('.collapsible').collapsible();
 $('select').material_select();
+$('textarea').trigger('autoresize');
 Waves.displayEffect()
 
 valida_formulario();
 limita_text_area();
+
+mascaras();
+altera_mascara_cpf_cnpj()
 
 Materialize.updateTextFields();

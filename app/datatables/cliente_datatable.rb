@@ -10,7 +10,7 @@ class ClienteDatatable < AjaxDatatablesRails::Base
 
   def searchable_columns
     # Declare strings in this format: ModelName.column_name
-    @searchable_columns ||= ['Cliente.nome']
+    @searchable_columns ||= ['Cliente.nome', 'Cliente.apelido', 'Cliente.ficticio',  'Cliente.cpf_cnpj', 'Cidade.nome', 'Estado.sigla']
   end
 
 
@@ -25,8 +25,8 @@ class ClienteDatatable < AjaxDatatablesRails::Base
         '3': record.nome,
         '4': record.apelido,
         '5': record.ficticio,
-        '6': record.cidade_primaria("nome"),
-        '7': record.estado_primario("sigla"),
+        '6': record.cidade_nome,
+        '7': record.estado_sigla,
 
         'DT_RowId' => "cliente_#{record.id}",
       }
@@ -34,7 +34,9 @@ class ClienteDatatable < AjaxDatatablesRails::Base
   end
 
   def get_raw_records
-    Cliente.all
+    Cliente.left_outer_joins(enderecos: { cidade: :estado })
+      .where("enderecos.primario = true or enderecos.primario is null")
+      .select("clientes.*, cidades.nome as 'cidade_nome', estados.sigla as 'estado_sigla'")
   end
 
   def permitido?

@@ -1,5 +1,6 @@
 class Tag < ApplicationRecord
   audited
+  trimmed_fields :nome
 
   belongs_to :cliente
 

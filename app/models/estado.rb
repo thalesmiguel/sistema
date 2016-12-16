@@ -1,6 +1,7 @@
 class Estado < ApplicationRecord
   audited
-
+  trimmed_fields :nome, :sigla
+  
   has_many :cidades
 
   validates :nome, presence: true, uniqueness: true

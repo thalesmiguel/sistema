@@ -1,5 +1,6 @@
 class Cidade < ApplicationRecord
   audited
+  trimmed_fields :nome
 
   belongs_to :estado
   has_many :enderecos

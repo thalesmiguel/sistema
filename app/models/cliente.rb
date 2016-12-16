@@ -1,4 +1,7 @@
 class Cliente < ApplicationRecord
+  audited
+  trimmed_fields :nome, :apelido, :ficticio, :sexo, :data_nascimento, :inscricao_estadual, :cpf_cnpj, :rg, :rg_emissor, :rg_data_emissao, :pessoa_tipo, :cadastro_tipo, :obsevacao
+
   has_many :enderecos
   has_many :telefones
   has_many :emails

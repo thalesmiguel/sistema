@@ -1,5 +1,6 @@
 class Email < ApplicationRecord
   audited
+  trimmed_fields :email, :contato
 
   belongs_to :cliente
 

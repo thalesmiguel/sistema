@@ -5,134 +5,149 @@
       <%= form_for cliente, remote: true, html: { class: "cliente-form col s12 validate" } do |f| %>
         <div class="modal-content">
           <div class="p-20">
-            <div class="row card-content m-b-0 p-b-0 p-l-30 p-r-30">
+            <div class="row card-content">
 
-              <div class="row">
-                <div class="input-field col s12 m4">
-                  <%= f.text_field :nome, required:"" %>
-                  <%= f.label :nome %>
+              <div class="row bordas p-15">
+                <div class="row">
+                  <div class="input-field col s12 m4">
+                    <%= f.text_field :nome, required:"" %>
+                    <%= f.label :nome %>
+                  </div>
+
+                  <div class="input-field col s12 m4">
+                    <%= f.text_field :apelido %>
+                    <%= f.label :apelido %>
+                  </div>
+
+                  <div class="input-field col s12 m4">
+                    <%= f.text_field :ficticio %>
+                    <%= f.label :ficticio, "Fictício" %>
+                  </div>
                 </div>
 
-                <div class="input-field col s12 m4">
-                  <%= f.text_field :apelido %>
-                  <%= f.label :apelido %>
-                </div>
-
-                <div class="input-field col s12 m4">
-                  <%= f.text_field :ficticio %>
-                  <%= f.label :ficticio, "Fictício" %>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="input-field col s12 m2">
-                  <%= f.text_field :cpf_cnpj %>
-                  <%= f.label :cpf_cnpj, "CPF" %>
-                </div>
-
-                <div class="input-field col s12 m2">
-                  <%= f.text_field :rg %>
-                  <%= f.label :rg, "RG" %>
-                </div>
-
-                <div class="input-field col s12 m2">
-                  <%= f.text_field :rg_emissor %>
-                  <%= f.label :rg_emissor, "Org. Emissão RG" %>
-                </div>
-
-                <div class="input-field col s12 m2">
-                  <%= f.text_field :rg_data_emissao %>
-                  <%= f.label :rg_data_emissao, "Dt. Emissão RG" %>
-                </div>
-
-                <div class="input-field col s12 m2">
-                  <%= f.text_field :data_nascimento %>
-                  <%= f.label :data_nascimento, "Dt. Nascimento" %>
-                </div>
-
-                <div class="input-field col s12 m2">
-                  <%= f.select :sexo, Cliente.sexos.map { |k, v| [k.humanize, k]} %>
-                  <%= f.label :sexo, class: "active" %>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="input-field col s12 m2">
-                  <%= f.text_field :inscricao_estadual %>
-                  <%= f.label :inscricao_estadual, "Inscr. Estadual" %>
-                </div>
-
-                <% if !cliente.new_record? %>
-                  <div class="input-field col s12 m2 offset-m6">
-                    <%= f.text_field :created_at, disabled: true, value: cliente.created_at.to_s(:data_formatada) %>
-                    <%= f.label :created_at, "Criado em" %>
+                <div class="row">
+                  <div class="input-field col s12 m2">
+                    <% if cliente.new_record? %>
+                      <%= f.text_field :cpf_cnpj, class:"cpf" %>
+                      <%= f.label :cpf_cnpj, "CPF" %>
+                    <% else %>
+                      <% if cliente.pessoa_tipo == 'física' %>
+                        <%= f.text_field :cpf_cnpj, class:"cpf" %>
+                        <%= f.label :cpf_cnpj, "CPF" %>
+                      <% else %>
+                        <%= f.text_field :cpf_cnpj, class:"cnpj" %>
+                        <%= f.label :cpf_cnpj, "CNPJ" %>
+                      <% end %>
+                    <% end %>
                   </div>
 
                   <div class="input-field col s12 m2">
-                    <%= f.text_field :updated_at, disabled: true, value: cliente.updated_at.to_s(:data_formatada) %>
-                    <%= f.label :updated_at, "Alterado em" %>
+                    <%= f.text_field :rg, class:"rg" %>
+                    <%= f.label :rg, "RG" %>
                   </div>
-                <% end %>
-              </div>
 
-              <div class="row">
-                <div class="input-field col s12">
-                  <ul class="collapsible z-depth-0" data-collapsible="expandable">
-                    <li>
-                      <div class="collapsible-header"><i class="material-icons">picture_in_picture</i>Tipo de Cadastro & Opções de Marketing</div>
-                      <div class="collapsible-body">
+                  <div class="input-field col s12 m2">
+                    <%= f.text_field :rg_emissor %>
+                    <%= f.label :rg_emissor, "Org. Emissão RG" %>
+                  </div>
 
-                        <div class="input-field col s12 m6 m-t-40">
-                          <%= f.select :pessoa_tipo, Cliente.pessoa_tipos.map { |k, v| [k.humanize, k]} %>
-                          <%= f.label :pessoa_tipo, "Pessoa", class: "active" %>
-                        </div>
+                  <div class="input-field col s12 m2">
+                    <%= f.text_field :rg_data_emissao, class:"data" %>
+                    <%= f.label :rg_data_emissao, "Dt. Emissão RG" %>
+                  </div>
 
-                        <div class="input-field col s12 m6 m-t-40">
-                          <%= f.select :cadastro_tipo, Cliente.cadastro_tipos.map { |k, v| [k.humanize, k]} %>
-                          <%= f.label :cadastro_tipo, "Tipo de Cadastro", class: "active" %>
-                        </div>
+                  <div class="input-field col s12 m2">
+                    <%= f.text_field :data_nascimento, class:"data" %>
+                    <%= f.label :data_nascimento, "Dt. Nascimento" %>
+                  </div>
 
-                        <div class="input-field col s12 m6 m-t-25">
-                          <% Cliente.marketing_tipos_array.each do |marketing_tipo| %>
-                            <ul>
-                              <li>
-                                <!-- Verificar se os checkboxes são marcados corretamente em relação às informações do banco de dados, passando TRUE como terceiro argumento -->
-                                <%#= check_box_tag "cliente[marketing_tipos][]", marketing_tipo, @cliente.marketing_tipos.include?(marketing_tipo), id: "cliente_marketing_tipos_#{marketing_tipo}", class: 'filled-in' %>
-                                <%= check_box_tag "cliente[marketing_tipos][]", marketing_tipo, true, id: "cliente_marketing_tipos_#{marketing_tipo}", class: 'filled-in' %>
-                                <%= label_tag "cliente_marketing_tipos_#{marketing_tipo}", marketing_tipo.humanize %>
-                              </li>
-                            </ul>
-                          <% end %>
-                          <%= f.label :marketing_tipos, "Tipos de Marketing", class: "active p-t-25" %>
+                  <div class="input-field col s12 m2">
+                    <%= f.select :sexo, Cliente.sexos.map { |k, v| [k.humanize, k]} %>
+                    <%= f.label :sexo, class: "active" %>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="input-field col s12 m2">
+                    <%= f.text_field :inscricao_estadual %>
+                    <%= f.label :inscricao_estadual, "Inscr. Estadual" %>
+                  </div>
+
+                  <div class="input-field col s12 m2 offset-m4">
+                    <%= f.text_field :id, disabled: true %>
+                    <%= f.label :id, "Código" %>
+                  </div>
+
+                  <% if !cliente.new_record? %>
+                    <div class="input-field col s12 m2">
+                      <%= f.text_field :created_at, disabled: true, value: cliente.created_at.to_s(:data_formatada) %>
+                      <%= f.label :created_at, "Criado em" %>
+                    </div>
+
+                    <div class="input-field col s12 m2">
+                      <%= f.text_field :updated_at, disabled: true, value: cliente.updated_at.to_s(:data_formatada) %>
+                      <%= f.label :updated_at, "Alterado em" %>
+                    </div>
+                  <% end %>
+                </div>
+
+                <div class="row">
+                  <div class="input-field col s12">
+                    <ul class="collapsible z-depth-0" data-collapsible="expandable">
+                      <li>
+                        <div class="collapsible-header"><i class="material-icons">picture_in_picture</i>Tipo de Cadastro & Opções de Marketing</div>
+                        <div class="collapsible-body">
+
+                          <div class="input-field col s12 m6 m-t-40">
+                            <%= f.select :pessoa_tipo, Cliente.pessoa_tipos.map { |k, v| [k.humanize, k]} %>
+                            <%= f.label :pessoa_tipo, "Pessoa", class: "active" %>
+                          </div>
+
+                          <div class="input-field col s12 m6 m-t-40">
+                            <%= f.select :cadastro_tipo, Cliente.cadastro_tipos.map { |k, v| [k.humanize, k]} %>
+                            <%= f.label :cadastro_tipo, "Tipo de Cadastro", class: "active" %>
+                          </div>
+
+                          <div class="input-field col s12 m6 m-t-25">
+                            <% Cliente.marketing_tipos_array.each do |marketing_tipo| %>
+                              <ul>
+                                <li>
+                                  <!-- Verificar se os checkboxes são marcados corretamente em relação às informações do banco de dados, passando TRUE como terceiro argumento -->
+                                  <%#= check_box_tag "cliente[marketing_tipos][]", marketing_tipo, @cliente.marketing_tipos.include?(marketing_tipo), id: "cliente_marketing_tipos_#{marketing_tipo}", class: 'filled-in' %>
+                                  <%= check_box_tag "cliente[marketing_tipos][]", marketing_tipo, true, id: "cliente_marketing_tipos_#{marketing_tipo}", class: 'filled-in' %>
+                                  <%= label_tag "cliente_marketing_tipos_#{marketing_tipo}", marketing_tipo.humanize %>
+                                </li>
+                              </ul>
+                            <% end %>
+                            <%= f.label :marketing_tipos, "Tipos de Marketing", class: "active p-t-25" %>
+                          </div>
+                          <p>&zwnj;</p>
+                          <p>&zwnj;</p>
+                          <p>&zwnj;</p>
+                          <p>&zwnj;</p>
                         </div>
-                        <p>&zwnj;</p>
-                        <p>&zwnj;</p>
-                        <p>&zwnj;</p>
-                        <p>&zwnj;</p>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="collapsible-header"><i class="material-icons">picture_in_picture</i>Observações</div>
-                      <div class="collapsible-body">
-                        <div class="input-field col s12">
-                          <%#= f.text_area :obsevacao, rows: 4, onkeydown: "return limitLines(this, event)", class: 'materialize-textarea' %>
-                          <%= f.text_area :obsevacao, rows: 8, class: 'materialize-textarea limita-text-area' %>
+                      </li>
+                      <li>
+                        <div class="collapsible-header"><i class="material-icons">picture_in_picture</i>Observações</div>
+                        <div class="collapsible-body">
+                          <div class="input-field col s12">
+                            <%#= f.text_area :obsevacao, rows: 4, onkeydown: "return limitLines(this, event)", class: 'materialize-textarea' %>
+                            <%= f.text_area :obsevacao, rows: 8, class: 'materialize-textarea limita-text-area' %>
+                          </div>
+                          <p>&zwnj;</p>
+                          <p>&zwnj;</p>
+                          <p>&zwnj;</p>
                         </div>
-                        <p>&zwnj;</p>
-                        <p>&zwnj;</p>
-                        <p>&zwnj;</p>
-                      </div>
-                    </li>
-                  </ul>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
 
-              <div class="row">
+
+              <div class="row bordas p-15">
                 <% if !@cliente.new_record? %>
                   <div id="cliente-tabs">
-                    <ul class="tabs tabs-divider">
-                      <li><div class="divider"></div></li>
-                    </ul>
 
                     <div class="col s12">
                       <ul class="tabs">
@@ -168,10 +183,20 @@
 
             <%= button_tag "Salvar", class:"btn waves-effect waves-light btn-right" %>
             <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5 btn-right", type: 'reset' %>
+
             <% if !cliente.new_record? %>
+              <% if cliente.ativo %>
+                <%= link_to "Inativar", inativar_cliente_path(cliente), method: 'put', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5 btn-right',
+                      data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a inativação?')) } if can? :manage, :cliente %>
+              <% else %>
+                <%= link_to "Ativar", inativar_cliente_path(cliente), method: 'put', remote: true, class: 'btn warning-color waves-effect waves-light m-r-5 btn-right',
+                      data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a ativação?')) } if can? :manage, :cliente %>
+              <% end %>
+
               <%= link_to "Excluir", cliente_path(cliente), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5 btn-right',
-                    data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a exclusão?')) } %>
+                    data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a inativação?')) } if can? :manage, :all %>
             <% end %>
+
           </div>
         </div>
       <% end %>

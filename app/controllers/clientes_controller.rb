@@ -1,9 +1,7 @@
 class ClientesController < ApplicationController
-  before_action :set_cliente, only: [:edit, :update, :destroy]
+  before_action :set_cliente, only: [:edit, :update, :destroy, :ativar, :inativar]
 
   def index
-    @cliente = Cliente.new
-
     respond_to do |format|
       format.html
       format.json { renderiza_datatable }
@@ -18,7 +16,6 @@ class ClientesController < ApplicationController
   end
 
   def edit
-    # mostra_modal(@cliente)
     respond_to do |format|
       format.js { render file: "ajax/clientes/mostra_cliente.js.erb" }
     end
@@ -50,6 +47,22 @@ class ClientesController < ApplicationController
     # renderiza_crud_js(@cliente, 'Cliente excluído com sucesso.')
     respond_to do |format|
       format.js { render file: "ajax/clientes/mostra_pesquisa.js.erb" }
+    end
+  end
+
+  def inativar
+    @cliente.ativo = false
+    @cliente.save
+    respond_to do |format|
+      format.js { render file: "ajax/clientes/mostra_cliente.js.erb" }
+    end
+  end
+
+  def ativar
+    @cliente.ativo = true
+    @cliente.save
+    respond_to do |format|
+      format.js { render file: "ajax/clientes/mostra_cliente.js.erb" }
     end
   end
 

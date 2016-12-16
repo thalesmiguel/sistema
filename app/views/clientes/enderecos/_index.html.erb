@@ -1,6 +1,13 @@
-<div>
-  <%= link_to_new new_cliente_endereco_path, true, "btn-100" if can? :manage, :endereco %>
-</div>
+<!-- <div>
+  <%#= link_to_new new_cliente_endereco_path, true, "btn-100" if can? :manage, :endereco %>
+</div> -->
+
+  <div class="row m-b-0 p-b-20">
+    <div class="col s12">
+      <%= link_to_new new_cliente_endereco_path, true, "", "Novo Endereço" if can? :manage, :endereco %>
+    </div>
+  </div>
+
 
 <table id="enderecos-table" class="highlight bordered" data-source="<%= cliente_enderecos_path(@cliente_endereco, format: :json) %>" data-cliente-endereco="<%= @cliente_endereco %>">
   <thead>

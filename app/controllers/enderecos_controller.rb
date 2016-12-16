@@ -29,7 +29,7 @@ class EnderecosController < ApplicationController
 
   def create
     @cliente = Cliente.find(params[:cliente_id])
-    
+
     @endereco = @cliente.enderecos.new(endereco_params)
     # @endereco = Endereco.new(endereco_params)
     if @endereco.save
@@ -51,6 +51,7 @@ class EnderecosController < ApplicationController
     @endereco.destroy
     renderiza_crud_js(@endereco, 'Endereço excluído com sucesso.')
   end
+
 
   private
 

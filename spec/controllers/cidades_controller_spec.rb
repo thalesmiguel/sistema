@@ -138,4 +138,23 @@ RSpec.describe CidadesController, type: :controller do
 
   end
 
+  describe 'GET update_cidades' do
+    it 'renderiza ajax' do
+      get :update_cidades, xhr: true, params: {}
+      expect(response).to render_template('ajax/application/update_cidades.js.erb')
+    end
+
+    it 'atribui as cidades do estado selecionado para @cidade' do
+      primeiro_estado = FactoryGirl.create(:estado)
+      segundo_estado = FactoryGirl.create(:estado)
+
+      primeira_cidade = FactoryGirl.create(:cidade, estado: primeiro_estado)
+      segunda_cidade = FactoryGirl.create(:cidade, estado: primeiro_estado)
+      terceira_cidade = FactoryGirl.create(:cidade, estado: segundo_estado)
+
+      get :update_cidades, xhr: true, params: {estado_id: segundo_estado}
+      expect(assigns(:cidades)).to eq([terceira_cidade])
+    end
+  end
+
 end
