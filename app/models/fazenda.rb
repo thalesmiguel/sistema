@@ -11,4 +11,8 @@ class Fazenda < ApplicationRecord
   validate :pelo_menos_um_deve_estar_ativo
 
   enum tipo: [ :arrendada, :não_informado, :própria ]
+
+  def estado
+    cidade.nil? ? 0 : cidade.estado_id
+  end
 end

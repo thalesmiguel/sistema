@@ -3,7 +3,7 @@ FactoryGirl.define do
     nome "MyString"
     cidade nil
     cep "MyString"
-    tipo Fazenda.tipos[:não_informado]
+    tipo 'não_informado'
     endereco "MyString"
     area "MyString"
     observacao "MyText"

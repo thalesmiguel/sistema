@@ -1,2 +1,3 @@
-$("#endereco_cidade_id").empty().append("<%= escape_javascript(render 'cidades/cidades', cidades: @cidades) %>");
+elemento = $("#" + "<%= model %>" + "_cidade_id")
+elemento.empty().append("<%= escape_javascript(render 'cidades/cidades', cidades: @cidades) %>");
 $('select').material_select();

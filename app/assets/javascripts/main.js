@@ -211,14 +211,15 @@ function mascaras() {
   $(".cep").mask("99.999-999", {placeholder: " "});
 }
 
-function cidades_dropdown(){
-  return $(document).on('change', '#endereco_estado', function(evt) {
+function cidades_dropdown(model){
+  return $(document).on('change', '#' + model + '_estado', function(evt) {
     return $.ajax('cidades/update_cidades', {
       format: 'js',
       type: 'GET',
       dataType: 'script',
       data: {
-        estado_id: $("#endereco_estado option:selected").val()
+        estado_id: $("#" + model + "_estado option:selected").val(),
+        model: model
       },
       error: function(jqXHR, textStatus, errorThrown) {
         // return console.log("AJAX Error: " + textStatus);

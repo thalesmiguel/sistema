@@ -1,1 +1,25 @@
-<h1>Telefones</h1>
+<div class="row m-b-0 p-b-20">
+  <div class="col s12">
+    <%= link_to_new new_cliente_telefone_path, true, "", "Novo Telefone" if can? :manage, :telefone %>
+  </div>
+</div>
+
+<table id="telefones-table" class="highlight bordered" data-source="<%= cliente_telefones_path(@cliente_telefone, format: :json) %>" data-cliente-telefone="<%= @cliente_telefone %>">
+  <thead>
+    <tr>
+      <th width="">Tipo</th>
+      <th width="">DDI</th>
+      <th width="">DDD</th>
+      <th width="">Número</th>
+      <th width="">Dt. Cadastro</th>
+      <th width="">Ramal</th>
+      <th width="">Contato</th>
+      <th width="">Importância</th>
+      <th width="">Telemarketing</th>
+      <th width="">Divulgar</th>
+      <th width="">Ativo</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>

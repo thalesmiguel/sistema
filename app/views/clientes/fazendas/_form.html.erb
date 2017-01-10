@@ -1,0 +1,143 @@
+<%= form_for [@cliente, @fazenda], remote: true, html: { class: "fazenda-form col s12 validate" } do |f| %>
+  <div class="modal-content">
+    <div class="p-20">
+      <div class="row card-content m-b-0 p-b-0 p-l-30 p-r-30">
+
+        <div class="row">
+          <div class="input-field col s12">
+            <%= f.text_field :nome, required:"" %>
+            <%= f.label :nome %>
+          </div>
+        </div>
+
+        <fieldset>
+          <legend>Localização</legend>
+
+          <div class="row">
+            <div class="input-field col s12 m2">
+              <%= f.select :estado, @estados.collect {|estado| [(estado.nome), estado.id]} %>
+              <%= f.label :estado, class: "active" %>
+            </div>
+
+            <div class="input-field col s12 m4">
+              <%= f.select :cidade_id, @cidades.collect {|cidade| [cidade.nome, cidade.id]} %>
+              <%= f.label :cidade_id, class: "active" %>
+            </div>
+
+            <div class="input-field col s12 m2">
+              <%= f.text_field :cep, class: "cep" %>
+              <%= f.label :cep %>
+            </div>
+
+            <div class="input-field col s12 m4">
+              <%= f.select :tipo, Fazenda.tipos.map { |k, v| [k.humanize, k]} %>
+              <%= f.label :tipo, class: "active" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field col s12 m8">
+              <%= f.text_field :endereco %>
+              <%= f.label :endereco %>
+            </div>
+
+            <div class="input-field col s12 m4">
+              <%= f.text_field :area %>
+              <%= f.label :area %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field col s12">
+              <%= f.text_area :observacao, rows: 4, class: 'materialize-textarea limita-text-area' %>
+              <%= f.label :observacao %>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="fieldset_50">
+          <fieldset class="col s12">
+            <legend>Dados Complementares</legend>
+
+            <div class="row">
+              <div class="input-field col s12 m2">
+                <%= f.text_field :inscricao_estadual %>
+                <%= f.label :inscricao_estadual, "Insc. Estadual" %>
+              </div>
+
+              <div class="input-field col s12 m3">
+                <%= f.text_field :cnpj_fazenda, class:"cnpj" %>
+                <%= f.label :cnpj_fazenda, "CNPJ Faz." %>
+              </div>
+
+              <div class="input-field col s12 m2">
+                <%= f.text_field :incra %>
+                <%= f.label :incra %>
+              </div>
+
+              <div class="input-field col s12 m3">
+                <%= f.text_field :cnpj_produtor, class:"cnpj" %>
+                <%= f.label :cnpj_produtor, "CNPJ Prod." %>
+              </div>
+
+              <div class="input-field col s12 m2">
+                <%= f.text_field :area %>
+                <%= f.label :area %>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="fieldset_50">
+          <fieldset class="col s12">
+            <legend>Dados para Emissão de NF</legend>
+
+            <div class="row">
+              <div class="input-field col s12 m3">
+                <%= f.check_box :faz_terceiro, class: 'filled-in'  %>
+                <%= f.label :faz_terceiro %>
+              </div>
+
+              <div class="input-field col s12 m5">
+                <%= f.text_field :nome_nf %>
+                <%= f.label :nome_nf, "Insc. Estadual" %>
+              </div>
+
+              <div class="input-field col s12 m4">
+                <%= f.text_field :cpf_cnpj_nf, class:"cnpj" %>
+                <%= f.label :cpf_cnpj_nf, "CNPJ Faz." %>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 m2">
+            <%= text_field_tag 'vendas' %>
+            <%= label_tag 'vendas' %>
+          </div>
+          <div class="input-field col s12 m2">
+            <%= text_field_tag 'compras' %>
+            <%= label_tag 'compras' %>
+          </div>
+          <div class="input-field col s12 m2">
+            <%= f.check_box :ativo, class: 'filled-in'  %>
+            <%= f.label :ativo %>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <%= button_tag "Salvar", class:"btn waves-effect waves-light" %>
+        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#fazenda_modal').closeModal()", type: 'button' %>
+        <%#= button_tag "Cancelar", class:"btn-flat waves-effect waves-light btn-cancelar ", type: :reset %>
+
+          <% if !@fazenda.new_record? %>
+            <%= link_to "Excluir", cliente_fazenda_path(@cliente, @fazenda), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',
+                  data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a exclusão?')) } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

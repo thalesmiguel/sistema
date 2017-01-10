@@ -83,9 +83,9 @@
         <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#endereco_modal').closeModal()", type: 'button' %>
         <%#= button_tag "Cancelar", class:"btn-flat waves-effect waves-light btn-cancelar ", type: :reset %>
 
-        <% if !@endereco.new_record? %>
-          <%= link_to "Excluir", cliente_endereco_path(@cliente, @endereco), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',
-                data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a exclusão?')) } %>
+          <% if !@endereco.new_record? %>
+            <%= link_to "Excluir", cliente_endereco_path(@cliente, @endereco), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',
+                  data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a exclusão?')) } %>
         <% end %>
       </div>
     </div>

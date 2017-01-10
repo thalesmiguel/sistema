@@ -13,5 +13,5 @@ $(document).on('turbolinks:load', function(){
     });
   })
 
-  cidades_dropdown();
+  cidades_dropdown('endereco');
 });

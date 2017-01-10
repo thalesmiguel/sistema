@@ -1,1 +1,23 @@
-<h1>Fazendas</h1>
+<div class="row m-b-0 p-b-20">
+  <div class="col s12">
+    <%= link_to_new new_cliente_fazenda_path, true, "", "Novo Endereço" if can? :manage, :fazenda %>
+  </div>
+</div>
+
+<table id="fazendas-table" class="highlight bordered" data-source="<%= cliente_fazendas_path(@cliente_fazenda, format: :json) %>" data-cliente-fazenda="<%= @cliente_fazenda %>">
+  <thead>
+    <tr>
+      <th width="">Nome</th>
+      <th width="">Cidade</th>
+      <th width="">UF</th>
+      <th width="">Inscrição</th>
+      <th width="">CNPJ</th>
+      <th width="">CNPJ Produtor</th>
+      <th width="">Ativa</th>
+      <th width="">Vendas</th>
+      <th width="">Compras</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>

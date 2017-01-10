@@ -4,3 +4,12 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+#cliente-dados-adicionais {
+  cursor: default;
+}
+
+.fieldset_50 {
+  float: left;
+  width: 50%;
+}

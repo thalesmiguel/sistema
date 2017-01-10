@@ -12,6 +12,7 @@ class CreateFazendas < ActiveRecord::Migration[5.0]
       t.string :cnpj_fazenda
       t.string :incra
       t.string :cnpj_produtor
+      t.boolean :faz_terceiro
       t.string :nome_nf
       t.string :cpf_cnpj_nf
       t.boolean :ativo, default: true

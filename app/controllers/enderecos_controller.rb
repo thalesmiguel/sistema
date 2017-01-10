@@ -1,5 +1,5 @@
 class EnderecosController < ApplicationController
-  before_action :set_endereco, only: [:edit, :update, :destroy]
+  before_action :set_endereco, only: [:edit, :update, :destroy, :altera_status]
 
   def index
     @cliente_endereco = params[:cliente_id]
@@ -51,7 +51,6 @@ class EnderecosController < ApplicationController
     @endereco.destroy
     renderiza_crud_js(@endereco, 'Endereço excluído com sucesso.')
   end
-
 
   private
 

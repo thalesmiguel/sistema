@@ -3,9 +3,9 @@ class CreateEmails < ActiveRecord::Migration[5.0]
     create_table :emails do |t|
       t.string :email
       t.string :contato
-      t.boolean :mala_direta
-      t.boolean :solicitacao_email
-      t.boolean :envio_contratos
+      t.boolean :mala_direta, default: true
+      t.boolean :solicitacao_email, default: true
+      t.boolean :envio_contratos, default: true
       t.boolean :ativo, default: true
       t.references :cliente, foreign_key: true
 

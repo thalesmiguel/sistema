@@ -16,12 +16,14 @@ Rails.application.routes.draw do
   scope path_names: { new: "novo", edit: "editar" } do
     resources :estados, except: [:show]
     resources :cidades, except: [:show]
+    resources :bancos, except: [:show]
 
-    put 'clientes/:id/ativar', to: 'clientes#ativar', as: 'ativar_cliente'
-    put 'clientes/:id/inativar', to: 'clientes#inativar', as: 'inativar_cliente'
+    put 'clientes/:id/altera_status', to: 'clientes#altera_status', as: 'altera_status_cliente'
     resources :clientes, except: [:show] do
       resources :enderecos, except: [:show]
       resources :telefones, except: [:show]
+      resources :emails, except: [:show]
+      resources :fazendas, except: [:show]
     end
 
   end

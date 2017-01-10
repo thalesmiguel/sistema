@@ -1,1 +1,21 @@
-<h1>E-Mails</h1>
+<div class="row m-b-0 p-b-20">
+  <div class="col s12">
+    <%= link_to_new new_cliente_email_path, true, "", "Novo Email" if can? :manage, :email %>
+  </div>
+</div>
+
+<table id="emails-table" class="highlight bordered" data-source="<%= cliente_emails_path(@cliente_email, format: :json) %>" data-cliente-email="<%= @cliente_email %>">
+  <thead>
+    <tr>
+      <th width="">Email</th>
+      <th width="">Contato</th>
+      <th width="">Criado em</th>
+      <th width="">Mala Direta</th>
+      <th width="">Solicitação por E-mail</th>
+      <th width="">Envio de Contratos</th>
+      <th width="">Ativo</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>

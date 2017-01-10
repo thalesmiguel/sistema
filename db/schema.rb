@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(version: 20161101134252) do
     t.integer  "pessoa_tipo"
     t.integer  "cadastro_tipo"
     t.text     "marketing_tipos",    limit: 65535
-    t.text     "obsevacao",          limit: 65535
+    t.text     "observacao",         limit: 65535
     t.boolean  "ativo",                            default: true
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
@@ -101,9 +101,9 @@ ActiveRecord::Schema.define(version: 20161101134252) do
   create_table "emails", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email"
     t.string   "contato"
-    t.boolean  "mala_direta"
-    t.boolean  "solicitacao_email"
-    t.boolean  "envio_contratos"
+    t.boolean  "mala_direta",       default: true
+    t.boolean  "solicitacao_email", default: true
+    t.boolean  "envio_contratos",   default: true
     t.boolean  "ativo",             default: true
     t.integer  "cliente_id"
     t.datetime "created_at",                       null: false
@@ -168,6 +168,7 @@ ActiveRecord::Schema.define(version: 20161101134252) do
     t.string   "cnpj_fazenda"
     t.string   "incra"
     t.string   "cnpj_produtor"
+    t.boolean  "faz_terceiro"
     t.string   "nome_nf"
     t.string   "cpf_cnpj_nf"
     t.boolean  "ativo",                            default: true
@@ -225,13 +226,13 @@ ActiveRecord::Schema.define(version: 20161101134252) do
 
   create_table "telefones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "tipo"
-    t.string   "ddi"
+    t.string   "ddi",           default: "55"
     t.string   "ddd"
     t.string   "numero"
     t.string   "ramal"
     t.string   "nome_contato"
     t.integer  "importancia"
-    t.boolean  "telemarketing"
+    t.boolean  "telemarketing", default: true
     t.boolean  "divulgar"
     t.boolean  "ativo",         default: true
     t.integer  "cliente_id"

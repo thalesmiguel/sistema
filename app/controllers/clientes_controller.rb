@@ -1,5 +1,5 @@
 class ClientesController < ApplicationController
-  before_action :set_cliente, only: [:edit, :update, :destroy, :ativar, :inativar]
+  before_action :set_cliente, only: [:edit, :update, :destroy, :altera_status]
 
   def index
     respond_to do |format|
@@ -50,16 +50,8 @@ class ClientesController < ApplicationController
     end
   end
 
-  def inativar
-    @cliente.ativo = false
-    @cliente.save
-    respond_to do |format|
-      format.js { render file: "ajax/clientes/mostra_cliente.js.erb" }
-    end
-  end
-
-  def ativar
-    @cliente.ativo = true
+  def altera_status
+    @cliente.ativo = !@cliente.ativo
     @cliente.save
     respond_to do |format|
       format.js { render file: "ajax/clientes/mostra_cliente.js.erb" }
@@ -74,7 +66,7 @@ class ClientesController < ApplicationController
 
     def cliente_params
       params.require(:cliente).permit(:nome, :apelido, :ficticio, :sexo, :data_nascimento, :inscricao_estadual, :cpf_cnpj, :rg,
-                                      :rg_emissor, :rg_data_emissao, :pessoa_tipo, :cadastro_tipo, :obsevacao,
+                                      :rg_emissor, :rg_data_emissao, :pessoa_tipo, :cadastro_tipo, :observacao,
                                       :marketing_tipos => [])
     end
 

@@ -43,7 +43,7 @@ class CidadesController < ApplicationController
   def update_cidades
     @cidades = Cidade.where("estado_id = ?", params[:estado_id]).order(:nome)
     respond_to do |format|
-      format.js { render file: "ajax/application/update_cidades.js.erb" }
+      format.js { render file: "ajax/application/update_cidades.js.erb", locals: { model: params[:model] }  }
     end
   end
 

@@ -30,3 +30,105 @@ mascaras();
 altera_mascara_cpf_cnpj()
 
 Materialize.updateTextFields();
+
+
+//
+
+$(document).on("click", "a[href='#cliente-enderecos']", function(){
+  $.ajax({
+    type: "GET",
+    url: '<%= "/clientes/#{@cliente.id}/enderecos" %>',
+    dataType : 'script'
+  }).success(function(){
+    carrega_datatable_id_automatico("#enderecos-table", ".endereco-form", ".excluir-endereco", [], [0,1,2,3,4,5,6,7,8,9,10]);
+    $('html, body').animate({scrollTop: $('footer').offset().top}, 'slow');
+  });
+});
+
+$(document).on("click", "a[href='#cliente-telefones']", function(){
+  $.ajax({
+    type: "GET",
+    url: '<%= "/clientes/#{@cliente.id}/telefones" %>',
+    dataType : 'script'
+  }).success(function(){
+    carrega_datatable_id_automatico("#telefones-table", ".telefone-form", ".excluir-telefone", [], [0,1,2,3,4,5,6,7,8,9,10]);
+    $('html, body').animate({scrollTop: $('footer').offset().top}, 'slow');
+  });
+});
+
+$(document).on("click", "a[href='#cliente-emails']", function(){
+  $.ajax({
+    type: "GET",
+    url: '<%= "/clientes/#{@cliente.id}/emails" %>',
+    dataType : 'script'
+  }).success(function(){
+    carrega_datatable_id_automatico("#emails-table", ".email-form", ".excluir-email", [], [0,1,2,3,4,5,6]);
+    $('html, body').animate({scrollTop: $('footer').offset().top}, 'slow');
+  });
+});
+
+$(document).on("click", "a[href='#cliente-fazendas']", function(){
+  $.ajax({
+    type: "GET",
+    url: '<%= "/clientes/#{@cliente.id}/fazendas" %>',
+    dataType : 'script'
+  }).success(function(){
+    carrega_datatable_id_automatico("#fazendas-table", ".fazenda-form", ".excluir-fazenda", [], [0,1,2,3,4,5,6,7,8]);
+    $('html, body').animate({scrollTop: $('footer').offset().top}, 'slow');
+  });
+});
+
+$(document).on("click", "a[href='#cliente-bancos']", function(){
+  $.ajax({
+    type: "GET",
+    url: '<%= "/clientes/#{@cliente.id}/bancos" %>',
+    dataType : 'script'
+  }).success(function(){
+    carrega_datatable_id_automatico("#bancos-table", ".banco-form", ".excluir-banco", [], [0,1,2,3,4,5,6,7,8,9,10]);
+    $('html, body').animate({scrollTop: $('footer').offset().top}, 'slow');
+  });
+});
+
+$(document).on("click", "a[href='#cliente-referencias']", function(){
+  $.ajax({
+    type: "GET",
+    url: '<%= "/clientes/#{@cliente.id}/referencias" %>',
+    dataType : 'script'
+  }).success(function(){
+    carrega_datatable_id_automatico("#referencias-table", ".referencia-form", ".excluir-referencia", [], [0,1,2,3,4,5,6,7,8,9,10]);
+    $('html, body').animate({scrollTop: $('footer').offset().top}, 'slow');
+  });
+});
+
+$(document).on("click", "a[href='#cliente-autorizados']", function(){
+  $.ajax({
+    type: "GET",
+    url: '<%= "/clientes/#{@cliente.id}/autorizados" %>',
+    dataType : 'script'
+  }).success(function(){
+    carrega_datatable_id_automatico("#autorizados-table", ".autorizado-form", ".excluir-autorizado", [], [0,1,2,3,4,5,6,7,8,9,10]);
+    $('html, body').animate({scrollTop: $('footer').offset().top}, 'slow');
+  });
+});
+
+$(document).on("click", "a[href='#cliente-racas']", function(){
+  $.ajax({
+    type: "GET",
+    url: '<%= "/clientes/#{@cliente.id}/racas" %>',
+    dataType : 'script'
+  }).success(function(){
+    carrega_datatable_id_automatico("#racas-table", ".raca-form", ".excluir-raca", [], [0,1,2,3,4,5,6,7,8,9,10]);
+    $('html, body').animate({scrollTop: $('footer').offset().top}, 'slow');
+  });
+});
+
+$(document).on("click", "a[href='#cliente-empresas']", function(){
+  $.ajax({
+    type: "GET",
+    url: '<%= "/clientes/#{@cliente.id}/empresas" %>',
+    dataType : 'script'
+  }).success(function(){
+    carrega_datatable_id_automatico("#empresas-table", ".empresa-form", ".excluir-empresa", [], [0,1,2,3,4,5,6,7,8,9,10]);
+    $('html, body').animate({scrollTop: $('footer').offset().top}, 'slow');
+  });
+});

@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :telefone do
-    tipo Telefone.tipos[:canal]
+    tipo "canal"
     ddi "55"
     ddd "18"
     numero "99134-4423"

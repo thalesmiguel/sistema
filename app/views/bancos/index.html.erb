@@ -1,0 +1,29 @@
+<div class="card p-t-0 p-b-70 p-l-30 p-r-30">
+
+  <div id="banco_modal" class="modal bottom-sheet modal-grande"></div>
+
+  <div class="row m-b-0">
+    <div class="valign-wrapper">
+      <div class="col s6 valign">
+        <h1>Bancos</h1>
+      </div>
+      <div class="col s6 valign right-align">
+        <%= link_to_new new_banco_path if can? :manage, :banco %>
+      </div>
+    </div>
+  </div>
+  <table id="bancos-table" class="highlight bordered" data-source="<%= bancos_path(format: :json) %>">
+    <thead>
+      <tr>
+        <th width="">Código</th>
+        <th width="">Nome</th>
+        <% if can? :manage, :banco %>
+          <th>Opções</th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+</div>

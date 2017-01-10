@@ -31,7 +31,6 @@ $(document).on('turbolinks:load', function(){
   $(document).on("click", "a[href='#cliente-relatorios']", function(){
     $("#cliente-dados-adicionais").removeClass("hide");
   });
-
 });
 
 function altera_mascara_cpf_cnpj(){

@@ -158,7 +158,6 @@ RSpec.describe EnderecosController, type: :controller do
       delete :destroy, xhr: true, params: { cliente_id: cliente.id, id: endereco }
       expect(Endereco.exists?(endereco.id)).to be_falsy
     end
-
   end
 
 end

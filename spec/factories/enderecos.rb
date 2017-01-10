@@ -1,6 +1,5 @@
 FactoryGirl.define do
   factory :endereco do
-    # tipo Endereco.tipos[:correspondência]
     tipo "correspondência"
     logradouro "MyString"
     numero "MyString"

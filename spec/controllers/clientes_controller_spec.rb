@@ -119,23 +119,20 @@ RSpec.describe ClientesController, type: :controller do
 
   end
 
-  describe "PUT inativar" do
-    let(:cliente) { FactoryGirl.create(:cliente, ativo: true) }
+  describe "PUT altera_status" do
+    let(:cliente_ativo) { FactoryGirl.create(:cliente, ativo: true) }
+    let(:cliente_inativo) { FactoryGirl.create(:cliente, ativo: false) }
 
     it 'altera o atributo ativo para falso' do
-      put :inativar, xhr: true, params: { id: cliente }
-      cliente.reload
-      expect(cliente.ativo).to eq(false)
+      put :altera_status, xhr: true, params: { id: cliente_ativo }
+      cliente_ativo.reload
+      expect(cliente_ativo.ativo).to eq(false)
     end
-  end
-
-  describe "PUT ativar" do
-    let(:cliente) { FactoryGirl.create(:cliente, ativo: false) }
 
     it 'altera o atributo ativo para verdadeiro' do
-      put :ativar, xhr: true, params: { id: cliente }
-      cliente.reload
-      expect(cliente.ativo).to eq(true)
+      put :altera_status, xhr: true, params: { id: cliente_inativo }
+      cliente_inativo.reload
+      expect(cliente_inativo.ativo).to eq(true)
     end
   end
 
