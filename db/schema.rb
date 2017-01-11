@@ -182,26 +182,26 @@ ActiveRecord::Schema.define(version: 20161101134252) do
   create_table "lancar_autorizados", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "nome"
     t.string   "cpf"
-    t.string   "observacao"
+    t.text     "observacao",              limit: 65535
     t.boolean  "tem_procuracao"
-    t.boolean  "ativo",                   default: true
+    t.boolean  "ativo",                                 default: true
     t.string   "procuracao_file_name"
     t.string   "procuracao_content_type"
     t.integer  "procuracao_file_size"
     t.datetime "procuracao_updated_at"
     t.integer  "cliente_id"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
     t.index ["cliente_id"], name: "index_lancar_autorizados_on_cliente_id", using: :btree
   end
 
   create_table "referencias", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "nome"
     t.string   "telefone"
-    t.string   "observacao"
+    t.text     "observacao", limit: 65535
     t.integer  "cliente_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.index ["cliente_id"], name: "index_referencias_on_cliente_id", using: :btree
   end
 

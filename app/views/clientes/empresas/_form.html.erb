@@ -1,0 +1,79 @@
+<%= form_for [@cliente, @empresa], remote: true, html: { class: "empresa-form col s12 validate" } do |f| %>
+  <div class="modal-content">
+    <div class="p-20 modal-border">
+      <div class="row card-content m-b-0 p-b-0 p-l-30 p-r-30">
+
+        <div class="row">
+          <div class="input-field col s12 m6">
+            <%= f.text_field :nome, required:"" %>
+            <%= f.label :nome %>
+          </div>
+
+          <div class="input-field col s12 m2">
+            <%= f.text_field :cnpj, class: "cnpj" %>
+            <%= f.label :cnpj, "CNPJ" %>
+          </div>
+
+          <div class="input-field col s12 m4">
+            <%= f.text_field :cargo %>
+            <%= f.label :cargo %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 m6">
+            <%= f.text_field :logradouro %>
+            <%= f.label :logradouro %>
+          </div>
+
+          <div class="input-field col s12 m2">
+            <%= f.text_field :numero %>
+            <%= f.label :numero, "Número" %>
+          </div>
+
+          <div class="input-field col s12 m4">
+            <%= f.text_field :complemento %>
+            <%= f.label :complemento %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 m2">
+            <%= f.text_field :bairro %>
+            <%= f.label :bairro %>
+          </div>
+
+          <div class="input-field col s12 m2">
+            <%= f.select :estado, @estados.collect {|estado| [(estado.nome), estado.id]} %>
+            <%= f.label :estado, class: "active" %>
+          </div>
+
+          <div class="input-field col s12 m4">
+            <%= f.select :cidade_id, @cidades.collect {|cidade| [cidade.nome, cidade.id]} %>
+            <%= f.label :cidade_id, class: "active" %>
+          </div>
+
+          <div class="input-field col s12 m2">
+            <%= f.text_field :cep, class: "cep" %>
+            <%= f.label :cep, "CEP" %>
+          </div>
+
+          <div class="input-field col s12 m2">
+            <%= f.text_field :caixa_postal %>
+            <%= f.label :caixa_postal %>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <%= button_tag "Salvar", class:"btn waves-effect waves-light" %>
+        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#empresa_modal').closeModal()", type: 'button' %>
+
+        <% if !@empresa.new_record? %>
+          <%= link_to "Excluir", cliente_empresa_path(@cliente, @empresa), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',
+                      data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a exclusão?')) } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

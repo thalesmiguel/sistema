@@ -26,6 +26,11 @@ Rails.application.routes.draw do
       resources :emails, except: [:show]
       resources :fazendas, except: [:show]
       resources :cliente_bancos, except: [:show]
+      resources :referencias, except: [:show]
+      resources :lancar_autorizados, except: [:show]
+      put 'lancar_autorizados/:id/deleta_procuracao', to: 'lancar_autorizados#deleta_procuracao', as: 'deleta_procuracao'
+      resources :empresas, except: [:show]
+      resources :alertas, except: [:show]
 
     end
   end

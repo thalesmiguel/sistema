@@ -1,4 +1,3 @@
-
 FactoryGirl.define do
   factory :cliente do
     sequence(:nome) { |n| "Nome#{n}" }
@@ -17,6 +16,6 @@ FactoryGirl.define do
     # cadastro_tipo Cliente.cadastro_tipos[:cliente]
     cadastro_tipo "cliente"
     marketing_tipos (["mala_direta", "fax", "e-mail"])
-    obsevacao "dçfjnsdçfkgjnsdgkjnsdfçgkjnsdfçgjksdnfgçjsdnçjksndfg"
+    observacao "dçfjnsdçfkgjnsdgkjnsdfçgkjnsdfçgjksdnfgçjsdnçjksndfg"
   end
 end

@@ -1,1 +1,17 @@
-<h1>Referências</h1>
+<div class="row m-b-0 p-b-20">
+  <div class="col s12">
+    <%= link_to_new new_cliente_referencia_path, true, "", "Nova Referência" if can? :manage, :referencia %>
+  </div>
+</div>
+
+<table id="referencias-table" class="highlight bordered" data-source="<%= cliente_referencias_path(@cliente_referencia, format: :json) %>" data-cliente-referencia="<%= @cliente_referencia %>">
+  <thead>
+    <tr>
+      <th width="">Nome</th>
+      <th width="">Telefone</th>
+      <th width="">Observações</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>

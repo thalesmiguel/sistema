@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :alerta do
-    tipo Alerta.tipos[:observação]
-    descricao "MyText"
+    tipo 'faturamento'
+    descricao "MyText MyText"
     ativo true
     cliente nil
   end

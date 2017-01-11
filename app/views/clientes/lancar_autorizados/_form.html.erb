@@ -1,0 +1,74 @@
+<%= form_for [@cliente, @lancar_autorizado], remote: true, multipart: true, html: { class: "lancar_autorizado-form col s12 validate"} do |f| %>
+  <div class="modal-content">
+    <div class="p-20 modal-border">
+      <div class="row card-content m-b-0 p-b-0 p-l-30 p-r-30">
+
+        <div class="row">
+          <div class="input-field col s12 m8">
+            <%= f.text_field :nome %>
+            <%= f.label :nome %>
+          </div>
+
+          <div class="input-field col s12 m4">
+            <%= f.text_field :cpf, class: 'cpf' %>
+            <%= f.label :cpf, 'CPF' %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <%= f.text_area :observacao, rows: 4, class: 'materialize-textarea limita-text-area' %>
+            <%= f.label :observacao, "Observação" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="file-field input-field col s10">
+            <div class="btn">
+              <span>Procuração</span>
+              <%= f.file_field :procuracao %>
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text">
+            </div>
+          </div>
+
+          <fieldset>
+            <div class="input-field col s2" style="display: flex;">
+              <% if @lancar_autorizado.procuracao.file? %>
+                <%=  %>
+                <%= link_to image_tag(@lancar_autorizado.procuracao.url(:thumb)), @lancar_autorizado.procuracao.url(:original, false), :target => "_blank" %>
+                <%= link_to('<i class="material-icons red-text">clear</i>'.html_safe, {action: :deleta_procuracao, id: @lancar_autorizado.id},
+                            method: :put, remote: true, data: { confirm: 'Tem certeza?' }) %>
+              <% end %>
+              <%= label_tag "Procuração", nil, class: "active" %>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 m2">
+            <%= f.check_box :tem_procuracao, class: 'filled-in'  %>
+            <%= f.label :tem_procuracao, "Tem Procuração" %>
+          </div>
+          <div class="input-field col s12 m1">
+            <%= f.check_box :ativo, class: 'filled-in'  %>
+            <%= f.label :ativo %>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <%= button_tag "Salvar", class:"btn waves-effect waves-light", id: "salvar-cliente-lancar_autorizado" %>
+        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#lancar_autorizado_modal').closeModal()", type: 'button' %>
+        <%#= button_tag "Cancelar", class:"btn-flat waves-effect waves-light btn-cancelar ", type: :reset %>
+
+          <% if !@lancar_autorizado.new_record? %>
+            <%= link_to "Excluir", cliente_lancar_autorizado_path(@cliente, @lancar_autorizado), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',
+                  data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a exclusão?')) } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

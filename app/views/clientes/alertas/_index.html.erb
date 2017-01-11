@@ -1,0 +1,20 @@
+<div class="row m-b-0 p-b-20">
+  <div class="col s12">
+    <%= link_to_new new_cliente_alerta_path, true, "", "Novo Telefone" if can? :manage, :alerta %>
+  </div>
+</div>
+
+<table id="alertas-table" class="highlight bordered" data-source="<%= cliente_alertas_path(@cliente_alerta, format: :json) %>" data-cliente-alerta="<%= @cliente_alerta %>">
+  <thead>
+    <tr>
+      <th width="">Tipo</th>
+      <th width="">Data</th>
+      <th width="">Descrição</th>
+      <th width="">Ativo</th>
+      <th width="">Comentários</th>
+      <th width="">Usuário</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>

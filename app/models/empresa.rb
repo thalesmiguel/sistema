@@ -7,4 +7,12 @@ class Empresa < ApplicationRecord
 
   validates :cliente, presence: true
   validates :nome, presence: true
+
+  def estado
+    cidade.nil? ? 0 : cidade.estado_id
+  end
+
+  def self.primario
+    where(primario: true).first
+  end
 end

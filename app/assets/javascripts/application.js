@@ -19,5 +19,6 @@
 //= require dataTables/jquery.dataTables
 //= require fnStandingRedraw
 //= require jquery.maskedinput.min
+//= require jquery.remotipart
 
 //= require_tree .

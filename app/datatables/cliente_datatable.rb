@@ -28,7 +28,8 @@ class ClienteDatatable < AjaxDatatablesRails::Base
         '6': record.cidade_nome,
         '7': record.estado_sigla,
 
-        'DT_RowId' => "cliente_#{record.id}",
+        'DT_RowId': "cliente_#{record.id}",
+        # 'DT_RowClass': "bozo",
       }
     end
   end
