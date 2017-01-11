@@ -1,7 +1,7 @@
 class BancoDatatable < AjaxDatatablesRails::Base
   include ApplicationHelper
 
-  def_delegators :@view, :link_to, :edit_banco_path
+  def_delegators :@view
 
   def sortable_columns
     # Declare strings in this format: ModelName.column_name
@@ -18,16 +18,18 @@ class BancoDatatable < AjaxDatatablesRails::Base
 
   def data
     records.map do |record|
-      [
-        record.codigo,
-        record.nome,
-        "#{link_to_edit edit_banco_path(record) if permitido?}" "#{link_to_destroy record, 'excluir-banco' if permitido?}"
-      ]
+      {
+        '0': record.codigo,
+        '1': record.nome,
+
+        'DT_RowId' => "banco_#{record.id}",
+      }
     end
   end
 
   def get_raw_records
-    Banco.all
+    # Banco.all
+    options[:bancos]
   end
 
   def permitido?

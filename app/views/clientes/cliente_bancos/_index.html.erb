@@ -1,0 +1,26 @@
+<div class="row m-b-0 p-b-20">
+  <div class="col s12">
+    <%= link_to_new new_cliente_cliente_banco_path, true, "", "Novo Endereço" if can? :manage, :cliente_banco %>
+  </div>
+</div>
+
+<table id="cliente_bancos-table" class="highlight bordered" data-source="<%= cliente_cliente_bancos_path(@cliente_cliente_banco, format: :json) %>" data-cliente-cliente_banco="<%= @cliente_cliente_banco %>">
+  <thead>
+    <tr>
+      <th width="">Código</th>
+      <th width="">Descrição</th>
+      <th width="">Agência</th>
+      <th width="">CC</th>
+      <th width="">Cidade</th>
+      <th width="">UF</th>
+      <th width="">Correntista</th>
+      <th width="">CPF/CNPJ</th>
+      <th width="">Observação</th>
+      <th width="">Dt. Cadastro</th>
+      <th width="">Primário</th>
+      <th width="">Ativo</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>

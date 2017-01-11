@@ -1,0 +1,52 @@
+<div class="card p-t-15 p-b-70 p-l-30 p-r-30 m-b-0 m-t-0">
+
+  <div class="row m-b-0">
+    <div class="valign-wrapper">
+      <h2>Bancos</h2>
+    </div>
+  </div>
+  <table id="bancos-table" class="highlight bordered" data-source="<%= bancos_path(format: :json) %>">
+    <thead>
+      <tr>
+        <th width="">Código</th>
+        <th width="">Nome</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+</div>
+
+<script type="text/javascript">
+  $(document).off("dblclick", "#bancos-table tr[id^=banco]");
+
+  $(document).on("dblclick", "#bancos-table tr[id^=banco]", function(){
+    let id_hidden_input = $(this).attr("id");
+    let $id = $("#cliente_banco_banco_id");
+
+    let modal = $("#banco_modal");
+    let codigo_input = $("#cliente_banco_banco_codigo");
+    let nome_input = $("#cliente_banco_banco_nome");
+    let codigo_label = $("label[for='cliente_banco_banco_codigo']");
+    let nome_label = $("label[for='cliente_banco_banco_nome']");
+
+    let $row = $(this).closest("tr");
+    let $codigo = $row.find("td:nth-child(1)");
+    let $nome = $row.find("td:nth-child(2)");
+
+    $id.val(id_hidden_input.replace("banco_", ""));
+
+    $.each($codigo, function() {
+      codigo_input.val($codigo.text());
+    });
+    $.each($nome, function() {
+      nome_input.val($nome.text());
+    });
+
+    codigo_label.addClass("active");
+    nome_label.addClass("active");
+    $("#salvar-cliente-banco").prop("disabled", false)
+    modal.closeModal();
+  });
+</script>

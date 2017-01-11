@@ -78,13 +78,13 @@ $(document).on("click", "a[href='#cliente-fazendas']", function(){
   });
 });
 
-$(document).on("click", "a[href='#cliente-bancos']", function(){
+$(document).on("click", "a[href='#cliente-cliente_bancos']", function(){
   $.ajax({
     type: "GET",
-    url: '<%= "/clientes/#{@cliente.id}/bancos" %>',
+    url: '<%= "/clientes/#{@cliente.id}/cliente_bancos" %>',
     dataType : 'script'
   }).success(function(){
-    carrega_datatable_id_automatico("#bancos-table", ".banco-form", ".excluir-banco", [], [0,1,2,3,4,5,6,7,8,9,10]);
+    carrega_datatable_id_automatico("#cliente_bancos-table", ".cliente_banco-form", ".excluir-cliente_banco", [], [0,1,2,3,4,5,6,7,8,9,10,11]);
     $('html, body').animate({scrollTop: $('footer').offset().top}, 'slow');
   });
 });

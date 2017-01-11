@@ -12,4 +12,16 @@ class ClienteBanco < ApplicationRecord
   validate :pelo_menos_um_deve_estar_ativo
   validate :pelo_menos_um_deve_ser_primario
 
+  def estado
+    cidade.nil? ? 0 : cidade.estado_id
+  end
+
+  def banco_codigo
+    banco.nil? ? "" : banco.codigo
+  end
+
+  def banco_nome
+    banco.nil? ? "" : banco.nome
+  end
+
 end

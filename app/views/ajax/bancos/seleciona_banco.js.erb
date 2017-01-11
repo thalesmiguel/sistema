@@ -1,0 +1,21 @@
+let modal = $("#banco_modal");
+let codigo_input = $("#cliente_banco_banco");
+let nome_input = $("#cliente_banco_nome");
+let codigo_label = $("label[for='cliente_banco_banco']");
+let nome_label = $("label[for='cliente_banco_nome']");
+
+let $row = $(this).closest("tr");
+let $codigo = $row.find("td:nth-child(1)");
+let $nome = $row.find("td:nth-child(2)");
+
+$.each($codigo, function() {
+  codigo_input.val($codigo.text());
+});
+$.each($nome, function() {
+  nome_input.val($nome.text());
+});
+
+codigo_label.addClass("active");
+nome_label.addClass("active");
+$("#salvar-cliente-banco").prop("disabled", false)
+modal.closeModal();

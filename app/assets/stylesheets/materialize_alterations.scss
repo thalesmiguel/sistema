@@ -82,6 +82,16 @@ body {
   overflow: visible;
 }
 
+.modal .modal-footer {
+  background-color: white;
+}
+
+.modal .modal-border {
+  background: white;
+  border: 1px solid #e0e0e0;
+}
+
+
 label, h1 {
   cursor: default !important;
 }
