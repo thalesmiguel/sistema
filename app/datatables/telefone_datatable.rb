@@ -21,7 +21,7 @@ class TelefoneDatatable < AjaxDatatablesRails::Base
   def data
     records.map do |record|
       {
-        '0': record.tipo,
+        '0': record.tipo.humanize,
         '1': record.ddi,
         '2': record.ddd,
         '3': record.numero,

@@ -3,17 +3,29 @@
     <div class="p-20 modal-border">
       <div class="row card-content m-b-0 p-b-0 p-l-30 p-r-30">
 
+        <%= f.hidden_field :user_id, value: current_user.id %>
+
         <div class="row">
           <div class="input-field col s12 m4">
-            <%= f.select :tipo, Alerta.tipos.map { |k, v| [k.humanize, k]} %>
+            <%= f.select :tipo, (Alerta.tipos.map { |k, v| [k.humanize, k, {'data-icon': "#{asset_path k}", class: "left"}] }) %>
             <%= f.label :tipo, class: "active" %>
           </div>
         </div>
+
+          <%#= f.select :tipo, Endereco.tipos.map { |k, v| [k.humanize, k]} %>
+          <%#= f.label :tipo, class: "active" %>
 
         <div class="row">
           <div class="input-field col s12">
             <%= f.text_area :descricao, rows: 8, class: 'materialize-textarea limita-text-area' %>
             <%= f.label :descricao, "Descrição" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 m2">
+            <%= f.check_box :ativo, class: 'filled-in'  %>
+            <%= f.label :ativo %>
           </div>
         </div>
       </div>

@@ -31,7 +31,10 @@ Rails.application.routes.draw do
       put 'lancar_autorizados/:id/deleta_procuracao', to: 'lancar_autorizados#deleta_procuracao', as: 'deleta_procuracao'
       resources :empresas, except: [:show]
       resources :alertas, except: [:show]
+    end
 
+    resources :alertas, except: [:show] do
+      resources :alerta_comentarios, except: [:show]
     end
   end
 

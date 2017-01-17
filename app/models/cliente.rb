@@ -54,4 +54,8 @@ class Cliente < ApplicationRecord
   def self.marketing_tipos_array
     ["E-mail", "Fax", "Mala_Direta", "SMS", "Telefone"]
   end
+
+  def pendencias_no_serasa
+    alertas.serasa_incluído.count + alertas.serasa_pendências.count
+  end
 end

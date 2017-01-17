@@ -5,6 +5,10 @@ class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
 
+  def self.ativo
+    where(ativo: true)
+  end
+
   private
   # Validações
   def pelo_menos_um_deve_estar_ativo

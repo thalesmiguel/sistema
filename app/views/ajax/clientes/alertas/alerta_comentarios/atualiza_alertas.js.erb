@@ -1,0 +1,21 @@
+<% if obj.errors.any? %>
+  <% obj.errors.each do |a, m| %>
+    Materialize.toast("<%= a.to_s.humanize %> <%= m %>", 5000, 'rounded red darken-4');
+  <% end %>
+<% else %>
+  Materialize.toast("<%= notice %>", 5000, 'rounded deep-purple');
+  <%= render file: "ajax/application/esconde_modal.js.erb", locals: { model: model } %>
+<% end %>
+
+//
+
+var cliente = $("#alertas-table").data('cliente-alerta')
+var url = "clientes/" + cliente + "/alertas.js"
+
+$.ajax({
+  type: "GET",
+  url: url,
+  success: function(){
+    carrega_datatable_id_automatico("#alertas-table", ".alerta-form", ".excluir-alerta", [], [0,1,2,3,4,5]);
+  }
+});

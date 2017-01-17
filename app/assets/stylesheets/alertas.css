@@ -1,0 +1,37 @@
+.alteração_de_cadastro {
+  background-color: #e53935;
+  color: white;
+}
+.alteração_de_cadastro:hover {
+  background-color: #d32f2f !important;
+}
+
+.faturamento {
+}
+
+.incluído_no_jurídico {
+}
+
+.pendência_de_documentos {
+  background-color: #8e24aa;
+  color: white;
+}
+.pendência_de_documentos:hover {
+  background-color: #7b1fa2 !important;
+}
+
+.serasa_incluído {
+}
+
+.serasa_nada_consta {
+}
+
+.serasa_pendências {
+}
+
+.observação {
+}
+
+.alteração_de_cadastro i.secondary-color-text, .pendência_de_documentos i.secondary-color-text {
+  color: white;
+}

@@ -96,6 +96,16 @@ RSpec.describe Cliente, type: :model do
       expect(cliente.estado_primario).to eq ""
     end
 
+    it 'busca por ocorrências no SERASA' do
+      user = FactoryGirl.create(:user)
+      cliente = FactoryGirl.create(:cliente)
+
+      primeiro_alerta = FactoryGirl.create(:alerta, user: user, cliente: cliente, tipo: :serasa_incluído)
+      primeiro_alerta = FactoryGirl.create(:alerta, user: user, cliente: cliente, tipo: :serasa_pendências)
+      segundo_alerta = FactoryGirl.create(:alerta, user: user, cliente: cliente, tipo: :observação)
+      expect(cliente.pendencias_no_serasa).to eq 2
+    end
+
   end
 
   describe 'associações' do
@@ -103,6 +113,7 @@ RSpec.describe Cliente, type: :model do
     let(:cliente) { FactoryGirl.create(:cliente) }
     let(:estado) { FactoryGirl.create(:estado) }
     let(:cidade) { FactoryGirl.create(:cidade, estado: estado) }
+    let(:user) { FactoryGirl.create(:user) }
 
     it 'has_many Enderecos' do
       primeiro_endereco = FactoryGirl.create(:endereco, cidade: cidade, cliente: cliente)
@@ -160,8 +171,8 @@ RSpec.describe Cliente, type: :model do
     end
 
     it 'has_many Alertas' do
-      primeiro_alerta = FactoryGirl.create(:alerta, cliente: cliente)
-      segundo_alerta = FactoryGirl.create(:alerta, cliente: cliente)
+      primeiro_alerta = FactoryGirl.create(:alerta, cliente: cliente, user: user)
+      segundo_alerta = FactoryGirl.create(:alerta, cliente: cliente, user: user)
       expect(cliente.alertas).to eq([primeiro_alerta, segundo_alerta])
     end
 

@@ -3,9 +3,14 @@ class AlertasController < ApplicationController
 
   def index
     @cliente_alerta = params[:cliente_id]
-    @alertas = Alerta.where(cliente_id: params[:cliente_id])
+    @alertas = Alerta.where(cliente_id: params[:cliente_id]).order(:created_at)
+
+    if !params[:somente_ativos]
+      params[:somente_ativos] = "false"
+    end
+
     respond_to do |format|
-      format.json { render json: AlertaDatatable.new(view_context, { alertas: @alertas, permitido: permitido? }) }
+      format.json { render json: AlertaDatatable.new(view_context, { alertas: @alertas, permitido: permitido?, somente_ativos: params[:somente_ativos] }) }
       format.js { mostra_alertas(@alertas) }
     end
   end
@@ -22,8 +27,8 @@ class AlertasController < ApplicationController
 
   def create
     @cliente = Cliente.find(params[:cliente_id])
-
     @alerta = @cliente.alertas.new(alerta_params)
+
     if @alerta.save
       renderiza_crud_js(@alerta, 'Alerta criado com sucesso.')
     else
@@ -56,7 +61,7 @@ class AlertasController < ApplicationController
     end
 
     def alerta_params
-      params.require(:alerta).permit(:tipo, :descricao, :ativo, :cliente_id)
+      params.require(:alerta).permit(:tipo, :descricao, :ativo, :cliente_id, :user_id)
     end
 
 end

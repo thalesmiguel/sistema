@@ -10,16 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161101134252) do
+ActiveRecord::Schema.define(version: 20170112125157) do
+
+  create_table "alerta_comentarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.text     "descricao",  limit: 65535
+    t.integer  "alerta_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["alerta_id"], name: "index_alerta_comentarios_on_alerta_id", using: :btree
+  end
 
   create_table "alertas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "tipo"
+    t.integer  "tipo"
     t.text     "descricao",  limit: 65535
     t.boolean  "ativo",                    default: true
     t.integer  "cliente_id"
+    t.integer  "user_id"
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
     t.index ["cliente_id"], name: "index_alertas_on_cliente_id", using: :btree
+    t.index ["user_id"], name: "index_alertas_on_user_id", using: :btree
   end
 
   create_table "audits", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -265,7 +275,9 @@ ActiveRecord::Schema.define(version: 20161101134252) do
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
   end
 
+  add_foreign_key "alerta_comentarios", "alertas"
   add_foreign_key "alertas", "clientes"
+  add_foreign_key "alertas", "users"
   add_foreign_key "cidades", "estados"
   add_foreign_key "cliente_bancos", "bancos"
   add_foreign_key "cliente_bancos", "cidades"

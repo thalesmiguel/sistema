@@ -21,7 +21,7 @@ class EnderecoDatatable < AjaxDatatablesRails::Base
   def data
     records.map do |record|
       {
-        '0': record.tipo,
+        '0': record.tipo.humanize,
         '1': record.logradouro,
         '2': record.numero,
         '3': record.complemento,

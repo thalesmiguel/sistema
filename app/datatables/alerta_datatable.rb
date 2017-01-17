@@ -19,22 +19,26 @@ class AlertaDatatable < AjaxDatatablesRails::Base
   def data
     records.map do |record|
       {
-        '0': record.tipo,
+        '0': record.tipo.humanize,
         '1': record.created_at.to_s(:data_formatada),
         '2': record.descricao,
         '3': material_check_box(record.ativo),
-        '4': 0,
-        '5': "usuario",
+        '4': record.alerta_comentarios.count,
+        '5': record.user.username,
 
         'DT_RowId' => "alerta_#{record.id}",
-        'DT_RowClass': "bozo",
+        'DT_RowClass': record.tipo,
       }
     end
   end
 
   def get_raw_records
     # Alerta.all
-    options[:alertas]
+    if options[:somente_ativos] == "false"
+      options[:alertas]
+    else
+      options[:alertas].ativo
+    end
   end
 
   def permitido?

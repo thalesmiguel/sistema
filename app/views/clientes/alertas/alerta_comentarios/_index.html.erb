@@ -1,0 +1,22 @@
+<div class="p-t-0 p-b-20 p-l-30 p-r-30">
+  <table id="alerta_comentarios-table" class="highlight bordered" data-source="<%= alerta_alerta_comentarios_path(@alerta_alerta_comentario, format: :json) %>" data-cliente-alerta="<%= @alerta_alerta_comentario %>">
+    <thead>
+      <tr>
+        <th width="">Data</th>
+        <th width="">Descrição</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+  <div class="row m-b-0 m-t-30">
+    <div class="valign-wrapper">
+      <div class="col s6 valign">
+      </div>
+      <div class="col s6 valign right-align">
+        <%= link_to_new new_alerta_alerta_comentario_path, true, "", "Novo Comentário" if can? :manage, :alerta %>
+      </div>
+    </div>
+  </div>
+</div>

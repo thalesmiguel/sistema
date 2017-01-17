@@ -1,5 +1,5 @@
 $("#cliente-visualizar").html("<%= escape_javascript(render partial: 'form', locals: { cliente: @cliente } ) %>");
-
+$("#cliente-adicionais").html("<%= escape_javascript(render partial: 'clientes/adicionais', locals: { cliente: @cliente }) %>");
 
 if (<%= !@cliente.new_record? %>) {
   $.ajax({

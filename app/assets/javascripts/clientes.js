@@ -16,21 +16,10 @@ $(document).on('turbolinks:load', function(){
     $("#cliente-dados-adicionais").addClass("hide");
   });
 
-  $(document).on("click", "a[href='#cliente-visualizar']", function(){
+  $(document).on("click", "a[href='#cliente-visualizar'], a[href='#cliente-alertas'], a[href='#cliente-contatos'], a[href='#cliente-relatorios']", function(){
     $("#cliente-dados-adicionais").removeClass("hide");
   });
 
-  $(document).on("click", "a[href='#cliente-alertas']", function(){
-    $("#cliente-dados-adicionais").removeClass("hide");
-  });
-
-  $(document).on("click", "a[href='#cliente-contatos']", function(){
-    $("#cliente-dados-adicionais").removeClass("hide");
-  });
-
-  $(document).on("click", "a[href='#cliente-relatorios']", function(){
-    $("#cliente-dados-adicionais").removeClass("hide");
-  });
 });
 
 function altera_mascara_cpf_cnpj(){
