@@ -3,9 +3,9 @@ class TelefonesController < ApplicationController
 
   def index
     @cliente_telefone = params[:cliente_id]
-    @telefones = Telefone.where(cliente_id: params[:cliente_id])
+    @telefones = Telefone.where(cliente_id: @cliente_telefone)
     respond_to do |format|
-      format.json { render json: TelefoneDatatable.new(view_context, { telefones: @telefones, permitido: permitido? }) }
+      format.json { render json: TelefoneDatatable.new(view_context, { cliente: @cliente_telefone, permitido: permitido? }) }
       format.js { mostra_telefones(@telefones) }
     end
   end

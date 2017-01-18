@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 
   has_many :alertas
+  has_many :audits
 
   audited
   rolify

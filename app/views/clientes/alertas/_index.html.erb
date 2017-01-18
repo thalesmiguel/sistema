@@ -5,8 +5,9 @@
         <h1>Alertas</h1>
       </div>
 
+      <button type="button" name="button" id="bozoBtn">Bozo</button>
+      
       <div class="col s6 valign right-align">
-
         <% if params[:somente_ativos] == "false" %>
           <%= link_to "Somente Ativos", cliente_alertas_path(params: {somente_ativos: "true"}), remote: true, id: "alertas-somente-ativos", class: "waves-effect waves-light btn-flat" if can? :read, :alerta %>
         <% else %>

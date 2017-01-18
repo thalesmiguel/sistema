@@ -25,9 +25,7 @@ class AlertaComentariosController < ApplicationController
 
     @alerta_comentario = @alerta.alerta_comentarios.new(alerta_comentario_params)
     if @alerta_comentario.save
-      respond_to do |format|
-        format.js { render file: 'ajax/clientes/alertas/alerta_comentarios/atualiza_alertas.js.erb', locals: { notice: 'Comentário criado com sucesso.', obj: @alerta_comentario, model: params[:controller].singularize } }
-      end
+      renderiza_crud_js(@alerta, 'Comentário criado com sucesso.')
     else
       renderiza_crud_js(@alerta_comentario)
     end

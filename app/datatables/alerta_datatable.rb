@@ -25,6 +25,7 @@ class AlertaDatatable < AjaxDatatablesRails::Base
         '3': material_check_box(record.ativo),
         '4': record.alerta_comentarios.count,
         '5': record.user.username,
+        '6': record.ativo,
 
         'DT_RowId' => "alerta_#{record.id}",
         'DT_RowClass': record.tipo,
@@ -34,11 +35,8 @@ class AlertaDatatable < AjaxDatatablesRails::Base
 
   def get_raw_records
     # Alerta.all
-    if options[:somente_ativos] == "false"
-      options[:alertas]
-    else
-      options[:alertas].ativo
-    end
+    return options[:alertas] if options[:somente_ativos] == "false"
+    options[:alertas].ativo
   end
 
   def permitido?

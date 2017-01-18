@@ -10,7 +10,8 @@ class AlertasController < ApplicationController
     end
 
     respond_to do |format|
-      format.json { render json: AlertaDatatable.new(view_context, { alertas: @alertas, permitido: permitido?, somente_ativos: params[:somente_ativos] }) }
+      format.json {
+        render json: AlertaDatatable.new(view_context, { alertas: @alertas, permitido: permitido?, somente_ativos: params[:somente_ativos] }) }
       format.js { mostra_alertas(@alertas) }
     end
   end

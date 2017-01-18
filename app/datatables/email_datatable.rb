@@ -1,45 +1,40 @@
 class EmailDatatable < AjaxDatatablesRails::Base
   include ApplicationHelper
 
-  def_delegators :@view
-
-  def sortable_columns
-    # Declare strings in this format: ModelName.column_name
-    @sortable_columns ||= ['Email.email', 'Email.contato', 'Email.mala_direta', 'Email.solicitacao_email', 'Email.envio_contratos', 'Email.ativo']
+  def view_columns
+    @view_columns ||= {
+      email: { source: "Email.email", cond: :like },
+      contato: { source: "Email.contato", cond: :like },
+      created_at: { source: "Email.created_at", cond: :like },
+      mala_direta: { source: "Email.mala_direta", cond: :like },
+      ativo: { source: "Email.ativo", cond: :like },
+      solicitacao_email: { source: "Email.solicitacao_email", cond: :like },
+      envio_contratos: { source: "Email.envio_contratos", cond: :like },
+    }
   end
-
-  def searchable_columns
-    # Declare strings in this format: ModelName.column_name
-    @searchable_columns ||= ['Email.email', 'Email.contato', 'Email.mala_direta', 'Email.solicitacao_email', 'Email.envio_contratos', 'Email.ativo']
-  end
-
 
   private
 
   def data
     records.map do |record|
       {
-        '0': record.email,
-        '1': record.contato,
-        '2': record.created_at.to_s(:data_formatada),
-        '3': material_check_box(record.mala_direta),
-        '4': material_check_box(record.ativo),
-        '5': material_check_box(record.solicitacao_email),
-        '6': material_check_box(record.envio_contratos),
-
-        'DT_RowId' => "email_#{record.id}",
+        email: record.email,
+        contato: record.contato,
+        created_at: record.created_at.to_s(:data_formatada),
+        mala_direta: material_check_box(record.mala_direta),
+        ativo: material_check_box(record.ativo),
+        solicitacao_email: material_check_box(record.solicitacao_email),
+        envio_contratos: material_check_box(record.envio_contratos),
+        DT_RowId: "email_#{record.id}",
       }
     end
   end
 
   def get_raw_records
-    # Email.all
-    options[:emails]
+    Email.where(cliente_id: options[:cliente])
   end
 
   def permitido?
     options[:permitido]
   end
-
-  # ==== Insert 'presenter'-like methods below if necessary
 end

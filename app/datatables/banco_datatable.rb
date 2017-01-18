@@ -1,40 +1,29 @@
 class BancoDatatable < AjaxDatatablesRails::Base
-  include ApplicationHelper
 
-  def_delegators :@view
-
-  def sortable_columns
-    # Declare strings in this format: ModelName.column_name
-    @sortable_columns ||= ['Banco.codigo', 'Banco.nome']
+  def view_columns
+    @view_columns ||= {
+      codigo: { source: "Banco.codigo", cond: :like },
+      nome: { source: "Banco.nome", cond: :like },
+    }
   end
-
-  def searchable_columns
-    # Declare strings in this format: ModelName.column_name
-    @searchable_columns ||= ['Banco.codigo', 'Banco.nome']
-  end
-
 
   private
 
   def data
     records.map do |record|
       {
-        '0': record.codigo,
-        '1': record.nome,
-
-        'DT_RowId' => "banco_#{record.id}",
+        codigo: record.codigo,
+        nome: record.nome,
+        DT_RowId: "banco_#{record.id}",
       }
     end
   end
 
   def get_raw_records
-    # Banco.all
-    options[:bancos]
+    Banco.all
   end
 
   def permitido?
     options[:permitido]
   end
-
-  # ==== Insert 'presenter'-like methods below if necessary
 end

@@ -1,51 +1,48 @@
 class EnderecoDatatable < AjaxDatatablesRails::Base
   include ApplicationHelper
 
-  def_delegators :@view
-
-  def sortable_columns
-    # Declare strings in this format: ModelName.column_name
-    @sortable_columns ||= ['Endereco.tipo', 'Endereco.logradouro', 'Endereco.numero', 'Endereco.complemento', 'Endereco.bairro',
-                           'Endereco.cep', 'Endereco.caixa_postal', 'Endereco.ativo', 'Endereco.primario']
+  def view_columns
+    @view_columns ||= {
+      tipo: { source: "Endereco.tipo", cond: :like },
+      logradouro: { source: "Endereco.logradouro", cond: :like },
+      numero: { source: "Endereco.numero", cond: :like },
+      complemento: { source: "Endereco.complemento", cond: :like },
+      bairro: { source: "Endereco.bairro", cond: :like },
+      cep: { source: "Endereco.cep", cond: :like },
+      caixa_postal: { source: "Endereco.caixa_postal", cond: :like },
+      cidade_nome: { source: "Cidade.nome", cond: :like },
+      estado_sigla: { source: "Estado.sigla", cond: :like },
+      ativo: { source: "Endereco.ativo", cond: :like },
+      primario: { source: "Endereco.primario", cond: :like },
+    }
   end
-
-  def searchable_columns
-    # Declare strings in this format: ModelName.column_name
-    @searchable_columns ||= ['Endereco.tipo', 'Endereco.logradouro', 'Endereco.numero', 'Endereco.complemento', 'Endereco.bairro',
-                             'Endereco.cep', 'Endereco.caixa_postal', 'Endereco.ativo', 'Endereco.primario']
-  end
-
 
   private
 
   def data
     records.map do |record|
       {
-        '0': record.tipo.humanize,
-        '1': record.logradouro,
-        '2': record.numero,
-        '3': record.complemento,
-        '4': record.bairro,
-        '5': record.cep,
-        '6': record.caixa_postal,
-        '7': record.cidade.nome,
-        '8': record.cidade.estado.sigla,
-        '9': material_check_box(record.ativo),
-        '10': material_check_box(record.primario),
-
-        'DT_RowId' => "endereco_#{record.id}",
+        tipo: record.tipo.humanize,
+        logradouro: record.logradouro,
+        numero: record.numero,
+        complemento: record.complemento,
+        bairro: record.bairro,
+        cep: record.cep,
+        caixa_postal: record.caixa_postal,
+        cidade_nome: record.cidade.nome,
+        estado_sigla: record.cidade.estado.sigla,
+        ativo: material_check_box(record.ativo),
+        primario: material_check_box(record.primario),
+        DT_RowId: "endereco_#{record.id}",
       }
     end
   end
 
   def get_raw_records
-    # Endereco.all
-    options[:enderecos]
+    Endereco.joins(cidade: :estado).where(cliente_id: options[:cliente])
   end
 
   def permitido?
     options[:permitido]
   end
-
-  # ==== Insert 'presenter'-like methods below if necessary
 end

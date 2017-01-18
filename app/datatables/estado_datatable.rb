@@ -1,32 +1,25 @@
 class EstadoDatatable < AjaxDatatablesRails::Base
-  include ApplicationHelper
 
-  def_delegators :@view, :link_to, :edit_estado_path
-
-  def sortable_columns
-    # Declare strings in this format: ModelName.column_name
-    @sortable_columns ||= ['Estado.nome', 'Estado.sigla']
+  def view_columns
+    @view_columns ||= {
+      nome: { source: "Estado.nome", cond: :like },
+      sigla: { source: "Estado.sigla", cond: :like },
+    }
   end
-
-  def searchable_columns
-    # Declare strings in this format: ModelName.column_name
-    @searchable_columns ||= ['Estado.nome', 'Estado.sigla']
-  end
-
 
   private
 
   def data
     records.map do |record|
-      [
-        record.nome,
-        record.sigla,
-        record.created_at.to_s(:data_formatada),
-        record.audits.first.user.username,
-        record.updated_at.to_s(:data_formatada),
-        record.audits.last.user.username,
-        "#{link_to_edit edit_estado_path(record) if permitido?}" "#{link_to_destroy record, 'excluir-estado' if permitido?}"
-      ]
+      {
+        nome: record.nome,
+        sigla: record.sigla,
+        created_at: record.created_at.to_s(:data_formatada),
+        created_by: record.audits.first.user.username,
+        updated_at: record.updated_at.to_s(:data_formatada),
+        updated_by: record.audits.last.user.username,
+        DT_RowId: "estado_#{record.id}",
+      }
     end
   end
 
@@ -37,6 +30,4 @@ class EstadoDatatable < AjaxDatatablesRails::Base
   def permitido?
     options[:permitido]
   end
-
-  # ==== Insert 'presenter'-like methods below if necessary
 end

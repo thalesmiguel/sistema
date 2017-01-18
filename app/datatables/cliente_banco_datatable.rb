@@ -1,52 +1,50 @@
 class ClienteBancoDatatable < AjaxDatatablesRails::Base
   include ApplicationHelper
 
-  def_delegators :@view
-
-  def sortable_columns
-    # Declare strings in this format: ModelName.column_name
-    @sortable_columns ||= ['ClienteBanco.agencia', 'ClienteBanco.conta_corrente', 'ClienteBanco.data_abertura_conta',
-                           'ClienteBanco.observacao', 'ClienteBanco.correntista_nome', 'ClienteBanco.correntista_cpf_cnpj', 'ClienteBanco.primario', 'ClienteBanco.ativo']
+  def view_columns
+    @view_columns ||= {
+      banco_codigo: { source: "Banco.codigo", cond: :like },
+      banco_nome: { source: "Banco.nome", cond: :like },
+      agencia: { source: "ClienteBanco.agencia", cond: :like },
+      conta_corrente: { source: "ClienteBanco.conta_corrente", cond: :like },
+      cidade_nome: { source: "Cidade.nome", cond: :like },
+      estado_sigla: { source: "Estado.sigla", cond: :like },
+      correntista_nome: { source: "ClienteBanco.correntista_nome", cond: :like },
+      correntista_cpf_cnpj: { source: "ClienteBanco.correntista_cpf_cnpj", cond: :like },
+      observacao: { source: "ClienteBanco.observacao", cond: :like },
+      created_at: { source: "ClienteBanco.created_at", cond: :like },
+      primario: { source: "ClienteBanco.primario", cond: :like },
+      ativo: { source: "ClienteBanco.ativo", cond: :like },
+    }
   end
-
-  def searchable_columns
-    # Declare strings in this format: ModelName.column_name
-    @searchable_columns ||= ['ClienteBanco.agencia', 'ClienteBanco.conta_corrente', 'ClienteBanco.data_abertura_conta',
-                             'ClienteBanco.observacao', 'ClienteBanco.correntista_nome', 'ClienteBanco.correntista_cpf_cnpj', 'ClienteBanco.primario', 'ClienteBanco.ativo']
-  end
-
 
   private
 
   def data
     records.map do |record|
       {
-        '0': record.banco.codigo,
-        '1': record.banco.nome,
-        '2': record.agencia,
-        '3': record.conta_corrente,
-        '4': record.cidade.nome,
-        '5': record.cidade.estado.sigla,
-        '6': record.correntista_nome,
-        '7': record.correntista_cpf_cnpj,
-        '8': record.observacao,
-        '9': record.created_at.to_s(:data_formatada),
-        '10': material_check_box(record.primario),
-        '11': material_check_box(record.ativo),
-
-        'DT_RowId' => "cliente_banco_#{record.id}",
+        banco_codigo: record.banco.codigo,
+        banco_nome: record.banco.nome,
+        agencia: record.agencia,
+        conta_corrente: record.conta_corrente,
+        cidade_nome: record.cidade.nome,
+        estado_sigla: record.cidade.estado.sigla,
+        correntista_nome: record.correntista_nome,
+        correntista_cpf_cnpj: record.correntista_cpf_cnpj,
+        observacao: record.observacao,
+        created_at: record.created_at.to_s(:data_formatada),
+        primario: material_check_box(record.primario),
+        ativo: material_check_box(record.ativo),
+        DT_RowId: "cliente_banco_#{record.id}",
       }
     end
   end
 
   def get_raw_records
-    # ClienteBanco.all
-    options[:cliente_bancos]
+    ClienteBanco.joins(:banco, cidade: :estado).where(cliente_id: options[:cliente])
   end
 
   def permitido?
     options[:permitido]
   end
-
-  # ==== Insert 'presenter'-like methods below if necessary
 end

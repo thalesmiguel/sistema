@@ -1,13 +1,27 @@
 $(document).on('turbolinks:load', function(){
-  carrega_datatable_id_automatico("#alertas-table", ".alerta-form", ".excluir-alerta", [], [0,1,2,3,4,5]);
+  // carrega_datatable_id_automatico("#alertas-table", ".alerta-form", ".excluir-alerta", [], [0,1,2,3,4,5]);
 
   $(document).on('click', '#alertas-somente-ativos, #alertas-exibir-todos', function(){
-    $("#alertas-table").DataTable().destroy();
-
-    setTimeout(function(){
-      carrega_datatable_id_automatico("#alertas-table", ".alerta-form", ".excluir-alerta", [], [0,1,2,3,4,5]);
-    }, 100);
+    $("#alertas-table").dataTable().fnDraw();
+    // $("#alertas-table").DataTable().destroy();
+    //
+    // setTimeout(function(){
+    //   carrega_datatable_id_automatico("#alertas-table", ".alerta-form", ".excluir-alerta", [], [0,1,2,3,4,5]);
+    // }, 100);
   });
+
+  $(document).on('click', '#bozoBtn', function(e){
+    e.preventDefault();
+    var table = $("#alertas-table").DataTable();
+    console.log("123");
+    table
+      .columns( 6 )
+      .search(  'abc' )
+      .draw();
+
+    // table.columns(0).search("").draw()
+  });
+
 
   var clicks, timer, delay;
   clicks=0;delay=500;timer=null;

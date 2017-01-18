@@ -3,9 +3,9 @@ class FazendasController < ApplicationController
 
   def index
     @cliente_fazenda = params[:cliente_id]
-    @fazendas = Fazenda.where(cliente_id: params[:cliente_id])
+    @fazendas = Fazenda.where(cliente_id: @cliente_fazenda)
     respond_to do |format|
-      format.json { render json: FazendaDatatable.new(view_context, { fazendas: @fazendas, permitido: permitido? }) }
+      format.json { render json: FazendaDatatable.new(view_context, { cliente: @cliente_fazenda, permitido: permitido? }) }
       format.js { mostra_fazendas(@fazendas) }
     end
   end

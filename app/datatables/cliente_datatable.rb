@@ -1,35 +1,33 @@
 class ClienteDatatable < AjaxDatatablesRails::Base
   include ApplicationHelper
 
-  def_delegators :@view
-
-  def sortable_columns
-    # Declare strings in this format: ModelName.column_name
-    @sortable_columns ||= ['Cliente.cadastro_tipo', 'Cliente.cpf_cnpj', 'Cliente.nome', 'Cliente.apelido', 'Cliente.ficticio']
+  def view_columns
+    @view_columns ||= {
+      ativo: { source: "Cliente.ativo", cond: :like },
+      cadastro_tipo: { source: "Cliente.cadastro_tipo", cond: :like },
+      cpf_cnpj: { source: "Cliente.cpf_cnpj", cond: :like },
+      nome: { source: "Cliente.nome", cond: :like },
+      apelido: { source: "Cliente.apelido", cond: :like },
+      ficticio: { source: "Cliente.ficticio", cond: :like },
+      cidade_nome: { source: "Cidade.nome", cond: :like },
+      estado_sigla: { source: "Estado.sigla", cond: :like },
+    }
   end
-
-  def searchable_columns
-    # Declare strings in this format: ModelName.column_name
-    @searchable_columns ||= ['Cliente.nome', 'Cliente.apelido', 'Cliente.ficticio',  'Cliente.cpf_cnpj', 'Cidade.nome', 'Estado.sigla']
-  end
-
 
   private
 
   def data
     records.map do |record|
       {
-        '0': material_check_box(record.ativo),
-        '1': record.cadastro_tipo,
-        '2': record.cpf_cnpj,
-        '3': record.nome,
-        '4': record.apelido,
-        '5': record.ficticio,
-        '6': record.cidade_nome,
-        '7': record.estado_sigla,
-
-        'DT_RowId': "cliente_#{record.id}",
-        # 'DT_RowClass': "bozo",
+        ativo: material_check_box(record.ativo),
+        cadastro_tipo: record.cadastro_tipo,
+        cpf_cnpj: record.cpf_cnpj,
+        nome: record.nome,
+        apelido: record.apelido,
+        ficticio: record.ficticio,
+        cidade_nome: record.cidade_nome,
+        estado_sigla: record.estado_sigla,
+        DT_RowId: "cliente_#{record.id}",
       }
     end
   end
@@ -43,6 +41,4 @@ class ClienteDatatable < AjaxDatatablesRails::Base
   def permitido?
     options[:permitido]
   end
-
-  # ==== Insert 'presenter'-like methods below if necessary
 end

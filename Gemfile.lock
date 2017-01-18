@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/ajahongir/ajax-datatables-rails.git
+  revision: 6769547aa032a72fc632344904c49d32359d9b52
+  branch: v-0-4-0
+  specs:
+    ajax-datatables-rails (0.4.0)
+      railties (>= 3.2)
+
+GIT
   remote: git://github.com/rails/rails-observers.git
   revision: 3fe157d6cbb5b5e767ded248009fc59443d63fa1
   specs:
@@ -46,8 +54,6 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     addressable (2.4.0)
-    ajax-datatables-rails (0.3.1)
-      railties (>= 3.1)
     arel (7.1.4)
     audited (4.3.0)
       activerecord (>= 4.0, < 5.1)
@@ -249,7 +255,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ajax-datatables-rails
+  ajax-datatables-rails!
   audited (~> 4.3)
   byebug
   cancancan
@@ -258,7 +264,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   jbuilder (~> 2.5)
-  jquery-datatables-rails (~> 3.4.0)
+  jquery-datatables-rails
   jquery-rails
   listen (~> 3.0.5)
   materialize-sass (= 0.97.7)
@@ -282,4 +288,4 @@ DEPENDENCIES
   web-console
 
 BUNDLED WITH
-   1.13.6
+   1.13.7

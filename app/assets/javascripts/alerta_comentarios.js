@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function(){
-  carrega_datatable_id_automatico_sem_controles("#alerta_comentarios-table", ".alerta_comentario-form", ".excluir-alerta_comentario", [], [0,1]);
+  // carrega_datatable_id_automatico_sem_controles("#alerta_comentarios-table", ".alerta_comentario-form", ".excluir-alerta_comentario", [], [0,1]);
 
   $(document).on("dblclick", "#alerta_comentarios-table tr[id^=alerta_comentario]", function(){
     var id = $(this).attr("id");
@@ -11,5 +11,9 @@ $(document).on('turbolinks:load', function(){
       type: "GET",
       url: url
     });
+  });
+
+  $(document).on("ajax:complete", "form[id*='alerta_comentario']", function(){
+    $("#alertas-table").dataTable().fnDraw();
   })
 });

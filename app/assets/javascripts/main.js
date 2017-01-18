@@ -5,7 +5,7 @@ $(document).on('turbolinks:load', function(){
   // $('select').material_select();
   $('.collapsible').collapsible();
   // $(".dropdown-button").dropdown();
-  $('ul.tabs').tabs();
+  // $('ul.tabs').tabs();
   Waves.displayEffect()
   // Materialize.updateTextFields();
 
@@ -136,7 +136,43 @@ function limita_text_area() {
 };
 // text_area
 
-function carrega_datatable(id_tabela, classe_formulario, classe_excluir, colunas_nao_clicaveis) {
+function carrega_datatable(modelo, modelo_singular, campos, campos_sem_busca_ordenacao) {
+
+  var lista_campos = []
+  $.each(campos, function( index, value ) {
+    lista_campos.push({data: value.toString()})
+  });
+
+  var tabela = $("#" + modelo + "-table").DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: $("#" + modelo + "-table").data('source'),
+    columns: lista_campos,
+    pagingType: "full_numbers",
+    autoWidth: false,
+    columnDefs: [
+      { orderable: false, targets: campos_sem_busca_ordenacao },
+      { searchable: false, targets: campos_sem_busca_ordenacao }
+    ],
+    language: { sUrl: "datatable_i18n" },
+    drawCallback: function( settings ) {
+      $('.paginate_button').addClass("waves-effect");
+      $('select').material_select();
+    }
+  });
+
+  $(document).on('ajax:complete', "." + modelo_singular + "-form", function(){
+    tabela.draw();
+  });
+};
+
+function carrega_datatable_id_automatico(id_tabela, classe_formulario, classe_excluir, colunas_nao_clicaveis, colunas_com_dados) {
+
+  var lista_colunas_com_dados = []
+  $.each(colunas_com_dados, function( index, value ) {
+    lista_colunas_com_dados.push({data: value.toString()})
+  });
+
   var tabela = $(id_tabela).dataTable({
     processing: true,
     serverSide: true,
@@ -144,6 +180,7 @@ function carrega_datatable(id_tabela, classe_formulario, classe_excluir, colunas
     pagingType: "full_numbers",
     autoWidth: false,
     columnDefs: [ { orderable: false, targets: colunas_nao_clicaveis } ],
+    columns: lista_colunas_com_dados,
     language: {
       sUrl: "datatable_i18n"
     },
@@ -163,45 +200,11 @@ function carrega_datatable(id_tabela, classe_formulario, classe_excluir, colunas
   });
 };
 
-function carrega_datatable_id_automatico(id_tabela, classe_formulario, classe_excluir, colunas_nao_clicaveis, calunas_com_dados) {
+function carrega_datatable_id_automatico_sem_controles(id_tabela, classe_formulario, classe_excluir, colunas_nao_clicaveis, colunas_com_dados) {
 
-  var lista_calunas_com_dados = []
-  $.each(calunas_com_dados, function( index, value ) {
-    lista_calunas_com_dados.push({data: value.toString()})
-  });
-
-  var tabela = $(id_tabela).dataTable({
-    processing: true,
-    serverSide: true,
-    ajax: $(id_tabela).data('source'),
-    pagingType: "full_numbers",
-    autoWidth: false,
-    columnDefs: [ { orderable: false, targets: colunas_nao_clicaveis } ],
-    columns: lista_calunas_com_dados,
-    language: {
-      sUrl: "datatable_i18n"
-    },
-    drawCallback: function( settings ) {
-      $('.paginate_button').addClass("waves-effect");
-      $('select').material_select();
-      // $('.tooltipped').tooltip({delay: 1000});
-    },
-  });
-
-  $(document).on('ajax:complete', classe_formulario, function(){
-    tabela.fnDraw();
-    // tabela.fnStandingRedraw();
-  });
-  $(document).on('ajax:complete', classe_excluir, function(){
-    tabela.fnDraw();
-  });
-};
-
-function carrega_datatable_id_automatico_sem_controles(id_tabela, classe_formulario, classe_excluir, colunas_nao_clicaveis, calunas_com_dados) {
-
-  var lista_calunas_com_dados = []
-  $.each(calunas_com_dados, function( index, value ) {
-    lista_calunas_com_dados.push({data: value.toString()})
+  var lista_colunas_com_dados = []
+  $.each(colunas_com_dados, function( index, value ) {
+    lista_colunas_com_dados.push({data: value.toString()})
   });
 
   var tabela = $(id_tabela).dataTable({
@@ -215,7 +218,7 @@ function carrega_datatable_id_automatico_sem_controles(id_tabela, classe_formula
     pagingType: "full_numbers",
     autoWidth: false,
     columnDefs: [ { orderable: false, targets: colunas_nao_clicaveis } ],
-    columns: lista_calunas_com_dados,
+    columns: lista_colunas_com_dados,
     language: {
       sUrl: "datatable_i18n"
     },

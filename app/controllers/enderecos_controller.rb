@@ -3,9 +3,9 @@ class EnderecosController < ApplicationController
 
   def index
     @cliente_endereco = params[:cliente_id]
-    @enderecos = Endereco.where(cliente_id: params[:cliente_id])
+    @enderecos = Endereco.where(cliente_id: @cliente_endereco)
     respond_to do |format|
-      format.json { render json: EnderecoDatatable.new(view_context, { enderecos: @enderecos, permitido: permitido? }) }
+      format.json { render json: EnderecoDatatable.new(view_context, { cliente: @cliente_endereco, permitido: permitido? }) }
       format.js { mostra_enderecos(@enderecos) }
     end
   end

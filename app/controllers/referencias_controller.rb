@@ -3,9 +3,9 @@ class ReferenciasController < ApplicationController
 
   def index
     @cliente_referencia = params[:cliente_id]
-    @referencias = Referencia.where(cliente_id: params[:cliente_id])
+    @referencias = Referencia.where(cliente_id: @cliente_referencia)
     respond_to do |format|
-      format.json { render json: ReferenciaDatatable.new(view_context, { referencias: @referencias, permitido: permitido? }) }
+      format.json { render json: ReferenciaDatatable.new(view_context, { cliente: @cliente_referencia, permitido: permitido? }) }
       format.js { mostra_referencias(@referencias) }
     end
   end

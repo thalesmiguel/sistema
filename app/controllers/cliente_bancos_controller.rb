@@ -3,9 +3,9 @@ class ClienteBancosController < ApplicationController
 
   def index
     @cliente_cliente_banco = params[:cliente_id]
-    @cliente_bancos = ClienteBanco.where(cliente_id: params[:cliente_id])
+    @cliente_bancos = ClienteBanco.where(cliente_id: @cliente_cliente_banco)
     respond_to do |format|
-      format.json { render json: ClienteBancoDatatable.new(view_context, { cliente_bancos: @cliente_bancos, permitido: permitido? }) }
+      format.json { render json: ClienteBancoDatatable.new(view_context, { cliente: @cliente_cliente_banco, permitido: permitido? }) }
       format.js { mostra_cliente_bancos(@cliente_bancos) }
     end
   end

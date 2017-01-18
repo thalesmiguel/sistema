@@ -1,51 +1,48 @@
 class TelefoneDatatable < AjaxDatatablesRails::Base
   include ApplicationHelper
 
-  def_delegators :@view
-
-  def sortable_columns
-    # Declare strings in this format: ModelName.column_name
-    @sortable_columns ||= ['Telefone.tipo', 'Telefone.ddi', 'Telefone.ddd', 'Telefone.numero', 'Telefone.created_at', 'Telefone.ramal',
-                           'Telefone.nome_contato', 'Telefone.importancia', 'Telefone.telemarketing', 'Telefone.divulgar', 'Telefone.ativo']
+  def view_columns
+    @view_columns ||= {
+      tipo: { source: "Telefone.tipo", cond: :like },
+      ddi: { source: "Telefone.ddi", cond: :like },
+      ddd: { source: "Telefone.ddd", cond: :like },
+      numero: { source: "Telefone.numero", cond: :like },
+      created_at: { source: "Telefone.created_at", cond: :like },
+      ramal: { source: "Telefone.ramal", cond: :like },
+      nome_contato: { source: "Telefone.nome_contato", cond: :like },
+      importancia: { source: "Telefone.importancia", cond: :like },
+      telemarketing: { source: "Telefone.telemarketing", cond: :like },
+      divulgar: { source: "Telefone.divulgar", cond: :like },
+      ativo: { source: "Telefone.ativo", cond: :like },
+    }
   end
-
-  def searchable_columns
-    # Declare strings in this format: ModelName.column_name
-    @searchable_columns ||= ['Telefone.tipo', 'Telefone.ddi', 'Telefone.ddd', 'Telefone.numero', 'Telefone.created_at', 'Telefone.ramal',
-                             'Telefone.nome_contato', 'Telefone.importancia', 'Telefone.telemarketing', 'Telefone.divulgar', 'Telefone.ativo']
-  end
-
 
   private
 
   def data
     records.map do |record|
       {
-        '0': record.tipo.humanize,
-        '1': record.ddi,
-        '2': record.ddd,
-        '3': record.numero,
-        '4': record.created_at.to_s(:data_formatada),
-        '5': record.ramal,
-        '6': record.nome_contato,
-        '7': record.importancia,
-        '8': material_check_box(record.telemarketing),
-        '9': material_check_box(record.divulgar),
-        '10': material_check_box(record.ativo),
-
-        'DT_RowId' => "telefone_#{record.id}",
+        tipo: record.tipo.humanize,
+        ddi: record.ddi,
+        ddd: record.ddd,
+        numero: record.numero,
+        created_at: record.created_at.to_s(:data_formatada),
+        ramal: record.ramal,
+        nome_contato: record.nome_contato,
+        importancia: record.importancia,
+        telemarketing: material_check_box(record.telemarketing),
+        divulgar: material_check_box(record.divulgar),
+        ativo: material_check_box(record.ativo),
+        DT_RowId: "telefone_#{record.id}",
       }
     end
   end
 
   def get_raw_records
-    # Telefone.all
-    options[:telefones]
+    Telefone.where(cliente_id: options[:cliente])
   end
 
   def permitido?
     options[:permitido]
   end
-
-  # ==== Insert 'presenter'-like methods below if necessary
 end

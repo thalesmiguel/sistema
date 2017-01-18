@@ -40,9 +40,10 @@ gem 'remotipart', '~> 1.2'
 gem 'materialize-sass', "0.97.7"
 gem 'money-rails'
 
-gem 'jquery-datatables-rails', '~> 3.4.0'
-gem 'ajax-datatables-rails'
-# gem 'ajax-datatables-rails', git: 'git://github.com/antillas21/ajax-datatables-rails.git', branch: 'v-0-4-0'
+# gem 'jquery-datatables-rails', '~> 3.4.0'
+gem 'jquery-datatables-rails'
+# gem 'ajax-datatables-rails'
+gem 'ajax-datatables-rails', github: 'ajahongir/ajax-datatables-rails', branch: 'v-0-4-0'
 
 gem "audited", "~> 4.3"
 gem "rails-observers", github: 'rails/rails-observers'

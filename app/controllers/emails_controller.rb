@@ -3,9 +3,9 @@ class EmailsController < ApplicationController
 
   def index
     @cliente_email = params[:cliente_id]
-    @emails = Email.where(cliente_id: params[:cliente_id])
+    @emails = Email.where(cliente_id: @cliente_email)
     respond_to do |format|
-      format.json { render json: EmailDatatable.new(view_context, { emails: @emails, permitido: permitido? }) }
+      format.json { render json: EmailDatatable.new(view_context, { cliente: @cliente_email, permitido: permitido? }) }
       format.js { mostra_emails(@emails) }
     end
   end

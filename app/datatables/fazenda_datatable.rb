@@ -1,49 +1,42 @@
 class FazendaDatatable < AjaxDatatablesRails::Base
   include ApplicationHelper
 
-  def_delegators :@view
-
-  def sortable_columns
-    # Declare strings in this format: ModelName.column_name
-    @sortable_columns ||= ['Fazenda.nome', 'Fazenda.cidade', 'Fazenda.estado', 'Fazenda.inscricao_estadual', 'Fazenda.cnpj',
-                           'Fazenda.cnpj_produtor', 'Fazenda.ativa', 'Fazenda.vendas', 'Fazenda.compras']
+  def view_columns
+    @view_columns ||= {
+      nome: { source: "Fazenda.nome", cond: :like },
+      cidade_nome: { source: "Cidade.nome", cond: :like },
+      estado_sigla: { source: "Estado.sigla", cond: :like },
+      inscricao_estadual: { source: "Fazenda.inscricao_estadual", cond: :like },
+      cnpj_produtor: { source: "Fazenda.cnpj_produtor", cond: :like },
+      cnpj_fazenda: { source: "Fazenda.cnpj_fazenda", cond: :like },
+      ativo: { source: "Fazenda.ativo", cond: :like },
+    }
   end
-
-  def searchable_columns
-    # Declare strings in this format: ModelName.column_name
-    @searchable_columns ||= ['Fazenda.nome', 'Fazenda.cidade', 'Fazenda.estado', 'Fazenda.inscricao_estadual', 'Fazenda.cnpj',
-                             'Fazenda.cnpj_produtor', 'Fazenda.ativa', 'Fazenda.vendas', 'Fazenda.compras']
-  end
-
 
   private
 
   def data
     records.map do |record|
       {
-        '0': record.nome,
-        '1': record.cidade.nome,
-        '2': record.cidade.estado.sigla,
-        '3': record.inscricao_estadual,
-        '4': record.cnpj_fazenda,
-        '5': record.cnpj_produtor,
-        '6': material_check_box(record.ativo),
-        '7': 0,
-        '8': 0,
-
-        'DT_RowId' => "fazenda_#{record.id}",
+        nome: record.nome,
+        cidade_nome: record.cidade.nome,
+        estado_sigla: record.cidade.estado.sigla,
+        inscricao_estadual: record.inscricao_estadual,
+        cnpj_produtor: record.cnpj_fazenda,
+        cnpj_fazenda: record.cnpj_produtor,
+        ativo: material_check_box(record.ativo),
+        fazenda_vendas: 0,
+        fazenda_compras: 0,
+        DT_RowId: "fazenda_#{record.id}",
       }
     end
   end
 
   def get_raw_records
-    # Fazenda.all
-    options[:fazendas]
+    Fazenda.joins(cidade: :estado).where(cliente_id: options[:cliente])
   end
 
   def permitido?
     options[:permitido]
   end
-
-  # ==== Insert 'presenter'-like methods below if necessary
 end
