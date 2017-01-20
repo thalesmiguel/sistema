@@ -1,21 +1,25 @@
-<div class="row m-b-0 p-b-20">
-  <div class="col s12">
-    <%= link_to_new new_cliente_email_path, true, "", "Novo Email" if can? :manage, :email %>
+<div class="p-t-0 paginate_left">
+  <table id="emails-table" class="highlight bordered" data-source="<%= cliente_emails_path(@cliente_email, format: :json) %>" data-cliente-email="<%= @cliente_email %>">
+    <thead>
+      <tr>
+        <th width="20%">Email</th>
+        <th width="20%">Contato</th>
+        <th width="15%">Criado em</th>
+        <th width="10%">Mala Direta</th>
+        <th width="15%">Solicitação por E-mail</th>
+        <th width="10%">Envio de Contratos</th>
+        <th width="5%">Ativo</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+  <div class="row m-b-0 m-t-30">
+    <div class="valign-wrapper">
+      <div class="col s12 valign right-align">
+        <%= link_to_new new_cliente_email_path, true, "", "Novo Email" if can? :manage, :email %>
+      </div>
+    </div>
   </div>
 </div>
-
-<table id="emails-table" class="highlight bordered" data-source="<%= cliente_emails_path(@cliente_email, format: :json) %>" data-cliente-email="<%= @cliente_email %>">
-  <thead>
-    <tr>
-      <th width="20%">Email</th>
-      <th width="20%">Contato</th>
-      <th width="15%">Criado em</th>
-      <th width="10%">Mala Direta</th>
-      <th width="15%">Solicitação por E-mail</th>
-      <th width="10%">Envio de Contratos</th>
-      <th width="5%">Ativo</th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>

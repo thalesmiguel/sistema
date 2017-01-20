@@ -136,6 +136,65 @@ function limita_text_area() {
 };
 // text_area
 
+function carrega_datatable_teste(modelo, modelo_singular, campos, campos_sem_busca_ordenacao) {
+
+  var lista_campos = []
+  $.each(campos, function( index, value ) {
+    lista_campos.push({data: value.toString()})
+  });
+
+  var table = "#" + modelo + "-table"
+
+  var tabela = $(table).DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: $("#" + modelo + "-table").data('source'),
+    columns: lista_campos,
+    pagingType: "full_numbers",
+    autoWidth: false,
+    columnDefs: [
+      { orderable: false, targets: campos_sem_busca_ordenacao },
+      { searchable: false, targets: campos_sem_busca_ordenacao }
+    ],
+    language: { sUrl: "datatable_i18n" },
+    drawCallback: function( settings ) {
+      $('.paginate_button').addClass("waves-effect waves-light");
+      $('select').material_select();
+    }
+  });
+
+  $(document).on('ajax:complete', "." + modelo_singular + "-form", function(){
+    tabela.draw();
+  });
+
+  $(document).contextmenu({
+    delegate: table + " td",
+    menu: [
+      {title: "Filtros", isHeader: true},
+      {title: "Filtrar", cmd: "filter", uiIcon: "filter"},
+      {title: "Remover Filtros", cmd: "nofilter", uiIcon: "nofilter"}
+    ],
+    select: function(event, ui) {
+      var celltext = ui.target.text();
+      var colvindex = ui.target.parent().children().index(ui.target);
+      switch(ui.cmd){
+        case "filter":
+          tabela.column( colvindex ).search( celltext ).draw();
+          break;
+        case "nofilter":
+          tabela.search('').columns().search('').draw();
+          break;
+      }
+    },
+    beforeOpen: function(event, ui) {
+      var $menu = ui.menu,
+          $target = ui.target,
+          extraData = ui.extraData;
+    }
+  });
+
+};
+
 function carrega_datatable(modelo, modelo_singular, campos, campos_sem_busca_ordenacao) {
 
   var lista_campos = []
@@ -156,7 +215,7 @@ function carrega_datatable(modelo, modelo_singular, campos, campos_sem_busca_ord
     ],
     language: { sUrl: "datatable_i18n" },
     drawCallback: function( settings ) {
-      $('.paginate_button').addClass("waves-effect");
+      $('.paginate_button').addClass("waves-effect waves-light");
       $('select').material_select();
     }
   });
@@ -166,77 +225,110 @@ function carrega_datatable(modelo, modelo_singular, campos, campos_sem_busca_ord
   });
 };
 
-function carrega_datatable_id_automatico(id_tabela, classe_formulario, classe_excluir, colunas_nao_clicaveis, colunas_com_dados) {
+function carrega_datatable_sem_controles(modelo, modelo_singular, campos, campos_sem_busca_ordenacao) {
 
-  var lista_colunas_com_dados = []
-  $.each(colunas_com_dados, function( index, value ) {
-    lista_colunas_com_dados.push({data: value.toString()})
+  var lista_campos = []
+  $.each(campos, function( index, value ) {
+    lista_campos.push({data: value.toString()})
   });
 
-  var tabela = $(id_tabela).dataTable({
+  var tabela = $("#" + modelo + "-table").DataTable({
+    paging:    false,
+    info:      false,
+    searching: false,
     processing: true,
     serverSide: true,
-    ajax: $(id_tabela).data('source'),
+    ajax: $("#" + modelo + "-table").data('source'),
+    columns: lista_campos,
     pagingType: "full_numbers",
     autoWidth: false,
-    columnDefs: [ { orderable: false, targets: colunas_nao_clicaveis } ],
-    columns: lista_colunas_com_dados,
-    language: {
-      sUrl: "datatable_i18n"
-    },
+    columnDefs: [
+      { orderable: false, targets: campos_sem_busca_ordenacao },
+      { searchable: false, targets: campos_sem_busca_ordenacao }
+    ],
+    language: { sUrl: "datatable_i18n" },
     drawCallback: function( settings ) {
-      $('.paginate_button').addClass("waves-effect");
+      $('.paginate_button').addClass("waves-effect waves-light");
       $('select').material_select();
-      // $('.tooltipped').tooltip({delay: 1000});
-    },
+    }
   });
 
-  $(document).on('ajax:complete', classe_formulario, function(){
-    tabela.fnDraw();
-    // tabela.fnStandingRedraw();
-  });
-  $(document).on('ajax:complete', classe_excluir, function(){
-    tabela.fnDraw();
+  $(document).on('ajax:complete', "." + modelo_singular + "-form", function(){
+    tabela.draw();
   });
 };
 
-function carrega_datatable_id_automatico_sem_controles(id_tabela, classe_formulario, classe_excluir, colunas_nao_clicaveis, colunas_com_dados) {
+// function carrega_datatable_id_automatico(id_tabela, classe_formulario, classe_excluir, colunas_nao_clicaveis, colunas_com_dados) {
+//
+//   var lista_colunas_com_dados = []
+//   $.each(colunas_com_dados, function( index, value ) {
+//     lista_colunas_com_dados.push({data: value.toString()})
+//   });
+//
+//   var tabela = $(id_tabela).dataTable({
+//     processing: true,
+//     serverSide: true,
+//     ajax: $(id_tabela).data('source'),
+//     pagingType: "full_numbers",
+//     autoWidth: false,
+//     columnDefs: [ { orderable: false, targets: colunas_nao_clicaveis } ],
+//     columns: lista_colunas_com_dados,
+//     language: {
+//       sUrl: "datatable_i18n"
+//     },
+//     drawCallback: function( settings ) {
+//       $('.paginate_button').addClass("waves-effect");
+//       $('select').material_select();
+//       // $('.tooltipped').tooltip({delay: 1000});
+//     },
+//   });
+//
+//   $(document).on('ajax:complete', classe_formulario, function(){
+//     tabela.fnDraw();
+//     // tabela.fnStandingRedraw();
+//   });
+//   $(document).on('ajax:complete', classe_excluir, function(){
+//     tabela.fnDraw();
+//   });
+// };
 
-  var lista_colunas_com_dados = []
-  $.each(colunas_com_dados, function( index, value ) {
-    lista_colunas_com_dados.push({data: value.toString()})
-  });
-
-  var tabela = $(id_tabela).dataTable({
-    paging:   false,
-    ordering: true,
-    info:     false,
-    searching:   false,
-    processing: true,
-    serverSide: true,
-    ajax: $(id_tabela).data('source'),
-    pagingType: "full_numbers",
-    autoWidth: false,
-    columnDefs: [ { orderable: false, targets: colunas_nao_clicaveis } ],
-    columns: lista_colunas_com_dados,
-    language: {
-      sUrl: "datatable_i18n"
-    },
-    drawCallback: function( settings ) {
-      $('.paginate_button').addClass("waves-effect");
-      $('select').material_select();
-      // $('.tooltipped').tooltip({delay: 1000});
-    },
-  });
-
-  $(document).on('ajax:complete', classe_formulario, function(){
-    tabela.fnDraw();
-    // tabela.fnStandingRedraw();
-  });
-  $(document).on('ajax:complete', classe_excluir, function(){
-    tabela.fnDraw();
-  });
-};
+// function carrega_datatable_id_automatico_sem_controles(id_tabela, classe_formulario, classe_excluir, colunas_nao_clicaveis, colunas_com_dados) {
+//
+//   var lista_colunas_com_dados = []
+//   $.each(colunas_com_dados, function( index, value ) {
+//     lista_colunas_com_dados.push({data: value.toString()})
+//   });
+//
+//   var tabela = $(id_tabela).dataTable({
+//     paging:   false,
+//     ordering: true,
+//     info:     false,
+//     searching:   false,
+//     processing: true,
+//     serverSide: true,
+//     ajax: $(id_tabela).data('source'),
+//     pagingType: "full_numbers",
+//     autoWidth: false,
+//     columnDefs: [ { orderable: false, targets: colunas_nao_clicaveis } ],
+//     columns: lista_colunas_com_dados,
+//     language: {
+//       sUrl: "datatable_i18n"
+//     },
+//     drawCallback: function( settings ) {
+//       $('.paginate_button').addClass("waves-effect");
+//       $('select').material_select();
+//       // $('.tooltipped').tooltip({delay: 1000});
+//     },
+//   });
+//
+//   $(document).on('ajax:complete', classe_formulario, function(){
+//     tabela.fnDraw();
+//     // tabela.fnStandingRedraw();
+//   });
+//   $(document).on('ajax:complete', classe_excluir, function(){
+//     tabela.fnDraw();
+//   });
+// };
 
 function mascaras() {
   $(".data").unmask();

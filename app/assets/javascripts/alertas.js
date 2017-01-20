@@ -1,25 +1,19 @@
 $(document).on('turbolinks:load', function(){
-  // carrega_datatable_id_automatico("#alertas-table", ".alerta-form", ".excluir-alerta", [], [0,1,2,3,4,5]);
-
   $(document).on('click', '#alertas-somente-ativos, #alertas-exibir-todos', function(){
     $("#alertas-table").dataTable().fnDraw();
-    // $("#alertas-table").DataTable().destroy();
-    //
-    // setTimeout(function(){
-    //   carrega_datatable_id_automatico("#alertas-table", ".alerta-form", ".excluir-alerta", [], [0,1,2,3,4,5]);
-    // }, 100);
   });
 
-  $(document).on('click', '#bozoBtn', function(e){
-    e.preventDefault();
+  $(document).on('click', '#alerta_somente_ativos_Btn', function(e){
     var table = $("#alertas-table").DataTable();
-    console.log("123");
-    table
-      .columns( 6 )
-      .search(  'abc' )
-      .draw();
-
-    // table.columns(0).search("").draw()
+    table.column(3).search("1").draw()
+    $("#alerta_exibir_todos_Btn").toggleClass("hide")
+    $(this).toggleClass("hide")
+  });
+  $(document).on('click', '#alerta_exibir_todos_Btn', function(e){
+    var table = $("#alertas-table").DataTable();
+    table.column(3).search("").draw()
+    $("#alerta_somente_ativos_Btn").toggleClass("hide")
+    $(this).toggleClass("hide")
   });
 
 
@@ -32,30 +26,21 @@ $(document).on('turbolinks:load', function(){
     timer = setTimeout(function() {
       switch(clicks){
         case 1:
-
           var id = row.attr("id");
           var url = "alertas/" + id.replace("alerta_", "") + "/alerta_comentarios.js"
 
-          $.ajax({
-            type: "GET",
-            url: url,
+          $.ajax({ type: "GET", url: url,
             success: function(){
-              carrega_datatable_id_automatico_sem_controles("#alerta_comentarios-table", ".alerta_comentario-form", ".excluir-alerta_comentario", [], [0,1]);
+              carrega_datatable_sem_controles("alerta_comentarios","alerta_comentario", ["created_at","descricao"], []);
             }
           });
-
         break;
         case 2:
-
           var id = row.attr("id");
           var cliente = $("#alertas-table").data('cliente-alerta')
           var url = "clientes/" + cliente + "/alertas/" + id.replace("alerta_", "") + "/editar.js"
 
-          $.ajax({
-            type: "GET",
-            url: url
-          });
-
+          $.ajax({ type: "GET", url: url });
         break;
       }
       clicks=0;

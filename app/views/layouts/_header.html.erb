@@ -1,13 +1,10 @@
-<nav>
-  <div class="nav-wrapper">
-
-    <% if user_signed_in? %>
-
+<% if user_signed_in? %>
+  <nav>
+    <div class="nav-wrapper">
       <a style="display: inline-block;" href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
       <a style="display: inline-block;" href="#" data-activates="slide-out" class="button-collapse brand-logo p-l-15">Sistema<span class='smaller'>Central</span></a>
 
       <%= render partial: "layouts/menu" %>
-
-    <% end %>
-  </div>
-</nav>
+    </div>
+  </nav>
+<% end %>

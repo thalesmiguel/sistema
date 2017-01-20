@@ -3,9 +3,9 @@ class EmpresasController < ApplicationController
 
   def index
     @cliente_empresa = params[:cliente_id]
-    @empresas = Empresa.where(cliente_id: params[:cliente_id])
+    @empresas = Empresa.where(cliente_id: @cliente_empresa)
     respond_to do |format|
-      format.json { render json: EmpresaDatatable.new(view_context, { empresas: @empresas, permitido: permitido? }) }
+      format.json { render json: EmpresaDatatable.new(view_context, { cliente: @cliente_empresa, permitido: permitido? }) }
       format.js { mostra_empresas(@empresas) }
     end
   end

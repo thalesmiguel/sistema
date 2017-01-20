@@ -3,7 +3,7 @@ class AlertasController < ApplicationController
 
   def index
     @cliente_alerta = params[:cliente_id]
-    @alertas = Alerta.where(cliente_id: params[:cliente_id]).order(:created_at)
+    @alertas = Alerta.where(cliente_id: @cliente_alerta).order(:created_at)
 
     if !params[:somente_ativos]
       params[:somente_ativos] = "false"
@@ -11,7 +11,7 @@ class AlertasController < ApplicationController
 
     respond_to do |format|
       format.json {
-        render json: AlertaDatatable.new(view_context, { alertas: @alertas, permitido: permitido?, somente_ativos: params[:somente_ativos] }) }
+        render json: AlertaDatatable.new(view_context, { cliente: @cliente_alerta, permitido: permitido?, somente_ativos: params[:somente_ativos] }) }
       format.js { mostra_alertas(@alertas) }
     end
   end

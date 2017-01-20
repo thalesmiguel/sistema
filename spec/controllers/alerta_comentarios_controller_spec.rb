@@ -16,10 +16,10 @@ RSpec.describe AlertaComentariosController, type: :controller do
       expect(response).to render_template('ajax/clientes/alertas/alerta_comentarios/index.js.erb')
     end
 
-    it 'renderiza json' do
-      get :index, xhr: true, format: :json, params: { alerta_id: alerta.id }
-      expect(response).to_not be_nil
-    end
+    # it 'renderiza json' do
+    #   get :index, xhr: true, format: :json, params: { alerta_id: alerta.id }
+    #   expect(response).to_not be_nil
+    # end
 
   end
 

@@ -1,43 +1,36 @@
 class LancarAutorizadoDatatable < AjaxDatatablesRails::Base
   include ApplicationHelper
 
-  def_delegators :@view
-
-  def sortable_columns
-    # Declare strings in this format: ModelName.column_name
-    @sortable_columns ||= ['LancarAutorizado.nome', 'LancarAutorizado.cpf', 'LancarAutorizado.tem_procuracao', 'LancarAutorizado.ativo', 'LancarAutorizado.observacao']
+  def view_columns
+    @view_columns ||= {
+      nome: { source: "LancarAutorizado.nome", cond: :like },
+      cpf: { source: "LancarAutorizado.cpf", cond: :like },
+      tem_procuracao: { source: "LancarAutorizado.tem_procuracao", cond: :like },
+      observacao: { source: "LancarAutorizado.observacao", cond: :like },
+      ativo: { source: "LancarAutorizado.ativo", cond: :like },
+    }
   end
-
-  def searchable_columns
-    # Declare strings in this format: ModelName.column_name
-    @searchable_columns ||= ['LancarAutorizado.nome', 'LancarAutorizado.cpf', 'LancarAutorizado.tem_procuracao', 'LancarAutorizado.ativo', 'LancarAutorizado.observacao']
-  end
-
 
   private
 
   def data
     records.map do |record|
       {
-        '0': record.nome,
-        '1': record.cpf,
-        '2': material_check_box(record.tem_procuracao),
-        '3': record.observacao,
-        '4': material_check_box(record.ativo),
-
-        'DT_RowId' => "lancar_autorizado_#{record.id}",
+        nome: record.nome,
+        cpf: record.cpf,
+        tem_procuracao: material_check_box(record.tem_procuracao),
+        observacao: record.observacao,
+        ativo: material_check_box(record.ativo),
+        DT_RowId: "lancar_autorizado_#{record.id}",
       }
     end
   end
 
   def get_raw_records
-    # LancarAutorizado.all
-    options[:lancar_autorizados]
+    LancarAutorizado.where(cliente_id: options[:cliente])
   end
 
   def permitido?
     options[:permitido]
   end
-
-  # ==== Insert 'presenter'-like methods below if necessary
 end

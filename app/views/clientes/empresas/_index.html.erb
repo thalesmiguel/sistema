@@ -1,21 +1,25 @@
-<div class="row m-b-0 p-b-20">
-  <div class="col s12">
-    <%= link_to_new new_cliente_empresa_path, true, "", "Novo Endereço" if can? :manage, :empresa %>
+<div class="p-t-0 paginate_left">
+  <table id="empresas-table" class="highlight bordered" data-source="<%= cliente_empresas_path(@cliente_empresa, format: :json) %>" data-cliente-empresa="<%= @cliente_empresa %>">
+    <thead>
+      <tr>
+        <th width="">Nome</th>
+        <th width="">CNPJ</th>
+        <th width="">Cargo</th>
+        <th width="">Logradouro</th>
+        <th width="">Cidade</th>
+        <th width="">UF</th>
+        <th width="">CEP</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+  <div class="row m-b-0 m-t-30">
+    <div class="valign-wrapper">
+      <div class="col s12 valign right-align">
+        <%= link_to_new new_cliente_empresa_path, true, "", "Novo Endereço" if can? :manage, :empresa %>
+      </div>
+    </div>
   </div>
 </div>
-
-<table id="empresas-table" class="highlight bordered" data-source="<%= cliente_empresas_path(@cliente_empresa, format: :json) %>" data-cliente-empresa="<%= @cliente_empresa %>">
-  <thead>
-    <tr>
-      <th width="">Nome</th>
-      <th width="">CNPJ</th>
-      <th width="">Cargo</th>
-      <th width="">Logradouro</th>
-      <th width="">Cidade</th>
-      <th width="">UF</th>
-      <th width="">CEP</th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>

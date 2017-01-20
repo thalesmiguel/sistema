@@ -15,10 +15,10 @@ RSpec.describe AlertasController, type: :controller do
       expect(response).to render_template('ajax/clientes/alertas/index.js.erb')
     end
 
-    it 'renderiza json' do
-      get :index, xhr: true, format: :json, params: { cliente_id: cliente.id, user_id: user.id }
-      expect(response).to_not be_nil
-    end
+    # it 'renderiza json' do
+    #   get :index, xhr: true, format: :json, params: { cliente_id: cliente.id, user_id: user.id }
+    #   expect(response).to_not be_nil
+    # end
 
   end
 

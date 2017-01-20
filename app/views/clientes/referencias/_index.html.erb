@@ -1,17 +1,21 @@
-<div class="row m-b-0 p-b-20">
-  <div class="col s12">
-    <%= link_to_new new_cliente_referencia_path, true, "", "Nova Referência" if can? :manage, :referencia %>
+<div class="p-t-0 paginate_left">
+  <table id="referencias-table" class="highlight bordered" data-source="<%= cliente_referencias_path(@cliente_referencia, format: :json) %>" data-cliente-referencia="<%= @cliente_referencia %>">
+    <thead>
+      <tr>
+        <th width="20%">Nome</th>
+        <th width="20%">Telefone</th>
+        <th width="60%">Observações</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+  <div class="row m-b-0 m-t-30">
+    <div class="valign-wrapper">
+      <div class="col s12 valign right-align">
+        <%= link_to_new new_cliente_referencia_path, true, "", "Nova Referência" if can? :manage, :referencia %>
+      </div>
+    </div>
   </div>
 </div>
-
-<table id="referencias-table" class="highlight bordered" data-source="<%= cliente_referencias_path(@cliente_referencia, format: :json) %>" data-cliente-referencia="<%= @cliente_referencia %>">
-  <thead>
-    <tr>
-      <th width="20%">Nome</th>
-      <th width="20%">Telefone</th>
-      <th width="60%">Observações</th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>

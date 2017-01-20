@@ -13,10 +13,10 @@ RSpec.describe ClientesController, type: :controller do
       expect(response).to render_template(:index)
     end
 
-    it 'renderiza json' do
-      get :index, xhr: true, format: :json
-      expect(response).to_not be_nil
-    end
+    # it 'renderiza json' do
+    #   get :index, xhr: true, format: :json
+    #   expect(response).to_not be_nil
+    # end
 
   end
 

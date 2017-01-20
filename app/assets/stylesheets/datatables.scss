@@ -29,21 +29,38 @@
   float: right;
 }
 
+.paginate_left .dataTables_paginate {
+  margin-top: 2em;
+  float: left;
+}
+
+// .dataTables_processing {
+//   position: absolute;
+//   top: 15%;
+//   left: 50%;
+//   width: 80px;
+//   height: 80px;
+//   margin-top: -40px;
+//   margin-left: -40px;
+// }
+
 .dataTables_processing {
-  position: absolute;
-  top: 15%;
-  left: 50%;
-  width: 80px;
-  height: 80px;
-  margin-top: -40px;
-  margin-left: -40px;
+    position: absolute;
+    width: 60%;
+    height: 10%;
+    background: rgba(200, 200, 200, 0.4);
+    left: 25%;
+    margin-top: 5%;
+    text-align: center;
+    line-height: 10;
+    border: 2px groove rgba(200, 200, 200, 0.4)
 }
 
 .sorting_disabled {
   cursor: default;
 }
 
-.sorting, .sorting_desc, .sorting_asc {
+.sorting, .sorting_desc, .sorting_asc, .filter, .nofilter {
   cursor: pointer;
   *cursor: hand;
   background-repeat: no-repeat;
@@ -56,6 +73,14 @@
 
 .sorting_asc {
   background-image: image-url("arrow_down.png")
+}
+
+.filter {
+  background-image: image-url("filter.png")
+}
+
+.nofilter {
+  background-image: image-url("nofilter.png")
 }
 
 .dataTables_info {
@@ -118,4 +143,76 @@ span a.paginate_button {
 span a.paginate_button:hover {
     background-color: #00aec1;
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
+.dataTable td {
+  cursor: default;
+}
+
+// Context Menu
+.ui-widget-header {
+  position: relative;
+  margin: 0px;
+  padding: 3px 1em 3px 1.7em;
+  cursor: default;
+  min-height: 0;
+  background: #283593;
+  color: #fff;
+  letter-spacing: 10px;
+  border-radius: 2px;
+}
+.ui-widget-content {
+  transition: box-shadow .25s;
+  padding: 20px;
+  margin: 0.5rem 0 1rem 0;
+  border-radius: 2px;
+  background-color: #fff;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 1px 5px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.2);
+}
+.ui-widget {
+    font-size: 1.1em;
+}
+.ui-menu-icons {
+    position: relative;
+}
+.ui-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+    outline: none;
+}
+.ui-helper-hidden {
+    display: none;
+}
+.ui-menu-icons .ui-menu-item {
+    padding-left: 2em;
+    transition: background-color .25s ease;
+}
+.ui-menu-icons .ui-menu-item:hover {
+    background: #e8eaf6;
+}
+.ui-menu .ui-menu-item {
+    position: relative;
+    margin: 0;
+    padding: 3px 1em 3px 2em;
+    cursor: pointer;
+    min-height: 0;
+}
+.ui-menu .ui-icon {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: .5em;
+    margin: auto 0;
+}
+.ui-icon {
+    width: 16px;
+    height: 16px;
+}
+.ui-icon {
+    display: block;
+    text-indent: -99999px;
+    overflow: hidden;
+    background-repeat: no-repeat;
 }

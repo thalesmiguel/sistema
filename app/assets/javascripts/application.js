@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require turbolinks
 //= require extenso
 //= require materialize-sprockets
@@ -20,5 +21,6 @@
 //= require fnStandingRedraw
 //= require jquery.maskedinput.min
 //= require jquery.remotipart
+//= require jquery.ui-contextmenu.min
 
 //= require_tree .

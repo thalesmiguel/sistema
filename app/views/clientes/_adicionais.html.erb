@@ -12,9 +12,11 @@
           <p class="green white-text"><i class='small material-icons right'>done_all</i> Cadastro </p>
         </li>
 
-        <li class="tab">
-          <p class="blue white-text"><i class='small material-icons right'>done</i> Ativo </p>
-        </li>
+        <% if cliente.informacoes_adicionais.include? "ativo" %>
+          <li class="tab">
+            <p class="blue white-text"><i class='small material-icons right'>done</i> Ativo </p>
+          </li>
+        <% end %>
 
         <li><div class="divider p-b-5 bg-color"></div></li>
 
@@ -22,12 +24,12 @@
           <p class="cyan white-text"><i class='small material-icons right'>clear</i> Não Aprovado </p>
         </li>
 
-        <% if cliente.pendencias_no_serasa > 0 %>
+        <% if cliente.informacoes_adicionais.include? "serasa" %>
           <li class="tab">
             <p class="red white-text"><i class='small material-icons right'>block</i> Pendências no Serasa </p>
           </li>
         <% end %>
-        
+
       </ul>
     </div>
   </div>

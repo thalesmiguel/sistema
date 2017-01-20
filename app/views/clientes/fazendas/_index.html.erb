@@ -1,23 +1,27 @@
-<div class="row m-b-0 p-b-20">
-  <div class="col s12">
-    <%= link_to_new new_cliente_fazenda_path, true, "", "Nova Fazenda" if can? :manage, :fazenda %>
+<div class="p-t-0 paginate_left">
+  <table id="fazendas-table" class="highlight bordered" data-source="<%= cliente_fazendas_path(@cliente_fazenda, format: :json) %>" data-cliente-fazenda="<%= @cliente_fazenda %>">
+    <thead>
+      <tr>
+        <th width="20%">Nome</th>
+        <th width="10%">Cidade</th>
+        <th width="10%">UF</th>
+        <th width="10%">Inscrição</th>
+        <th width="10%">CNPJ</th>
+        <th width="10%">CNPJ Produtor</th>
+        <th width="10%">Ativa</th>
+        <th width="10%">Vendas</th>
+        <th width="10%">Compras</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+  <div class="row m-b-0 m-t-30">
+    <div class="valign-wrapper">
+      <div class="col s12 valign right-align">
+        <%= link_to_new new_cliente_fazenda_path, true, "", "Nova Fazenda" if can? :manage, :fazenda %>
+      </div>
+    </div>
   </div>
 </div>
-
-<table id="fazendas-table" class="highlight bordered" data-source="<%= cliente_fazendas_path(@cliente_fazenda, format: :json) %>" data-cliente-fazenda="<%= @cliente_fazenda %>">
-  <thead>
-    <tr>
-      <th width="20%">Nome</th>
-      <th width="10%">Cidade</th>
-      <th width="10%">UF</th>
-      <th width="10%">Inscrição</th>
-      <th width="10%">CNPJ</th>
-      <th width="10%">CNPJ Produtor</th>
-      <th width="10%">Ativa</th>
-      <th width="10%">Vendas</th>
-      <th width="10%">Compras</th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>

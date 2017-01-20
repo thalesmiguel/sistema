@@ -56,6 +56,15 @@ class Cliente < ApplicationRecord
   end
 
   def pendencias_no_serasa
-    alertas.serasa_incluído.count + alertas.serasa_pendências.count
+    alertas.serasa_incluído.ativo.count + alertas.serasa_pendências.ativo.count
   end
+
+  def informacoes_adicionais
+    informacoes_adicionais = []
+    informacoes_adicionais << "ativo" if ativo
+    informacoes_adicionais << "serasa" if pendencias_no_serasa > 0
+
+    return informacoes_adicionais
+  end
+
 end

@@ -3,9 +3,9 @@ class AlertaComentariosController < ApplicationController
 
   def index
     @alerta_alerta_comentario = params[:alerta_id]
-    @alerta_comentarios = AlertaComentario.where(alerta_id: params[:alerta_id])
+    @alerta_comentarios = AlertaComentario.where(alerta_id: @alerta_alerta_comentario)
     respond_to do |format|
-      format.json { render json: AlertaComentarioDatatable.new(view_context, { alerta_comentarios: @alerta_comentarios, permitido: permitido? }) }
+      format.json { render json: AlertaComentarioDatatable.new(view_context, { alerta: @alerta_alerta_comentario, permitido: permitido? }) }
       format.js { mostra_alerta_comentarios(@alerta_comentarios) }
     end
   end

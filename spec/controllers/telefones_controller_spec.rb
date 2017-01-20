@@ -14,10 +14,10 @@ RSpec.describe TelefonesController, type: :controller do
       expect(response).to render_template('ajax/clientes/telefones/index.js.erb')
     end
 
-    it 'renderiza json' do
-      get :index, xhr: true, format: :json, params: { cliente_id: cliente.id }
-      expect(response).to_not be_nil
-    end
+    # it 'renderiza json' do
+    #   get :index, xhr: true, format: :json, params: { cliente_id: cliente.id }
+    #   expect(response).to_not be_nil
+    # end
 
   end
 

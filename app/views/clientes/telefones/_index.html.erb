@@ -1,25 +1,29 @@
-<div class="row m-b-0 p-b-20">
-  <div class="col s12">
-    <%= link_to_new new_cliente_telefone_path, true, "", "Novo Telefone" if can? :manage, :telefone %>
+<div class="p-t-0 paginate_left">
+  <table id="telefones-table" class="highlight bordered" data-source="<%= cliente_telefones_path(@cliente_telefone, format: :json) %>" data-cliente-telefone="<%= @cliente_telefone %>">
+    <thead>
+      <tr>
+        <th width="15%">Tipo</th>
+        <th width="10%">DDI</th>
+        <th width="10%">DDD</th>
+        <th width="20%">Número</th>
+        <th width="15%">Dt. Cadastro</th>
+        <th width="5%">Ramal</th>
+        <th width="5%">Contato</th>
+        <th width="5%">Importância</th>
+        <th width="5%">Telemarketing</th>
+        <th width="5%">Divulgar</th>
+        <th width="5%">Ativo</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+  <div class="row m-b-0 m-t-30">
+    <div class="valign-wrapper">
+      <div class="col s12 valign right-align">
+        <%= link_to_new new_cliente_telefone_path, true, "", "Novo Telefone" if can? :manage, :telefone %>
+      </div>
+    </div>
   </div>
 </div>
-
-<table id="telefones-table" class="highlight bordered" data-source="<%= cliente_telefones_path(@cliente_telefone, format: :json) %>" data-cliente-telefone="<%= @cliente_telefone %>">
-  <thead>
-    <tr>
-      <th width="15%">Tipo</th>
-      <th width="10%">DDI</th>
-      <th width="10%">DDD</th>
-      <th width="20%">Número</th>
-      <th width="15%">Dt. Cadastro</th>
-      <th width="5%">Ramal</th>
-      <th width="5%">Contato</th>
-      <th width="5%">Importância</th>
-      <th width="5%">Telemarketing</th>
-      <th width="5%">Divulgar</th>
-      <th width="5%">Ativo</th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>

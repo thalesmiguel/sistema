@@ -1,19 +1,23 @@
-<div class="row m-b-0 p-b-20">
-  <div class="col s12">
-    <%= link_to_new new_cliente_lancar_autorizado_path, true, "", "Nova Referência" if can? :manage, :lancar_autorizado %>
+<div class="p-t-0 paginate_left">
+  <table id="lancar_autorizados-table" class="highlight bordered" data-source="<%= cliente_lancar_autorizados_path(@cliente_lancar_autorizado, format: :json) %>" data-cliente-lancar_autorizado="<%= @cliente_lancar_autorizado %>">
+    <thead>
+      <tr>
+        <th width="">Nome</th>
+        <th width="">CPF</th>
+        <th width="">Procuração</th>
+        <th width="">Observações</th>
+        <th width="">Ativo</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+  <div class="row m-b-0 m-t-30">
+    <div class="valign-wrapper">
+      <div class="col s12 valign right-align">
+        <%= link_to_new new_cliente_lancar_autorizado_path, true, "", "Nova Referência" if can? :manage, :lancar_autorizado %>
+      </div>
+    </div>
   </div>
 </div>
-
-<table id="lancar_autorizados-table" class="highlight bordered" data-source="<%= cliente_lancar_autorizados_path(@cliente_lancar_autorizado, format: :json) %>" data-cliente-lancar_autorizado="<%= @cliente_lancar_autorizado %>">
-  <thead>
-    <tr>
-      <th width="">Nome</th>
-      <th width="">CPF</th>
-      <th width="">Procuração</th>
-      <th width="">Observações</th>
-      <th width="">Ativo</th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>

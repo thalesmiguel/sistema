@@ -106,6 +106,30 @@ RSpec.describe Cliente, type: :model do
       expect(cliente.pendencias_no_serasa).to eq 2
     end
 
+    context 'busca informações adicionais' do
+      let(:user) { FactoryGirl.create(:user) }
+      let(:cliente) { FactoryGirl.create(:cliente, ativo: true) }
+
+      context 'Pendências no SERASA' do
+        it 'apresenta informação se Alerta está ativo' do
+          alerta = FactoryGirl.create(:alerta, cliente: cliente, user: user, tipo: :serasa_incluído, ativo: true)
+          alerta.reload
+          expect(cliente.informacoes_adicionais).to include "serasa"
+        end
+
+        it 'não apresenta informação se Alerta está inativo' do
+          alerta = FactoryGirl.create(:alerta, cliente: cliente, user: user, tipo: :serasa_incluído, ativo: false)
+          alerta.reload
+          expect(cliente.informacoes_adicionais).to_not include "serasa"
+        end
+      end
+
+      it 'apresenta cadastro ativo' do
+        cliente.reload
+        expect(cliente.informacoes_adicionais).to include "ativo"
+      end
+    end
+
   end
 
   describe 'associações' do

@@ -1,7 +1,7 @@
 $(document).on('turbolinks:load', function(){
   $('ul.tabs').tabs();
 
-  carrega_datatable("clientes","cliente", ["ativo","cadastro_tipo","cpf_cnpj","nome","apelido","ficticio","cidade_nome","estado_sigla"], []);
+  carrega_datatable_teste("clientes","cliente", ["ativo","cadastro_tipo","cpf_cnpj","nome","apelido","ficticio","cidade_nome","estado_sigla"], []);
 
   $(document).on("dblclick", "#clientes-table tr[id^=cliente]", function(){
     var id = $(this).attr("id");

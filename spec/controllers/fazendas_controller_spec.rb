@@ -16,10 +16,10 @@ RSpec.describe FazendasController, type: :controller do
       expect(response).to render_template('ajax/clientes/fazendas/index.js.erb')
     end
 
-    it 'renderiza json' do
-      get :index, xhr: true, format: :json, params: { cliente_id: cliente.id }
-      expect(response).to_not be_nil
-    end
+    # it 'renderiza json' do
+    #   get :index, xhr: true, format: :json, params: { cliente_id: cliente.id }
+    #   expect(response).to_not be_nil
+    # end
 
   end
 

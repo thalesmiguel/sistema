@@ -3,9 +3,9 @@ class LancarAutorizadosController < ApplicationController
 
   def index
     @cliente_lancar_autorizado = params[:cliente_id]
-    @lancar_autorizados = LancarAutorizado.where(cliente_id: params[:cliente_id])
+    @lancar_autorizados = LancarAutorizado.where(cliente_id: @cliente_lancar_autorizado)
     respond_to do |format|
-      format.json { render json: LancarAutorizadoDatatable.new(view_context, { lancar_autorizados: @lancar_autorizados, permitido: permitido? }) }
+      format.json { render json: LancarAutorizadoDatatable.new(view_context, { cliente: @cliente_lancar_autorizado, permitido: permitido? }) }
       format.js { mostra_lancar_autorizados(@lancar_autorizados) }
     end
   end
