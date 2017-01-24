@@ -34,6 +34,12 @@ RSpec.describe Leilao, type: :model do
       expect(leilao.testemunha_2).to eq(user)
     end
 
+    it 'belongs_to Subtipo' do
+      subtipo = FactoryGirl.create(:subtipo)
+      leilao = Leilao.new(FactoryGirl.attributes_for(:leilao, subtipo_lotes: subtipo))
+      expect(leilao.subtipo_lotes).to eq(subtipo)
+    end
+
     it 'has_many LeilaoComentarios' do
       leilao = FactoryGirl.create(:leilao)
       user = FactoryGirl.create(:user)

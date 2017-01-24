@@ -206,7 +206,7 @@ ActiveRecord::Schema.define(version: 20170124163239) do
   end
 
   create_table "leilao_eventos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "descricao"
+    t.string   "nome"
     t.datetime "data_inicio"
     t.datetime "data_fim"
     t.integer  "leilao_id"
@@ -240,6 +240,7 @@ ActiveRecord::Schema.define(version: 20170124163239) do
     t.integer  "testemunha_2_id"
     t.integer  "situacao"
     t.integer  "leilao_anterior_id"
+    t.integer  "subtipo_lotes_id"
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
@@ -248,6 +249,7 @@ ActiveRecord::Schema.define(version: 20170124163239) do
     t.datetime "updated_at",         null: false
     t.index ["cidade_id"], name: "index_leiloes_on_cidade_id", using: :btree
     t.index ["leilao_anterior_id"], name: "fk_rails_e4049b4ee5", using: :btree
+    t.index ["subtipo_lotes_id"], name: "fk_rails_2e44c73510", using: :btree
     t.index ["testemunha_1_id"], name: "fk_rails_a005123dd6", using: :btree
     t.index ["testemunha_2_id"], name: "fk_rails_33b4d6fd6e", using: :btree
   end
@@ -270,6 +272,13 @@ ActiveRecord::Schema.define(version: 20170124163239) do
     t.datetime "updated_at"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
     t.index ["name"], name: "index_roles_on_name", using: :btree
+  end
+
+  create_table "subtipos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "codigo"
+    t.string   "nome"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tags", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -342,6 +351,7 @@ ActiveRecord::Schema.define(version: 20170124163239) do
   add_foreign_key "leilao_observacoes", "users"
   add_foreign_key "leiloes", "cidades"
   add_foreign_key "leiloes", "leiloes", column: "leilao_anterior_id"
+  add_foreign_key "leiloes", "subtipos", column: "subtipo_lotes_id"
   add_foreign_key "leiloes", "users", column: "testemunha_1_id"
   add_foreign_key "leiloes", "users", column: "testemunha_2_id"
   add_foreign_key "referencias", "clientes"

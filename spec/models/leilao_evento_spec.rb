@@ -5,8 +5,8 @@ RSpec.describe LeilaoEvento, type: :model do
   describe 'validações' do
     let(:leilao) { FactoryGirl.create(:leilao) }
 
-    it 'exige descricao' do
-      leilao_evento = LeilaoEvento.new(FactoryGirl.attributes_for(:leilao_evento, descricao: "", leilao: leilao))
+    it 'exige nome' do
+      leilao_evento = LeilaoEvento.new(FactoryGirl.attributes_for(:leilao_evento, nome: "", leilao: leilao))
       expect(leilao_evento.valid?).to be_falsy
     end
 
@@ -39,7 +39,7 @@ RSpec.describe LeilaoEvento, type: :model do
 
       it 'alteração de LeilaoEvento' do
         leilao_evento = FactoryGirl.create(:leilao_evento, leilao: leilao)
-        leilao_evento.descricao = "Novo nome"
+        leilao_evento.nome = "Novo nome"
         leilao_evento.save
         expect(leilao_evento.audits.count).to eq 2
       end

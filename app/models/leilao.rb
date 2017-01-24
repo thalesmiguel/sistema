@@ -10,6 +10,7 @@ class Leilao < ApplicationRecord
   belongs_to :cidade
   belongs_to :testemunha_1, class_name: "User"
   belongs_to :testemunha_2, class_name: "User"
+  belongs_to :subtipo_lotes, class_name: "Subtipo"
 
   has_many :leilao_observacoes
   has_one :leilao_evento

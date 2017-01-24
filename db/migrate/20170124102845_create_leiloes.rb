@@ -14,6 +14,7 @@ class CreateLeiloes < ActiveRecord::Migration[5.0]
       t.integer :testemunha_2_id
       t.integer :situacao
       t.integer :leilao_anterior_id
+      t.integer :subtipo_lotes_id
       t.attachment :logo
 
       t.timestamps
@@ -21,5 +22,6 @@ class CreateLeiloes < ActiveRecord::Migration[5.0]
     add_foreign_key :leiloes, :leiloes, column: :leilao_anterior_id, primary_key: :id
     add_foreign_key :leiloes, :users, column: :testemunha_1_id, primary_key: :id
     add_foreign_key :leiloes, :users, column: :testemunha_2_id, primary_key: :id
+    add_foreign_key :leiloes, :subtipos, column: :subtipo_lotes_id, primary_key: :id
   end
 end

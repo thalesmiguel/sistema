@@ -1,9 +1,9 @@
 class LeilaoEvento < ApplicationRecord
   audited
-  trimmed_fields :descricao
+  trimmed_fields :nome
 
   belongs_to :leilao
 
-  validates :descricao, presence: true
+  validates :nome, presence: true
   validates :leilao, presence: true
 end
