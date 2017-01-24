@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 
-  has_many :leiloes, class_name: "Leilao", foreign_key: 'testemunha_1'
+  has_many :testemunha_1, class_name: "Leilao", foreign_key: :testemunha_1_id
+  has_many :testemunha_2, class_name: "Leilao", foreign_key: :testemunha_2_id
   has_many :leilao_observacoes
 
   has_many :alertas
@@ -54,6 +55,10 @@ class User < ApplicationRecord
 
   def email_changed?
     false
+  end
+
+  def testemunhas
+    testemunha_1.or(testemunha_2)
   end
 
 end

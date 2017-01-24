@@ -202,4 +202,27 @@ RSpec.describe Cliente, type: :model do
 
   end
 
+  describe 'log' do
+
+    describe 'gera log de' do
+      let(:cliente) { FactoryGirl.create(:cliente) }
+
+      it 'criação de Telefone' do
+        expect(cliente.audits.count).to eq 1
+      end
+
+      it 'alteração de Telefone' do
+        cliente.nome = "Novo nome"
+        cliente.save
+        expect(cliente.audits.count).to eq 2
+      end
+
+      it 'exclusão de Telefone' do
+        cliente.destroy
+        expect(cliente.audits.count).to eq 2
+      end
+
+    end
+  end
+
 end

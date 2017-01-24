@@ -10,16 +10,16 @@ class CreateLeiloes < ActiveRecord::Migration[5.0]
       t.string :nome_site
       t.references :cidade, foreign_key: true
       t.integer :tipo
-      t.integer :testemunha_1
-      t.integer :testemunha_2
+      t.integer :testemunha_1_id
+      t.integer :testemunha_2_id
       t.integer :situacao
+      t.integer :leilao_anterior_id
       t.attachment :logo
 
       t.timestamps
-
     end
-    add_foreign_key :leiloes, :users, column: :testemunha_1
-    add_foreign_key :leiloes, :users, column: :testemunha_2
-
+    add_foreign_key :leiloes, :leiloes, column: :leilao_anterior_id, primary_key: :id
+    add_foreign_key :leiloes, :users, column: :testemunha_1_id, primary_key: :id
+    add_foreign_key :leiloes, :users, column: :testemunha_2_id, primary_key: :id
   end
 end

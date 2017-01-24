@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170124131308) do
+ActiveRecord::Schema.define(version: 20170124163239) do
 
   create_table "alerta_comentarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "descricao",  limit: 65535
@@ -205,6 +205,16 @@ ActiveRecord::Schema.define(version: 20170124131308) do
     t.index ["cliente_id"], name: "index_lancar_autorizados_on_cliente_id", using: :btree
   end
 
+  create_table "leilao_eventos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "descricao"
+    t.datetime "data_inicio"
+    t.datetime "data_fim"
+    t.integer  "leilao_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["leilao_id"], name: "index_leilao_eventos_on_leilao_id", using: :btree
+  end
+
   create_table "leilao_observacoes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "descricao",  limit: 65535
     t.integer  "user_id"
@@ -226,18 +236,20 @@ ActiveRecord::Schema.define(version: 20170124131308) do
     t.string   "nome_site"
     t.integer  "cidade_id"
     t.integer  "tipo"
-    t.integer  "testemunha_1"
-    t.integer  "testemunha_2"
+    t.integer  "testemunha_1_id"
+    t.integer  "testemunha_2_id"
     t.integer  "situacao"
+    t.integer  "leilao_anterior_id"
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.index ["cidade_id"], name: "index_leiloes_on_cidade_id", using: :btree
-    t.index ["testemunha_1"], name: "fk_rails_a5a4589307", using: :btree
-    t.index ["testemunha_2"], name: "fk_rails_1152a99182", using: :btree
+    t.index ["leilao_anterior_id"], name: "fk_rails_e4049b4ee5", using: :btree
+    t.index ["testemunha_1_id"], name: "fk_rails_a005123dd6", using: :btree
+    t.index ["testemunha_2_id"], name: "fk_rails_33b4d6fd6e", using: :btree
   end
 
   create_table "referencias", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -325,11 +337,13 @@ ActiveRecord::Schema.define(version: 20170124131308) do
   add_foreign_key "fazendas", "cidades"
   add_foreign_key "fazendas", "clientes"
   add_foreign_key "lancar_autorizados", "clientes"
+  add_foreign_key "leilao_eventos", "leiloes"
   add_foreign_key "leilao_observacoes", "leiloes"
   add_foreign_key "leilao_observacoes", "users"
   add_foreign_key "leiloes", "cidades"
-  add_foreign_key "leiloes", "users", column: "testemunha_1"
-  add_foreign_key "leiloes", "users", column: "testemunha_2"
+  add_foreign_key "leiloes", "leiloes", column: "leilao_anterior_id"
+  add_foreign_key "leiloes", "users", column: "testemunha_1_id"
+  add_foreign_key "leiloes", "users", column: "testemunha_2_id"
   add_foreign_key "referencias", "clientes"
   add_foreign_key "tags", "clientes"
   add_foreign_key "telefones", "clientes"

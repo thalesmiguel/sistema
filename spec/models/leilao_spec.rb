@@ -41,6 +41,20 @@ RSpec.describe Leilao, type: :model do
       segunda_leilao_observacao = FactoryGirl.create(:leilao_observacao, leilao: leilao, user: user)
       expect(leilao.leilao_observacoes).to eq([primeira_leilao_observacao, segunda_leilao_observacao])
     end
+
+    it 'has_one LeilaoEvento' do
+      leilao = FactoryGirl.create(:leilao)
+      leilao_evento = FactoryGirl.create(:leilao_evento, leilao: leilao)
+      expect(leilao.leilao_evento).to eq(leilao_evento)
+    end
+
+    it 'belongs_to leilao_anterior & has_one leilao_posterior' do
+      primeiro_leilao = FactoryGirl.create(:leilao)
+      segundo_leilao = FactoryGirl.create(:leilao, leilao_anterior: primeiro_leilao)
+      terceiro_leilao = FactoryGirl.create(:leilao, leilao_anterior: primeiro_leilao)
+      expect(segundo_leilao.leilao_anterior).to eq(primeiro_leilao)
+      expect(primeiro_leilao.leilao_posterior).to eq([segundo_leilao, terceiro_leilao])
+    end
   end
 
   describe 'log' do

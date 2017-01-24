@@ -8,10 +8,15 @@ class Leilao < ApplicationRecord
   validates :nome, presence: true
 
   belongs_to :cidade
-  belongs_to :testemunha_1, class_name: "User", foreign_key: 'testemunha_1'
-  belongs_to :testemunha_2, class_name: "User", foreign_key: 'testemunha_2'
+  belongs_to :testemunha_1, class_name: "User"
+  belongs_to :testemunha_2, class_name: "User"
 
   has_many :leilao_observacoes
+  has_one :leilao_evento
+
+  belongs_to :leilao_anterior, class_name: "Leilao"
+  has_many :leilao_posterior, class_name: "Leilao", foreign_key: :leilao_anterior_id
+
 
   enum categoria: { elite: 0, corte: 1, outro: 2, shopping: 3 }
   enum modalidade: { recinto: 0, virtual: 1, virtual_com_ponto_de_apoio: 2 }
