@@ -11,6 +11,8 @@ class Leilao < ApplicationRecord
   belongs_to :testemunha_1, class_name: "User", foreign_key: 'testemunha_1'
   belongs_to :testemunha_2, class_name: "User", foreign_key: 'testemunha_2'
 
+  has_many :leilao_observacoes
+
   enum categoria: { elite: 0, corte: 1, outro: 2, shopping: 3 }
   enum modalidade: { recinto: 0, virtual: 1, virtual_com_ponto_de_apoio: 2 }
   enum tipo: { leilão_normal: 0, sub_leilão: 1, leilão_internet: 2, shopping_internet: 3, leilão_webcasting: 4, leilão_com_pré_lance: 5, leilão_doação: 6 }

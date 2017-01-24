@@ -33,6 +33,14 @@ RSpec.describe Leilao, type: :model do
       leilao = Leilao.new(FactoryGirl.attributes_for(:leilao, testemunha_2: user))
       expect(leilao.testemunha_2).to eq(user)
     end
+
+    it 'has_many LeilaoComentarios' do
+      leilao = FactoryGirl.create(:leilao)
+      user = FactoryGirl.create(:user)
+      primeira_leilao_observacao = FactoryGirl.create(:leilao_observacao, leilao: leilao, user: user)
+      segunda_leilao_observacao = FactoryGirl.create(:leilao_observacao, leilao: leilao, user: user)
+      expect(leilao.leilao_observacoes).to eq([primeira_leilao_observacao, segunda_leilao_observacao])
+    end
   end
 
   describe 'log' do
