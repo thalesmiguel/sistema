@@ -62,7 +62,7 @@
                   </div>
 
                   <div class="input-field col s12 m2">
-                    <%= f.select :sexo, Cliente.sexos.map { |k, v| [k.humanize, k]} %>
+                    <%= f.select :sexo, Cliente.sexos.map { |k, v| [k.humanize, k]}, class: "material-select" %>
                     <%= f.label :sexo, class: "active" %>
                   </div>
                 </div>
@@ -99,12 +99,12 @@
                         <div class="collapsible-body">
 
                           <div class="input-field col s12 m6 m-t-40">
-                            <%= f.select :pessoa_tipo, Cliente.pessoa_tipos.map { |k, v| [k.humanize, k]} %>
+                            <%= f.select :pessoa_tipo, Cliente.pessoa_tipos.map { |k, v| [k.humanize, k]}, class: "material-select" %>
                             <%= f.label :pessoa_tipo, "Pessoa", class: "active" %>
                           </div>
 
                           <div class="input-field col s12 m6 m-t-40">
-                            <%= f.select :cadastro_tipo, Cliente.cadastro_tipos.map { |k, v| [k.humanize, k]} %>
+                            <%= f.select :cadastro_tipo, Cliente.cadastro_tipos.map { |k, v| [k.humanize, k]}, class: "material-select" %>
                             <%= f.label :cadastro_tipo, "Tipo de Cadastro", class: "active" %>
                           </div>
 

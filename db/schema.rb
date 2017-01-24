@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170112125157) do
+ActiveRecord::Schema.define(version: 20170124102845) do
 
   create_table "alerta_comentarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "descricao",  limit: 65535
@@ -205,6 +205,30 @@ ActiveRecord::Schema.define(version: 20170112125157) do
     t.index ["cliente_id"], name: "index_lancar_autorizados_on_cliente_id", using: :btree
   end
 
+  create_table "leiloes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "categoria"
+    t.integer  "modalidade"
+    t.string   "nome"
+    t.datetime "data_inicio"
+    t.datetime "data_fim"
+    t.string   "nome_agenda"
+    t.string   "nome_site"
+    t.integer  "cidade_id"
+    t.integer  "tipo"
+    t.integer  "testemunha_1"
+    t.integer  "testemunha_2"
+    t.integer  "situacao"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["cidade_id"], name: "index_leiloes_on_cidade_id", using: :btree
+    t.index ["testemunha_1"], name: "fk_rails_a5a4589307", using: :btree
+    t.index ["testemunha_2"], name: "fk_rails_1152a99182", using: :btree
+  end
+
   create_table "referencias", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "nome"
     t.string   "telefone"
@@ -290,6 +314,9 @@ ActiveRecord::Schema.define(version: 20170112125157) do
   add_foreign_key "fazendas", "cidades"
   add_foreign_key "fazendas", "clientes"
   add_foreign_key "lancar_autorizados", "clientes"
+  add_foreign_key "leiloes", "cidades"
+  add_foreign_key "leiloes", "users", column: "testemunha_1"
+  add_foreign_key "leiloes", "users", column: "testemunha_2"
   add_foreign_key "referencias", "clientes"
   add_foreign_key "tags", "clientes"
   add_foreign_key "telefones", "clientes"

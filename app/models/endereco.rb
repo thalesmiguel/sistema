@@ -11,7 +11,7 @@ class Endereco < ApplicationRecord
   validate :pelo_menos_um_deve_estar_ativo
   validate :pelo_menos_um_deve_ser_primario
 
-  enum tipo: [:correspondência, :faturamento]
+  enum tipo: { correspondência: 0, faturamento: 1 }
 
   def estado
     cidade.nil? ? 0 : cidade.estado_id

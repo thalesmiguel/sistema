@@ -11,6 +11,6 @@ class Telefone < ApplicationRecord
 
   validate :pelo_menos_um_deve_estar_ativo
 
-  enum tipo: [ :canal, :celular, :comercial, :fax, :fax_fazenda, :fazenda, :financeiro, :residencial, :torpedo ]
+  enum tipo: { canal: 0, celular: 1, comercial: 2, fax: 3, fax_fazenda: 4, fazenda: 5, financeiro: 6, residencial: 7, torpedo: 8 }
 
 end

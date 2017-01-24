@@ -1,6 +1,9 @@
 $(document).on('turbolinks:load', function(){
   // $('.modal-trigger').leanModal();
 
+  $('select.yadcf-filter').material_select();
+  $(".yadcf-filter > ul").find("li:first-child").find("span").text("Filtrar")
+
   $(".button-collapse").sideNav();
   // $('select').material_select();
   $('.collapsible').collapsible();
@@ -148,6 +151,7 @@ function carrega_datatable_teste(modelo, modelo_singular, campos, campos_sem_bus
   var tabela = $(table).DataTable({
     processing: true,
     serverSide: true,
+    stateSave: true,
     ajax: $("#" + modelo + "-table").data('source'),
     columns: lista_campos,
     pagingType: "full_numbers",
@@ -159,7 +163,8 @@ function carrega_datatable_teste(modelo, modelo_singular, campos, campos_sem_bus
     language: { sUrl: "datatable_i18n" },
     drawCallback: function( settings ) {
       $('.paginate_button').addClass("waves-effect waves-light");
-      $('select').material_select();
+      // $('select').not('.yadcf-filter').material_select();
+      $('.dataTables_length select' ).material_select();
     }
   });
 
@@ -193,6 +198,17 @@ function carrega_datatable_teste(modelo, modelo_singular, campos, campos_sem_bus
     }
   });
 
+  yadcf.init(tabela, [
+    // { column_number: 0, select_type: 'select2', select_type_options: { placeholder: 'Filtrar', allowClear: true } , filter_reset_button_text: false },
+    { column_number: 1, filter_reset_button_text: false },
+    { column_number: 2, filter_reset_button_text: false },
+    { column_number: 3, filter_reset_button_text: false },
+    { column_number: 4, filter_reset_button_text: false },
+    { column_number: 5, filter_reset_button_text: false },
+    { column_number: 6, filter_reset_button_text: false },
+    { column_number: 7, filter_reset_button_text: false },
+  ]);
+
 };
 
 function carrega_datatable(modelo, modelo_singular, campos, campos_sem_busca_ordenacao) {
@@ -216,7 +232,7 @@ function carrega_datatable(modelo, modelo_singular, campos, campos_sem_busca_ord
     language: { sUrl: "datatable_i18n" },
     drawCallback: function( settings ) {
       $('.paginate_button').addClass("waves-effect waves-light");
-      $('select').material_select();
+      // $('select').not('.yadcf-filter').material_select();
     }
   });
 
@@ -249,7 +265,7 @@ function carrega_datatable_sem_controles(modelo, modelo_singular, campos, campos
     language: { sUrl: "datatable_i18n" },
     drawCallback: function( settings ) {
       $('.paginate_button').addClass("waves-effect waves-light");
-      $('select').material_select();
+      $('select').not('.yadcf-filter').material_select();
     }
   });
 

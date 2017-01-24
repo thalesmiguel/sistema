@@ -1,5 +1,9 @@
 class User < ApplicationRecord
 
+  has_many :leiloes, class_name: "Leilao", foreign_key: 'testemunha_1'
+  # has_many :leiloes, foreign_key: 'testemunha_1'
+  # has_many :leiloes, foreign_key: 'testemunha_2', class_name: 'Leilao'
+
   has_many :alertas
   has_many :audits
 

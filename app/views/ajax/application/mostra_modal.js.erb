@@ -3,7 +3,7 @@ modal.html("<%= escape_javascript(render partial: caminho ) %>");
 modal.openModal();
 
 Materialize.updateTextFields();
-$('select').material_select();
+$('select').not('.yadcf-filter').material_select();
 valida_formulario();
 mascaras();
 limita_text_area();

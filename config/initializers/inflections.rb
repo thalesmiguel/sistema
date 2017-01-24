@@ -57,6 +57,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.uncountable %w( tórax tênis ônibus lápis fênix )
 
   # Irregulares
+  inflect.irregular "leilao", "leiloes"
   inflect.irregular "país", "países"
   inflect.irregular 'alerta', 'alertas'
   inflect.irregular 'user', 'users'

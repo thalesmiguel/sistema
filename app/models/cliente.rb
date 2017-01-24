@@ -21,9 +21,9 @@ class Cliente < ApplicationRecord
 
   serialize :marketing_tipos, Array
 
-  enum sexo: [ :masculino, :feminino ]
-  enum pessoa_tipo: [ :física, :jurídica, :outra ]
-  enum cadastro_tipo: [ :cliente, :fornecedor, :funcionário, :prestador_de_serviço, :visitante ]
+  enum sexo: { masculino: 0, feminino: 1 }
+  enum pessoa_tipo: { física: 0, jurídica: 1, outra: 2 }
+  enum cadastro_tipo: { cliente: 0, fornecedor: 1, funcionário: 2, prestador_de_serviço: 3, visitante: 4 }
 
 
   def estado_primario(campo = "")

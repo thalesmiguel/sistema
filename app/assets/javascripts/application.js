@@ -17,7 +17,10 @@
 //= require extenso
 //= require materialize-sprockets
 //= require pace.min
+
 //= require dataTables/jquery.dataTables
+//= require jquery.dataTables.yadcf
+
 //= require fnStandingRedraw
 //= require jquery.maskedinput.min
 //= require jquery.remotipart
