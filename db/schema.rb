@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170130170702) do
+ActiveRecord::Schema.define(version: 20170130171547) do
 
   create_table "alerta_comentarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "descricao",  limit: 65535
@@ -312,6 +312,14 @@ ActiveRecord::Schema.define(version: 20170130170702) do
     t.index ["subtipo_lotes_id"], name: "fk_rails_2e44c73510", using: :btree
     t.index ["testemunha_1_id"], name: "fk_rails_a005123dd6", using: :btree
     t.index ["testemunha_2_id"], name: "fk_rails_33b4d6fd6e", using: :btree
+  end
+
+  create_table "racas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "codigo"
+    t.string   "nome"
+    t.integer  "especie"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "referencias", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
