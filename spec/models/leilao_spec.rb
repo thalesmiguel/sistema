@@ -116,6 +116,15 @@ RSpec.describe Leilao, type: :model do
       expect(leilao.patrocinadores).to eq([primeiro_patrocinador, segundo_patrocinador])
     end
 
+    it 'has_many :assessorias, through LeilaoPatrocinadores' do
+      primeira_assessoria = FactoryGirl.create(:assessoria)
+      segunda_assessoria = FactoryGirl.create(:assessoria)
+      leilao = FactoryGirl.create(:leilao)
+      primeiro_leilao_assessoria = FactoryGirl.create(:leilao_assessoria, assessoria: primeira_assessoria, leilao: leilao)
+      segundo_leilao_assessoria = FactoryGirl.create(:leilao_assessoria, assessoria: segunda_assessoria, leilao: leilao)
+      expect(leilao.assessorias).to eq([primeira_assessoria, segunda_assessoria])
+    end
+
   end
 
   describe 'log' do

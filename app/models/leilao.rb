@@ -30,6 +30,8 @@ class Leilao < ApplicationRecord
   has_many :racas, through: :leilao_racas
   has_many :leilao_patrocinadores
   has_many :patrocinadores, through: :leilao_patrocinadores
+  has_many :leilao_assessorias
+  has_many :assessorias, through: :leilao_assessorias
 
 
   enum categoria: { elite: 0, corte: 1, outro: 2, shopping: 3 }

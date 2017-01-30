@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170130174157) do
+ActiveRecord::Schema.define(version: 20170130174540) do
 
   create_table "alerta_comentarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "descricao",  limit: 65535
@@ -241,6 +241,15 @@ ActiveRecord::Schema.define(version: 20170130174157) do
     t.index ["cliente_id"], name: "index_lancar_autorizados_on_cliente_id", using: :btree
   end
 
+  create_table "leilao_assessorias", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "leilao_id"
+    t.integer  "assessoria_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["assessoria_id"], name: "index_leilao_assessorias_on_assessoria_id", using: :btree
+    t.index ["leilao_id"], name: "index_leilao_assessorias_on_leilao_id", using: :btree
+  end
+
   create_table "leilao_bandeiras", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "leilao_id"
     t.integer  "bandeira_id"
@@ -454,6 +463,8 @@ ActiveRecord::Schema.define(version: 20170130174157) do
   add_foreign_key "fazendas", "cidades"
   add_foreign_key "fazendas", "clientes"
   add_foreign_key "lancar_autorizados", "clientes"
+  add_foreign_key "leilao_assessorias", "assessorias"
+  add_foreign_key "leilao_assessorias", "leiloes"
   add_foreign_key "leilao_bandeiras", "bandeiras"
   add_foreign_key "leilao_bandeiras", "leiloes"
   add_foreign_key "leilao_canais", "canais"
