@@ -26,6 +26,8 @@ class Leilao < ApplicationRecord
   has_many :bandeiras, through: :leilao_bandeiras
   has_many :leilao_canais
   has_many :canais, through: :leilao_canais
+  has_many :leilao_racas
+  has_many :racas, through: :leilao_racas
 
 
   enum categoria: { elite: 0, corte: 1, outro: 2, shopping: 3 }

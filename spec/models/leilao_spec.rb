@@ -98,6 +98,15 @@ RSpec.describe Leilao, type: :model do
       expect(leilao.canais).to eq([primeiro_canal, segundo_canal])
     end
 
+    it 'has_many :racas, through LeilaoBandeiras' do
+      primeira_raca = FactoryGirl.create(:raca)
+      segunda_raca = FactoryGirl.create(:raca)
+      leilao = FactoryGirl.create(:leilao)
+      primeira_leilao_raca = FactoryGirl.create(:leilao_raca, raca: primeira_raca, leilao: leilao)
+      segunda_leilao_raca = FactoryGirl.create(:leilao_raca, raca: segunda_raca, leilao: leilao)
+      expect(leilao.racas).to eq([primeira_raca, segunda_raca])
+    end
+
   end
 
   describe 'log' do
