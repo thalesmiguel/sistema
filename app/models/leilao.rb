@@ -18,6 +18,9 @@ class Leilao < ApplicationRecord
   belongs_to :leilao_anterior, class_name: "Leilao"
   has_many :leilao_posterior, class_name: "Leilao", foreign_key: :leilao_anterior_id
 
+  has_many :leilao_promotores
+  has_many :promotores, through: :leilao_promotores, source: :cliente
+
 
   enum categoria: { elite: 0, corte: 1, outro: 2, shopping: 3 }
   enum modalidade: { recinto: 0, virtual: 1, virtual_com_ponto_de_apoio: 2 }

@@ -13,6 +13,9 @@ class Cliente < ApplicationRecord
   has_many :empresas
   has_many :alertas
 
+  has_many :leilao_promotores
+  has_many :promotor_leiloes, through: :leilao_promotores, source: :leilao
+
   validates :nome, presence: true
   validates :cpf_cnpj, uniqueness: true
   validates :cadastro_tipo, presence: true

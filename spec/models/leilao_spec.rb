@@ -61,6 +61,16 @@ RSpec.describe Leilao, type: :model do
       expect(segundo_leilao.leilao_anterior).to eq(primeiro_leilao)
       expect(primeiro_leilao.leilao_posterior).to eq([segundo_leilao, terceiro_leilao])
     end
+
+    it 'has_many :promotores, through LeilaoPromotores' do
+      primeiro_cliente = FactoryGirl.create(:cliente)
+      segundo_cliente = FactoryGirl.create(:cliente)
+      leilao = FactoryGirl.create(:leilao)
+      primeiro_leilao_promotor = FactoryGirl.create(:leilao_promotor, cliente: primeiro_cliente, leilao: leilao)
+      segundo_leilao_promotor = FactoryGirl.create(:leilao_promotor, cliente: segundo_cliente, leilao: leilao)
+      expect(leilao.promotores).to eq([primeiro_cliente, segundo_cliente])
+    end
+
   end
 
   describe 'log' do

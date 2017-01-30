@@ -10,11 +10,12 @@ class CreateLeiloes < ActiveRecord::Migration[5.0]
       t.string :nome_site
       t.references :cidade, foreign_key: true
       t.integer :tipo
+      t.integer :situacao
       t.integer :testemunha_1_id
       t.integer :testemunha_2_id
-      t.integer :situacao
       t.integer :leilao_anterior_id
       t.integer :subtipo_lotes_id
+      t.text :observacao_nota_mapa
       t.attachment :logo
 
       t.timestamps

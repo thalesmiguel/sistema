@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170124163239) do
+ActiveRecord::Schema.define(version: 20170130130213) do
 
   create_table "alerta_comentarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "descricao",  limit: 65535
@@ -226,6 +226,15 @@ ActiveRecord::Schema.define(version: 20170124163239) do
     t.index ["user_id"], name: "index_leilao_observacoes_on_user_id", using: :btree
   end
 
+  create_table "leilao_promotores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "leilao_id"
+    t.integer  "cliente_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cliente_id"], name: "index_leilao_promotores_on_cliente_id", using: :btree
+    t.index ["leilao_id"], name: "index_leilao_promotores_on_leilao_id", using: :btree
+  end
+
   create_table "leiloes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "categoria"
     t.integer  "modalidade"
@@ -349,6 +358,8 @@ ActiveRecord::Schema.define(version: 20170124163239) do
   add_foreign_key "leilao_eventos", "leiloes"
   add_foreign_key "leilao_observacoes", "leiloes"
   add_foreign_key "leilao_observacoes", "users"
+  add_foreign_key "leilao_promotores", "clientes"
+  add_foreign_key "leilao_promotores", "leiloes"
   add_foreign_key "leiloes", "cidades"
   add_foreign_key "leiloes", "leiloes", column: "leilao_anterior_id"
   add_foreign_key "leiloes", "subtipos", column: "subtipo_lotes_id"
