@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170130173502) do
+ActiveRecord::Schema.define(version: 20170130174157) do
 
   create_table "alerta_comentarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "descricao",  limit: 65535
@@ -30,6 +30,18 @@ ActiveRecord::Schema.define(version: 20170130173502) do
     t.datetime "updated_at",                              null: false
     t.index ["cliente_id"], name: "index_alertas_on_cliente_id", using: :btree
     t.index ["user_id"], name: "index_alertas_on_user_id", using: :btree
+  end
+
+  create_table "assessorias", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "codigo"
+    t.string   "nome"
+    t.text     "observacao",        limit: 65535
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "audits", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
