@@ -84,8 +84,8 @@ RSpec.describe Leilao, type: :model do
       primeira_bandeira = FactoryGirl.create(:bandeira)
       segunda_bandeira = FactoryGirl.create(:bandeira)
       leilao = FactoryGirl.create(:leilao)
-      primeira_leilao_bandeira = FactoryGirl.create(:leilao_bandeira, bandeira: primeira_bandeira, leilao: leilao)
-      segunda_leilao_bandeira = FactoryGirl.create(:leilao_bandeira, bandeira: segunda_bandeira, leilao: leilao)
+      primeiro_leilao_bandeira = FactoryGirl.create(:leilao_bandeira, bandeira: primeira_bandeira, leilao: leilao)
+      segundo_leilao_bandeira = FactoryGirl.create(:leilao_bandeira, bandeira: segunda_bandeira, leilao: leilao)
       expect(leilao.bandeiras).to eq([primeira_bandeira, segunda_bandeira])
     end
 
@@ -93,18 +93,27 @@ RSpec.describe Leilao, type: :model do
       primeiro_canal = FactoryGirl.create(:canal)
       segundo_canal = FactoryGirl.create(:canal)
       leilao = FactoryGirl.create(:leilao)
-      primeira_leilao_canal = FactoryGirl.create(:leilao_canal, canal: primeiro_canal, leilao: leilao)
-      segunda_leilao_canal = FactoryGirl.create(:leilao_canal, canal: segundo_canal, leilao: leilao)
+      primeiro_leilao_canal = FactoryGirl.create(:leilao_canal, canal: primeiro_canal, leilao: leilao)
+      segundo_leilao_canal = FactoryGirl.create(:leilao_canal, canal: segundo_canal, leilao: leilao)
       expect(leilao.canais).to eq([primeiro_canal, segundo_canal])
     end
 
-    it 'has_many :racas, through LeilaoBandeiras' do
+    it 'has_many :racas, through LeilaoRacas' do
       primeira_raca = FactoryGirl.create(:raca)
       segunda_raca = FactoryGirl.create(:raca)
       leilao = FactoryGirl.create(:leilao)
-      primeira_leilao_raca = FactoryGirl.create(:leilao_raca, raca: primeira_raca, leilao: leilao)
-      segunda_leilao_raca = FactoryGirl.create(:leilao_raca, raca: segunda_raca, leilao: leilao)
+      primeiro_leilao_raca = FactoryGirl.create(:leilao_raca, raca: primeira_raca, leilao: leilao)
+      segundo_leilao_raca = FactoryGirl.create(:leilao_raca, raca: segunda_raca, leilao: leilao)
       expect(leilao.racas).to eq([primeira_raca, segunda_raca])
+    end
+
+    it 'has_many :patrocinadores, through LeilaoPatrocinadores' do
+      primeiro_patrocinador = FactoryGirl.create(:patrocinador)
+      segundo_patrocinador = FactoryGirl.create(:patrocinador)
+      leilao = FactoryGirl.create(:leilao)
+      primeiro_leilao_patrocinador = FactoryGirl.create(:leilao_patrocinador, patrocinador: primeiro_patrocinador, leilao: leilao)
+      segundo_leilao_patrocinador = FactoryGirl.create(:leilao_patrocinador, patrocinador: segundo_patrocinador, leilao: leilao)
+      expect(leilao.patrocinadores).to eq([primeiro_patrocinador, segundo_patrocinador])
     end
 
   end

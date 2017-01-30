@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170130172450) do
+ActiveRecord::Schema.define(version: 20170130173502) do
 
   create_table "alerta_comentarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "descricao",  limit: 65535
@@ -277,6 +277,15 @@ ActiveRecord::Schema.define(version: 20170130172450) do
     t.index ["user_id"], name: "index_leilao_observacoes_on_user_id", using: :btree
   end
 
+  create_table "leilao_patrocinadores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "leilao_id"
+    t.integer  "patrocinador_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["leilao_id"], name: "index_leilao_patrocinadores_on_leilao_id", using: :btree
+    t.index ["patrocinador_id"], name: "index_leilao_patrocinadores_on_patrocinador_id", using: :btree
+  end
+
   create_table "leilao_promotores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "leilao_id"
     t.integer  "cliente_id"
@@ -321,6 +330,16 @@ ActiveRecord::Schema.define(version: 20170130172450) do
     t.index ["subtipo_lotes_id"], name: "fk_rails_2e44c73510", using: :btree
     t.index ["testemunha_1_id"], name: "fk_rails_a005123dd6", using: :btree
     t.index ["testemunha_2_id"], name: "fk_rails_33b4d6fd6e", using: :btree
+  end
+
+  create_table "patrocinadores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "nome"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   create_table "racas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -432,6 +451,8 @@ ActiveRecord::Schema.define(version: 20170130172450) do
   add_foreign_key "leilao_eventos", "leiloes"
   add_foreign_key "leilao_observacoes", "leiloes"
   add_foreign_key "leilao_observacoes", "users"
+  add_foreign_key "leilao_patrocinadores", "leiloes"
+  add_foreign_key "leilao_patrocinadores", "patrocinadores"
   add_foreign_key "leilao_promotores", "clientes"
   add_foreign_key "leilao_promotores", "leiloes"
   add_foreign_key "leilao_racas", "leiloes"
