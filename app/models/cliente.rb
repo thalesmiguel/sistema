@@ -15,6 +15,8 @@ class Cliente < ApplicationRecord
 
   has_many :leilao_promotores
   has_many :promotor_leiloes, through: :leilao_promotores, source: :leilao
+  has_many :leilao_convidados
+  has_many :convidado_leiloes, through: :leilao_convidados, source: :leilao
 
   validates :nome, presence: true
   validates :cpf_cnpj, uniqueness: true

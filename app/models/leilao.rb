@@ -20,6 +20,8 @@ class Leilao < ApplicationRecord
 
   has_many :leilao_promotores
   has_many :promotores, through: :leilao_promotores, source: :cliente
+  has_many :leilao_convidados
+  has_many :convidados, through: :leilao_convidados, source: :cliente
 
 
   enum categoria: { elite: 0, corte: 1, outro: 2, shopping: 3 }

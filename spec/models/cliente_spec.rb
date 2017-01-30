@@ -208,6 +208,14 @@ RSpec.describe Cliente, type: :model do
       expect(cliente.promotor_leiloes).to eq([primeiro_leilao, segundo_leilao])
     end
 
+    it 'has_many :convidado_leiloes, through LeilaoPromotores' do
+      primeiro_leilao = FactoryGirl.create(:leilao)
+      segundo_leilao = FactoryGirl.create(:leilao)
+      primeiro_leilao_convidado = FactoryGirl.create(:leilao_convidado, cliente: cliente, leilao: primeiro_leilao)
+      segundo_leilao_convidado = FactoryGirl.create(:leilao_convidado, cliente: cliente, leilao: segundo_leilao)
+      expect(cliente.convidado_leiloes).to eq([primeiro_leilao, segundo_leilao])
+    end
+
   end
 
   describe 'log' do
