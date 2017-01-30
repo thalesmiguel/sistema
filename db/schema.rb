@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170130163944) do
+ActiveRecord::Schema.define(version: 20170130170702) do
 
   create_table "alerta_comentarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "descricao",  limit: 65535
@@ -71,6 +71,18 @@ ActiveRecord::Schema.define(version: 20170130163944) do
     t.datetime "logo_updated_at"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+  end
+
+  create_table "canais", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "nome"
+    t.text     "observacao",        limit: 65535
+    t.text     "inf_transmissao",   limit: 65535
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "cidades", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -224,6 +236,15 @@ ActiveRecord::Schema.define(version: 20170130163944) do
     t.datetime "updated_at",  null: false
     t.index ["bandeira_id"], name: "index_leilao_bandeiras_on_bandeira_id", using: :btree
     t.index ["leilao_id"], name: "index_leilao_bandeiras_on_leilao_id", using: :btree
+  end
+
+  create_table "leilao_canais", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "leilao_id"
+    t.integer  "canal_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["canal_id"], name: "index_leilao_canais_on_canal_id", using: :btree
+    t.index ["leilao_id"], name: "index_leilao_canais_on_leilao_id", using: :btree
   end
 
   create_table "leilao_convidados", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -387,6 +408,8 @@ ActiveRecord::Schema.define(version: 20170130163944) do
   add_foreign_key "lancar_autorizados", "clientes"
   add_foreign_key "leilao_bandeiras", "bandeiras"
   add_foreign_key "leilao_bandeiras", "leiloes"
+  add_foreign_key "leilao_canais", "canais"
+  add_foreign_key "leilao_canais", "leiloes"
   add_foreign_key "leilao_convidados", "clientes"
   add_foreign_key "leilao_convidados", "leiloes"
   add_foreign_key "leilao_eventos", "leiloes"

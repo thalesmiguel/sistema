@@ -23,7 +23,7 @@ RSpec.describe LeilaoBandeira, type: :model do
     let(:leilao) { FactoryGirl.create(:leilao) }
     let(:leilao_bandeira) { FactoryGirl.create(:leilao_bandeira, bandeira: bandeira, leilao: leilao) }
 
-    it 'belongs_to Cliente' do
+    it 'belongs_to Bandeira' do
       expect(leilao_bandeira.bandeira).to eq(bandeira)
     end
 
