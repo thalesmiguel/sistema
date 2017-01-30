@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170130162258) do
+ActiveRecord::Schema.define(version: 20170130163944) do
 
   create_table "alerta_comentarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "descricao",  limit: 65535
@@ -59,6 +59,18 @@ ActiveRecord::Schema.define(version: 20170130162258) do
     t.string   "nome"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "bandeiras", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "nome"
+    t.string   "sigla"
+    t.string   "cor"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   create_table "cidades", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -203,6 +215,15 @@ ActiveRecord::Schema.define(version: 20170130162258) do
     t.datetime "created_at",                                           null: false
     t.datetime "updated_at",                                           null: false
     t.index ["cliente_id"], name: "index_lancar_autorizados_on_cliente_id", using: :btree
+  end
+
+  create_table "leilao_bandeiras", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "leilao_id"
+    t.integer  "bandeira_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["bandeira_id"], name: "index_leilao_bandeiras_on_bandeira_id", using: :btree
+    t.index ["leilao_id"], name: "index_leilao_bandeiras_on_leilao_id", using: :btree
   end
 
   create_table "leilao_convidados", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -364,6 +385,8 @@ ActiveRecord::Schema.define(version: 20170130162258) do
   add_foreign_key "fazendas", "cidades"
   add_foreign_key "fazendas", "clientes"
   add_foreign_key "lancar_autorizados", "clientes"
+  add_foreign_key "leilao_bandeiras", "bandeiras"
+  add_foreign_key "leilao_bandeiras", "leiloes"
   add_foreign_key "leilao_convidados", "clientes"
   add_foreign_key "leilao_convidados", "leiloes"
   add_foreign_key "leilao_eventos", "leiloes"

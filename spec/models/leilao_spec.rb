@@ -71,13 +71,22 @@ RSpec.describe Leilao, type: :model do
       expect(leilao.promotores).to eq([primeiro_cliente, segundo_cliente])
     end
 
-    it 'has_many :convidados, through LeilaoPromotores' do
+    it 'has_many :convidados, through LeilaoConvidados' do
       primeiro_cliente = FactoryGirl.create(:cliente)
       segundo_cliente = FactoryGirl.create(:cliente)
       leilao = FactoryGirl.create(:leilao)
       primeiro_leilao_convidado = FactoryGirl.create(:leilao_convidado, cliente: primeiro_cliente, leilao: leilao)
       segundo_leilao_convidado = FactoryGirl.create(:leilao_convidado, cliente: segundo_cliente, leilao: leilao)
       expect(leilao.convidados).to eq([primeiro_cliente, segundo_cliente])
+    end
+
+    it 'has_many :bandeiras, through LeilaoBandeiras' do
+      primeira_bandeira = FactoryGirl.create(:bandeira)
+      segunda_bandeira = FactoryGirl.create(:bandeira)
+      leilao = FactoryGirl.create(:leilao)
+      primeira_leilao_bandeira = FactoryGirl.create(:leilao_bandeira, bandeira: primeira_bandeira, leilao: leilao)
+      segunda_leilao_bandeira = FactoryGirl.create(:leilao_bandeira, bandeira: segunda_bandeira, leilao: leilao)
+      expect(leilao.bandeiras).to eq([primeira_bandeira, segunda_bandeira])
     end
 
   end
