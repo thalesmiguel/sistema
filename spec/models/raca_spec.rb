@@ -14,6 +14,11 @@ RSpec.describe Raca, type: :model do
       expect(raca.valid?).to be_falsy
     end
 
+    it 'exige especie' do
+      raca = Raca.new(FactoryGirl.attributes_for(:raca, especie: ""))
+      expect(raca.valid?).to be_falsy
+    end
+
   end
 
   describe 'associações' do

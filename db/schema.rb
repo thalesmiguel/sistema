@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170130174540) do
+ActiveRecord::Schema.define(version: 20170131181158) do
 
   create_table "alerta_comentarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "descricao",  limit: 65535
@@ -353,6 +353,28 @@ ActiveRecord::Schema.define(version: 20170130174540) do
     t.index ["testemunha_2_id"], name: "fk_rails_33b4d6fd6e", using: :btree
   end
 
+  create_table "pagamento_condicoes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "codigo"
+    t.string   "nome"
+    t.integer  "tipo"
+    t.integer  "captacoes"
+    t.integer  "parcelas"
+    t.integer  "frequencia"
+    t.boolean  "entrada"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pagamento_parcelas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "parcela"
+    t.integer  "captacoes"
+    t.date     "vencimento"
+    t.integer  "pagamento_condicao_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["pagamento_condicao_id"], name: "index_pagamento_parcelas_on_pagamento_condicao_id", using: :btree
+  end
+
   create_table "patrocinadores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "nome"
     t.string   "logo_file_name"
@@ -485,6 +507,7 @@ ActiveRecord::Schema.define(version: 20170130174540) do
   add_foreign_key "leiloes", "subtipos", column: "subtipo_lotes_id"
   add_foreign_key "leiloes", "users", column: "testemunha_1_id"
   add_foreign_key "leiloes", "users", column: "testemunha_2_id"
+  add_foreign_key "pagamento_parcelas", "pagamento_condicoes"
   add_foreign_key "referencias", "clientes"
   add_foreign_key "tags", "clientes"
   add_foreign_key "telefones", "clientes"
