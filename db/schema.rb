@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170201153638) do
+ActiveRecord::Schema.define(version: 20170201181338) do
 
   create_table "alerta_comentarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "descricao",  limit: 65535
@@ -460,6 +460,15 @@ ActiveRecord::Schema.define(version: 20170201153638) do
     t.index ["cliente_id"], name: "index_tags_on_cliente_id", using: :btree
   end
 
+  create_table "taxa_manuais", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "tipo"
+    t.string   "nome"
+    t.integer  "leilao_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["leilao_id"], name: "index_taxa_manuais_on_leilao_id", using: :btree
+  end
+
   create_table "telefones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "tipo"
     t.string   "ddi",           default: "55"
@@ -539,5 +548,6 @@ ActiveRecord::Schema.define(version: 20170201153638) do
   add_foreign_key "pagamento_parcelas", "pagamento_condicoes"
   add_foreign_key "referencias", "clientes"
   add_foreign_key "tags", "clientes"
+  add_foreign_key "taxa_manuais", "leiloes"
   add_foreign_key "telefones", "clientes"
 end

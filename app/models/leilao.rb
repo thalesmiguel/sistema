@@ -13,6 +13,7 @@ class Leilao < ApplicationRecord
   belongs_to :subtipo_lotes, class_name: "Subtipo"
 
   has_many :leilao_observacoes
+  has_many :taxa_manuais
   has_one :leilao_evento
   has_one :leilao_padrao
   has_one :leilao_comissao
