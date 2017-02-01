@@ -8,5 +8,9 @@ FactoryGirl.define do
     perc_compra_elite 1
     perc_compra_corte 1
     leilao nil
+    promotor_banco nil
+    financ_comissao_compra "asd"
+    financ_comissao_venda "qasd"
+    financ_solicitacao_entrada "asd"
   end
 end

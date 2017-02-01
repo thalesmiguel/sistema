@@ -6,6 +6,8 @@ class ClienteBanco < ApplicationRecord
   belongs_to :cidade
   belongs_to :cliente
 
+  has_many :leilao_comissoes, class_name: 'LeilaoComissao', foreign_key: :promotor_banco_id
+
   validates :banco, presence: true
   validates :cidade, presence: true
   validates :cliente, presence: true

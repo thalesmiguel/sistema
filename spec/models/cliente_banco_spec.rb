@@ -54,6 +54,14 @@ RSpec.describe ClienteBanco, type: :model do
       expect(cliente_banco.valid?).to be_falsy
     end
 
+    it 'has_many LeilaoComissoes' do
+      cliente_banco = FactoryGirl.create(:cliente_banco, banco: banco, cidade: cidade, cliente: cliente)
+      leilao = FactoryGirl.create(:leilao)
+      primeira_leilao_comissao = FactoryGirl.create(:leilao_comissao, leilao: leilao, promotor_banco: cliente_banco)
+      segunda_leilao_comissao = FactoryGirl.create(:leilao_comissao, leilao: leilao, promotor_banco: cliente_banco)
+      expect(cliente_banco.leilao_comissoes).to eq [primeira_leilao_comissao, segunda_leilao_comissao]
+    end
+
   end
 
   describe 'log' do

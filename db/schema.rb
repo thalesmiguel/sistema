@@ -277,7 +277,12 @@ ActiveRecord::Schema.define(version: 20170201153638) do
     t.integer  "perc_venda_convidado_corte"
     t.integer  "perc_compra_elite"
     t.integer  "perc_compra_corte"
+    t.boolean  "cobra_comissao_retornos"
+    t.string   "financ_comissao_compra"
+    t.string   "financ_comissao_venda"
+    t.string   "financ_solicitacao_entrada"
     t.integer  "leilao_id"
+    t.integer  "promotor_banco_id"
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
     t.index ["leilao_id"], name: "index_leilao_comissoes_on_leilao_id", using: :btree

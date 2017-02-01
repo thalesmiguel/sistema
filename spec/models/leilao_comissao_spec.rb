@@ -19,6 +19,17 @@ RSpec.describe LeilaoComissao, type: :model do
       leilao_comissao = LeilaoComissao.new(FactoryGirl.attributes_for(:leilao_comissao, leilao: leilao))
       expect(leilao_comissao.leilao).to eq(leilao)
     end
+
+    it 'belongs_to :banco_promotor pelo modelo ClienteBanco' do
+      estado = FactoryGirl.create(:estado)
+      cidade = FactoryGirl.create(:cidade, estado: estado)
+      cliente = FactoryGirl.create(:cliente)
+      banco = FactoryGirl.create(:banco)
+
+      cliente_banco = FactoryGirl.create(:cliente_banco, cliente: cliente, banco: banco, cidade: cidade)
+      leilao_comissao = LeilaoComissao.new(FactoryGirl.attributes_for(:leilao_comissao, leilao: leilao, promotor_banco: cliente_banco))
+      expect(leilao_comissao.promotor_banco).to eq(cliente_banco)
+    end
   end
 
   describe 'log' do

@@ -1,7 +1,9 @@
 class LeilaoComissao < ApplicationRecord
   audited
+  trimmed_fields :financ_comissao_compra, :financ_comissao_venda, :financ_solicitacao_entrada
 
   belongs_to :leilao
+  belongs_to :promotor_banco, class_name: "ClienteBanco", foreign_key: :promotor_banco_id
 
   validates :leilao, presence: true
 
