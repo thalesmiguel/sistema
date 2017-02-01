@@ -53,6 +53,12 @@ RSpec.describe Leilao, type: :model do
       expect(leilao.taxa_manuais).to eq([primeira_taxa_manual, segunda_taxa_manual])
     end
 
+    it 'has_many TaxaAutomaticas' do
+      primeira_taxa_automatica = FactoryGirl.create(:taxa_automatica, leilao: leilao)
+      segunda_taxa_automatica = FactoryGirl.create(:taxa_automatica, leilao: leilao)
+      expect(leilao.taxa_automaticas).to eq([primeira_taxa_automatica, segunda_taxa_automatica])
+    end
+
     it 'has_one LeilaoEvento' do
       leilao_evento = FactoryGirl.create(:leilao_evento, leilao: leilao)
       expect(leilao.leilao_evento).to eq(leilao_evento)

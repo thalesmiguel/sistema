@@ -46,15 +46,28 @@ MoneyRails.configure do |config|
   # Register a custom currency
   #
   # Example:
+  # config.register_currency = {
+  #   :id                  => :brl,
+  #   :priority            => 1,
+  #   :iso_code            => "BRL",
+  #   :name                => "Real",
+  #   :symbol              => "R$",
+  #   :symbol_first        => true,
+  #   :subunit             => "Cent",
+  #   :subunit_to_unit     => 100,
+  #   :thousands_separator => ".",
+  #   :decimal_mark        => ","
+  # }
+
   config.register_currency = {
-    :id                  => :brl,
-    :priority            => 1,
-    :iso_code            => "BRL",
-    :name                => "Real",
+    :id                  => :txa,
+    :priority            => 2,
+    :iso_code            => "BRTX",
+    :name                => "Real_TX",
     :symbol              => "R$",
     :symbol_first        => true,
-    :subunit             => "Cent",
-    :subunit_to_unit     => 100,
+    :subunit             => "Subcent",
+    :subunit_to_unit     => 10000,
     :thousands_separator => ".",
     :decimal_mark        => ","
   }

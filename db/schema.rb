@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170201181338) do
+ActiveRecord::Schema.define(version: 20170201183401) do
 
   create_table "alerta_comentarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "descricao",  limit: 65535
@@ -460,6 +460,24 @@ ActiveRecord::Schema.define(version: 20170201181338) do
     t.index ["cliente_id"], name: "index_tags_on_cliente_id", using: :btree
   end
 
+  create_table "taxa_automaticas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "tipo"
+    t.string   "nome"
+    t.string   "nome_resumido"
+    t.integer  "cobranca_por"
+    t.integer  "cobranca_lote_tipo"
+    t.text     "cobrado_de",         limit: 65535
+    t.integer  "a_cada"
+    t.integer  "intervalo_inicio"
+    t.integer  "intervalo_fim"
+    t.integer  "valor_centavos",                   default: 0,      null: false
+    t.string   "valor_currency",                   default: "BRTX", null: false
+    t.integer  "leilao_id"
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
+    t.index ["leilao_id"], name: "index_taxa_automaticas_on_leilao_id", using: :btree
+  end
+
   create_table "taxa_manuais", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "tipo"
     t.string   "nome"
@@ -548,6 +566,7 @@ ActiveRecord::Schema.define(version: 20170201181338) do
   add_foreign_key "pagamento_parcelas", "pagamento_condicoes"
   add_foreign_key "referencias", "clientes"
   add_foreign_key "tags", "clientes"
+  add_foreign_key "taxa_automaticas", "leiloes"
   add_foreign_key "taxa_manuais", "leiloes"
   add_foreign_key "telefones", "clientes"
 end
