@@ -4,8 +4,8 @@ class CreateLeilaoPadroes < ActiveRecord::Migration[5.0]
       t.integer :pagamento_elite_id
       t.integer :pagamento_corte_id
       t.integer :pagamento_outros_id
-      t.money   :dolar
-      t.money   :arroba
+      t.monetize :dolar
+      t.monetize :arroba
       t.references :leilao, foreign_key: true
 
       t.timestamps

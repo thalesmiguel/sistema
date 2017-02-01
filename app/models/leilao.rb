@@ -15,6 +15,7 @@ class Leilao < ApplicationRecord
   has_many :leilao_observacoes
   has_one :leilao_evento
   has_one :leilao_padrao
+  has_one :leilao_comissao
 
   belongs_to :leilao_anterior, class_name: "Leilao"
   has_many :leilao_posterior, class_name: "Leilao", foreign_key: :leilao_anterior_id
