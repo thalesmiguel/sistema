@@ -54,6 +54,12 @@ RSpec.describe Leilao, type: :model do
       expect(leilao.leilao_evento).to eq(leilao_evento)
     end
 
+    it 'has_one LeilaoPadrao' do
+      leilao = FactoryGirl.create(:leilao)
+      leilao_padrao = FactoryGirl.create(:leilao_padrao, leilao: leilao)
+      expect(leilao.leilao_padrao).to eq(leilao_padrao)
+    end
+
     it 'belongs_to leilao_anterior & has_one leilao_posterior' do
       primeiro_leilao = FactoryGirl.create(:leilao)
       segundo_leilao = FactoryGirl.create(:leilao, leilao_anterior: primeiro_leilao)

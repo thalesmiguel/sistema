@@ -20,33 +20,19 @@ RSpec.describe PagamentoParcela, type: :model do
       expect(pagamento_parcela.valid?).to be_falsy
     end
 
-    context 'valida a última parcela' do
-      it 'Criando: exige que a soma das captações seja igual a quantidade de captações de PagamentoParcela' do
-        pagamento_condicao = FactoryGirl.create(:pagamento_condicao, parcelas: 2, captacoes: 10)
-        primeira_parcela = FactoryGirl.create(:pagamento_parcela, pagamento_condicao: pagamento_condicao, parcela: 1, captacoes: 5)
-        ultima_parcela = PagamentoParcela.new(FactoryGirl.attributes_for(:pagamento_parcela, pagamento_condicao: pagamento_condicao, parcela: 2, captacoes: 4))
-        expect(ultima_parcela.valid?).to be_falsy
-      end
-
-      it 'Editando: exige que a soma das captações seja igual a quantidade de captações de PagamentoParcela' do
-        pagamento_condicao = FactoryGirl.create(:pagamento_condicao, parcelas: 2, captacoes: 10)
-        primeira_parcela = FactoryGirl.create(:pagamento_parcela, pagamento_condicao: pagamento_condicao, parcela: 1, captacoes: 5)
-        ultima_parcela = FactoryGirl.create(:pagamento_parcela, pagamento_condicao: pagamento_condicao, parcela: 2, captacoes: 5)
-        ultima_parcela.captacoes = 4
-        ultima_parcela.captacoes = 5
-        ultima_parcela.valid?
-        expect(ultima_parcela.valid?).to be_truthy
-      end
+    it 'exige data de vencimento caso a condição de pagamento seja datas_diferenciadas' do
+      pagamento_condicao = FactoryGirl.create(:pagamento_condicao, parcelas: 2, captacoes: 2, tipo: 'datas_diferenciadas')
+      pagamento_parcela = PagamentoParcela.new(FactoryGirl.attributes_for(:pagamento_parcela, pagamento_condicao: pagamento_condicao, parcela: 1, captacoes: 1, vencimento: ''))
+      expect(pagamento_parcela.valid?).to be_falsy
     end
   end
 
   describe 'associações' do
     let(:pagamento_condicao) { FactoryGirl.create(:pagamento_condicao, parcelas: 2, captacoes: 2) }
 
-    it 'has_many PagamentoParcela' do
-      primeira_pagamento_parcela = FactoryGirl.create(:pagamento_parcela, pagamento_condicao: pagamento_condicao, parcela: 1, captacoes: 1)
-      segunda_pagamento_parcela = FactoryGirl.create(:pagamento_parcela, pagamento_condicao: pagamento_condicao, parcela: 2, captacoes: 1)
-      expect(pagamento_condicao.pagamento_parcelas).to eq [primeira_pagamento_parcela, segunda_pagamento_parcela]
+    it 'belongs_to PagamentoCondicao' do
+      pagamento_parcela = FactoryGirl.create(:pagamento_parcela, pagamento_condicao: pagamento_condicao, parcela: 1, captacoes: 1)
+      expect(pagamento_parcela.pagamento_condicao).to eq pagamento_condicao
     end
 
     # it 'has_many :pagamento_parcela_leiloes, through LeilaoPagamentoParcelas' do
@@ -57,6 +43,22 @@ RSpec.describe PagamentoParcela, type: :model do
     #   expect(pagamento_parcela.pagamento_parcela_leiloes).to eq([primeiro_leilao, segundo_leilao])
     # end
 
+  end
+
+  describe 'métodos' do
+    let(:pagamento_condicao) { FactoryGirl.create(:pagamento_condicao, parcelas: 5, captacoes: 10) }
+
+    it 'mostra a quantidade de captações atual' do
+      primeira_parcela = FactoryGirl.create(:pagamento_parcela, pagamento_condicao: pagamento_condicao, parcela: 1, captacoes: 2)
+      segunda_parcela = PagamentoParcela.new(FactoryGirl.attributes_for(:pagamento_parcela, pagamento_condicao: pagamento_condicao, parcela: 2, captacoes: 2))
+      expect(segunda_parcela.captacao_atual).to eq 2
+    end
+
+    it 'mostra que a quantidade de captações conferem' do
+      primeira_parcela = FactoryGirl.create(:pagamento_parcela, pagamento_condicao: pagamento_condicao, parcela: 1, captacoes: 2)
+      segunda_parcela = PagamentoParcela.new(FactoryGirl.attributes_for(:pagamento_parcela, pagamento_condicao: pagamento_condicao, parcela: 2, captacoes: 2))
+      expect(segunda_parcela.captacoes_conferem?).to be_falsey
+    end
   end
 
   describe 'log' do
@@ -70,10 +72,12 @@ RSpec.describe PagamentoParcela, type: :model do
       end
 
       it 'alteração de PagamentoParcela' do
-        novo_leilao = FactoryGirl.create(:leilao)
-        pagamento_parcela.captacoes = 0
-        pagamento_parcela.save
-        expect(pagamento_parcela.audits.count).to eq 2
+        pagamento_condicao = FactoryGirl.create(:pagamento_condicao, parcelas: 2, captacoes: 2)
+        primeira_parcela = FactoryGirl.create(:pagamento_parcela, pagamento_condicao: pagamento_condicao, parcela: 1, captacoes: 1)
+        segunda_parcela = FactoryGirl.create(:pagamento_parcela, pagamento_condicao: pagamento_condicao, parcela: 1, captacoes: 1)
+        primeira_parcela.captacoes = 0
+        primeira_parcela.save
+        expect(primeira_parcela.audits.count).to eq 2
       end
 
       it 'exclusão de PagamentoParcela' do
