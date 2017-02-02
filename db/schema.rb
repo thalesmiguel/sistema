@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170202114006) do
+ActiveRecord::Schema.define(version: 20170202124709) do
 
   create_table "alerta_comentarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "descricao",  limit: 65535
@@ -575,6 +575,23 @@ ActiveRecord::Schema.define(version: 20170202114006) do
     t.integer "user_id"
     t.integer "role_id"
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
+  end
+
+  create_table "veiculos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.boolean  "disponivel_viagem"
+    t.string   "modelo"
+    t.integer  "ano"
+    t.string   "chassi"
+    t.string   "placa"
+    t.string   "renavam"
+    t.string   "motor"
+    t.date     "data_compra"
+    t.string   "nf"
+    t.integer  "ocupantes"
+    t.integer  "media"
+    t.integer  "combustivel"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   add_foreign_key "alerta_comentarios", "alertas"
