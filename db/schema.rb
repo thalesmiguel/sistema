@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170201183401) do
+ActiveRecord::Schema.define(version: 20170202114006) do
 
   create_table "alerta_comentarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "descricao",  limit: 65535
@@ -225,6 +225,12 @@ ActiveRecord::Schema.define(version: 20170201183401) do
     t.index ["cliente_id"], name: "index_fazendas_on_cliente_id", using: :btree
   end
 
+  create_table "funcoes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "nome"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "lancar_autorizados", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "nome"
     t.string   "cpf"
@@ -416,6 +422,26 @@ ActiveRecord::Schema.define(version: 20170201183401) do
     t.datetime "updated_at",        null: false
   end
 
+  create_table "planejamento_escalas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "funcionario_id"
+    t.integer  "funcao_id"
+    t.integer  "uniforme_id"
+    t.integer  "diaria_valor_centavos",  default: 0,     null: false
+    t.string   "diaria_valor_currency",  default: "BRL", null: false
+    t.string   "diaria_descricao"
+    t.integer  "despesa_valor_centavos", default: 0,     null: false
+    t.string   "despesa_valor_currency", default: "BRL", null: false
+    t.string   "despesa_descricao"
+    t.string   "avaliacao"
+    t.string   "avaliacao_observacao"
+    t.integer  "leilao_id"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.index ["funcao_id"], name: "index_planejamento_escalas_on_funcao_id", using: :btree
+    t.index ["leilao_id"], name: "index_planejamento_escalas_on_leilao_id", using: :btree
+    t.index ["uniforme_id"], name: "index_planejamento_escalas_on_uniforme_id", using: :btree
+  end
+
   create_table "racas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "codigo"
     t.string   "nome"
@@ -466,15 +492,31 @@ ActiveRecord::Schema.define(version: 20170201183401) do
     t.string   "nome_resumido"
     t.integer  "cobranca_por"
     t.integer  "cobranca_lote_tipo"
-    t.text     "cobrado_de",         limit: 65535
-    t.integer  "a_cada"
-    t.integer  "intervalo_inicio"
-    t.integer  "intervalo_fim"
-    t.integer  "valor_centavos",                   default: 0,      null: false
-    t.string   "valor_currency",                   default: "BRTX", null: false
+    t.text     "cobrado_de",                    limit: 65535
+    t.integer  "lote_a_cada"
+    t.integer  "lote_valor_centavos",                         default: 0,      null: false
+    t.string   "lote_valor_currency",                         default: "BRTX", null: false
+    t.integer  "macho_a_cada"
+    t.integer  "macho_intervalo_inicio"
+    t.integer  "macho_intervalo_fim"
+    t.integer  "macho_valor_centavos",                        default: 0,      null: false
+    t.string   "macho_valor_currency",                        default: "BRTX", null: false
+    t.boolean  "macho_somente_sem_registro"
+    t.integer  "femea_a_cada"
+    t.integer  "femea_intervalo_inicio"
+    t.integer  "femea_intervalo_fim"
+    t.integer  "femea_valor_centavos",                        default: 0,      null: false
+    t.string   "femea_valor_currency",                        default: "BRTX", null: false
+    t.boolean  "femea_somente_sem_registro"
+    t.integer  "sem_sexo_a_cada"
+    t.integer  "sem_sexo_intervalo_inicio"
+    t.integer  "sem_sexo_intervalo_fim"
+    t.integer  "sem_sexo_valor_centavos",                     default: 0,      null: false
+    t.string   "sem_sexo_valor_currency",                     default: "BRTX", null: false
+    t.boolean  "sem_sexo_somente_sem_registro"
     t.integer  "leilao_id"
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
+    t.datetime "created_at",                                                   null: false
+    t.datetime "updated_at",                                                   null: false
     t.index ["leilao_id"], name: "index_taxa_automaticas_on_leilao_id", using: :btree
   end
 
@@ -502,6 +544,13 @@ ActiveRecord::Schema.define(version: 20170201183401) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.index ["cliente_id"], name: "index_telefones_on_cliente_id", using: :btree
+  end
+
+  create_table "uniformes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "nome"
+    t.integer  "sexo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -564,6 +613,8 @@ ActiveRecord::Schema.define(version: 20170201183401) do
   add_foreign_key "leilao_racas", "racas"
   add_foreign_key "leiloes", "cidades"
   add_foreign_key "pagamento_parcelas", "pagamento_condicoes"
+  add_foreign_key "planejamento_escalas", "funcoes"
+  add_foreign_key "planejamento_escalas", "uniformes"
   add_foreign_key "referencias", "clientes"
   add_foreign_key "tags", "clientes"
   add_foreign_key "taxa_automaticas", "leiloes"

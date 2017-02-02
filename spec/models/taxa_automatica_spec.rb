@@ -25,8 +25,11 @@ RSpec.describe TaxaAutomatica, type: :model do
   describe 'métodos' do
     it 'apresenta valor com 4 casas decimais' do
       leilao = FactoryGirl.create(:leilao)
-      taxa_automatica = TaxaAutomatica.new(FactoryGirl.attributes_for(:taxa_automatica, leilao: leilao, valor: 1.9999))
-      is_expected.to monetize(:valor).with_currency(:brtx)
+      taxa_automatica = TaxaAutomatica.new(FactoryGirl.attributes_for(:taxa_automatica, leilao: leilao, lote_valor: 1.9999, macho_valor: 1.9999, femea_valor: 1.9999, sem_sexo_valor: 1.9999))
+      is_expected.to monetize(:lote_valor).with_currency(:brtx)
+      is_expected.to monetize(:macho_valor).with_currency(:brtx)
+      is_expected.to monetize(:femea_valor).with_currency(:brtx)
+      is_expected.to monetize(:sem_sexo_valor).with_currency(:brtx)
     end
   end
 

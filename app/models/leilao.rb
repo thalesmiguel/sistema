@@ -15,6 +15,7 @@ class Leilao < ApplicationRecord
   has_many :leilao_observacoes
   has_many :taxa_manuais
   has_many :taxa_automaticas
+  has_many :planejamento_escalas
   has_one :leilao_evento
   has_one :leilao_padrao
   has_one :leilao_comissao

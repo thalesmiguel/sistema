@@ -13,6 +13,8 @@ class Cliente < ApplicationRecord
   has_many :empresas
   has_many :alertas
 
+  has_many :planejamento_escalas, foreign_key: 'funcionario_id'
+
   has_many :leilao_promotores
   has_many :promotor_leiloes, through: :leilao_promotores, source: :leilao
   has_many :leilao_convidados

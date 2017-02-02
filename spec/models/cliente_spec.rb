@@ -216,6 +216,14 @@ RSpec.describe Cliente, type: :model do
       expect(cliente.convidado_leiloes).to eq([primeiro_leilao, segundo_leilao])
     end
 
+    it 'has_many PlanejamentoEscalas' do
+      funcionario = FactoryGirl.create(:cliente, cadastro_tipo: 'funcionário')
+      leilao = FactoryGirl.create(:leilao)
+      primeira_escala = FactoryGirl.create(:planejamento_escala, leilao: leilao, funcionario: funcionario)
+      segunda_escala = FactoryGirl.create(:planejamento_escala, leilao: leilao, funcionario: funcionario)
+      expect(funcionario.planejamento_escalas).to eq [primeira_escala, segunda_escala]
+    end
+
   end
 
   describe 'log' do

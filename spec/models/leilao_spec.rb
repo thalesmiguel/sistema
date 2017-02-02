@@ -59,6 +59,13 @@ RSpec.describe Leilao, type: :model do
       expect(leilao.taxa_automaticas).to eq([primeira_taxa_automatica, segunda_taxa_automatica])
     end
 
+    it 'has_many PlanejamentoEscalas' do
+      funcionario = FactoryGirl.create(:cliente, cadastro_tipo: 'funcionário')
+      primeira_escala = FactoryGirl.create(:planejamento_escala, leilao: leilao, funcionario: funcionario)
+      segunda_escala = FactoryGirl.create(:planejamento_escala, leilao: leilao, funcionario: funcionario)
+      expect(leilao.planejamento_escalas).to eq [primeira_escala, segunda_escala]
+    end
+
     it 'has_one LeilaoEvento' do
       leilao_evento = FactoryGirl.create(:leilao_evento, leilao: leilao)
       expect(leilao.leilao_evento).to eq(leilao_evento)
