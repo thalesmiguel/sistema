@@ -13,9 +13,9 @@ RSpec.describe Uniforme, type: :model do
   describe 'associações' do
 
     it 'has_many PlanejamentoEscalas' do
-      funcionario = FactoryGirl.create(:cliente, cadastro_tipo: 'funcionário')
+      funcionario = FactoryGirl.create(:cliente, cadastro_tipo: 'funcionário', sexo: 'feminino')
       leilao = FactoryGirl.create(:leilao)
-      uniforme = FactoryGirl.create(:uniforme)
+      uniforme = FactoryGirl.create(:uniforme, sexo: 'feminino')
       primeira_escala = FactoryGirl.create(:planejamento_escala, uniforme: uniforme, leilao: leilao, funcionario: funcionario)
       segunda_escala = FactoryGirl.create(:planejamento_escala, uniforme: uniforme, leilao: leilao, funcionario: funcionario)
       expect(uniforme.planejamento_escalas).to eq [primeira_escala, segunda_escala]
