@@ -144,11 +144,19 @@ RSpec.describe Cliente, type: :model do
       segundo_endereco = FactoryGirl.create(:endereco, primario: false, cidade: cidade, cliente: cliente)
       expect(cliente.enderecos).to eq([primeiro_endereco, segundo_endereco])
     end
+    it 'apaga Enderecos quando é destruído' do
+      endereco = FactoryGirl.create(:endereco, cidade: cidade, cliente: cliente)
+      expect { cliente.destroy }.to change { Endereco.count }
+    end
 
     it 'has_many Telefones' do
       primerio_telefone = FactoryGirl.create(:telefone, cliente: cliente)
       segundo_telefone = FactoryGirl.create(:telefone, cliente: cliente)
       expect(cliente.telefones).to eq([primerio_telefone, segundo_telefone])
+    end
+    it 'apaga Telefones quando é destruído' do
+      telefone = FactoryGirl.create(:telefone, cliente: cliente)
+      expect { cliente.destroy }.to change { Telefone.count }
     end
 
     it 'has_many Emails' do
@@ -156,11 +164,19 @@ RSpec.describe Cliente, type: :model do
       segundo_email = FactoryGirl.create(:email, cliente: cliente)
       expect(cliente.emails).to eq([primeiro_email, segundo_email])
     end
+    it 'apaga Emails quando é destruído' do
+      email = FactoryGirl.create(:email, cliente: cliente)
+      expect { cliente.destroy }.to change { Email.count }
+    end
 
     it 'has_many Fazendas' do
       primeira_fazenda = FactoryGirl.create(:fazenda, cidade: cidade, cliente: cliente)
       segunda_fazenda = FactoryGirl.create(:fazenda, cidade: cidade, cliente: cliente)
       expect(cliente.fazendas).to eq([primeira_fazenda, segunda_fazenda])
+    end
+    it 'apaga Fazendas quando é destruído' do
+      fazenda = FactoryGirl.create(:fazenda, cidade: cidade, cliente: cliente)
+      expect { cliente.destroy }.to change { Fazenda.count }
     end
 
     it 'has_many ClienteBancos' do
@@ -169,11 +185,20 @@ RSpec.describe Cliente, type: :model do
       segundo_cliente_banco = FactoryGirl.create(:cliente_banco, primario: false, banco: banco, cidade: cidade, cliente: cliente)
       expect(cliente.cliente_bancos).to eq([primeiro_cliente_banco, segundo_cliente_banco])
     end
+    it 'apaga ClienteBancos quando é destruído' do
+      banco = FactoryGirl.create(:banco)
+      cliente_banco = FactoryGirl.create(:cliente_banco, banco: banco, cidade: cidade, cliente: cliente)
+      expect { cliente.destroy }.to change { ClienteBanco.count }
+    end
 
     it 'has_many Referências' do
       primeira_referencia = FactoryGirl.create(:referencia, cliente: cliente)
       segunda_referencia = FactoryGirl.create(:referencia, cliente: cliente)
       expect(cliente.referencias).to eq([primeira_referencia, segunda_referencia])
+    end
+    it 'apaga Referências quando é destruído' do
+      referencia = FactoryGirl.create(:referencia, cliente: cliente)
+      expect { cliente.destroy }.to change { Referencia.count }
     end
 
     it 'has_many Autorizados a Lançar' do
@@ -181,11 +206,19 @@ RSpec.describe Cliente, type: :model do
       segundo_autorizado_a_lancar = FactoryGirl.create(:lancar_autorizado, cliente: cliente)
       expect(cliente.lancar_autorizados).to eq([primeiro_autorizado_a_lancar, segundo_autorizado_a_lancar])
     end
+    it 'apaga Autorizados a Lançar quando é destruído' do
+      autorizado_a_lancar = FactoryGirl.create(:lancar_autorizado, cliente: cliente)
+      expect { cliente.destroy }.to change { LancarAutorizado.count }
+    end
 
     it 'has_many Tags' do
       primeira_tag = FactoryGirl.create(:tag, cliente: cliente)
       segunda_tag = FactoryGirl.create(:tag, cliente: cliente)
       expect(cliente.tags).to eq([primeira_tag, segunda_tag])
+    end
+    it 'apaga Tags quando é destruído' do
+      tag = FactoryGirl.create(:tag, cliente: cliente)
+      expect { cliente.destroy }.to change { Tag.count }
     end
 
     it 'has_many Empresas' do
@@ -193,11 +226,19 @@ RSpec.describe Cliente, type: :model do
       segunda_empresa = FactoryGirl.create(:empresa, cidade: cidade, cliente: cliente)
       expect(cliente.empresas).to eq([primeira_empresa, segunda_empresa])
     end
+    it 'apaga Empresas quando é destruído' do
+      empresa = FactoryGirl.create(:empresa, cidade: cidade, cliente: cliente)
+      expect { cliente.destroy }.to change { Empresa.count }
+    end
 
     it 'has_many Alertas' do
       primeiro_alerta = FactoryGirl.create(:alerta, cliente: cliente, user: user)
       segundo_alerta = FactoryGirl.create(:alerta, cliente: cliente, user: user)
       expect(cliente.alertas).to eq([primeiro_alerta, segundo_alerta])
+    end
+    it 'apaga Alertas quando é destruído' do
+      alerta = FactoryGirl.create(:alerta, cliente: cliente, user: user)
+      expect { cliente.destroy }.to change { Alerta.count }
     end
 
     it 'has_many :promotor_leiloes, through LeilaoPromotores' do
@@ -207,6 +248,11 @@ RSpec.describe Cliente, type: :model do
       segundo_leilao_promotor = FactoryGirl.create(:leilao_promotor, cliente: cliente, leilao: segundo_leilao)
       expect(cliente.promotor_leiloes).to eq([primeiro_leilao, segundo_leilao])
     end
+    it 'apaga LeilaoPromotores quando é destruído' do
+      leilao = FactoryGirl.create(:leilao)
+      leilao_promotor = FactoryGirl.create(:leilao_promotor, cliente: cliente, leilao: leilao)
+      expect { cliente.destroy }.to change { LeilaoPromotor.count }
+    end
 
     it 'has_many :convidado_leiloes, through LeilaoPromotores' do
       primeiro_leilao = FactoryGirl.create(:leilao)
@@ -215,6 +261,11 @@ RSpec.describe Cliente, type: :model do
       segundo_leilao_convidado = FactoryGirl.create(:leilao_convidado, cliente: cliente, leilao: segundo_leilao)
       expect(cliente.convidado_leiloes).to eq([primeiro_leilao, segundo_leilao])
     end
+    it 'apaga LeilaoPromotores quando é destruído' do
+      leilao = FactoryGirl.create(:leilao)
+      primeiro_leilao_convidado = FactoryGirl.create(:leilao_convidado, cliente: cliente, leilao: leilao)
+      expect { cliente.destroy }.to change { LeilaoConvidado.count }
+    end
 
     it 'has_many PlanejamentoEscalas' do
       funcionario = FactoryGirl.create(:cliente, cadastro_tipo: 'funcionário')
@@ -222,6 +273,12 @@ RSpec.describe Cliente, type: :model do
       primeira_escala = FactoryGirl.create(:planejamento_escala, leilao: leilao, funcionario: funcionario)
       segunda_escala = FactoryGirl.create(:planejamento_escala, leilao: leilao, funcionario: funcionario)
       expect(funcionario.planejamento_escalas).to eq [primeira_escala, segunda_escala]
+    end
+    it 'apaga PlanejamentoEscalas quando é destruído' do
+      funcionario = FactoryGirl.create(:cliente, cadastro_tipo: 'funcionário')
+      leilao = FactoryGirl.create(:leilao)
+      escala = FactoryGirl.create(:planejamento_escala, leilao: leilao, funcionario: funcionario)
+      expect { funcionario.destroy }.to change { PlanejamentoEscala.count }
     end
 
   end

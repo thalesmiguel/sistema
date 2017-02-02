@@ -33,6 +33,11 @@ RSpec.describe PagamentoCondicao, type: :model do
       expect(pagamento_condicao.pagamento_parcelas.count).to eq 2
     end
 
+    it 'apaga PagamentoParcela quando é destruído' do
+      pagamento_condicao.reload
+      expect { pagamento_condicao.destroy }.to change { PagamentoParcela.count }
+    end
+
     it 'has_many :leiloes_elite pela classe LeilaoPadrao e campo :pagamento_elite' do
       leilao_padrao = FactoryGirl.create(:leilao_padrao, leilao: leilao, pagamento_elite: pagamento_condicao)
       expect(pagamento_condicao.leiloes_elite).to eq [leilao_padrao]

@@ -1,5 +1,6 @@
 class LeilaoPadrao < ApplicationRecord
   audited
+  
   belongs_to :leilao
   belongs_to :pagamento_elite, class_name: "PagamentoCondicao"
   belongs_to :pagamento_corte, class_name: "PagamentoCondicao"

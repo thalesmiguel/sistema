@@ -34,6 +34,11 @@ RSpec.describe Alerta, type: :model do
       expect(alerta.alerta_comentarios).to eq([primeiro_alerta_comentario, segundo_alerta_comentario])
     end
 
+    it 'apaga ComentarioAlertas quando é destruído' do
+      alerta = FactoryGirl.create(:alerta, cliente: cliente, user: user)
+      alerta_comentario = FactoryGirl.create(:alerta_comentario, alerta: alerta)
+      expect { alerta.destroy }.to change { AlertaComentario.count }
+    end
   end
 
   describe 'log' do

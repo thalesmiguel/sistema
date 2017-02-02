@@ -12,30 +12,31 @@ class Leilao < ApplicationRecord
   belongs_to :testemunha_2, class_name: "User"
   belongs_to :subtipo_lotes, class_name: "Subtipo"
 
-  has_many :leilao_observacoes
-  has_many :taxa_manuais
-  has_many :taxa_automaticas
-  has_many :planejamento_escalas
+  has_many :leilao_observacoes, dependent: :destroy
+  has_many :taxa_manuais, dependent: :destroy
+  has_many :taxa_automaticas, dependent: :destroy
+  has_many :planejamento_escalas, dependent: :destroy
+  has_many :planejamento_veiculos, dependent: :destroy
   has_one :leilao_evento
-  has_one :leilao_padrao
-  has_one :leilao_comissao
+  has_one :leilao_padrao, dependent: :destroy
+  has_one :leilao_comissao, dependent: :destroy
 
   belongs_to :leilao_anterior, class_name: "Leilao"
   has_many :leilao_posterior, class_name: "Leilao", foreign_key: :leilao_anterior_id
 
-  has_many :leilao_promotores
+  has_many :leilao_promotores, dependent: :destroy
   has_many :promotores, through: :leilao_promotores, source: :cliente
-  has_many :leilao_convidados
+  has_many :leilao_convidados, dependent: :destroy
   has_many :convidados, through: :leilao_convidados, source: :cliente
-  has_many :leilao_bandeiras
+  has_many :leilao_bandeiras, dependent: :destroy
   has_many :bandeiras, through: :leilao_bandeiras
-  has_many :leilao_canais
+  has_many :leilao_canais, dependent: :destroy
   has_many :canais, through: :leilao_canais
-  has_many :leilao_racas
+  has_many :leilao_racas, dependent: :destroy
   has_many :racas, through: :leilao_racas
-  has_many :leilao_patrocinadores
+  has_many :leilao_patrocinadores, dependent: :destroy
   has_many :patrocinadores, through: :leilao_patrocinadores
-  has_many :leilao_assessorias
+  has_many :leilao_assessorias, dependent: :destroy
   has_many :assessorias, through: :leilao_assessorias
 
 

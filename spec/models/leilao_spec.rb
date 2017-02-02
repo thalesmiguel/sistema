@@ -41,10 +41,14 @@ RSpec.describe Leilao, type: :model do
       expect(leilao.subtipo_lotes).to eq(subtipo)
     end
 
-    it 'has_many LeilaoComentarios' do
+    it 'has_many LeilaoObservacoes' do
       primeira_leilao_observacao = FactoryGirl.create(:leilao_observacao, leilao: leilao, user: user)
       segunda_leilao_observacao = FactoryGirl.create(:leilao_observacao, leilao: leilao, user: user)
       expect(leilao.leilao_observacoes).to eq([primeira_leilao_observacao, segunda_leilao_observacao])
+    end
+    it 'apaga LeilaoObservacoes quando é destruído' do
+      leilao_observacao = FactoryGirl.create(:leilao_observacao, leilao: leilao, user: user)
+      expect { leilao.destroy }.to change { LeilaoObservacao.count }
     end
 
     it 'has_many TaxaManuais' do
@@ -52,11 +56,19 @@ RSpec.describe Leilao, type: :model do
       segunda_taxa_manual = FactoryGirl.create(:taxa_manual, leilao: leilao)
       expect(leilao.taxa_manuais).to eq([primeira_taxa_manual, segunda_taxa_manual])
     end
+    it 'apaga TaxaManuais quando é destruído' do
+      taxa_manual = FactoryGirl.create(:taxa_manual, leilao: leilao)
+      expect { leilao.destroy }.to change { TaxaManual.count }
+    end
 
     it 'has_many TaxaAutomaticas' do
       primeira_taxa_automatica = FactoryGirl.create(:taxa_automatica, leilao: leilao)
       segunda_taxa_automatica = FactoryGirl.create(:taxa_automatica, leilao: leilao)
       expect(leilao.taxa_automaticas).to eq([primeira_taxa_automatica, segunda_taxa_automatica])
+    end
+    it 'apaga TaxaAutomaticas quando é destruído' do
+      taxa_automatica = FactoryGirl.create(:taxa_automatica, leilao: leilao)
+      expect { leilao.destroy }.to change { TaxaAutomatica.count }
     end
 
     it 'has_many PlanejamentoEscalas' do
@@ -64,6 +76,23 @@ RSpec.describe Leilao, type: :model do
       primeira_escala = FactoryGirl.create(:planejamento_escala, leilao: leilao, funcionario: funcionario)
       segunda_escala = FactoryGirl.create(:planejamento_escala, leilao: leilao, funcionario: funcionario)
       expect(leilao.planejamento_escalas).to eq [primeira_escala, segunda_escala]
+    end
+    it 'apaga PlanejamentoEscalas quando é destruído' do
+      funcionario = FactoryGirl.create(:cliente, cadastro_tipo: 'funcionário')
+      escala = FactoryGirl.create(:planejamento_escala, leilao: leilao, funcionario: funcionario)
+      expect { leilao.destroy }.to change { PlanejamentoEscala.count }
+    end
+
+    it 'has_many PlanejamentoVeiculos' do
+      veiculo = FactoryGirl.create(:veiculo, disponivel_viagem: true)
+      primeira_veiculo = FactoryGirl.create(:planejamento_veiculo, leilao: leilao, veiculo: veiculo)
+      segunda_veiculo = FactoryGirl.create(:planejamento_veiculo, leilao: leilao, veiculo: veiculo)
+      expect(leilao.planejamento_veiculos).to eq [primeira_veiculo, segunda_veiculo]
+    end
+    it 'apaga PlanejamentoVeiculos quando é destruído' do
+      veiculo = FactoryGirl.create(:veiculo, disponivel_viagem: true)
+      veiculo = FactoryGirl.create(:planejamento_veiculo, leilao: leilao, veiculo: veiculo)
+      expect { leilao.destroy }.to change { PlanejamentoVeiculo.count }
     end
 
     it 'has_one LeilaoEvento' do
@@ -75,10 +104,18 @@ RSpec.describe Leilao, type: :model do
       leilao_padrao = FactoryGirl.create(:leilao_padrao, leilao: leilao)
       expect(leilao.leilao_padrao).to eq(leilao_padrao)
     end
+    it 'apaga LeilaoPadrao quando é destruído' do
+      leilao_padrao = FactoryGirl.create(:leilao_padrao, leilao: leilao)
+      expect { leilao.destroy }.to change { LeilaoPadrao.count }
+    end
 
     it 'has_one LeilaoComissao' do
       leilao_comissao = FactoryGirl.create(:leilao_comissao, leilao: leilao)
       expect(leilao.leilao_comissao).to eq(leilao_comissao)
+    end
+    it 'apaga LeilaoComissao quando é destruído' do
+      leilao_comissao = FactoryGirl.create(:leilao_comissao, leilao: leilao)
+      expect { leilao.destroy }.to change { LeilaoComissao.count }
     end
 
     it 'belongs_to leilao_anterior & has_one leilao_posterior' do
@@ -96,6 +133,11 @@ RSpec.describe Leilao, type: :model do
       segundo_leilao_promotor = FactoryGirl.create(:leilao_promotor, cliente: segundo_cliente, leilao: leilao)
       expect(leilao.promotores).to eq([primeiro_cliente, segundo_cliente])
     end
+    it 'apaga LeilaoPromotores quando é destruído' do
+      cliente = FactoryGirl.create(:cliente)
+      primeiro_leilao_promotor = FactoryGirl.create(:leilao_promotor, cliente: cliente, leilao: leilao)
+      expect { leilao.destroy }.to change { LeilaoPromotor.count }
+    end
 
     it 'has_many :convidados, through LeilaoConvidados' do
       primeiro_cliente = FactoryGirl.create(:cliente)
@@ -103,6 +145,11 @@ RSpec.describe Leilao, type: :model do
       primeiro_leilao_convidado = FactoryGirl.create(:leilao_convidado, cliente: primeiro_cliente, leilao: leilao)
       segundo_leilao_convidado = FactoryGirl.create(:leilao_convidado, cliente: segundo_cliente, leilao: leilao)
       expect(leilao.convidados).to eq([primeiro_cliente, segundo_cliente])
+    end
+    it 'apaga LeilaoConvidados quando é destruído' do
+      cliente = FactoryGirl.create(:cliente)
+      leilao_convidado = FactoryGirl.create(:leilao_convidado, cliente: cliente, leilao: leilao)
+      expect { leilao.destroy }.to change { LeilaoConvidado.count }
     end
 
     it 'has_many :bandeiras, through LeilaoBandeiras' do
@@ -112,6 +159,11 @@ RSpec.describe Leilao, type: :model do
       segundo_leilao_bandeira = FactoryGirl.create(:leilao_bandeira, bandeira: segunda_bandeira, leilao: leilao)
       expect(leilao.bandeiras).to eq([primeira_bandeira, segunda_bandeira])
     end
+    it 'apaga LeilaoBandeiras quando é destruído' do
+      bandeira = FactoryGirl.create(:bandeira)
+      leilao_bandeira = FactoryGirl.create(:leilao_bandeira, bandeira: bandeira, leilao: leilao)
+      expect { leilao.destroy }.to change { LeilaoBandeira.count }
+    end
 
     it 'has_many :canais, through LeilaoCanais' do
       primeiro_canal = FactoryGirl.create(:canal)
@@ -119,6 +171,11 @@ RSpec.describe Leilao, type: :model do
       primeiro_leilao_canal = FactoryGirl.create(:leilao_canal, canal: primeiro_canal, leilao: leilao)
       segundo_leilao_canal = FactoryGirl.create(:leilao_canal, canal: segundo_canal, leilao: leilao)
       expect(leilao.canais).to eq([primeiro_canal, segundo_canal])
+    end
+    it 'apaga LeilaoCanais quando é destruído' do
+      canal = FactoryGirl.create(:canal)
+      primeiro_leilao_canal = FactoryGirl.create(:leilao_canal, canal: canal, leilao: leilao)
+      expect { leilao.destroy }.to change { LeilaoCanal.count }
     end
 
     it 'has_many :racas, through LeilaoRacas' do
@@ -128,6 +185,11 @@ RSpec.describe Leilao, type: :model do
       segundo_leilao_raca = FactoryGirl.create(:leilao_raca, raca: segunda_raca, leilao: leilao)
       expect(leilao.racas).to eq([primeira_raca, segunda_raca])
     end
+    it 'apaga LeilaoRacas quando é destruído' do
+      raca = FactoryGirl.create(:raca)
+      primeiro_leilao_raca = FactoryGirl.create(:leilao_raca, raca: raca, leilao: leilao)
+      expect { leilao.destroy }.to change { LeilaoRaca.count }
+    end
 
     it 'has_many :patrocinadores, through LeilaoPatrocinadores' do
       primeiro_patrocinador = FactoryGirl.create(:patrocinador)
@@ -136,13 +198,23 @@ RSpec.describe Leilao, type: :model do
       segundo_leilao_patrocinador = FactoryGirl.create(:leilao_patrocinador, patrocinador: segundo_patrocinador, leilao: leilao)
       expect(leilao.patrocinadores).to eq([primeiro_patrocinador, segundo_patrocinador])
     end
+    it 'apaga LeilaoPatrocinadores quando é destruído' do
+      patrocinador = FactoryGirl.create(:patrocinador)
+      leilao_patrocinador = FactoryGirl.create(:leilao_patrocinador, patrocinador: patrocinador, leilao: leilao)
+      expect { leilao.destroy }.to change { LeilaoPatrocinador.count }
+    end
 
-    it 'has_many :assessorias, through LeilaoPatrocinadores' do
+    it 'has_many :assessorias, through LeilaoAssessorias' do
       primeira_assessoria = FactoryGirl.create(:assessoria)
       segunda_assessoria = FactoryGirl.create(:assessoria)
       primeiro_leilao_assessoria = FactoryGirl.create(:leilao_assessoria, assessoria: primeira_assessoria, leilao: leilao)
       segundo_leilao_assessoria = FactoryGirl.create(:leilao_assessoria, assessoria: segunda_assessoria, leilao: leilao)
       expect(leilao.assessorias).to eq([primeira_assessoria, segunda_assessoria])
+    end
+    it 'apaga LeilaoPatrocinadores quando é destruído' do
+      assessoria = FactoryGirl.create(:assessoria)
+      leilao_assessoria = FactoryGirl.create(:leilao_assessoria, assessoria: assessoria, leilao: leilao)
+      expect { leilao.destroy }.to change { LeilaoAssessoria.count }
     end
 
   end

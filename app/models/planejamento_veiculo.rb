@@ -14,4 +14,8 @@ class PlanejamentoVeiculo < ApplicationRecord
     !veiculo.disponivel_viagem? ? errors.add(:veiculo, 'deve estar disponível para viagem') : true if veiculo
   end
 
+  # def funcionario_deve_estar_na_escala
+  #   leilao.planejamento_escala.funcionario
+  # end
+
 end

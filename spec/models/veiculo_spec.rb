@@ -11,9 +11,10 @@ RSpec.describe Veiculo, type: :model do
 
   describe 'associações' do
     it 'has_many PlanejamentoVeiculos' do
+      leilao = FactoryGirl.create(:leilao)
       veiculo = FactoryGirl.create(:veiculo, disponivel_viagem: true)
-      primeiro_planejamento = FactoryGirl.create(:planejamento_veiculo, veiculo: veiculo)
-      segundo_planejamento = FactoryGirl.create(:planejamento_veiculo, veiculo: veiculo)
+      primeiro_planejamento = FactoryGirl.create(:planejamento_veiculo, veiculo: veiculo, leilao: leilao)
+      segundo_planejamento = FactoryGirl.create(:planejamento_veiculo, veiculo: veiculo, leilao: leilao)
       expect(veiculo.planejamento_veiculos).to eq [primeiro_planejamento, segundo_planejamento]
     end
   end

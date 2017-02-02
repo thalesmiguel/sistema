@@ -2,22 +2,22 @@ class Cliente < ApplicationRecord
   audited
   trimmed_fields :nome, :apelido, :ficticio, :sexo, :data_nascimento, :inscricao_estadual, :cpf_cnpj, :rg, :rg_emissor, :rg_data_emissao, :pessoa_tipo, :cadastro_tipo, :obsevacao
 
-  has_many :enderecos
-  has_many :telefones
-  has_many :emails
-  has_many :fazendas
-  has_many :cliente_bancos
-  has_many :referencias
-  has_many :lancar_autorizados
-  has_many :tags
-  has_many :empresas
-  has_many :alertas
+  has_many :enderecos, dependent: :destroy
+  has_many :telefones, dependent: :destroy
+  has_many :emails, dependent: :destroy
+  has_many :fazendas, dependent: :destroy
+  has_many :cliente_bancos, dependent: :destroy
+  has_many :referencias, dependent: :destroy
+  has_many :lancar_autorizados, dependent: :destroy
+  has_many :tags, dependent: :destroy
+  has_many :empresas, dependent: :destroy
+  has_many :alertas, dependent: :destroy
 
-  has_many :planejamento_escalas, foreign_key: 'funcionario_id'
+  has_many :planejamento_escalas, foreign_key: 'funcionario_id', dependent: :destroy
 
-  has_many :leilao_promotores
+  has_many :leilao_promotores, dependent: :destroy
   has_many :promotor_leiloes, through: :leilao_promotores, source: :leilao
-  has_many :leilao_convidados
+  has_many :leilao_convidados, dependent: :destroy
   has_many :convidado_leiloes, through: :leilao_convidados, source: :leilao
 
   validates :nome, presence: true
