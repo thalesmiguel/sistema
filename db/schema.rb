@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170202124709) do
+ActiveRecord::Schema.define(version: 20170202125527) do
 
   create_table "alerta_comentarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "descricao",  limit: 65535
@@ -442,6 +442,18 @@ ActiveRecord::Schema.define(version: 20170202124709) do
     t.index ["uniforme_id"], name: "index_planejamento_escalas_on_uniforme_id", using: :btree
   end
 
+  create_table "planejamento_veiculos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "data_inicio"
+    t.datetime "data_fim"
+    t.text     "observacao",  limit: 65535
+    t.integer  "leilao_id"
+    t.integer  "veiculo_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["leilao_id"], name: "index_planejamento_veiculos_on_leilao_id", using: :btree
+    t.index ["veiculo_id"], name: "index_planejamento_veiculos_on_veiculo_id", using: :btree
+  end
+
   create_table "racas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "codigo"
     t.string   "nome"
@@ -632,6 +644,8 @@ ActiveRecord::Schema.define(version: 20170202124709) do
   add_foreign_key "pagamento_parcelas", "pagamento_condicoes"
   add_foreign_key "planejamento_escalas", "funcoes"
   add_foreign_key "planejamento_escalas", "uniformes"
+  add_foreign_key "planejamento_veiculos", "leiloes"
+  add_foreign_key "planejamento_veiculos", "veiculos"
   add_foreign_key "referencias", "clientes"
   add_foreign_key "tags", "clientes"
   add_foreign_key "taxa_automaticas", "leiloes"

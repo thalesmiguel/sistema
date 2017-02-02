@@ -9,14 +9,14 @@ RSpec.describe Veiculo, type: :model do
     end
   end
 
-  # describe 'associações' do
-  #   let(:leilao) { FactoryGirl.create(:leilao) }
-  #
-  #   it 'belongs_to Leilao' do
-  #     veiculo = Veiculo.new(FactoryGirl.attributes_for(:veiculo, leilao: leilao))
-  #     expect(veiculo.leilao).to eq(leilao)
-  #   end
-  # end
+  describe 'associações' do
+    it 'has_many PlanejamentoVeiculos' do
+      veiculo = FactoryGirl.create(:veiculo, disponivel_viagem: true)
+      primeiro_planejamento = FactoryGirl.create(:planejamento_veiculo, veiculo: veiculo)
+      segundo_planejamento = FactoryGirl.create(:planejamento_veiculo, veiculo: veiculo)
+      expect(veiculo.planejamento_veiculos).to eq [primeiro_planejamento, segundo_planejamento]
+    end
+  end
 
   describe 'log' do
 
