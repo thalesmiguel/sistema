@@ -7,6 +7,9 @@ class PlanejamentoEscala < ApplicationRecord
   belongs_to :funcao
   belongs_to :uniforme
 
+  has_many :planejamento_viagens, dependent: :destroy
+  has_many :planejamento_veiculos, through: :planejamento_viagens
+
   monetize :diaria_valor_centavos
   monetize :despesa_valor_centavos
 

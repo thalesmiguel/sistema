@@ -56,6 +56,25 @@ RSpec.describe PlanejamentoEscala, type: :model do
       planejamento_escala = PlanejamentoEscala.new(FactoryGirl.attributes_for(:planejamento_escala, leilao: leilao, funcionario: funcionario, uniforme: uniforme))
       expect(planejamento_escala.leilao).to eq(leilao)
     end
+
+    context 'has_many :planejamento_veiculos, through PlanejamentoViagens' do
+      let(:primeiro_veiculo) { FactoryGirl.create(:veiculo) }
+      let(:segundo_veiculo) { FactoryGirl.create(:veiculo) }
+      let(:planejamento_escala) { FactoryGirl.create(:planejamento_escala, leilao: leilao, funcionario: funcionario) }
+      let(:primeiro_planejamento_veiculo) { FactoryGirl.create(:planejamento_veiculo, leilao: leilao, veiculo: primeiro_veiculo) }
+      let(:segundo_planejamento_veiculo) { FactoryGirl.create(:planejamento_veiculo, leilao: leilao, veiculo: segundo_veiculo) }
+
+      it 'busca planejamento_veiculos' do
+        primeiro_planejamento_viagem = FactoryGirl.create(:planejamento_viagem, planejamento_escala: planejamento_escala, planejamento_veiculo: primeiro_planejamento_veiculo)
+        segundo_planejamento_viagem = FactoryGirl.create(:planejamento_viagem, planejamento_escala: planejamento_escala, planejamento_veiculo: segundo_planejamento_veiculo)
+        expect(planejamento_escala.planejamento_veiculos).to eq([primeiro_planejamento_veiculo, segundo_planejamento_veiculo])
+      end
+      it 'apaga PlanejamentoViagens quando é destruído' do
+        primeiro_planejamento_viagem = FactoryGirl.create(:planejamento_viagem, planejamento_escala: planejamento_escala, planejamento_veiculo: primeiro_planejamento_veiculo)
+        segundo_planejamento_viagem = FactoryGirl.create(:planejamento_viagem, planejamento_escala: planejamento_escala, planejamento_veiculo: segundo_planejamento_veiculo)
+        expect { planejamento_escala.destroy }.to change { PlanejamentoViagem.count }
+      end
+    end
   end
 
   describe 'métodos' do

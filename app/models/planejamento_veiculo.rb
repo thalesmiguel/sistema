@@ -3,8 +3,10 @@ class PlanejamentoVeiculo < ApplicationRecord
   trimmed_fields :observacao
 
   belongs_to :leilao
-  # belongs_to :funcionario, class_name: 'Cliente'
   belongs_to :veiculo
+
+  has_many :planejamento_viagens, dependent: :destroy
+  has_many :planejamento_escalas, through: :planejamento_viagens
 
   validates :leilao, presence: true
   validates :veiculo, presence: true
