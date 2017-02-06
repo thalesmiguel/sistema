@@ -217,6 +217,19 @@ RSpec.describe Leilao, type: :model do
       expect { leilao.destroy }.to change { LeilaoAssessoria.count }
     end
 
+    it 'has_many :leiloeiros, through LeilaoLeiloeiros' do
+      primeiro_leiloeiro = FactoryGirl.create(:leiloeiro)
+      segundo_leiloeiro = FactoryGirl.create(:leiloeiro)
+      primeiro_leilao_leiloeiro = FactoryGirl.create(:leilao_leiloeiro, leiloeiro: primeiro_leiloeiro, leilao: leilao)
+      segundo_leilao_leiloeiro = FactoryGirl.create(:leilao_leiloeiro, leiloeiro: segundo_leiloeiro, leilao: leilao)
+      expect(leilao.leiloeiros).to eq([primeiro_leiloeiro, segundo_leiloeiro])
+    end
+    it 'apaga LeilaoLeiloeiros quando é destruído' do
+      leiloeiro = FactoryGirl.create(:leiloeiro)
+      leilao_leiloeiro = FactoryGirl.create(:leilao_leiloeiro, leiloeiro: leiloeiro, leilao: leilao)
+      expect { leilao.destroy }.to change { LeilaoLeiloeiro.count }
+    end
+
   end
 
   describe 'log' do

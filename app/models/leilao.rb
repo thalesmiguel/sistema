@@ -38,6 +38,8 @@ class Leilao < ApplicationRecord
   has_many :patrocinadores, through: :leilao_patrocinadores
   has_many :leilao_assessorias, dependent: :destroy
   has_many :assessorias, through: :leilao_assessorias
+  has_many :leilao_leiloeiros, dependent: :destroy
+  has_many :leiloeiros, through: :leilao_leiloeiros
 
 
   enum categoria: { elite: 0, corte: 1, outro: 2, shopping: 3 }
