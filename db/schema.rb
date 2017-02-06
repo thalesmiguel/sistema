@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170203111617) do
+ActiveRecord::Schema.define(version: 20170203134446) do
 
   create_table "alerta_comentarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "descricao",  limit: 65535
@@ -365,6 +365,35 @@ ActiveRecord::Schema.define(version: 20170203111617) do
     t.index ["raca_id"], name: "index_leilao_racas_on_raca_id", using: :btree
   end
 
+  create_table "leiloeiros", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "nome_contrato"
+    t.string   "razao_social"
+    t.string   "cpf"
+    t.string   "cnpj"
+    t.string   "sindicato"
+    t.string   "endereco"
+    t.integer  "cidade_id"
+    t.string   "cep"
+    t.string   "email"
+    t.string   "telefone"
+    t.string   "fax"
+    t.string   "sigla"
+    t.integer  "cliente_id"
+    t.string   "foto_file_name"
+    t.string   "foto_content_type"
+    t.integer  "foto_file_size"
+    t.datetime "foto_updated_at"
+    t.decimal  "comissao_elite",    precision: 16, scale: 2
+    t.decimal  "comissao_virtual",  precision: 16, scale: 2
+    t.decimal  "comissao_corte",    precision: 16, scale: 2
+    t.decimal  "comissao_shopping", precision: 16, scale: 2
+    t.boolean  "comissao_contrato"
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.index ["cidade_id"], name: "index_leiloeiros_on_cidade_id", using: :btree
+    t.index ["cliente_id"], name: "index_leiloeiros_on_cliente_id", using: :btree
+  end
+
   create_table "leiloes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "categoria"
     t.integer  "modalidade"
@@ -651,6 +680,8 @@ ActiveRecord::Schema.define(version: 20170203111617) do
   add_foreign_key "leilao_promotores", "leiloes"
   add_foreign_key "leilao_racas", "leiloes"
   add_foreign_key "leilao_racas", "racas"
+  add_foreign_key "leiloeiros", "cidades"
+  add_foreign_key "leiloeiros", "clientes"
   add_foreign_key "leiloes", "cidades"
   add_foreign_key "pagamento_parcelas", "pagamento_condicoes"
   add_foreign_key "planejamento_escalas", "funcoes"

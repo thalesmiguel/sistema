@@ -8,6 +8,7 @@ class Cidade < ApplicationRecord
   has_many :cliente_bancos
   has_many :empresas
   has_many :leiloes
+  has_many :leiloeiros
 
   validates :nome, presence: true, uniqueness: { scope: :estado_id, message: 'já cadastrada' }
 end

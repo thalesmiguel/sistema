@@ -58,6 +58,12 @@ RSpec.describe Cidade, type: :model do
       segundo_leilao = FactoryGirl.create(:leilao, cidade: cidade)
       expect(cidade.leiloes).to eq([primerio_leilao, segundo_leilao])
     end
+
+    it 'has_many Leilões' do
+      primerio_leiloeiro = FactoryGirl.create(:leiloeiro, cidade: cidade)
+      segundo_leiloeiro = FactoryGirl.create(:leiloeiro, cidade: cidade)
+      expect(cidade.leiloeiros).to eq([primerio_leiloeiro, segundo_leiloeiro])
+    end
   end
 
   describe 'log' do

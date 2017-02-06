@@ -14,6 +14,10 @@ RSpec.describe Assessoria, type: :model do
       expect(assessoria.valid?).to be_falsy
     end
 
+    it 'grava logo' do
+      bandeira = FactoryGirl.create(:assessoria)
+      expect(bandeira.logo_file_name).to eq("imagem.png")
+    end
   end
 
   describe 'associações' do

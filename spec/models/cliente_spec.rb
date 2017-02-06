@@ -241,6 +241,12 @@ RSpec.describe Cliente, type: :model do
       expect { cliente.destroy }.to change { Alerta.count }
     end
 
+    it 'has_many Leiloeiros' do
+      primeiro_leiloeiro = FactoryGirl.create(:leiloeiro, cliente: cliente)
+      segundo_leiloeiro = FactoryGirl.create(:leiloeiro, cliente: cliente)
+      expect(cliente.leiloeiros).to eq([primeiro_leiloeiro, segundo_leiloeiro])
+    end
+
     it 'has_many :promotor_leiloes, through LeilaoPromotores' do
       primeiro_leilao = FactoryGirl.create(:leilao)
       segundo_leilao = FactoryGirl.create(:leilao)
