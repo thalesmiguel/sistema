@@ -18,7 +18,7 @@ class PagamentoCondicao < ApplicationRecord
 
 
   def numero_de_parcelas_e_captacoes
-    parcelas > captacoes ? errors.add(:parcelas, "O número de parcelas não pode ser menor do que o número de captações.") : true
+    errors.add(:parcelas, "O número de parcelas não pode ser menor do que o número de captações.") if parcelas > captacoes
   end
 
   def captacoes_conferem?

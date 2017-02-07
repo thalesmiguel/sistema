@@ -13,7 +13,7 @@ class PlanejamentoVeiculo < ApplicationRecord
   validate :veiculo_deve_estar_disponivel_para_viagem
 
   def veiculo_deve_estar_disponivel_para_viagem
-    !veiculo.disponivel_viagem? ? errors.add(:veiculo, 'deve estar disponível para viagem') : true if veiculo
+    errors.add(:veiculo, 'deve estar disponível para viagem') unless veiculo.disponivel_viagem? if veiculo 
   end
 
   # def funcionario_deve_estar_na_escala

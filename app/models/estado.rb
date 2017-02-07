@@ -12,6 +12,6 @@ class Estado < ApplicationRecord
   private
 
   def sigla_deve_ter_dois_caracteres
-    sigla.length != 2 ? errors.add(:sigla, 'deve ter 2 caracteres') : true
+    errors.add(:sigla, 'deve ter 2 caracteres') if sigla.length != 2
   end
 end

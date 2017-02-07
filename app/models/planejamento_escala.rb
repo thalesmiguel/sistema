@@ -19,10 +19,10 @@ class PlanejamentoEscala < ApplicationRecord
   validate :sexo_do_uniforme_igual_ao_do_funcionario
 
   def cliente_deve_ser_funcionario
-    !funcionario.funcionário? ? errors.add(:funcionario, 'deve ser um funcionário') : true if funcionario
+    errors.add(:funcionario, 'deve ser um funcionário') unless funcionario.funcionário? if funcionario
   end
 
   def sexo_do_uniforme_igual_ao_do_funcionario
-    funcionario.sexo != uniforme.sexo ? errors.add(:uniforme, 'deve ser do mesmo sexo e o Funcionário') : true if funcionario && uniforme
+    errors.add(:uniforme, 'deve ser do mesmo sexo e o Funcionário') unless funcionario.sexo == uniforme.sexo if funcionario && uniforme
   end
 end

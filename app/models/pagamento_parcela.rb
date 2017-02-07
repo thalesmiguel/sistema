@@ -27,7 +27,7 @@ class PagamentoParcela < ApplicationRecord
   end
 
   def vencimento_deve_ser_informado_se_datas_diferencias
-    pagamento_condicao.datas_diferenciadas? && !vencimento ? errors.add(:vencimento, "Deve ser informado.") : true if pagamento_condicao
+    errors.add(:vencimento, "Deve ser informado.") unless vencimento if pagamento_condicao && pagamento_condicao.datas_diferenciadas? 
   end
 
 end
