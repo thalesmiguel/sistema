@@ -4,7 +4,7 @@ class ClienteDatatable < AjaxDatatablesRails::Base
   def view_columns
     @view_columns ||= {
       ativo: { source: "Cliente.ativo", cond: :like },
-      cadastro_tipo: { source: "Cliente.cadastro_tipo", cond: :like },
+      cadastro_tipo: { source: "Cliente.cadastro_tipo", cond: filtra_cadastro_tipo },
       cpf_cnpj: { source: "Cliente.cpf_cnpj", cond: :like },
       nome: { source: "Cliente.nome", cond: :like },
       apelido: { source: "Cliente.apelido", cond: :like },
@@ -36,6 +36,10 @@ class ClienteDatatable < AjaxDatatablesRails::Base
     Cliente.left_outer_joins(enderecos: { cidade: :estado })
       .where("enderecos.primario = true or enderecos.primario is null")
       .select("clientes.*, cidades.nome as 'cidade_nome', estados.sigla as 'estado_sigla'")
+  end
+
+  def filtra_cadastro_tipo
+    ->(column) { ::Arel::Nodes::SqlLiteral.new(column.field.to_s).matches("#{ Cliente.cadastro_tipos[column.search.value] }") }
   end
 
   def permitido?

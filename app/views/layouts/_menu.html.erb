@@ -16,6 +16,32 @@
 
   <li><%= link_to "<i class='small material-icons right'>people</i> Clientes".html_safe, clientes_path, class:"waves-effect" %></li>
 
+  <li class="no-padding">
+    <ul class="collapsible collapsible-accordion">
+      <li class="bold">
+        <a class="collapsible-header waves-effect">Cadastros<i class="material-icons">arrow_drop_down</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li class="no-padding">
+              <ul class="collapsible collapsible-accordion">
+                <li class="bold">
+                  <a class="collapsible-header waves-effect">Planejamento<i class="material-icons">arrow_drop_down</i></a>
+                  <div class="collapsible-body">
+                    <ul>
+                      <li><%= link_to "<i class='small material-icons right'>place</i> Funções".html_safe, cidades_path, class:"waves-effect p-l-50 p-r-0" %></li>
+                      <li><%= link_to "<i class='small material-icons right'>place</i> Uniformes".html_safe, cidades_path, class:"waves-effect p-l-50 p-r-0" %></li>
+                      <li><%= link_to "<i class='small material-icons right'>place</i> Veículos".html_safe, cidades_path, class:"waves-effect p-l-50 p-r-0" %></li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </li>
+
   <li><a href="#!">Second Link</a></li>
 
   <li><div class="divider"></div></li>

@@ -1,7 +1,16 @@
 $(document).on('turbolinks:load', function(){
   $('ul.tabs').tabs();
 
-  carrega_datatable_teste("clientes","cliente", ["ativo","cadastro_tipo","cpf_cnpj","nome","apelido","ficticio","cidade_nome","estado_sigla"], []);
+  // Datatables
+  let campos = ["ativo","cadastro_tipo","cpf_cnpj","nome","apelido","ficticio","cidade_nome","estado_sigla"];
+  let yadcf_campos = []
+  $.each(campos, function( index, value ) {
+    yadcf_campos.push({column_number: index, filter_reset_button_text: false, style_class: 'browser-default', filter_default_label: 'Filtrar'})
+  });
+  let campos_sem_busca_ordenacao = []
+
+  carrega_datatable_teste("clientes","cliente", campos, campos_sem_busca_ordenacao, yadcf_campos);
+  // Datatabes
 
   $(document).on("dblclick", "#clientes-table tr[id^=cliente]", function(){
     var id = $(this).attr("id");
@@ -18,7 +27,6 @@ $(document).on('turbolinks:load', function(){
   $(document).on("click", "a[href='#cliente-visualizar'], a[href='#cliente-alertas'], a[href='#cliente-contatos'], a[href='#cliente-relatorios']", function(){
     $("#cliente-dados-adicionais").removeClass("hide");
   });
-
 });
 
 function altera_mascara_cpf_cnpj(){

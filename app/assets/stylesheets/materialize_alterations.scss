@@ -820,6 +820,14 @@ a[data-activates='mobile-menu'] {
   height: 48px !important;
 }
 
+.side-nav .collapsible-body li.active, .side-nav.fixed .collapsible-body li.active {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.side-nav .collapsible-body li.active a, .side-nav.fixed .collapsible-body li.active a {
+  color: rgba(0, 0, 0, 0.87);;
+}
+
 span.name, span.email {
   cursor: default;
 }
@@ -828,6 +836,19 @@ span.name, span.email {
   padding: 14px 16px !important;
 }
 
+.side-nav a {
+  color: rgba(0, 0, 0, 0.87);
+  display: block;
+  font-size: 14px;
+  font-weight: normal;
+  height: 48px;
+  line-height: 48px;
+  padding: 0 32px;
+}
+
+.bold>a {
+    font-weight: bold;
+}
 
 // Vertical Tabs
 .tabs-vertical .tabs {
@@ -931,3 +952,7 @@ footer {
   width: 100%;
 }
 // Fixed Footer & Header
+
+input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+  background: rgba($secondary-color,0.05);
+}

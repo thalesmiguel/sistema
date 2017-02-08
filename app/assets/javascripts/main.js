@@ -4,8 +4,8 @@ $(document).on('turbolinks:load', function(){
   $('select.yadcf-filter').material_select();
   $(".yadcf-filter > ul").find("li:first-child").find("span").text("Filtrar")
 
-  $(".button-collapse").sideNav();
   // $('select').material_select();
+  $(".button-collapse").sideNav();
   $('.collapsible').collapsible();
   // $(".dropdown-button").dropdown();
   // $('ul.tabs').tabs();
@@ -14,6 +14,9 @@ $(document).on('turbolinks:load', function(){
 
 
   $(document).ajaxStart(function() { Pace.restart(); });
+  $('html').on('click', function(){
+    $(".yadcf-filter-wrapper").hide(200);
+  })
   // $(".button-collapse").sideNav();
   // $("select[required]").css({display: "block", height: 0, padding: 0, width: 0, position: 'absolute'});
 
@@ -139,7 +142,7 @@ function limita_text_area() {
 };
 // text_area
 
-function carrega_datatable_teste(modelo, modelo_singular, campos, campos_sem_busca_ordenacao) {
+function carrega_datatable_teste(modelo, modelo_singular, campos, campos_sem_busca_ordenacao, yadcf_campos) {
 
   var lista_campos = []
   $.each(campos, function( index, value ) {
@@ -163,8 +166,11 @@ function carrega_datatable_teste(modelo, modelo_singular, campos, campos_sem_bus
     language: { sUrl: "datatable_i18n" },
     drawCallback: function( settings ) {
       $('.paginate_button').addClass("waves-effect waves-light");
-      // $('select').not('.yadcf-filter').material_select();
       $('.dataTables_length select' ).material_select();
+      $(".datatables-hr-filter").on("click", function(){
+        $(this).next(".yadcf-filter-wrapper").show(200);
+        return false;
+      });
     }
   });
 
@@ -175,7 +181,7 @@ function carrega_datatable_teste(modelo, modelo_singular, campos, campos_sem_bus
   $(document).contextmenu({
     delegate: table + " td",
     menu: [
-      {title: "Filtros", isHeader: true},
+      // {title: "Filtros", isHeader: true},
       {title: "Filtrar", cmd: "filter", uiIcon: "filter"},
       {title: "Remover Filtros", cmd: "nofilter", uiIcon: "nofilter"}
     ],
@@ -197,18 +203,8 @@ function carrega_datatable_teste(modelo, modelo_singular, campos, campos_sem_bus
           extraData = ui.extraData;
     }
   });
-
-  yadcf.init(tabela, [
-    // { column_number: 0, select_type: 'select2', select_type_options: { placeholder: 'Filtrar', allowClear: true } , filter_reset_button_text: false },
-    { column_number: 1, filter_reset_button_text: false },
-    { column_number: 2, filter_reset_button_text: false },
-    { column_number: 3, filter_reset_button_text: false },
-    { column_number: 4, filter_reset_button_text: false },
-    { column_number: 5, filter_reset_button_text: false },
-    { column_number: 6, filter_reset_button_text: false },
-    { column_number: 7, filter_reset_button_text: false },
-  ]);
-
+  //
+  yadcf.init(tabela, yadcf_campos);
 };
 
 function carrega_datatable(modelo, modelo_singular, campos, campos_sem_busca_ordenacao) {
@@ -232,7 +228,7 @@ function carrega_datatable(modelo, modelo_singular, campos, campos_sem_busca_ord
     language: { sUrl: "datatable_i18n" },
     drawCallback: function( settings ) {
       $('.paginate_button').addClass("waves-effect waves-light");
-      // $('select').not('.yadcf-filter').material_select();
+      $('select').not('.yadcf-filter').material_select();
     }
   });
 

@@ -156,9 +156,12 @@ span a.paginate_button:hover {
   padding: 3px 1em 3px 1.7em;
   cursor: default;
   min-height: 0;
-  background: #283593;
-  color: #fff;
-  letter-spacing: 10px;
+  // background: #283593;
+  background-image: image-url("search.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  // color: #fff;
+  // letter-spacing: 10px;
   border-radius: 2px;
 }
 .ui-widget-content {
@@ -239,4 +242,23 @@ span a.paginate_button:hover {
 .select2 {
     width: calc(100% - 45px) !important;
     margin-left: 45px;
+}
+
+.yadcf-filter-wrapper {
+  display: none;
+  position: absolute;
+  background: red;
+  border-radius: 5px;
+  padding: 10px;
+  padding-bottom: 0;
+  width: 250px;
+  margin-top: -3%;
+}
+
+.datatables-hr-filter {
+  font-size: 15px !important;
+}
+
+.dataTable th:hover .datatables-hr-filter {
+  display: block !important;
 }
