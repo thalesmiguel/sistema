@@ -2,8 +2,7 @@ $(document).on('turbolinks:load', function(){
   // $('.modal-trigger').leanModal();
 
   $('select.yadcf-filter').material_select();
-  $(".yadcf-filter > ul").find("li:first-child").find("span").text("Filtrar")
-
+  $(".yadcf-filter.inuse").closest("th").addClass("bg-filter");
   // $('select').material_select();
   $(".button-collapse").sideNav();
   $('.collapsible').collapsible();
@@ -171,6 +170,8 @@ function carrega_datatable_teste(modelo, modelo_singular, campos, campos_sem_bus
         $(this).next(".yadcf-filter-wrapper").show(200);
         return false;
       });
+      $(".yadcf-filter.inuse").closest("th").addClass("bg-filter");
+      $(".yadcf-filter").not(".inuse").closest("th").removeClass("bg-filter");
     }
   });
 
@@ -181,7 +182,6 @@ function carrega_datatable_teste(modelo, modelo_singular, campos, campos_sem_bus
   $(document).contextmenu({
     delegate: table + " td",
     menu: [
-      // {title: "Filtros", isHeader: true},
       {title: "Filtrar", cmd: "filter", uiIcon: "filter"},
       {title: "Remover Filtros", cmd: "nofilter", uiIcon: "nofilter"}
     ],
@@ -191,9 +191,12 @@ function carrega_datatable_teste(modelo, modelo_singular, campos, campos_sem_bus
       switch(ui.cmd){
         case "filter":
           tabela.column( colvindex ).search( celltext ).draw();
+          let header = tabela.column( colvindex ).header();
+          $(header).find(".yadcf-filter").addClass("inuse");
           break;
         case "nofilter":
           tabela.search('').columns().search('').draw();
+          $(".yadcf-filter.inuse").removeClass("inuse");
           break;
       }
     },
@@ -205,6 +208,10 @@ function carrega_datatable_teste(modelo, modelo_singular, campos, campos_sem_bus
   });
   //
   yadcf.init(tabela, yadcf_campos);
+
+  $(document).on('ajax:complete', "." + modelo_singular + "-form", function(){
+    tabela.draw();
+  });
 };
 
 function carrega_datatable(modelo, modelo_singular, campos, campos_sem_busca_ordenacao) {

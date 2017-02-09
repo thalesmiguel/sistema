@@ -65,22 +65,29 @@
   *cursor: hand;
   background-repeat: no-repeat;
   background-position: center right;
+  transition: background-color .5s ease;
 }
 
 .sorting_desc {
-  background-image: image-url("arrow_up.png")
+  background-image: image-url("arrow_up.png");
+  background-position: right 25px center;
 }
 
 .sorting_asc {
-  background-image: image-url("arrow_down.png")
+  background-image: image-url("arrow_down.png");
+  background-position: right 25px center;
 }
 
 .filter {
-  background-image: image-url("filter.png")
+  background-image: image-url("filter.png");
 }
 
 .nofilter {
-  background-image: image-url("nofilter.png")
+  background-image: image-url("nofilter.png");
+}
+
+.bg-filter {
+  background-color: rgba(0, 151, 167, 0.2);
 }
 
 .dataTables_info {
@@ -247,18 +254,26 @@ span a.paginate_button:hover {
 .yadcf-filter-wrapper {
   display: none;
   position: absolute;
-  background: red;
+  background: white;
   border-radius: 5px;
-  padding: 10px;
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
   padding-bottom: 0;
-  width: 250px;
   margin-top: -3%;
 }
 
 .datatables-hr-filter {
-  font-size: 15px !important;
+  visibility: hidden;
+  opacity: 0;
+  font-size: 20px !important;
+  // background: white;
+  // border: 1px solid white;
+  border-radius: 2px;
+  // box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.1);
+  transition: visibility 0.5s, opacity 0.5s ease;
 }
 
 .dataTable th:hover .datatables-hr-filter {
-  display: block !important;
+  visibility: visible;
+  opacity: 1;
+  // display: block !important;
 }

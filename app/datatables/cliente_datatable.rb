@@ -39,7 +39,7 @@ class ClienteDatatable < AjaxDatatablesRails::Base
   end
 
   def filtra_cadastro_tipo
-    ->(column) { ::Arel::Nodes::SqlLiteral.new(column.field.to_s).matches("#{ Cliente.cadastro_tipos[column.search.value] }") }
+    ->(column) { column.table[column.field].eq(Cliente.cadastro_tipos[column.search.value]) }
   end
 
   def permitido?
