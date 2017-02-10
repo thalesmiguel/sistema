@@ -4,8 +4,8 @@ class CidadeDatatable < ApplicationDatatable
     @view_columns ||= {
       nome: { source: "Cidade.nome", cond: :like },
       estado_sigla: { source: "Estado.sigla", cond: :like },
-      created_at: { source: "Cidade.created_at", cond: :like },
-      updated_at: { source: "Cidade.updated_at", cond: :like },
+      created_at: { source: "Cidade.created_at", cond: filtra_data },
+      updated_at: { source: "Cidade.updated_at", cond: filtra_data },
     }
   end
 

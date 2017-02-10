@@ -21,16 +21,7 @@ module ApplicationHelper
     ativo ? '<i class="material-icons secondary-color-text">check_box</i>' : '<i class="material-icons secondary-color-text">check_box_outline_blank</i>'
   end
 
-
   # Datatables
-  def boolean_pt(boolean)
-    boolean == true ? 'verdadeiro' : 'falso'
-  end
-
-  def string_to_boolean(boolean)
-    boolean == 'verdadeiro' ? 1 : 0
-  end
-
   def filtro_dt
     '<i class="material-icons right datatables-hr-filter">visibility</i>'.html_safe
   end
