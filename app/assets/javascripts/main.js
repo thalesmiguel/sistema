@@ -141,11 +141,16 @@ function limita_text_area() {
 };
 // text_area
 
-function carrega_datatable_teste(modelo, modelo_singular, campos, campos_sem_busca_ordenacao, yadcf_campos) {
+function carrega_datatable_filtro(modelo, modelo_singular, campos, campos_sem_busca_ordenacao) {
 
   var lista_campos = []
   $.each(campos, function( index, value ) {
     lista_campos.push({data: value.toString()})
+  });
+
+  let yadcf_campos = []
+  $.each(campos, function( index, value ) {
+    yadcf_campos.push({column_number: index, filter_reset_button_text: false, style_class: 'browser-default', filter_default_label: 'Filtrar'})
   });
 
   var table = "#" + modelo + "-table"
@@ -208,7 +213,7 @@ function carrega_datatable_teste(modelo, modelo_singular, campos, campos_sem_bus
           extraData = ui.extraData;
     }
   });
-  //
+
   yadcf.init(tabela, yadcf_campos);
 
   $(document).on('ajax:complete', "." + modelo_singular + "-form", function(){

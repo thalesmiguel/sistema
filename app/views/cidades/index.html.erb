@@ -15,12 +15,12 @@
   <table id="cidades-table" class="highlight bordered" data-source="<%= cidades_path(format: :json) %>">
     <thead>
       <tr>
-        <th width="30%">Nome <i class="material-icons right datatables-hr-filter">visibility</i> </th>
-        <th width="30%">Estado <i class="material-icons right datatables-hr-filter">visibility</i> </th>
-        <th width="10%">Criado em <i class="material-icons right datatables-hr-filter">visibility</i> </th>
-        <th width="10%">Criado por <i class="material-icons right datatables-hr-filter">visibility</i> </th>
-        <th width="10%">Alterado em <i class="material-icons right datatables-hr-filter">visibility</i> </th>
-        <th width="10%">Alterado por <i class="material-icons right datatables-hr-filter">visibility</i> </th>
+        <th width="30%">Nome <%= filtro_dt %> </th>
+        <th width="30%">Estado <%= filtro_dt %> </th>
+        <th width="10%">Criado em <%= filtro_dt %> </th>
+        <th width="10%">Criado por <%= filtro_dt %> </th>
+        <th width="10%">Alterado em <%= filtro_dt %> </th>
+        <th width="10%">Alterado por <%= filtro_dt %> </th>
       </tr>
     </thead>
     <tbody>

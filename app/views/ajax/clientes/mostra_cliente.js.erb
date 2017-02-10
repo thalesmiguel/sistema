@@ -14,19 +14,9 @@ if (<%= !@cliente.new_record? %>) {
       success : function(){
         switch (value) {
           case "enderecos":
-
-            // Datatables
             let campos = ["tipo","logradouro","numero","complemento","bairro","cep","caixa_postal","cidade_nome","estado_sigla","ativo","primario"];
-            let yadcf_campos = []
-            $.each(campos, function( index, value ) {
-              yadcf_campos.push({column_number: index, filter_reset_button_text: false, style_class: 'browser-default', filter_default_label: 'Filtrar'})
-            });
-            let campos_sem_busca_ordenacao = []
-            carrega_datatable_teste("enderecos","endereco", campos, campos_sem_busca_ordenacao, yadcf_campos);
-            // Datatabes
+            carrega_datatable_filtro("enderecos","endereco", campos, []);
 
-            // carrega_datatable("enderecos","endereco", ["tipo","logradouro","numero","complemento","bairro","cep","caixa_postal","cidade_nome","estado_sigla","ativo","primario"], []);
-            // carrega_datatable_id_automatico("#enderecos-table", ".endereco-form", ".excluir-endereco", [], [0,1,2,3,4,5,6,7,8,9,10]);
             break;
           case "telefones":
             carrega_datatable("telefones","telefone", ["tipo","ddi","ddd","numero","created_at","ramal","nome_contato","importancia","telemarketing","divulgar","ativo"], []);

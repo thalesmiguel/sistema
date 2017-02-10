@@ -14,12 +14,12 @@
     <table id="alertas-table" class="highlight bordered" data-source="<%= cliente_alertas_path(@cliente_alerta, format: :json, params: {somente_ativos: params[:somente_ativos]}) %>" data-cliente-alerta="<%= @cliente_alerta %>">
       <thead>
         <tr>
-          <th width="">Tipo</th>
-          <th width="">Data</th>
-          <th width="">Descrição</th>
-          <th width="">Ativo</th>
-          <th width="">Comentários</th>
-          <th width="">Usuário</th>
+          <th width="">Tipo <%= filtro_dt %> </th>
+          <th width="">Data <%= filtro_dt %> </th>
+          <th width="">Descrição <%= filtro_dt %> </th>
+          <th width="">Ativo <%= filtro_dt %> </th>
+          <th width="">Comentários <%= filtro_dt %> </th>
+          <th width="">Usuário <%= filtro_dt %> </th>
         </tr>
       </thead>
       <tbody>

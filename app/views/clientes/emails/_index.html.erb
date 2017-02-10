@@ -2,13 +2,13 @@
   <table id="emails-table" class="highlight bordered" data-source="<%= cliente_emails_path(@cliente_email, format: :json) %>" data-cliente-email="<%= @cliente_email %>">
     <thead>
       <tr>
-        <th width="20%">Email</th>
-        <th width="20%">Contato</th>
-        <th width="15%">Criado em</th>
-        <th width="10%">Mala Direta</th>
-        <th width="15%">Solicitação por E-mail</th>
-        <th width="10%">Envio de Contratos</th>
-        <th width="5%">Ativo</th>
+        <th width="20%">Email <%= filtro_dt %> </th>
+        <th width="20%">Contato <%= filtro_dt %> </th>
+        <th width="15%">Criado em <%= filtro_dt %> </th>
+        <th width="10%">Mala Direta <%= filtro_dt %> </th>
+        <th width="15%">Solicitação por E-mail <%= filtro_dt %> </th>
+        <th width="10%">Envio de Contratos <%= filtro_dt %> </th>
+        <th width="5%">Ativo <%= filtro_dt %> </th>
       </tr>
     </thead>
     <tbody>

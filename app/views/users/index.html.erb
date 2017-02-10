@@ -17,10 +17,10 @@
   <table id="users-table" class="highlight bordered" data-source="<%= users_path(format: :json) %>">
     <thead>
       <tr>
-        <th width="40%">Usuário</th>
-        <th width="30%">Email</th>
-        <th width="15%">Criado em</th>
-        <th width="15%">Alterado em</th>
+        <th width="40%">Usuário <%= filtro_dt %> </th>
+        <th width="30%">Email <%= filtro_dt %> </th>
+        <th width="15%">Criado em <%= filtro_dt %> </th>
+        <th width="15%">Alterado em <%= filtro_dt %> </th>
       </tr>
     </thead>
     <tbody>

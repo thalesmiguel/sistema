@@ -2,17 +2,17 @@
   <table id="enderecos-table" class="highlight bordered" data-source="<%= cliente_enderecos_path(@cliente_endereco, format: :json) %>" data-cliente-endereco="<%= @cliente_endereco %>">
     <thead>
       <tr>
-        <th width="7%">Tipo <i class="material-icons right datatables-hr-filter">visibility</i> </th>
-        <th width="15%">Logradouro <i class="material-icons right datatables-hr-filter">visibility</i> </th>
-        <th width="8%">Numero <i class="material-icons right datatables-hr-filter">visibility</i> </th>
-        <th width="11%">Complemento <i class="material-icons right datatables-hr-filter">visibility</i> </th>
-        <th width="9%">Bairro <i class="material-icons right datatables-hr-filter">visibility</i> </th>
-        <th width="9%">CEP <i class="material-icons right datatables-hr-filter">visibility</i> </th>
-        <th width="9%">Cx. Postal <i class="material-icons right datatables-hr-filter">visibility</i> </th>
-        <th width="9%">Cidade <i class="material-icons right datatables-hr-filter">visibility</i> </th>
-        <th width="7%">UF <i class="material-icons right datatables-hr-filter">visibility</i> </th>
-        <th width="7%">Ativo <i class="material-icons right datatables-hr-filter">visibility</i> </th>
-        <th width="9%">Primário <i class="material-icons right datatables-hr-filter">visibility</i> </th>
+        <th width="7%">Tipo <%= filtro_dt %> </th>
+        <th width="15%">Logradouro <%= filtro_dt %> </th>
+        <th width="8%">Numero <%= filtro_dt %> </th>
+        <th width="11%">Complemento <%= filtro_dt %> </th>
+        <th width="9%">Bairro <%= filtro_dt %> </th>
+        <th width="9%">CEP <%= filtro_dt %> </th>
+        <th width="9%">Cx. Postal <%= filtro_dt %> </th>
+        <th width="9%">Cidade <%= filtro_dt %> </th>
+        <th width="7%">UF <%= filtro_dt %> </th>
+        <th width="7%">Ativo <%= filtro_dt %> </th>
+        <th width="9%">Primário <%= filtro_dt %> </th>
       </tr>
     </thead>
     <tbody>

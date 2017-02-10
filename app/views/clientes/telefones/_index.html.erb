@@ -2,17 +2,17 @@
   <table id="telefones-table" class="highlight bordered" data-source="<%= cliente_telefones_path(@cliente_telefone, format: :json) %>" data-cliente-telefone="<%= @cliente_telefone %>">
     <thead>
       <tr>
-        <th width="15%">Tipo</th>
-        <th width="10%">DDI</th>
-        <th width="10%">DDD</th>
-        <th width="20%">Número</th>
-        <th width="15%">Dt. Cadastro</th>
-        <th width="5%">Ramal</th>
-        <th width="5%">Contato</th>
-        <th width="5%">Importância</th>
-        <th width="5%">Telemarketing</th>
-        <th width="5%">Divulgar</th>
-        <th width="5%">Ativo</th>
+        <th width="15%">Tipo <%= filtro_dt %> </th>
+        <th width="10%">DDI <%= filtro_dt %> </th>
+        <th width="10%">DDD <%= filtro_dt %> </th>
+        <th width="20%">Número <%= filtro_dt %> </th>
+        <th width="15%">Dt. Cadastro <%= filtro_dt %> </th>
+        <th width="5%">Ramal <%= filtro_dt %> </th>
+        <th width="5%">Contato <%= filtro_dt %> </th>
+        <th width="5%">Importância <%= filtro_dt %> </th>
+        <th width="5%">Telemarketing <%= filtro_dt %> </th>
+        <th width="5%">Divulgar <%= filtro_dt %> </th>
+        <th width="5%">Ativo <%= filtro_dt %> </th>
       </tr>
     </thead>
     <tbody>

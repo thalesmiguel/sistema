@@ -2,13 +2,13 @@
   <table id="empresas-table" class="highlight bordered" data-source="<%= cliente_empresas_path(@cliente_empresa, format: :json) %>" data-cliente-empresa="<%= @cliente_empresa %>">
     <thead>
       <tr>
-        <th width="">Nome</th>
-        <th width="">CNPJ</th>
-        <th width="">Cargo</th>
-        <th width="">Logradouro</th>
-        <th width="">Cidade</th>
-        <th width="">UF</th>
-        <th width="">CEP</th>
+        <th width="">Nome <%= filtro_dt %> </th>
+        <th width="">CNPJ <%= filtro_dt %> </th>
+        <th width="">Cargo <%= filtro_dt %> </th>
+        <th width="">Logradouro <%= filtro_dt %> </th>
+        <th width="">Cidade <%= filtro_dt %> </th>
+        <th width="">UF <%= filtro_dt %> </th>
+        <th width="">CEP <%= filtro_dt %> </th>
       </tr>
     </thead>
     <tbody>

@@ -1,16 +1,8 @@
 $(document).on('turbolinks:load', function(){
   $('ul.tabs').tabs();
 
-  // Datatables
   let campos = ["ativo","cadastro_tipo","cpf_cnpj","nome","apelido","ficticio","cidade_nome","estado_sigla"];
-  let yadcf_campos = []
-  $.each(campos, function( index, value ) {
-    yadcf_campos.push({column_number: index, filter_reset_button_text: false, style_class: 'browser-default', filter_default_label: 'Filtrar'})
-  });
-  let campos_sem_busca_ordenacao = []
-
-  carrega_datatable("clientes","cliente", campos, campos_sem_busca_ordenacao, yadcf_campos);
-  // Datatabes
+  carrega_datatable_filtro("clientes","cliente", campos, []);
 
   $(document).on("dblclick", "#clientes-table tr[id^=cliente]", function(){
     var id = $(this).attr("id");
