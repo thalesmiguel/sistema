@@ -14,44 +14,43 @@ if (<%= !@cliente.new_record? %>) {
       success : function(){
         switch (value) {
           case "enderecos":
-            let campos = ["tipo","logradouro","numero","complemento","bairro","cep","caixa_postal","cidade_nome","estado_sigla","ativo","primario"];
+            var campos = ["tipo","logradouro","numero","complemento","bairro","cep","caixa_postal","cidade_nome","estado_sigla","ativo","primario"];
             carrega_datatable_filtro("enderecos","endereco", campos, []);
-
             break;
           case "telefones":
-            carrega_datatable("telefones","telefone", ["tipo","ddi","ddd","numero","created_at","ramal","nome_contato","importancia","telemarketing","divulgar","ativo"], []);
-            // carrega_datatable_id_automatico("#telefones-table", ".telefone-form", ".excluir-telefone", [], [0,1,2,3,4,5,6,7,8,9,10]);
+            var campos = ["tipo","ddi","ddd","numero","created_at","ramal","nome_contato","importancia","telemarketing","divulgar","ativo"];
+            carrega_datatable_filtro("telefones","telefone", campos, []);
             break;
           case "emails":
-            carrega_datatable("emails","email", ["email","contato","created_at","mala_direta","ativo","solicitacao_email","envio_contratos"], []);
-            // carrega_datatable_id_automatico("#emails-table", ".email-form", ".excluir-email", [], [0,1,2,3,4,5,6]);
+            var campos = ["email","contato","created_at","mala_direta","ativo","solicitacao_email","envio_contratos"];
+            carrega_datatable_filtro("emails","email", campos, []);
             break;
           case "fazendas":
-            carrega_datatable("fazendas","fazenda", ["nome","cidade_nome","estado_sigla","inscricao_estadual","cnpj_produtor","cnpj_fazenda","ativo","fazenda_vendas","fazenda_compras"], []);
-            // carrega_datatable_id_automatico("#fazendas-table", ".fazenda-form", ".excluir-fazenda", [], [0,1,2,3,4,5,6,7,8]);
+            var campos = ["nome","cidade_nome","estado_sigla","inscricao_estadual","cnpj_produtor","cnpj_fazenda","ativo","fazenda_vendas","fazenda_compras"];
+            carrega_datatable_filtro("fazendas","fazenda", campos, []);
             break;
           case "cliente_bancos":
-            carrega_datatable("cliente_bancos","cliente_banco", ["banco_codigo","banco_nome","agencia","conta_corrente","cidade_nome","estado_sigla","correntista_nome","correntista_cpf_cnpj","observacao","created_at","primario","ativo"], []);
-            // carrega_datatable_id_automatico("#cliente_bancos-table", ".cliente_banco-form", ".excluir-cliente_banco", [], [0,1,2,3,4,5,6,7,8,9,10,11]);
+            var campos = ["banco_codigo","banco_nome","agencia","conta_corrente","cidade_nome","estado_sigla","correntista_nome","correntista_cpf_cnpj","observacao","created_at","primario","ativo"];
+            carrega_datatable_filtro("cliente_bancos","cliente_banco", campos, []);
             break;
           case "referencias":
-            carrega_datatable("referencias","referencia", ["nome","telefone","observacao"], []);
-            // carrega_datatable_id_automatico("#referencias-table", ".referencia-form", ".excluir-referencia", [], [0,1,2]);
+            var campos = ["nome","telefone","observacao"];
+            carrega_datatable_filtro("referencias","referencia", campos, []);
             break;
           case "lancar_autorizados":
-            carrega_datatable("lancar_autorizados","lancar_autorizado", ["nome","cpf","tem_procuracao","observacao","ativo"], []);
-            // carrega_datatable_id_automatico("#lancar_autorizados-table", ".lancar_autorizado-form", ".excluir-lancar_autorizado", [], [0,1,2,3,4]);
+            var campos = ["nome","cpf","tem_procuracao","observacao","ativo"];
+            carrega_datatable_filtro("lancar_autorizados","lancar_autorizado", campos, []);
             break;
           case "racas":
             // carrega_datatable_id_automatico("#racas-table", ".raca-form", ".excluir-raca", [], [0,1,2,3,4,5,6,7,8,9,10]);
             break;
           case "empresas":
-            carrega_datatable("empresas","empresa", ["nome","cnpj","cargo","logradouro","cidade_nome","estado_nome","cep"], []);
-            // carrega_datatable_id_automatico("#empresas-table", ".empresa-form", ".excluir-empresa", [], [0,1,2,3,4,5,6]);
+            var campos = ["nome","cnpj","cargo","logradouro","cidade_nome","estado_nome","cep"];
+            carrega_datatable_filtro("empresas","empresa", campos, []);
             break;
           case "alertas":
-            carrega_datatable("alertas","alerta", ["tipo","created_at","descricao","ativo","qtde_comentarios","created_by"], [4,5]);
-            // carrega_datatable_id_automatico("#alertas-table", ".alerta-form", ".excluir-alerta", [], [0,1,2,3,4,5,6]);
+            var campos = ["tipo","created_at","descricao","ativo","qtde_comentarios","created_by"];
+            carrega_datatable_filtro("alertas","alerta", campos, [4,5]);
             break;
           default: value
         }

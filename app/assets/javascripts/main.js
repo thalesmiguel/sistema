@@ -175,6 +175,8 @@ function carrega_datatable_filtro(modelo, modelo_singular, campos, campos_sem_bu
         $(this).next(".yadcf-filter-wrapper").show(200);
         return false;
       });
+      datatable_context_menu(table, tabela);
+      yadcf.init(tabela, yadcf_campos);
       $(".yadcf-filter.inuse").closest("th").addClass("bg-filter");
       $(".yadcf-filter").not(".inuse").closest("th").removeClass("bg-filter");
       $("td:contains(verdadeiro)").html('<i class="material-icons secondary-color-text">check_box</i>');
@@ -185,7 +187,9 @@ function carrega_datatable_filtro(modelo, modelo_singular, campos, campos_sem_bu
   $(document).on('ajax:complete', "." + modelo_singular + "-form", function(){
     tabela.draw();
   });
+};
 
+function datatable_context_menu(table, tabela) {
   $(document).contextmenu({
     delegate: table + " td",
     menu: [
@@ -213,13 +217,7 @@ function carrega_datatable_filtro(modelo, modelo_singular, campos, campos_sem_bu
           extraData = ui.extraData;
     }
   });
-
-  yadcf.init(tabela, yadcf_campos);
-
-  $(document).on('ajax:complete', "." + modelo_singular + "-form", function(){
-    tabela.draw();
-  });
-};
+}
 
 function carrega_datatable(modelo, modelo_singular, campos, campos_sem_busca_ordenacao) {
 

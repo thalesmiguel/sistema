@@ -1,4 +1,5 @@
 $(document).on('turbolinks:load', function(){
+  $(document).off("dblclick", "#empresas-table tr[id^=empresa]")
   $(document).on("dblclick", "#empresas-table tr[id^=empresa]", function(){
     var id = $(this).attr("id");
     var cliente = $("#empresas-table").data('cliente-empresa')

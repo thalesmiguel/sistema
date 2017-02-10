@@ -1,4 +1,5 @@
 $(document).on('turbolinks:load', function(){
+  $(document).off("dblclick", "#referencias-table tr[id^=referencia]")
   $(document).on("dblclick", "#referencias-table tr[id^=referencia]", function(){
     var id = $(this).attr("id");
     var cliente = $("#referencias-table").data('cliente-referencia')

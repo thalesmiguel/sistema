@@ -1,4 +1,5 @@
 $(document).on('turbolinks:load', function(){
+  $(document).off("dblclick", "#fazendas-table tr[id^=fazenda]")
   $(document).on("dblclick", "#fazendas-table tr[id^=fazenda]", function(){
     var id = $(this).attr("id");
     var cliente = $("#fazendas-table").data('cliente-fazenda')

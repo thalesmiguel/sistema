@@ -1,14 +1,17 @@
 $(document).on('turbolinks:load', function(){
+  $(document).off('click', '#alertas-somente-ativos, #alertas-exibir-todos')
   $(document).on('click', '#alertas-somente-ativos, #alertas-exibir-todos', function(){
     $("#alertas-table").dataTable().fnDraw();
   });
 
+  $(document).off('click', '#alerta_somente_ativos_Btn')
   $(document).on('click', '#alerta_somente_ativos_Btn', function(e){
     var table = $("#alertas-table").DataTable();
     table.column(3).search("1").draw()
     $("#alerta_exibir_todos_Btn").toggleClass("hide")
     $(this).toggleClass("hide")
   });
+  $(document).off('click', '#alerta_exibir_todos_Btn')
   $(document).on('click', '#alerta_exibir_todos_Btn', function(e){
     var table = $("#alertas-table").DataTable();
     table.column(3).search("").draw()
@@ -20,6 +23,7 @@ $(document).on('turbolinks:load', function(){
   var clicks, timer, delay;
   clicks=0;delay=500;timer=null;
 
+  $(document).off('click', "#alertas-table tr[id^=alerta]")
   $(document).on('click', "#alertas-table tr[id^=alerta]", function(){
     row = $(this);
     clicks++;

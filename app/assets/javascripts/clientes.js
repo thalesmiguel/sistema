@@ -4,6 +4,7 @@ $(document).on('turbolinks:load', function(){
   let campos = ["ativo","cadastro_tipo","cpf_cnpj","nome","apelido","ficticio","cidade_nome","estado_sigla"];
   carrega_datatable_filtro("clientes","cliente", campos, []);
 
+  $(document).off("dblclick", "#clientes-table tr[id^=cliente]")
   $(document).on("dblclick", "#clientes-table tr[id^=cliente]", function(){
     var id = $(this).attr("id");
     var url = "/clientes/" + id.replace("cliente_", "") + "/editar"
@@ -11,11 +12,13 @@ $(document).on('turbolinks:load', function(){
   });
 
 
+  $(document).off("click", "a[href='#cliente-pesquisar']")
   $(document).on("click", "a[href='#cliente-pesquisar']", function(){
     $("#clientes-table").dataTable().fnDraw();
     $("#cliente-dados-adicionais").addClass("hide");
   });
 
+  $(document).off("click", "a[href='#cliente-visualizar'], a[href='#cliente-alertas'], a[href='#cliente-contatos'], a[href='#cliente-relatorios']")
   $(document).on("click", "a[href='#cliente-visualizar'], a[href='#cliente-alertas'], a[href='#cliente-contatos'], a[href='#cliente-relatorios']", function(){
     $("#cliente-dados-adicionais").removeClass("hide");
   });
