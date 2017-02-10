@@ -1,9 +1,9 @@
-class EnderecoDatatable < AjaxDatatablesRails::Base
+class EnderecoDatatable < ApplicationDatatable
   include ApplicationHelper
 
   def view_columns
     @view_columns ||= {
-      tipo: { source: "Endereco.tipo", cond: :like },
+      tipo: { source: "Endereco.tipo", cond: filtra_tipo },
       logradouro: { source: "Endereco.logradouro", cond: :like },
       numero: { source: "Endereco.numero", cond: :like },
       complemento: { source: "Endereco.complemento", cond: :like },
@@ -12,8 +12,8 @@ class EnderecoDatatable < AjaxDatatablesRails::Base
       caixa_postal: { source: "Endereco.caixa_postal", cond: :like },
       cidade_nome: { source: "Cidade.nome", cond: :like },
       estado_sigla: { source: "Estado.sigla", cond: :like },
-      ativo: { source: "Endereco.ativo", cond: :like },
-      primario: { source: "Endereco.primario", cond: :like },
+      ativo: { source: "Endereco.ativo", cond: filtra_check_box },
+      primario: { source: "Endereco.primario", cond: filtra_check_box },
     }
   end
 
@@ -31,8 +31,8 @@ class EnderecoDatatable < AjaxDatatablesRails::Base
         caixa_postal: record.caixa_postal,
         cidade_nome: record.cidade.nome,
         estado_sigla: record.cidade.estado.sigla,
-        ativo: material_check_box(record.ativo),
-        primario: material_check_box(record.primario),
+        ativo: boolean_pt(record.ativo),
+        primario: boolean_pt(record.primario),
         DT_RowId: "endereco_#{record.id}",
       }
     end
@@ -42,7 +42,7 @@ class EnderecoDatatable < AjaxDatatablesRails::Base
     Endereco.joins(cidade: :estado).where(cliente_id: options[:cliente])
   end
 
-  def permitido?
-    options[:permitido]
+  def filtra_tipo
+    ->(column) { column.table[column.field].eq(Endereco.tipos[column.search.value.downcase]) }
   end
 end

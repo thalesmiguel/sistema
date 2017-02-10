@@ -1,9 +1,9 @@
-class ClienteDatatable < AjaxDatatablesRails::Base
+class ClienteDatatable < ApplicationDatatable
   include ApplicationHelper
 
   def view_columns
     @view_columns ||= {
-      ativo: { source: "Cliente.ativo", cond: :like },
+      ativo: { source: "Cliente.ativo", cond: filtra_check_box },
       cadastro_tipo: { source: "Cliente.cadastro_tipo", cond: filtra_cadastro_tipo },
       cpf_cnpj: { source: "Cliente.cpf_cnpj", cond: :like },
       nome: { source: "Cliente.nome", cond: :like },
@@ -19,7 +19,7 @@ class ClienteDatatable < AjaxDatatablesRails::Base
   def data
     records.map do |record|
       {
-        ativo: material_check_box(record.ativo),
+        ativo: boolean_pt(record.ativo),
         cadastro_tipo: record.cadastro_tipo,
         cpf_cnpj: record.cpf_cnpj,
         nome: record.nome,
@@ -40,9 +40,5 @@ class ClienteDatatable < AjaxDatatablesRails::Base
 
   def filtra_cadastro_tipo
     ->(column) { column.table[column.field].eq(Cliente.cadastro_tipos[column.search.value]) }
-  end
-
-  def permitido?
-    options[:permitido]
   end
 end

@@ -1,4 +1,4 @@
-class CidadeDatatable < AjaxDatatablesRails::Base
+class CidadeDatatable < ApplicationDatatable
 
   def view_columns
     @view_columns ||= {
@@ -27,9 +27,5 @@ class CidadeDatatable < AjaxDatatablesRails::Base
 
   def get_raw_records
     Cidade.joins(:estado)
-  end
-
-  def permitido?
-    options[:permitido]
   end
 end

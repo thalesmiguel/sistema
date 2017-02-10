@@ -172,6 +172,8 @@ function carrega_datatable_teste(modelo, modelo_singular, campos, campos_sem_bus
       });
       $(".yadcf-filter.inuse").closest("th").addClass("bg-filter");
       $(".yadcf-filter").not(".inuse").closest("th").removeClass("bg-filter");
+      $("td:contains(verdadeiro)").html('<i class="material-icons secondary-color-text">check_box</i>');
+      $("td:contains(falso)").html('<i class="material-icons secondary-color-text">check_box_outline_blank</i>');
     }
   });
 

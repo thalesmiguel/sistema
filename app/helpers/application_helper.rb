@@ -19,4 +19,12 @@ module ApplicationHelper
   def material_check_box(ativo)
     ativo ? '<i class="material-icons secondary-color-text">check_box</i>' : '<i class="material-icons secondary-color-text">check_box_outline_blank</i>'
   end
+
+  def boolean_pt(boolean)
+    boolean == true ? 'verdadeiro' : 'falso'
+  end
+
+  def string_to_boolean(boolean)
+    boolean == 'verdadeiro' ? 1 : 0
+  end
 end

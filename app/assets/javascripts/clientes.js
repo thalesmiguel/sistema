@@ -9,7 +9,7 @@ $(document).on('turbolinks:load', function(){
   });
   let campos_sem_busca_ordenacao = []
 
-  carrega_datatable_teste("clientes","cliente", campos, campos_sem_busca_ordenacao, yadcf_campos);
+  carrega_datatable("clientes","cliente", campos, campos_sem_busca_ordenacao, yadcf_campos);
   // Datatabes
 
   $(document).on("dblclick", "#clientes-table tr[id^=cliente]", function(){
