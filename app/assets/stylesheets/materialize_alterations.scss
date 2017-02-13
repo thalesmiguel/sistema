@@ -960,3 +960,7 @@ input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]),
 .hidden {
   visibility: hidden;
 }
+
+.color-picker {
+  margin-top: 10px;
+}

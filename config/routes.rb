@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     resources :veiculos, except: [:show]
     resources :subtipos, except: [:show]
     resources :leilao_eventos, except: [:show]
+    resources :bandeiras, except: [:show]
+    put 'bandeiras/:id/deleta_logo', to: 'bandeiras#deleta_logo', as: 'deleta_logo'
 
     put 'clientes/:id/altera_status', to: 'clientes#altera_status', as: 'altera_status_cliente'
     resources :clientes, except: [:show] do

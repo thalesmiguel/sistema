@@ -13,12 +13,6 @@ RSpec.describe LancarAutorizadosController, type: :controller do
       get :index, xhr: true, params: { cliente_id: cliente.id }
       expect(response).to render_template('ajax/clientes/lancar_autorizados/index.js.erb')
     end
-
-    # it 'renderiza json' do
-    #   get :index, xhr: true, format: :json, params: { cliente_id: cliente.id }
-    #   expect(response).to_not be_nil
-    # end
-
   end
 
   describe "GET new" do

@@ -1,0 +1,26 @@
+<div class="card p-t-0 p-b-70 p-l-30 p-r-30">
+
+  <div id="bandeira_modal" class="modal bottom-sheet modal-grande"></div>
+
+  <div class="row m-b-0">
+    <div class="valign-wrapper">
+      <div class="col s6 valign">
+        <h1>Bandeiras</h1>
+      </div>
+      <div class="col s6 valign right-align">
+        <%= link_to_new new_bandeira_path if can? :manage, :bandeira %>
+      </div>
+    </div>
+  </div>
+  <table id="bandeiras-table" class="highlight bordered" data-source="<%= bandeiras_path(format: :json) %>">
+    <thead>
+      <tr>
+        <th width="70%">Nome <%= filtro_dt %> </th>
+        <th width="30%">Sigla <%= filtro_dt %> </th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+</div>
