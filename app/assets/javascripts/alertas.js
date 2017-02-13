@@ -19,6 +19,13 @@ $(document).on('turbolinks:load', function(){
     $(this).toggleClass("hide")
   });
 
+  $(document).off("click", "a[href='#cliente-alertas']")
+  $(document).on("click", "a[href='#cliente-alertas'].standby", function(){
+    var campos = ["tipo","created_at","descricao","ativo","qtde_comentarios","created_by"];
+    carrega_datatable_filtro("alertas","alerta", campos, [4,5]);
+    $(this).removeClass("standby");
+  })
+
 
   var clicks, timer, delay;
   clicks=0;delay=500;timer=null;

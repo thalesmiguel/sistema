@@ -9,6 +9,7 @@ $(document).on('turbolinks:load', function(){
     var id = $(this).attr("id");
     var url = "/clientes/" + id.replace("cliente_", "") + "/editar"
     $.ajax({ type: "GET", url: url });
+    $("a[href='#cliente-enderecos'],a[href='#cliente-telefones'],a[href='#cliente-emails'],a[href='#cliente-fazendas'],a[href='#cliente-cliente_bancos'],a[href='#cliente-referencias'],a[href='#cliente-lancar_autorizados'],a[href='#cliente-racas'],a[href='#cliente-empresas'],a[href='#cliente-alertas'],a[href='#cliente-contatos'],a[href='#cliente-relatorios']").addClass('standby');
   });
 
 
@@ -33,7 +34,7 @@ function altera_mascara_cpf_cnpj(){
     if ( selecionado == "Física" ) {
       cpf_cnpj.removeClass("cnpj").addClass("cpf");
       label.html("CPF")
-    } else  {
+    } else {
       cpf_cnpj.removeClass("cpf").addClass("cnpj");
       label.html("CNPJ")
     };

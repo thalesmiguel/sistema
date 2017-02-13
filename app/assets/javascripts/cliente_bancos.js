@@ -18,4 +18,11 @@ $(document).on('turbolinks:load', function(){
   });
 
   cidades_dropdown('cliente_banco');
+
+  $(document).off("click", "a[href='#cliente-cliente_bancos']")
+  $(document).on("click", "a[href='#cliente-cliente_bancos'].standby", function(){
+    var campos = ["banco_codigo","banco_nome","agencia","conta_corrente","cidade_nome","estado_sigla","correntista_nome","correntista_cpf_cnpj","observacao","created_at","primario","ativo"];
+    carrega_datatable_filtro("cliente_bancos","cliente_banco", campos, []);
+    $(this).removeClass("standby");
+  })
 });

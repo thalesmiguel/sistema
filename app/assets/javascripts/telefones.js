@@ -6,4 +6,11 @@ $(document).on('turbolinks:load', function(){
     var url = "clientes/" + cliente + "/telefones/" + id.replace("telefone_", "") + "/editar"
     $.ajax({ type: "GET", url: url });
   });
+
+  $(document).off("click", "a[href='#cliente-telefones']")
+  $(document).on("click", "a[href='#cliente-telefones'].standby", function(){
+    var campos = ["tipo","ddi","ddd","numero","created_at","ramal","nome_contato","importancia","telemarketing","divulgar","ativo"];
+    carrega_datatable_filtro("telefones","telefone", campos, []);
+    $(this).removeClass("standby");
+  })
 });

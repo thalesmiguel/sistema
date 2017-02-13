@@ -7,4 +7,11 @@ $(document).on('turbolinks:load', function(){
     $.ajax({ type: "GET", url: url });
   });
   cidades_dropdown('fazenda');
+
+  $(document).off("click", "a[href='#cliente-fazendas']")
+  $(document).on("click", "a[href='#cliente-fazendas'].standby", function(){
+    var campos = ["nome","cidade_nome","estado_sigla","inscricao_estadual","cnpj_produtor","cnpj_fazenda","ativo","fazenda_vendas","fazenda_compras"];
+    carrega_datatable_filtro("fazendas","fazenda", campos, []);
+    $(this).removeClass("standby");
+  })
 });
