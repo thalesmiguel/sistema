@@ -1,5 +1,6 @@
 $(document).on('turbolinks:load', function(){
-  carrega_datatable("funcoes","funcao", ["nome","created_at","updated_at"], []);
+  var campos = ["nome","created_at","updated_at"];
+  carrega_datatable_filtro("funcoes","funcao", campos, []);
 
   $(document).off("dblclick", "#funcoes-table tr[id^=funcao]")
   $(document).on("dblclick", "#funcoes-table tr[id^=funcao]", function(){

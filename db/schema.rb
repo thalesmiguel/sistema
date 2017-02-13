@@ -640,7 +640,7 @@ ActiveRecord::Schema.define(version: 20170206134202) do
   end
 
   create_table "veiculos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.boolean  "disponivel_viagem"
+    t.boolean  "disponivel_viagem",                          default: false
     t.string   "modelo"
     t.integer  "ano"
     t.string   "chassi"
@@ -650,10 +650,10 @@ ActiveRecord::Schema.define(version: 20170206134202) do
     t.date     "data_compra"
     t.string   "nf"
     t.integer  "ocupantes"
-    t.integer  "media"
+    t.decimal  "media",             precision: 16, scale: 2
     t.integer  "combustivel"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
   end
 
   add_foreign_key "alerta_comentarios", "alertas"

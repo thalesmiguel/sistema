@@ -1,0 +1,31 @@
+<div class="card p-t-0 p-b-70 p-l-30 p-r-30">
+
+  <div id="veiculo_modal" class="modal bottom-sheet modal-grande"></div>
+
+  <div class="row m-b-0">
+    <div class="valign-wrapper">
+      <div class="col s6 valign">
+        <h1>Veículos</h1>
+      </div>
+      <div class="col s6 valign right-align">
+        <%= link_to_new new_veiculo_path if can? :manage, :veiculo %>
+      </div>
+    </div>
+  </div>
+  <table id="veiculos-table" class="highlight bordered" data-source="<%= veiculos_path(format: :json) %>">
+    <thead>
+      <tr>
+        <th width="20%">Modelo <%= filtro_dt %> </th>
+        <th width="8%">Ano <%= filtro_dt %> </th>
+        <th width="14%">Placa <%= filtro_dt %> </th>
+        <th width="14%">Combustivel <%= filtro_dt %> </th>
+        <th width="14%">Ocupantes <%= filtro_dt %> </th>
+        <th width="15%">Cons. Médio <%= filtro_dt %> </th>
+        <th width="15%">Disp. Escala <%= filtro_dt %> </th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+</div>

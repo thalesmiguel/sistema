@@ -1,9 +1,11 @@
-class EstadoDatatable < AjaxDatatablesRails::Base
+class EstadoDatatable < ApplicationDatatable
 
   def view_columns
     @view_columns ||= {
       nome: { source: "Estado.nome", cond: :like },
       sigla: { source: "Estado.sigla", cond: :like },
+      created_at: { source: "Estado.created_at", cond: filtra_data },
+      updated_at: { source: "Estado.updated_at", cond: filtra_data },
     }
   end
 

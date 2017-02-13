@@ -1,0 +1,77 @@
+<%= form_for @veiculo, remote: true, html: { class: "veiculo-form col s12 validate" } do |f| %>
+  <div class="modal-content">
+    <div class="p-20 modal-border">
+      <div class="row card-content m-b-0 p-b-0 p-l-30 p-r-30">
+        <div class="row">
+          <div class="input-field col s12 m8">
+            <%= f.text_field :modelo, required:"" %>
+            <%= f.label :modelo %>
+          </div>
+          <div class="input-field col s12 m4">
+            <%= f.text_field :ano %>
+            <%= f.label :ano %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 m8">
+            <%= f.text_field :chassi %>
+            <%= f.label :chassi %>
+          </div>
+          <div class="input-field col s12 m2">
+            <%= f.text_field :placa %>
+            <%= f.label :placa %>
+          </div>
+          <div class="input-field col s12 m2">
+            <%= f.text_field :renavam %>
+            <%= f.label :renavam %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 m3">
+            <%= f.text_field :motor %>
+            <%= f.label :motor %>
+          </div>
+          <div class="input-field col s12 m2">
+            <%= f.text_field :data_compra, class:"data" %>
+            <%= f.label :data_compra, "Data da Compra" %>
+          </div>
+          <div class="input-field col s12 m2">
+            <%= f.text_field :nf %>
+            <%= f.label :nf, "Nota Fiscal" %>
+          </div>
+          <div class="input-field col s12 m2">
+            <%= f.text_field :ocupantes %>
+            <%= f.label :ocupantes %>
+          </div>
+          <div class="input-field col s12 m3">
+            <%= f.text_field :media %>
+            <%= f.label :media, "Média" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 m8">
+            <%= f.select :combustivel, Veiculo.combustiveis.map { |k, v| [k.humanize, k]} %>
+            <%= f.label :combustivel, class: "active" %>
+          </div>
+          <div class="input-field col s12 m2">
+            <%= f.check_box :disponivel_viagem, class: 'filled-in'  %>
+            <%= f.label :disponivel_viagem, "Disponível para viagem" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <%= button_tag "Salvar", class:"btn waves-effect waves-light" %>
+        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#veiculo_modal').closeModal()", type: 'button' %>
+
+        <% if !@veiculo.new_record? %>
+          <%= link_to "Excluir", veiculo_path(@veiculo), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',
+                data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a exclusão?')) } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

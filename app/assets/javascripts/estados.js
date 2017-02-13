@@ -1,5 +1,6 @@
 $(document).on('turbolinks:load', function(){
-  carrega_datatable("estados","estado", ["nome","sigla","created_at","created_by","updated_at","updated_by"], [2,3,4,5]);
+  var campos = ["nome","sigla","created_at","created_by","updated_at","updated_by"];
+  carrega_datatable_filtro("estados","estado", campos, [3,5]);
 
   $(document).off("dblclick", "#estados-table tr[id^=estado]")
   $(document).on("dblclick", "#estados-table tr[id^=estado]", function(){

@@ -1,5 +1,6 @@
 $(document).on('turbolinks:load', function(){
-  carrega_datatable("uniformes","uniforme", ["nome","sexo","created_at","updated_at"], []);
+  var campos = ["nome","sexo","created_at","updated_at"];
+  carrega_datatable_filtro("uniformes","uniforme", campos, []);
 
   $(document).off("dblclick", "#uniformes-table tr[id^=uniforme]")
   $(document).on("dblclick", "#uniformes-table tr[id^=uniforme]", function(){

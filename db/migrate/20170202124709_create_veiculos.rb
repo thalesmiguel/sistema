@@ -1,7 +1,7 @@
 class CreateVeiculos < ActiveRecord::Migration[5.0]
   def change
     create_table :veiculos do |t|
-      t.boolean :disponivel_viagem
+      t.boolean :disponivel_viagem, default: false
       t.string :modelo
       t.integer :ano
       t.string :chassi
@@ -11,7 +11,7 @@ class CreateVeiculos < ActiveRecord::Migration[5.0]
       t.date :data_compra
       t.string :nf
       t.integer :ocupantes
-      t.integer :media
+      t.decimal :media, precision: 16, scale: 2
       t.integer :combustivel
 
       t.timestamps
