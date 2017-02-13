@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :uniforme do
     nome "MyString"
-    sexo 1
+    sexo "masculino"
   end
 end

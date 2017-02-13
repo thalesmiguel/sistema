@@ -7,7 +7,8 @@ class ApplicationDatatable < AjaxDatatablesRails::Base
   end
 
   def filtra_data
-    ->(column) { column.table[column.field].matches("#{ column.search.value.to_time.to_s(:data_banco) }%" ) }
+    # ->(column) { column.table[column.field].matches("#{ column.search.value.to_time.to_s(:data_banco) }%" ) if column.search.value.to_time }
+    ->(column) { column.table[column.field].matches("#{ (Time.parse(column.search.value).to_s(:data_banco) + "%" rescue nil) }" ) }
   end
 
   def permitido?
