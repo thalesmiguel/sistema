@@ -41,6 +41,12 @@ RSpec.describe Leilao, type: :model do
       expect(leilao.subtipo_lotes).to eq(subtipo)
     end
 
+    it 'belongs_to LeilaoEvento' do
+      leilao_evento = FactoryGirl.create(:leilao_evento)
+      leilao = FactoryGirl.create(:leilao, leilao_evento: leilao_evento)
+      expect(leilao.leilao_evento).to eq(leilao_evento)
+    end
+
     it 'has_many LeilaoObservacoes' do
       primeira_leilao_observacao = FactoryGirl.create(:leilao_observacao, leilao: leilao, user: user)
       segunda_leilao_observacao = FactoryGirl.create(:leilao_observacao, leilao: leilao, user: user)
@@ -93,11 +99,6 @@ RSpec.describe Leilao, type: :model do
       veiculo = FactoryGirl.create(:veiculo, disponivel_viagem: true)
       veiculo = FactoryGirl.create(:planejamento_veiculo, leilao: leilao, veiculo: veiculo)
       expect { leilao.destroy }.to change { PlanejamentoVeiculo.count }
-    end
-
-    it 'has_one LeilaoEvento' do
-      leilao_evento = FactoryGirl.create(:leilao_evento, leilao: leilao)
-      expect(leilao.leilao_evento).to eq(leilao_evento)
     end
 
     it 'has_one LeilaoPadrao' do

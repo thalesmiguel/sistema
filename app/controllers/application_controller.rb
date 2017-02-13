@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
 
 
   # Usado nos Data Tables
-  def renderiza_datatable(classe = params[:controller].singularize.capitalize)
+  def renderiza_datatable(classe = params[:controller].camelize.singularize)
     render json: "#{classe}Datatable".constantize.new(view_context, { permitido: permitido? })
   end
 

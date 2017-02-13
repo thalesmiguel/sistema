@@ -4,7 +4,6 @@ class CreateLeilaoEventos < ActiveRecord::Migration[5.0]
       t.string :nome
       t.datetime :data_inicio
       t.datetime :data_fim
-      t.references :leilao, foreign_key: true
 
       t.timestamps
     end

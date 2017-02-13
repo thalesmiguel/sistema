@@ -11,13 +11,13 @@ class Leilao < ApplicationRecord
   belongs_to :testemunha_1, class_name: "User"
   belongs_to :testemunha_2, class_name: "User"
   belongs_to :subtipo_lotes, class_name: "Subtipo"
+  belongs_to :leilao_evento
 
   has_many :leilao_observacoes, dependent: :destroy
   has_many :taxa_manuais, dependent: :destroy
   has_many :taxa_automaticas, dependent: :destroy
   has_many :planejamento_escalas, dependent: :destroy
   has_many :planejamento_veiculos, dependent: :destroy
-  has_one :leilao_evento
   has_one :leilao_padrao, dependent: :destroy
   has_one :leilao_comissao, dependent: :destroy
 

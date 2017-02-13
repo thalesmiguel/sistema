@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     resources :uniformes, except: [:show]
     resources :veiculos, except: [:show]
     resources :subtipos, except: [:show]
+    resources :leilao_eventos, except: [:show]
 
     put 'clientes/:id/altera_status', to: 'clientes#altera_status', as: 'altera_status_cliente'
     resources :clientes, except: [:show] do

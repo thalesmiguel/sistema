@@ -1,0 +1,2 @@
+class BandeirasController < ApplicationController
+end

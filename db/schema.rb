@@ -307,10 +307,8 @@ ActiveRecord::Schema.define(version: 20170206134202) do
     t.string   "nome"
     t.datetime "data_inicio"
     t.datetime "data_fim"
-    t.integer  "leilao_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["leilao_id"], name: "index_leilao_eventos_on_leilao_id", using: :btree
   end
 
   create_table "leilao_leiloeiros", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -424,9 +422,11 @@ ActiveRecord::Schema.define(version: 20170206134202) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.integer  "leilao_evento_id"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
     t.index ["cidade_id"], name: "index_leiloes_on_cidade_id", using: :btree
+    t.index ["leilao_evento_id"], name: "index_leiloes_on_leilao_evento_id", using: :btree
   end
 
   create_table "pagamento_condicoes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -679,7 +679,6 @@ ActiveRecord::Schema.define(version: 20170206134202) do
   add_foreign_key "leilao_comissoes", "leiloes"
   add_foreign_key "leilao_convidados", "clientes"
   add_foreign_key "leilao_convidados", "leiloes"
-  add_foreign_key "leilao_eventos", "leiloes"
   add_foreign_key "leilao_leiloeiros", "leiloeiros"
   add_foreign_key "leilao_leiloeiros", "leiloes"
   add_foreign_key "leilao_observacoes", "leiloes"
@@ -694,6 +693,7 @@ ActiveRecord::Schema.define(version: 20170206134202) do
   add_foreign_key "leiloeiros", "cidades"
   add_foreign_key "leiloeiros", "clientes"
   add_foreign_key "leiloes", "cidades"
+  add_foreign_key "leiloes", "leilao_eventos"
   add_foreign_key "pagamento_parcelas", "pagamento_condicoes"
   add_foreign_key "planejamento_escalas", "funcoes"
   add_foreign_key "planejamento_escalas", "uniformes"
