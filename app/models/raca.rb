@@ -1,8 +1,7 @@
 class Raca < ApplicationRecord
   audited
-  trimmed_fields :codigo, :nome
+  trimmed_fields :nome
 
-  validates :codigo, presence: true
   validates :nome, presence: true
   validates :especie, presence: true
 

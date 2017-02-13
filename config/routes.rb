@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     put 'bandeiras/:id/deleta_logo_bandeira', to: 'bandeiras#deleta_logo_bandeira', as: 'deleta_logo_bandeira'
     resources :canais, except: [:show]
     put 'canais/:id/deleta_logo_canal', to: 'canais#deleta_logo_canal', as: 'deleta_logo_canal'
+    resources :racas, except: [:show]
 
     put 'clientes/:id/altera_status', to: 'clientes#altera_status', as: 'altera_status_cliente'
     resources :clientes, except: [:show] do

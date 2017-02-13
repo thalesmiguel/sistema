@@ -505,7 +505,6 @@ ActiveRecord::Schema.define(version: 20170206134202) do
   end
 
   create_table "racas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "codigo"
     t.string   "nome"
     t.integer  "especie"
     t.datetime "created_at", null: false
