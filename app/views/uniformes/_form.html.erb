@@ -15,12 +15,12 @@
       </div>
 
       <div class="modal-footer">
-        <%= button_tag "Salvar", class:"btn waves-effect waves-light" %>
+        <%= button_tag "Salvar", class:"btn waves-effect waves-light" if can? :manage, :uniforme %>
         <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#uniforme_modal').closeModal()", type: 'button' %>
 
         <% if !@uniforme.new_record? %>
           <%= link_to "Excluir", uniforme_path(@uniforme), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',
-                data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a exclusão?')) } %>
+                data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a exclusão?')) } if can? :manage, :uniforme %>
         <% end %>
       </div>
     </div>

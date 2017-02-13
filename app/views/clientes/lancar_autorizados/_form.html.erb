@@ -60,13 +60,13 @@
       </div>
 
       <div class="modal-footer">
-        <%= button_tag "Salvar", class:"btn waves-effect waves-light", id: "salvar-cliente-lancar_autorizado" %>
+        <%= button_tag "Salvar", class:"btn waves-effect waves-light", id: "salvar-cliente-lancar_autorizado" if can? :manage, :lancar_autorizado %>
         <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#lancar_autorizado_modal').closeModal()", type: 'button' %>
         <%#= button_tag "Cancelar", class:"btn-flat waves-effect waves-light btn-cancelar ", type: :reset %>
 
           <% if !@lancar_autorizado.new_record? %>
             <%= link_to "Excluir", cliente_lancar_autorizado_path(@cliente, @lancar_autorizado), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',
-                  data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a exclusão?')) } %>
+                  data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a exclusão?')) } if can? :manage, :lancar_autorizado %>
         <% end %>
       </div>
     </div>

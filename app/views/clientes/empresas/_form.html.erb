@@ -66,12 +66,12 @@
       </div>
 
       <div class="modal-footer">
-        <%= button_tag "Salvar", class:"btn waves-effect waves-light" %>
+        <%= button_tag "Salvar", class:"btn waves-effect waves-light" if can? :manage, :empresa %>
         <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#empresa_modal').closeModal()", type: 'button' %>
 
         <% if !@empresa.new_record? %>
           <%= link_to "Excluir", cliente_empresa_path(@cliente, @empresa), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',
-                      data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a exclusão?')) } %>
+                      data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a exclusão?')) } if can? :manage, :empresa %>
         <% end %>
       </div>
     </div>

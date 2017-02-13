@@ -11,12 +11,12 @@
       </div>
 
       <div class="modal-footer">
-        <%= button_tag "Salvar", class:"btn waves-effect waves-light" %>
+        <%= button_tag "Salvar", class:"btn waves-effect waves-light" if can? :manage, :funcao %>
         <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#funcao_modal').closeModal()", type: 'button' %>
 
         <% if !@funcao.new_record? %>
           <%= link_to "Excluir", funcao_path(@funcao), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',
-                data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a exclusão?')) } %>
+                data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a exclusão?')) } if can? :manage, :funcao %>
         <% end %>
       </div>
     </div>
