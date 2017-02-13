@@ -39,7 +39,7 @@ class BandeirasController < ApplicationController
     renderiza_crud_js(@bandeira, 'Bandeira excluída com sucesso.')
   end
 
-  def deleta_logo
+  def deleta_logo_bandeira
     @deleta_logo_bandeira = Bandeira.find_by_id(params[:id])
     @deleta_logo_bandeira.logo = nil
     if @deleta_logo_bandeira.save
