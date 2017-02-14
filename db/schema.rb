@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 20170206134202) do
   end
 
   create_table "assessorias", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "codigo"
     t.string   "nome"
     t.text     "observacao",        limit: 65535
     t.string   "logo_file_name"

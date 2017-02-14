@@ -4,11 +4,6 @@ RSpec.describe Assessoria, type: :model do
 
   describe 'validações' do
 
-    it 'exige codigo' do
-      assessoria = Assessoria.new(FactoryGirl.attributes_for(:assessoria, codigo: ""))
-      expect(assessoria.valid?).to be_falsy
-    end
-
     it 'exige nome' do
       assessoria = Assessoria.new(FactoryGirl.attributes_for(:assessoria, nome: ""))
       expect(assessoria.valid?).to be_falsy

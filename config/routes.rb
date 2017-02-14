@@ -30,6 +30,8 @@ Rails.application.routes.draw do
     resources :racas, except: [:show]
     resources :patrocinadores, except: [:show]
     put 'patrocinadores/:id/deleta_logo_patrocinador', to: 'patrocinadores#deleta_logo_patrocinador', as: 'deleta_logo_patrocinador'
+    resources :assessorias, except: [:show]
+    put 'assessorias/:id/deleta_logo_assessoria', to: 'assessorias#deleta_logo_assessoria', as: 'deleta_logo_assessoria'
 
     put 'clientes/:id/altera_status', to: 'clientes#altera_status', as: 'altera_status_cliente'
     resources :clientes, except: [:show] do
