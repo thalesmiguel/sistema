@@ -28,6 +28,8 @@ Rails.application.routes.draw do
     resources :canais, except: [:show]
     put 'canais/:id/deleta_logo_canal', to: 'canais#deleta_logo_canal', as: 'deleta_logo_canal'
     resources :racas, except: [:show]
+    resources :patrocinadores, except: [:show]
+    put 'patrocinadores/:id/deleta_logo_patrocinador', to: 'patrocinadores#deleta_logo_patrocinador', as: 'deleta_logo_patrocinador'
 
     put 'clientes/:id/altera_status', to: 'clientes#altera_status', as: 'altera_status_cliente'
     resources :clientes, except: [:show] do

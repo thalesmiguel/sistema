@@ -1,0 +1,25 @@
+<div class="card p-t-0 p-b-70 p-l-30 p-r-30">
+
+  <div id="patrocinador_modal" class="modal bottom-sheet modal-grande"></div>
+
+  <div class="row m-b-0">
+    <div class="valign-wrapper">
+      <div class="col s6 valign">
+        <h1>Patrocinadores</h1>
+      </div>
+      <div class="col s6 valign right-align">
+        <%= link_to_new new_patrocinador_path if can? :manage, :patrocinador %>
+      </div>
+    </div>
+  </div>
+  <table id="patrocinadores-table" class="highlight bordered" data-source="<%= patrocinadores_path(format: :json) %>">
+    <thead>
+      <tr>
+        <th width="100%">Nome <%= filtro_dt %> </th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+</div>

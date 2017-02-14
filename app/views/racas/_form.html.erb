@@ -15,6 +15,17 @@
             <%= f.label :especie, class: "active" %>
           </div>
         </div>
+
+        <!-- <div class="row">
+          <div class="input-field col s12">
+            <% Raca.especies.each do |especie, key| %>
+              <%= f.radio_button :especie, especie, id: "raca_#{especie}", class: "with-gap" %>
+              <%= f.label especie %>
+              <br>
+            <% end %>
+          </div>
+        </div> -->
+
       </div>
 
       <div class="modal-footer">
