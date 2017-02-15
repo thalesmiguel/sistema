@@ -12,7 +12,6 @@ class Cliente < ApplicationRecord
   has_many :tags, dependent: :destroy
   has_many :empresas, dependent: :destroy
   has_many :alertas, dependent: :destroy
-  has_many :leiloeiros
 
   has_many :planejamento_escalas, foreign_key: 'funcionario_id', dependent: :destroy
 

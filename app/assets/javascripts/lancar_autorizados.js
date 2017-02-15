@@ -12,7 +12,7 @@ $(document).on('turbolinks:load', function(){
     $("#salvar-cliente-lancar_autorizado").prop("disabled", false);
   })
 
-  $(document).off("click", "a[href='#cliente-lancar_autorizados']")
+  $(document).off("click", "a[href='#cliente-lancar_autorizados'].standby")
   $(document).on("click", "a[href='#cliente-lancar_autorizados'].standby", function(){
     var campos = ["nome","cpf","tem_procuracao","observacao","ativo"];
     carrega_datatable_filtro("lancar_autorizados","lancar_autorizado", campos, []);

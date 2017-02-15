@@ -385,20 +385,18 @@ ActiveRecord::Schema.define(version: 20170206134202) do
     t.string   "telefone"
     t.string   "fax"
     t.string   "sigla"
-    t.integer  "cliente_id"
     t.string   "foto_file_name"
     t.string   "foto_content_type"
     t.integer  "foto_file_size"
     t.datetime "foto_updated_at"
-    t.decimal  "comissao_elite",    precision: 16, scale: 2
-    t.decimal  "comissao_virtual",  precision: 16, scale: 2
-    t.decimal  "comissao_corte",    precision: 16, scale: 2
-    t.decimal  "comissao_shopping", precision: 16, scale: 2
-    t.boolean  "comissao_contrato"
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+    t.decimal  "comissao_elite",    precision: 16, scale: 2, default: "0.0"
+    t.decimal  "comissao_virtual",  precision: 16, scale: 2, default: "0.0"
+    t.decimal  "comissao_corte",    precision: 16, scale: 2, default: "0.0"
+    t.decimal  "comissao_shopping", precision: 16, scale: 2, default: "0.0"
+    t.boolean  "comissao_contrato",                          default: false
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
     t.index ["cidade_id"], name: "index_leiloeiros_on_cidade_id", using: :btree
-    t.index ["cliente_id"], name: "index_leiloeiros_on_cliente_id", using: :btree
   end
 
   create_table "leiloes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -689,7 +687,6 @@ ActiveRecord::Schema.define(version: 20170206134202) do
   add_foreign_key "leilao_racas", "leiloes"
   add_foreign_key "leilao_racas", "racas"
   add_foreign_key "leiloeiros", "cidades"
-  add_foreign_key "leiloeiros", "clientes"
   add_foreign_key "leiloes", "cidades"
   add_foreign_key "leiloes", "leilao_eventos"
   add_foreign_key "pagamento_parcelas", "pagamento_condicoes"

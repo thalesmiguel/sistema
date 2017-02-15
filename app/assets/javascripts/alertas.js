@@ -19,7 +19,7 @@ $(document).on('turbolinks:load', function(){
     $(this).toggleClass("hide")
   });
 
-  $(document).off("click", "a[href='#cliente-alertas']")
+  $(document).off("click", "a[href='#cliente-alertas'].standby")
   $(document).on("click", "a[href='#cliente-alertas'].standby", function(){
     var campos = ["tipo","created_at","descricao","ativo","qtde_comentarios","created_by"];
     carrega_datatable_filtro("alertas","alerta", campos, [4,5]);

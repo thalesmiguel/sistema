@@ -13,13 +13,12 @@ class CreateLeiloeiros < ActiveRecord::Migration[5.0]
       t.string :telefone
       t.string :fax
       t.string :sigla
-      t.references :cliente, foreign_key: true
       t.attachment :foto
-      t.decimal :comissao_elite, precision: 16, scale: 2
-      t.decimal :comissao_virtual, precision: 16, scale: 2
-      t.decimal :comissao_corte, precision: 16, scale: 2
-      t.decimal :comissao_shopping, precision: 16, scale: 2
-      t.boolean :comissao_contrato
+      t.decimal :comissao_elite, precision: 16, scale: 2, default: 0
+      t.decimal :comissao_virtual, precision: 16, scale: 2, default: 0
+      t.decimal :comissao_corte, precision: 16, scale: 2, default: 0
+      t.decimal :comissao_shopping, precision: 16, scale: 2, default: 0
+      t.boolean :comissao_contrato, default: false
 
       t.timestamps
     end

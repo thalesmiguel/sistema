@@ -22,15 +22,10 @@ RSpec.describe Leiloeiro, type: :model do
   describe 'associações' do
     let(:estado) { FactoryGirl.create(:estado) }
     let(:cidade) { FactoryGirl.create(:cidade, estado: estado) }
-    let(:cliente) { FactoryGirl.create(:cliente) }
-    let(:leiloeiro) { FactoryGirl.create(:leiloeiro, cidade: cidade, cliente: cliente) }
+    let(:leiloeiro) { FactoryGirl.create(:leiloeiro, cidade: cidade) }
 
     it 'belongs_to Cidade' do
       expect(leiloeiro.cidade).to eq cidade
-    end
-
-    it 'belongs_to Cliente' do
-      expect(leiloeiro.cliente).to eq cliente
     end
 
     it 'has_many :leiloes, through LeilaoLeiloeiros' do

@@ -7,7 +7,7 @@ $(document).on('turbolinks:load', function(){
     $.ajax({ type: "GET", url: url });
   });
 
-  $(document).off("click", "a[href='#cliente-referencias']")
+  $(document).off("click", "a[href='#cliente-referencias'].standby")
   $(document).on("click", "a[href='#cliente-referencias'].standby", function(){
     var campos = ["nome","telefone","observacao"];
     carrega_datatable_filtro("referencias","referencia", campos, []);

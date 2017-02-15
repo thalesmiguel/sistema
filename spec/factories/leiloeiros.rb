@@ -12,7 +12,6 @@ FactoryGirl.define do
     telefone "MyString"
     fax "MyString"
     sigla "MS"
-    cliente nil
     foto { File.new("#{Rails.root}/spec/support/fixtures/imagem.png") }
     comissao_elite "9.99"
     comissao_virtual "9.99"

@@ -4,11 +4,6 @@ RSpec.describe Raca, type: :model do
 
   describe 'validações' do
 
-    it 'exige codigo' do
-      raca = Raca.new(FactoryGirl.attributes_for(:raca, codigo: ""))
-      expect(raca.valid?).to be_falsy
-    end
-
     it 'exige nome' do
       raca = Raca.new(FactoryGirl.attributes_for(:raca, nome: ""))
       expect(raca.valid?).to be_falsy

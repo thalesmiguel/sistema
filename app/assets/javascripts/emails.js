@@ -7,7 +7,7 @@ $(document).on('turbolinks:load', function(){
     $.ajax({ type: "GET", url: url });
   });
 
-  $(document).off("click", "a[href='#cliente-emails']")
+  $(document).off("click", "a[href='#cliente-emails'].standby")
   $(document).on("click", "a[href='#cliente-emails'].standby", function(){
     var campos = ["email","contato","created_at","mala_direta","ativo","solicitacao_email","envio_contratos"];
     carrega_datatable_filtro("emails","email", campos, []);

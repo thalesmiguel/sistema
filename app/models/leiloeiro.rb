@@ -3,7 +3,6 @@ class Leiloeiro < ApplicationRecord
   trimmed_fields :nome_contrato, :razao_social, :cpf, :cnpj, :sindicato, :endereco, :cep, :email, :telefone, :fax, :sigla
 
   belongs_to :cidade
-  belongs_to :cliente
 
   has_many :leilao_leiloeiros, dependent: :destroy
   has_many :leiloes, through: :leilao_leiloeiros
@@ -13,4 +12,8 @@ class Leiloeiro < ApplicationRecord
 
   validates :razao_social, presence: true
   validates :sigla, length: { is: 2 }, allow_blank: true
+
+  def estado
+    cidade.nil? ? 0 : cidade.estado_id
+  end
 end

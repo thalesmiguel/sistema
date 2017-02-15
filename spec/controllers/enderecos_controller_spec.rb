@@ -15,12 +15,6 @@ RSpec.describe EnderecosController, type: :controller do
       get :index, xhr: true, params: { cliente_id: cliente.id }
       expect(response).to render_template('ajax/clientes/enderecos/index.js.erb')
     end
-
-    # it 'renderiza json' do
-    #   get :index, xhr: true, format: :json, params: { cliente_id: cliente.id }
-    #   expect(response).to_not be_nil
-    # end
-
   end
 
   describe "GET new" do

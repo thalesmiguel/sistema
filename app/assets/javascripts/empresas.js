@@ -9,7 +9,7 @@ $(document).on('turbolinks:load', function(){
 
   cidades_dropdown('empresa');
 
-  $(document).off("click", "a[href='#cliente-empresas']")
+  $(document).off("click", "a[href='#cliente-empresas'].standby")
   $(document).on("click", "a[href='#cliente-empresas'].standby", function(){
     var campos = ["nome","cnpj","cargo","logradouro","cidade_nome","estado_nome","cep"];
     carrega_datatable_filtro("empresas","empresa", campos, []);
