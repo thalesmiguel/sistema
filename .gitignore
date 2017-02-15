@@ -12,6 +12,14 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+/system/*
+!/system/404.html
+!/system/422.html
+!/system/500.html
+!/system/apple-touch-icon-precomposed.png
+!/system/apple-touch-icon.png
+!/system/favicon.ico
+!/system/robots.txt
 
 # Ignore Byebug command history file.
 .byebug_history
