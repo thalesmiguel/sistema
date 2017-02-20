@@ -3,7 +3,7 @@ class RacaDatatable < ApplicationDatatable
   def view_columns
     @view_columns ||= {
       nome: { source: "Raca.nome", cond: :like },
-      especie: { source: "Raca.especie", cond: filtra_epecie },
+      especie: { source: "Raca.especie", cond: filtra_especie },
     }
   end
 
@@ -23,7 +23,7 @@ class RacaDatatable < ApplicationDatatable
     Raca.all
   end
 
-  def filtra_epecie
+  def filtra_especie
     ->(column) { column.table[column.field].eq(Raca.especies[column.search.value]) }
   end
 end

@@ -1,8 +1,8 @@
 <% if obj.errors.any? %>
   <% obj.errors.each do |a, m| %>
-    Materialize.toast("<%= a.to_s.humanize %> <%= m %>", 5000, 'rounded red darken-4');
+    Materialize.toast("<%= a.to_s.humanize %> <%= m %>", 7000, 'rounded red darken-4');
   <% end %>
 <% else %>
-  Materialize.toast("<%= notice %>", 5000, 'rounded deep-purple');
+  Materialize.toast("<%= notice %>", 7000, 'rounded deep-purple');
   <%= render file: "ajax/application/esconde_modal.js.erb", locals: { model: model } %>
 <% end %>

@@ -4,11 +4,6 @@ RSpec.describe PagamentoCondicao, type: :model do
 
   describe 'validações' do
 
-    it 'exige codigo' do
-      pagamento_condicao = PagamentoCondicao.new(FactoryGirl.attributes_for(:pagamento_condicao, codigo: ""))
-      expect(pagamento_condicao.valid?).to be_falsy
-    end
-
     it 'exige nome' do
       pagamento_condicao = PagamentoCondicao.new(FactoryGirl.attributes_for(:pagamento_condicao, nome: ""))
       expect(pagamento_condicao.valid?).to be_falsy
@@ -23,6 +18,7 @@ RSpec.describe PagamentoCondicao, type: :model do
       pagamento_condicao = PagamentoCondicao.new(FactoryGirl.attributes_for(:pagamento_condicao, parcelas: 10, captacoes: 8))
       expect(pagamento_condicao.valid?).to be_falsy
     end
+
   end
 
   describe 'associações' do
@@ -55,16 +51,39 @@ RSpec.describe PagamentoCondicao, type: :model do
   end
 
   describe 'métodos' do
-    it 'mostra que a quantidade de captações conferem' do
-      pagamento_condicao = FactoryGirl.create(:pagamento_condicao, parcelas: 2, captacoes: 4)
-      primeira_parcela = FactoryGirl.create(:pagamento_parcela, pagamento_condicao: pagamento_condicao, parcela: 1, captacoes: 2)
-      segunda_parcela = FactoryGirl.create(:pagamento_parcela, pagamento_condicao: pagamento_condicao, parcela: 1, captacoes: 2)
-      expect(pagamento_condicao.captacoes_conferem?).to be_truthy
-    end
+    # it 'mostra se a quantidade de captações confere' do
+    #   pagamento_condicao = FactoryGirl.create(:pagamento_condicao, parcelas: 2, captacoes: 4)
+    #   primeira_parcela = pagamento_condicao.pagamento_parcelas.first
+    #   segunda_parcela = pagamento_condicao.pagamento_parcelas.last
+    #
+    #   primeira_parcela.update(captacoes: 2)
+    #   segunda_parcela.update(captacoes: 3)
+    #   expect(pagamento_condicao.captacoes_conferem?).to be_falsy
+    # end
 
-    it 'gera ParcelaPagamentos automaticamente' do
+    it 'gera ParcelaPagamentos automaticamente na criação de PagamentoCondicao' do
       pagamento_condicao = FactoryGirl.create(:pagamento_condicao, parcelas: 4, captacoes: 4)
       expect(pagamento_condicao.pagamento_parcelas.count).to eq 4
+    end
+
+    it 'altera ParcelaPagamentos automaticamente na alteração de PagamentoCondicao' do
+      pagamento_condicao = FactoryGirl.create(:pagamento_condicao, parcelas: 4, captacoes: 4)
+      pagamento_condicao.update(parcelas: 2)
+      expect(pagamento_condicao.pagamento_parcelas.count).to eq 2
+    end
+
+    it 'não refaz ParcelaPagamentos se o atributo :parcelas de PagamentoCondicao não é alterado' do
+      pagamento_condicao = FactoryGirl.create(:pagamento_condicao, parcelas: 1, captacoes: 1)
+      pagamento_parcela = pagamento_condicao.pagamento_parcelas.first
+      pagamento_condicao.update(parcelas: 1)
+      expect(pagamento_condicao.pagamento_parcelas.first).to eq pagamento_parcela
+    end
+
+    it 'não refaz ParcelaPagamentos se o atributo :captacoes de ParcelaPagamentos é alterado' do
+      pagamento_condicao = FactoryGirl.create(:pagamento_condicao, parcelas: 1, captacoes: 1)
+      pagamento_parcela = pagamento_condicao.pagamento_parcelas.first
+      pagamento_parcela.update(captacoes: 1)
+      expect(pagamento_condicao.pagamento_parcelas.first).to eq pagamento_parcela
     end
 
     it 'mostra todos os Leilões que utilizaram essa Condição de Pagamento' do

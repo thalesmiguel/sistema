@@ -1,0 +1,57 @@
+<%= form_for @pagamento_condicao, remote: true, html: { class: "pagamento_condicao-form col s12 validate" } do |f| %>
+  <div class="modal-content">
+    <div class="p-20 modal-border">
+      <div class="row card-content m-b-0 p-b-0 p-l-30 p-r-30">
+
+        <div class="row">
+          <div class="input-field col s12 m6">
+            <%= f.text_field :nome, required:"" %>
+            <%= f.label :nome %>
+          </div>
+          <div class="input-field col s12 m6">
+            <%= f.select :tipo, PagamentoCondicao.tipos.map { |k, v| [k.humanize, k]} %>
+            <%= f.label :tipo, class: "active" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 m2">
+            <%= f.text_field :captacoes, required:"" %>
+            <%= f.label :captacoes, 'Captações' %>
+          </div>
+          <div class="input-field col s12 m2">
+            <%= f.text_field :parcelas, required:"" %>
+            <%= f.label :parcelas %>
+          </div>
+          <div class="input-field col s12 m2">
+            <%= f.text_field :frequencia %>
+            <%= f.label :frequencia, 'Frequência' %>
+          </div>
+          <div class="input-field col s12 m2">
+            <%= f.check_box :entrada, class: 'filled-in'  %>
+            <%= f.label :entrada, 'Tem entrada' %>
+          </div>
+        </div>
+
+        <div class="row">
+          <%= f.fields_for :pagamento_parcelas do |i| %>
+            <div id="pagamento_parcelas">
+              <%= render partial: "parcelas", locals: {i: i} %>
+            </div>
+          <% end %>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <%= button_tag "Salvar", class:"btn waves-effect waves-light" if can? :manage, :pagamento_condicao %>
+        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#pagamento_condicao_modal').closeModal()", type: 'button' %>
+
+        <% if !@pagamento_condicao.new_record? %>
+          <%= link_to "Excluir", pagamento_condicao_path(@pagamento_condicao), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',
+                data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a exclusão?')) } if can? :manage, :pagamento_condicao %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

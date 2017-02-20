@@ -15,6 +15,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def renderiza_erro_controller_js(obj, mensagem = '', model = params[:controller].singularize)
+    respond_to do |format|
+      format.js { render file: 'ajax/application/erro_controller.js.erb', locals: { notice: mensagem, obj: obj, model: model } }
+    end
+  end
+
   # def renderiza_crud_js(obj, mensagem = '', acao = action_name, controller = params[:controller])
   #   respond_to do |format|
   #     format.js { render file: 'ajax/application/crud.js.erb', locals: { notice: mensagem, obj: obj, acao: acao, controller: controller } }
@@ -40,5 +46,4 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
   end
-
 end

@@ -48,11 +48,11 @@ RSpec.describe PagamentoParcela, type: :model do
   describe 'métodos' do
     let(:pagamento_condicao) { FactoryGirl.create(:pagamento_condicao, parcelas: 5, captacoes: 10) }
 
-    it 'mostra a quantidade de captações atual' do
-      primeira_parcela = FactoryGirl.create(:pagamento_parcela, pagamento_condicao: pagamento_condicao, parcela: 1, captacoes: 2)
-      segunda_parcela = PagamentoParcela.new(FactoryGirl.attributes_for(:pagamento_parcela, pagamento_condicao: pagamento_condicao, parcela: 2, captacoes: 2))
-      expect(segunda_parcela.captacao_atual).to eq 2
-    end
+    # it 'mostra a quantidade de captações atual' do
+    #   primeira_parcela = FactoryGirl.create(:pagamento_parcela, pagamento_condicao: pagamento_condicao, parcela: 1, captacoes: 2)
+    #   segunda_parcela = PagamentoParcela.new(FactoryGirl.attributes_for(:pagamento_parcela, pagamento_condicao: pagamento_condicao, parcela: 2, captacoes: 2))
+    #   expect(segunda_parcela.captacao_atual).to eq 2
+    # end
 
     it 'mostra que a quantidade de captações conferem' do
       primeira_parcela = FactoryGirl.create(:pagamento_parcela, pagamento_condicao: pagamento_condicao, parcela: 1, captacoes: 2)

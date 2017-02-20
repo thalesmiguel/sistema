@@ -1,0 +1,2 @@
+module LeiloesHelper
+end

@@ -1,0 +1,2 @@
+class LeiloesController < ApplicationController
+end

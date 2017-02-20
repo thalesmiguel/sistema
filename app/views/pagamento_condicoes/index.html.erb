@@ -1,0 +1,30 @@
+<div class="card p-t-0 p-b-70 p-l-30 p-r-30">
+
+  <div id="pagamento_condicao_modal" class="modal bottom-sheet modal-medio"></div>
+
+  <div class="row m-b-0">
+    <div class="valign-wrapper">
+      <div class="col s6 valign">
+        <h1>Condições de Pagamento</h1>
+      </div>
+      <div class="col s6 valign right-align">
+        <%= link_to_new new_pagamento_condicao_path if can? :manage, :pagamento_condicao %>
+      </div>
+    </div>
+  </div>
+  <table id="pagamento_condicoes-table" class="highlight bordered" data-source="<%= pagamento_condicoes_path(format: :json) %>">
+    <thead>
+      <tr>
+        <th width="20%">Nome <%= filtro_dt %> </th>
+        <th width="20%">Tipo <%= filtro_dt %> </th>
+        <th width="15%">Parcelas <%= filtro_dt %> </th>
+        <th width="15%">Captações <%= filtro_dt %> </th>
+        <th width="15%">Frequência <%= filtro_dt %> </th>
+        <th width="15%">Entrada <%= filtro_dt %> </th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+</div>

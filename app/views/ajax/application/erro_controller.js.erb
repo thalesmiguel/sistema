@@ -1,0 +1,3 @@
+<% if flash[:warning] %>
+  Materialize.toast("<%= flash[:warning].html_safe %>", 7000, 'rounded orange darken-4');
+<% end %>

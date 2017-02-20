@@ -35,6 +35,8 @@ Rails.application.routes.draw do
     resources :leiloeiros, except: [:show]
     put 'leiloeiros/:id/deleta_foto_leiloeiro', to: 'leiloeiros#deleta_foto_leiloeiro', as: 'deleta_foto_leiloeiro'
 
+    resources :pagamento_condicoes, except: [:show]
+
     put 'clientes/:id/altera_status', to: 'clientes#altera_status', as: 'altera_status_cliente'
     resources :clientes, except: [:show] do
       resources :enderecos, except: [:show]

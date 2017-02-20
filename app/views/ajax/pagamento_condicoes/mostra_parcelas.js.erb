@@ -1,0 +1,6 @@
+$("#pagamento_condicao_modal").html("<%= escape_javascript(render partial: 'form' ) %>");
+
+$("label[for^='pagamento_condicao']").addClass('active');
+$('select').not('.yadcf-filter').material_select();
+valida_formulario();
+mascaras();

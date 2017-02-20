@@ -427,15 +427,14 @@ ActiveRecord::Schema.define(version: 20170206134202) do
   end
 
   create_table "pagamento_condicoes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "codigo"
     t.string   "nome"
     t.integer  "tipo"
     t.integer  "captacoes"
     t.integer  "parcelas"
     t.integer  "frequencia"
-    t.boolean  "entrada"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "entrada",    default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "pagamento_parcelas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
