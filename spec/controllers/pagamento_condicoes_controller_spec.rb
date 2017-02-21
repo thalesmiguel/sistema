@@ -32,7 +32,7 @@ RSpec.describe PagamentoCondicoesController, type: :controller do
     context 'dados válidos' do
       it 'renderiza novo PagamentoCondicao' do
         post :create, xhr: true, params: { pagamento_condicao: FactoryGirl.attributes_for(:pagamento_condicao) }
-        expect(response).to render_template("ajax/application/crud.js.erb")
+        expect(response).to render_template("ajax/pagamento_condicoes/mostra_parcelas.js.erb")
       end
 
       it 'cria novo pagamento_condicao no banco de dados' do
@@ -82,14 +82,12 @@ RSpec.describe PagamentoCondicoesController, type: :controller do
       let(:dados_validos) { FactoryGirl.attributes_for(:pagamento_condicao, nome: "Novo nome") }
 
       it 'renderiza PagamentoCondicao alterado' do
-        skip 'problema com a validação no controller'
         pagamento_condicao.reload
         put :update, xhr: true, params: { id: pagamento_condicao, pagamento_condicao: dados_validos }
-        expect(response).to render_template("ajax/application/crud.js.erb")
+        expect(response).to render_template("pagamento_condicoes/mostra_parcelas.js.erb")
       end
 
       it 'altera o pagamento_condicao no banco de dados' do
-        skip 'problema com a validação no controller'
         put :update, xhr: true, params: { id: pagamento_condicao, pagamento_condicao: dados_validos }
         pagamento_condicao.reload
         expect(pagamento_condicao.nome).to eq("Novo nome")
@@ -100,13 +98,11 @@ RSpec.describe PagamentoCondicoesController, type: :controller do
       let(:dados_invalidos) { FactoryGirl.attributes_for(:pagamento_condicao, nome: "", tipo: "mensal", pagamento_parcelas_attributes: [parcela]) }
 
       it 'renderiza mensagem de erro' do
-        skip 'problema com a validação no controller'
         put :update, xhr: true, params: { id: pagamento_condicao, pagamento_condicao: dados_invalidos }
         expect(response).to render_template("ajax/application/crud.js.erb")
       end
 
       it 'não altera o pagamento_condicao no banco de dados' do
-        skip 'problema com a validação no controller'
         put :update, xhr: true, params: { id: pagamento_condicao, pagamento_condicao: dados_invalidos }
         pagamento_condicao.reload
         expect(pagamento_condicao.tipo).not_to eq("mensal")
@@ -128,34 +124,6 @@ RSpec.describe PagamentoCondicoesController, type: :controller do
       expect(PagamentoCondicao.exists?(pagamento_condicao.id)).to be_falsy
     end
 
-  end
-
-  describe "validações" do
-    context 'exige que as quantidades de capatações estejam corretas' do
-      let(:pagamento_condicao) { FactoryGirl.create(:pagamento_condicao, captacoes: 2, parcelas: 2) }
-      let(:primeira_parcela_id) { pagamento_condicao.pagamento_parcelas.first.id }
-      let(:segunda_parcela_id) { pagamento_condicao.pagamento_parcelas.last.id }
-      let(:primeira_parcela) { FactoryGirl.attributes_for(:pagamento_parcela, id: primeira_parcela_id, captacoes: 1) }
-      let(:segunda_parcela) { FactoryGirl.attributes_for(:pagamento_parcela, id: segunda_parcela_id, captacoes: 1) }
-      let(:dados_validos) { FactoryGirl.attributes_for(:pagamento_condicao, captacoes: 2, parcelas: 2, pagamento_parcelas_attributes: [primeira_parcela, segunda_parcela]) }
-
-      it 'altera o pagamento_condicao no banco de dados' do
-        skip 'problema com a validação no controller'
-        puts dados_validos
-        put :update, xhr: true, params: { id: pagamento_condicao, pagamento_condicao: dados_validos }
-        expect(pagamento_condicao.pagamento_parcelas.sum(:captacoes)).to eq 2
-      end
-
-      it 'valida a quantidade de catações' do
-        skip 'problema com a validação no controller'
-        primeira_parcela = FactoryGirl.attributes_for(:pagamento_parcela, id: primeira_parcela_id, captacoes: 3)
-        dados_validos = FactoryGirl.attributes_for(:pagamento_condicao, captacoes: 2, pagamento_parcelas_attributes: [primeira_parcela, segunda_parcela])
-        put :update, xhr: true, params: { id: pagamento_condicao, pagamento_condicao: dados_validos }
-
-        puts dados_validos[:pagamento_parcelas_attributes].map { |s| s[:captacoes] }.reduce(0, :+)
-        expect { raise "oops" }.to raise_error "oops"
-      end
-    end
   end
 
 end

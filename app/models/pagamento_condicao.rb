@@ -4,8 +4,13 @@ class PagamentoCondicao < ApplicationRecord
 
   after_create :cria_parcelas
   after_update :altera_parcelas
+  before_update :parcela_update!
 
-  has_many :pagamento_parcelas, dependent: :destroy
+
+  has_many :pagamento_parcelas, dependent: :destroy, inverse_of: :pagamento_condicao
+  accepts_nested_attributes_for :pagamento_parcelas, reject_if: :all_blank, allow_destroy: true
+  validates_associated :pagamento_parcelas
+
   has_many :leiloes_elite, class_name: 'LeilaoPadrao', foreign_key: :pagamento_elite_id
   has_many :leiloes_corte, class_name: 'LeilaoPadrao', foreign_key: :pagamento_corte_id
   has_many :leiloes_outros, class_name: 'LeilaoPadrao', foreign_key: :pagamento_outros_id
@@ -14,40 +19,38 @@ class PagamentoCondicao < ApplicationRecord
   validates :tipo, presence: true
   validates :captacoes, presence: true
   validates :parcelas, presence: true
-  validate :numero_de_parcelas_e_captacoes
-  # validate :numero_de_captacoes
+  validates :frequencia, presence: true, if: :período_de_dias?
 
-  enum tipo: { período_de_dias: 0, mensal: 1, datas_diferenciadas: 2 }
+  validate :numero_de_parcelas_maior_que_o_de_captacoes
+  validate :numero_de_captacoes
 
-  accepts_nested_attributes_for :pagamento_parcelas, reject_if: :all_blank, allow_destroy: true
+  enum tipo: { mensal: 0, datas_diferenciadas: 1, período_de_dias: 2 }
 
-  def numero_de_parcelas_e_captacoes
+
+  def parcela_update!
+    pagamento_parcelas.find_each(batch_size: 100) do |parcela|
+      parcela.update(vencimento: nil)
+    end
+  end
+
+  def apaga_vencimento
+    pagamento_parcelas.update_all(vencimento: nil) unless datas_diferenciadas? if pagamento_parcelas
+  end
+
+  def numero_de_parcelas_maior_que_o_de_captacoes
     errors.add(:parcelas, "O número de parcelas não pode ser maior do que o número de captações.") if parcelas > captacoes
   end
 
-  # def numero_de_captacoes
-  #   errors.add(:captacoes, "O número de captações não confere.") unless captacoes_conferem? || new_record?
-  # end
-  #
-  # def captacoes_conferem?
-  #   unless new_record?
-  #     puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-  #     puts "id: #{id}"
-  #     puts "captacoes: #{captacoes}"
-  #     puts "parcela_captacoes: #{parcela_captacoes}"
-  #     puts "captacoes_was: #{captacoes_was}"
-  #
-  #     puts "________________________________"
-  #     pagamento_parcelas.each do |parcela|
-  #       puts "parcela.id: #{parcela.id}"
-  #       puts "parcela.captacoes: #{parcela.captacoes}"
-  #     end
-  #   end
-  #   captacoes == parcela_captacoes
-  # end
+  def numero_de_captacoes
+    errors.add(:captacoes, "O número de captações não confere.") unless captacoes_conferem? || new_record?
+  end
+
+  def captacoes_conferem?
+    self.captacoes == parcela_captacoes
+  end
 
   def parcela_captacoes
-    pagamento_parcelas.sum(:captacoes)
+    pagamento_parcelas.map { |v| v[:captacoes] }.reduce(0, :+)
   end
 
   def cria_parcelas

@@ -184,9 +184,8 @@ function carrega_datatable_filtro(modelo, modelo_singular, campos, campos_sem_bu
     }
   });
 
-  $(document).on('ajax:complete', "." + modelo_singular + "-form", function(){
-    tabela.draw();
-  });
+  $(document).off('ajax:complete', "." + modelo_singular + "-form")
+  $(document).on('ajax:complete', "." + modelo_singular + "-form", () => { tabela.draw() });
 };
 
 function datatable_context_menu(table, tabela) {

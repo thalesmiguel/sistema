@@ -21,13 +21,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # def renderiza_crud_js(obj, mensagem = '', acao = action_name, controller = params[:controller])
-  #   respond_to do |format|
-  #     format.js { render file: 'ajax/application/crud.js.erb', locals: { notice: mensagem, obj: obj, acao: acao, controller: controller } }
-  #   end
-  # end
-
-
   # Usado nos Data Tables
   def renderiza_datatable(classe = params[:controller].camelize.singularize)
     render json: "#{classe}Datatable".constantize.new(view_context, { permitido: permitido? })

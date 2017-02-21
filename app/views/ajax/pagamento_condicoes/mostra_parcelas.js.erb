@@ -1,6 +1,9 @@
-$("#pagamento_condicao_modal").html("<%= escape_javascript(render partial: 'form' ) %>");
+Materialize.toast("<%= notice %>", 7000, 'rounded deep-purple');
 
-$("label[for^='pagamento_condicao']").addClass('active');
-$('select').not('.yadcf-filter').material_select();
-valida_formulario();
-mascaras();
+setTimeout(() =>{
+  $("#pagamento_condicao_modal").html("<%= escape_javascript(render partial: 'form' ) %>");
+  $("label[for^='pagamento_condicao']").not("label[for='pagamento_condicao_entrada']").addClass('active');
+  $('select').not('.yadcf-filter').material_select();
+  valida_formulario();
+  mascaras();
+}, 150);

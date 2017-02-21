@@ -19,6 +19,18 @@ RSpec.describe PagamentoCondicao, type: :model do
       expect(pagamento_condicao.valid?).to be_falsy
     end
 
+    it 'exige frequencia se o tipo de condição é período_de_dias' do
+      pagamento_condicao = PagamentoCondicao.new(FactoryGirl.attributes_for(:pagamento_condicao, parcelas: 2, captacoes: 2, tipo: :período_de_dias, frequencia: nil ))
+      expect(pagamento_condicao.valid?).to be_falsy
+    end
+
+    it 'exige que :captacoes seja igual a soma das captações das parcelas' do
+      pagamento_condicao = FactoryGirl.create(:pagamento_condicao, parcelas: 2, captacoes: 2, tipo: 'datas_diferenciadas')
+      pagamento_parcela = pagamento_condicao.pagamento_parcelas.first
+      pagamento_parcela.captacoes = 3
+      expect(pagamento_condicao.valid?).to be_falsy
+    end
+
   end
 
   describe 'associações' do
