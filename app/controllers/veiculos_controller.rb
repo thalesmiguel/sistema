@@ -20,7 +20,7 @@ class VeiculosController < ApplicationController
   def create
     @veiculo = Veiculo.new(veiculo_params)
     if @veiculo.save
-      renderiza_crud_js(@veiculo, 'Veículo criado com sucesso.')
+      renderiza_crud_js(@veiculo, 'Veículo criado com sucesso')
     else
       renderiza_crud_js(@veiculo)
     end
@@ -28,7 +28,7 @@ class VeiculosController < ApplicationController
 
   def update
     if @veiculo.update(veiculo_params)
-      renderiza_crud_js(@veiculo, 'Veículo alterado com sucesso.')
+      renderiza_crud_js(@veiculo, 'Veículo alterado com sucesso')
     else
       renderiza_crud_js(@veiculo)
     end
@@ -36,7 +36,7 @@ class VeiculosController < ApplicationController
 
   def destroy
     @veiculo.destroy
-    renderiza_crud_js(@veiculo, 'Veículo excluído com sucesso.')
+    renderiza_crud_js(@veiculo, 'Veículo excluído com sucesso')
   end
 
   private

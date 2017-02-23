@@ -20,7 +20,7 @@ class FuncoesController < ApplicationController
   def create
     @funcao = Funcao.new(funcao_params)
     if @funcao.save
-      renderiza_crud_js(@funcao, 'Função criada com sucesso.')
+      renderiza_crud_js(@funcao, 'Função criada com sucesso')
     else
       renderiza_crud_js(@funcao)
     end
@@ -28,7 +28,7 @@ class FuncoesController < ApplicationController
 
   def update
     if @funcao.update(funcao_params)
-      renderiza_crud_js(@funcao, 'Função alterada com sucesso.')
+      renderiza_crud_js(@funcao, 'Função alterada com sucesso')
     else
       renderiza_crud_js(@funcao)
     end
@@ -36,7 +36,7 @@ class FuncoesController < ApplicationController
 
   def destroy
     @funcao.destroy
-    renderiza_crud_js(@funcao, 'Função excluída com sucesso.')
+    renderiza_crud_js(@funcao, 'Função excluída com sucesso')
   end
 
   private

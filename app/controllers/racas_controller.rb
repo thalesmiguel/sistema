@@ -20,7 +20,7 @@ class RacasController < ApplicationController
   def create
     @raca = Raca.new(raca_params)
     if @raca.save
-      renderiza_crud_js(@raca, 'Raça criada com sucesso.')
+      renderiza_crud_js(@raca, 'Raça criada com sucesso')
     else
       renderiza_crud_js(@raca)
     end
@@ -28,7 +28,7 @@ class RacasController < ApplicationController
 
   def update
     if @raca.update(raca_params)
-      renderiza_crud_js(@raca, 'Raça alterada com sucesso.')
+      renderiza_crud_js(@raca, 'Raça alterada com sucesso')
     else
       renderiza_crud_js(@raca)
     end
@@ -36,7 +36,7 @@ class RacasController < ApplicationController
 
   def destroy
     @raca.destroy
-    renderiza_crud_js(@raca, 'Raça excluída com sucesso.')
+    renderiza_crud_js(@raca, 'Raça excluída com sucesso')
   end
 
   private

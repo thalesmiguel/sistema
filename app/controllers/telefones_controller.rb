@@ -25,7 +25,7 @@ class TelefonesController < ApplicationController
 
     @telefone = @cliente.telefones.new(telefone_params)
     if @telefone.save
-      renderiza_crud_js(@telefone, 'Telefone criado com sucesso.')
+      renderiza_crud_js(@telefone, 'Telefone criado com sucesso')
     else
       renderiza_crud_js(@telefone)
     end
@@ -33,7 +33,7 @@ class TelefonesController < ApplicationController
 
   def update
     if @telefone.update(telefone_params)
-      renderiza_crud_js(@telefone, 'Telefone alterado com sucesso.')
+      renderiza_crud_js(@telefone, 'Telefone alterado com sucesso')
     else
       renderiza_crud_js(@telefone)
     end
@@ -41,7 +41,7 @@ class TelefonesController < ApplicationController
 
   def destroy
     @telefone.destroy
-    renderiza_crud_js(@telefone, 'Telefone excluído com sucesso.')
+    renderiza_crud_js(@telefone, 'Telefone excluído com sucesso')
   end
 
   private

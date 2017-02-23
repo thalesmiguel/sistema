@@ -20,7 +20,7 @@ class PatrocinadoresController < ApplicationController
   def create
     @patrocinador = Patrocinador.new(patrocinador_params)
     if @patrocinador.save
-      renderiza_crud_js(@patrocinador, 'Patrocinador criado com sucesso.')
+      renderiza_crud_js(@patrocinador, 'Patrocinador criado com sucesso')
     else
       renderiza_crud_js(@patrocinador)
     end
@@ -28,7 +28,7 @@ class PatrocinadoresController < ApplicationController
 
   def update
     if @patrocinador.update(patrocinador_params)
-      renderiza_crud_js(@patrocinador, 'Patrocinador alterado com sucesso.')
+      renderiza_crud_js(@patrocinador, 'Patrocinador alterado com sucesso')
     else
       renderiza_crud_js(@patrocinador)
     end
@@ -36,14 +36,14 @@ class PatrocinadoresController < ApplicationController
 
   def destroy
     @patrocinador.destroy
-    renderiza_crud_js(@patrocinador, 'Patrocinador excluído com sucesso.')
+    renderiza_crud_js(@patrocinador, 'Patrocinador excluído com sucesso')
   end
 
   def deleta_logo_patrocinador
     @deleta_logo_patrocinador = Patrocinador.find_by_id(params[:id])
     @deleta_logo_patrocinador.logo = nil
     if @deleta_logo_patrocinador.save
-      renderiza_crud_js(@deleta_logo_patrocinador, 'Logo excluído com sucesso.')
+      renderiza_crud_js(@deleta_logo_patrocinador, 'Logo excluído com sucesso')
     end
   end
 

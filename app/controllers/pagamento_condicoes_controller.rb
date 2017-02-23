@@ -21,7 +21,7 @@ class PagamentoCondicoesController < ApplicationController
     @pagamento_condicao = PagamentoCondicao.new(pagamento_condicao_params)
     if @pagamento_condicao.save
       respond_to do |format|
-        format.js { render file: 'ajax/pagamento_condicoes/mostra_parcelas.js.erb', locals: { notice: 'Condição de pagamento criada com sucesso.' } }
+        format.js { render file: 'ajax/pagamento_condicoes/mostra_parcelas.js.erb', locals: { notice: 'Condição de pagamento criada com sucesso' } }
       end
     else
       renderiza_crud_js(@pagamento_condicao)
@@ -31,7 +31,7 @@ class PagamentoCondicoesController < ApplicationController
   def update
     if @pagamento_condicao.update(pagamento_condicao_params)
       respond_to do |format|
-        format.js { render file: 'ajax/pagamento_condicoes/mostra_parcelas.js.erb', locals: { notice: "Condição de pagamento alterada com sucesso." } }
+        format.js { render file: 'ajax/pagamento_condicoes/mostra_parcelas.js.erb', locals: { notice: "Condição de pagamento alterada com sucesso" } }
       end
     else
       renderiza_crud_js(@pagamento_condicao)
@@ -40,7 +40,7 @@ class PagamentoCondicoesController < ApplicationController
 
   def destroy
     @pagamento_condicao.destroy
-    renderiza_crud_js(@pagamento_condicao, 'Condição de pagamento excluída com sucesso.')
+    renderiza_crud_js(@pagamento_condicao, 'Condição de pagamento excluída com sucesso')
   end
 
   private

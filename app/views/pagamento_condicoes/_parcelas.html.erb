@@ -8,7 +8,7 @@
       <%= i.text_field :captacoes, required:"" %>
       <%= i.label :captacoes %>
     </div>
-    <div class="input-field col s12 m4 parcela_vencimento hidden">
+    <%= div_vencimento @pagamento_condicao.tipo %>
       <%= i.text_field :vencimento, class:"data" %>
       <%= i.label :vencimento %>
     </div>

@@ -33,7 +33,7 @@ class EnderecosController < ApplicationController
     @endereco = @cliente.enderecos.new(endereco_params)
     # @endereco = Endereco.new(endereco_params)
     if @endereco.save
-      renderiza_crud_js(@endereco, 'Endereço criado com sucesso.')
+      renderiza_crud_js(@endereco, 'Endereço criado com sucesso')
     else
       renderiza_crud_js(@endereco)
     end
@@ -41,7 +41,7 @@ class EnderecosController < ApplicationController
 
   def update
     if @endereco.update(endereco_params)
-      renderiza_crud_js(@endereco, 'Endereço alterado com sucesso.')
+      renderiza_crud_js(@endereco, 'Endereço alterado com sucesso')
     else
       renderiza_crud_js(@endereco)
     end
@@ -49,7 +49,7 @@ class EnderecosController < ApplicationController
 
   def destroy
     @endereco.destroy
-    renderiza_crud_js(@endereco, 'Endereço excluído com sucesso.')
+    renderiza_crud_js(@endereco, 'Endereço excluído com sucesso')
   end
 
   private

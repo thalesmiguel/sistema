@@ -36,7 +36,7 @@ class ClientesController < ApplicationController
 
   def update
     if @cliente.update(cliente_params)
-      renderiza_crud_js(@cliente, 'Cliente alterado com sucesso.')
+      renderiza_crud_js(@cliente, 'Cliente alterado com sucesso')
     else
       renderiza_crud_js(@cliente)
     end
@@ -44,7 +44,7 @@ class ClientesController < ApplicationController
 
   def destroy
     @cliente.destroy
-    # renderiza_crud_js(@cliente, 'Cliente excluído com sucesso.')
+    # renderiza_crud_js(@cliente, 'Cliente excluído com sucesso')
     respond_to do |format|
       format.js { render file: "ajax/clientes/mostra_pesquisa.js.erb" }
     end

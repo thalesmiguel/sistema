@@ -31,7 +31,7 @@ class AlertasController < ApplicationController
     @alerta = @cliente.alertas.new(alerta_params)
 
     if @alerta.save
-      renderiza_crud_js(@alerta, 'Alerta criado com sucesso.')
+      renderiza_crud_js(@alerta, 'Alerta criado com sucesso')
     else
       renderiza_crud_js(@alerta)
     end
@@ -39,7 +39,7 @@ class AlertasController < ApplicationController
 
   def update
     if @alerta.update(alerta_params)
-      renderiza_crud_js(@alerta, 'Alerta alterado com sucesso.')
+      renderiza_crud_js(@alerta, 'Alerta alterado com sucesso')
     else
       renderiza_crud_js(@alerta)
     end
@@ -47,7 +47,7 @@ class AlertasController < ApplicationController
 
   def destroy
     @alerta.destroy
-    renderiza_crud_js(@alerta, 'Alerta excluído com sucesso.')
+    renderiza_crud_js(@alerta, 'Alerta excluído com sucesso')
   end
 
   private

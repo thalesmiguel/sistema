@@ -20,7 +20,7 @@ class LeilaoEventosController < ApplicationController
   def create
     @leilao_evento = LeilaoEvento.new(leilao_evento_params)
     if @leilao_evento.save
-      renderiza_crud_js(@leilao_evento, 'Evento criado com sucesso.')
+      renderiza_crud_js(@leilao_evento, 'Evento criado com sucesso')
     else
       renderiza_crud_js(@leilao_evento)
     end
@@ -28,7 +28,7 @@ class LeilaoEventosController < ApplicationController
 
   def update
     if @leilao_evento.update(leilao_evento_params)
-      renderiza_crud_js(@leilao_evento, 'Evento alterado com sucesso.')
+      renderiza_crud_js(@leilao_evento, 'Evento alterado com sucesso')
     else
       renderiza_crud_js(@leilao_evento)
     end
@@ -36,7 +36,7 @@ class LeilaoEventosController < ApplicationController
 
   def destroy
     @leilao_evento.destroy
-    renderiza_crud_js(@leilao_evento, 'Evento excluído com sucesso.')
+    renderiza_crud_js(@leilao_evento, 'Evento excluído com sucesso')
   end
 
   private

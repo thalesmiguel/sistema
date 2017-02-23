@@ -2,4 +2,152 @@ require 'rails_helper'
 
 RSpec.describe LeiloesController, type: :controller do
 
+  before(:each) do
+    signed_in_as_a_valid_user
+  end
+
+  describe "GET index" do
+
+    it 'renderiza template :index' do
+      get :index
+      expect(response).to render_template(:index)
+    end
+
+    # it 'renderiza json' do
+    #   get :index, xhr: true, format: :json
+    #   expect(response).to_not be_nil
+    # end
+
+  end
+
+  describe "GET new" do
+
+    it 'renderiza aba :new' do
+      get :new, xhr: true, params: {}
+      expect(response).to render_template('ajax/leilaos/mostra_leilao.js.erb')
+    end
+
+    it 'atribui novo Leilao para @leilao' do
+      get :new, xhr: true, params: {}
+      expect(assigns(:leilao)).to be_a_new(Leilao)
+    end
+  end
+
+  describe "POST create" do
+    let(:dados_validos) { FactoryGirl.attributes_for(:leilao) }
+    let(:dados_invalidos) { FactoryGirl.attributes_for(:leilao, nome: '') }
+
+    context 'dados válidos' do
+      it 'renderiza novo Leilao' do
+        post :create, xhr: true, params: { leilao: dados_validos }
+        expect(response).to render_template("ajax/leilaos/mostra_novo_leilao.js.erb")
+        # expect(response).to render_template("ajax/application/crud.js.erb")
+      end
+
+      it 'cria novo leilao no banco de dados' do
+        expect {
+          post :create, xhr: true, params: { leilao: dados_validos }
+        }.to change(Leilao, :count).by(1)
+      end
+
+    end
+
+    context 'dados inválidos' do
+      it 'renderiza mensagem de erro' do
+        post :create, xhr: true, params: { leilao: dados_invalidos }
+        expect(response).to render_template("ajax/application/crud.js.erb")
+      end
+
+      it 'não cria novo leilao no banco de dados' do
+        expect {
+          post :create, xhr: true, params: { leilao: dados_invalidos }
+        }.not_to change(Leilao, :count)
+      end
+    end
+
+  end
+
+  describe "GET edit" do
+    let(:leilao) { FactoryGirl.create(:leilao) }
+
+    it 'mostra a tela de visualização' do
+      get :edit, xhr: true, params: { id: leilao }
+      expect(response).to render_template('ajax/leilaos/mostra_leilao.js.erb')
+    end
+
+    it 'atribui o leilao selecionada para @leilao' do
+      get :edit, xhr: true, params: { id: leilao }
+      expect(assigns(:leilao)).to eq(leilao)
+    end
+
+  end
+
+  describe "PUT update" do
+    let(:leilao) { FactoryGirl.create(:leilao, nome: "Nome antigo") }
+
+    let(:dados_validos) { FactoryGirl.attributes_for(:leilao, nome: "Novo nome") }
+    let(:dados_invalidos) { FactoryGirl.attributes_for(:leilao, nome: '') }
+
+    context 'dados válidos' do
+
+      it 'renderiza Leilao alterada' do
+        put :update, xhr: true, params: { id: leilao, leilao: dados_validos }
+        expect(response).to render_template("ajax/application/crud.js.erb")
+      end
+
+      it 'altera o leilao no banco de dados' do
+        put :update, xhr: true, params: { id: leilao, leilao: dados_validos }
+        leilao.reload
+        expect(leilao.nome).to eq("Novo nome")
+      end
+    end
+
+    context 'dados inválidos' do
+
+      it 'renderiza mensagem de erro' do
+        put :update, xhr: true, params: { id: leilao, leilao: dados_invalidos }
+        expect(response).to render_template("ajax/application/crud.js.erb")
+      end
+
+      it 'não altera o leilao no banco de dados' do
+        put :update, xhr: true, params: { id: leilao, leilao: dados_invalidos }
+        leilao.reload
+        expect(leilao.nome).to eq("Nome antigo")
+      end
+
+    end
+
+  end
+
+  describe "PUT altera_status" do
+    let(:leilao_ativo) { FactoryGirl.create(:leilao, ativo: true) }
+    let(:leilao_inativo) { FactoryGirl.create(:leilao, ativo: false) }
+
+    it 'altera o atributo ativo para falso' do
+      put :altera_status, xhr: true, params: { id: leilao_ativo }
+      leilao_ativo.reload
+      expect(leilao_ativo.ativo).to eq(false)
+    end
+
+    it 'altera o atributo ativo para verdadeiro' do
+      put :altera_status, xhr: true, params: { id: leilao_inativo }
+      leilao_inativo.reload
+      expect(leilao_inativo.ativo).to eq(true)
+    end
+  end
+
+  # describe "DELETE destroy" do
+  #   let(:leilao) { FactoryGirl.create(:leilao) }
+  #
+  #   it 'deleta Leilao da tabela' do
+  #     delete :destroy, xhr: true, params: { id: leilao }
+  #     expect(response).to render_template("ajax/leilaos/mostra_pesquisa.js.erb")
+  #   end
+  #
+  #   it 'deleta leilao do banco de dados' do
+  #     delete :destroy, xhr: true, params: { id: leilao }
+  #     expect(Leilao.exists?(leilao.id)).to be_falsy
+  #   end
+  # end
+
 end

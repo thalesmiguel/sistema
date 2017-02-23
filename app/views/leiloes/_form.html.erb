@@ -1,0 +1,129 @@
+<%= form_for @leiloeiro, remote: true, html: { class: "leiloeiro-form col s12 validate" } do |f| %>
+  <div class="modal-content">
+    <div class="p-20 modal-border">
+      <div class="row card-content m-b-0 p-b-0 p-l-30 p-r-30">
+        <div class="row">
+          <div class="input-field col s4">
+            <%= f.text_field :nome_contrato, required:"" %>
+            <%= f.label :nome_contrato, "Nome" %>
+          </div>
+          <div class="input-field col s4">
+            <%= f.text_field :razao_social, required:"" %>
+            <%= f.label :razao_social, "Razão Social" %>
+          </div>
+
+          <div class="file-field input-field col s2">
+            <div class="btn">
+              <span>Foto</span>
+              <%= f.file_field :foto %>
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text">
+            </div>
+          </div>
+
+          <fieldset>
+            <div class="input-field col s2" style="display: flex;">
+              <% if @leiloeiro.foto.file? %>
+                <%=  %>
+                <%= link_to image_tag(@leiloeiro.foto.url(:thumb)), @leiloeiro.foto.url(:original, false), :target => "_blank" %>
+                <%= link_to('<i class="material-icons red-text">clear</i>'.html_safe, {action: :deleta_foto_leiloeiro, id: @leiloeiro.id},
+                            method: :put, remote: true, data: { confirm: 'Tem certeza?' }) %>
+              <% end %>
+              <%= label_tag "Foto", nil, class: "active" %>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s4">
+            <%= f.text_field :cpf, class:"cpf" %>
+            <%= f.label :cpf, "CPF" %>
+          </div>
+          <div class="input-field col s4">
+            <%= f.text_field :cnpj, class:"cnpj" %>
+            <%= f.label :cnpj, "CNPJ" %>
+          </div>
+          <div class="input-field col s4">
+            <%= f.text_field :sindicato %>
+            <%= f.label :sindicato, "Nº Sindicato" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 m4">
+            <%= f.text_field :endereco %>
+            <%= f.label :endereco %>
+          </div>
+          <div class="input-field col s12 m3">
+            <%= f.select :estado, @estados.collect {|estado| [(estado.nome), estado.id]} %>
+            <%= f.label :estado, class: "active" %>
+          </div>
+          <div class="input-field col s12 m3">
+            <%= f.select :cidade_id, @cidades.collect {|cidade| [cidade.nome, cidade.id]} %>
+            <%= f.label :cidade_id, class: "active" %>
+          </div>
+          <div class="input-field col s12 m2">
+            <%= f.text_field :cep, class: "cep" %>
+            <%= f.label :cep %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 m4">
+            <%= f.text_field :email %>
+            <%= f.label :email %>
+          </div>
+          <div class="input-field col s12 m3">
+            <%= f.text_field :telefone %>
+            <%= f.label :telefone %>
+          </div>
+          <div class="input-field col s12 m3">
+            <%= f.text_field :fax %>
+            <%= f.label :fax %>
+          </div>
+          <div class="input-field col s12 m2">
+            <%= f.text_field :sigla %>
+            <%= f.label :sigla %>
+          </div>
+        </div>
+
+        <div class="row">
+          <fieldset>
+            <div class="input-field col s12 m2">
+              <%= f.text_field :comissao_elite %>
+              <%= f.label :comissao_elite, "% Elite" %>
+            </div>
+            <div class="input-field col s12 m2">
+              <%= f.text_field :comissao_corte %>
+              <%= f.label :comissao_corte, "% Corte" %>
+            </div>
+            <div class="input-field col s12 m2">
+              <%= f.text_field :comissao_virtual %>
+              <%= f.label :comissao_virtual, "% Virtual" %>
+            </div>
+            <div class="input-field col s12 m2">
+              <%= f.text_field :comissao_shopping %>
+              <%= f.label :comissao_shopping, "% Shopping" %>
+            </div>
+            <div class="input-field col s12 m4">
+              <%= f.check_box :comissao_contrato, class: 'filled-in'  %>
+              <%= f.label :comissao_contrato, 'Emite % nos Contratos' %>
+            </div>
+          </fieldset>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <%= button_tag "Salvar", class:"btn waves-effect waves-light" if can? :manage, :leiloeiro %>
+        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#leiloeiro_modal').closeModal()", type: 'button' %>
+
+        <% if !@leiloeiro.new_record? %>
+          <%= link_to "Excluir", leiloeiro_path(@leiloeiro), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',
+                data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a exclusão?')) } if can? :manage, :leiloeiro  %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

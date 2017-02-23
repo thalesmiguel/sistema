@@ -20,7 +20,7 @@ class UniformesController < ApplicationController
   def create
     @uniforme = Uniforme.new(uniforme_params)
     if @uniforme.save
-      renderiza_crud_js(@uniforme, 'Uniforme criado com sucesso.')
+      renderiza_crud_js(@uniforme, 'Uniforme criado com sucesso')
     else
       renderiza_crud_js(@uniforme)
     end
@@ -28,7 +28,7 @@ class UniformesController < ApplicationController
 
   def update
     if @uniforme.update(uniforme_params)
-      renderiza_crud_js(@uniforme, 'Uniforme alterado com sucesso.')
+      renderiza_crud_js(@uniforme, 'Uniforme alterado com sucesso')
     else
       renderiza_crud_js(@uniforme)
     end
@@ -36,7 +36,7 @@ class UniformesController < ApplicationController
 
   def destroy
     @uniforme.destroy
-    renderiza_crud_js(@uniforme, 'Uniforme excluído com sucesso.')
+    renderiza_crud_js(@uniforme, 'Uniforme excluído com sucesso')
   end
 
   private

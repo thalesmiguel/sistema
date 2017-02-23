@@ -15,7 +15,7 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     @user = User.new(registration_params)
     if @user.save
-      renderiza_crud_js(@user, 'Usuário criado com sucesso.')
+      renderiza_crud_js(@user, 'Usuário criado com sucesso')
     else
       renderiza_crud_js(@user)
     end
@@ -23,7 +23,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def update
     if @user.update(registration_params)
-      renderiza_crud_js(@user, 'Usuário alterado com sucesso.')
+      renderiza_crud_js(@user, 'Usuário alterado com sucesso')
     else
       renderiza_crud_js(@user)
     end

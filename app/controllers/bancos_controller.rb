@@ -21,7 +21,7 @@ class BancosController < ApplicationController
   def create
     @banco = Banco.new(banco_params)
     if @banco.save
-      renderiza_crud_js(@banco, 'Banco criado com sucesso.')
+      renderiza_crud_js(@banco, 'Banco criado com sucesso')
     else
       renderiza_crud_js(@banco)
     end
@@ -29,7 +29,7 @@ class BancosController < ApplicationController
 
   def update
     if @banco.update(banco_params)
-      renderiza_crud_js(@banco, 'Banco alterado com sucesso.')
+      renderiza_crud_js(@banco, 'Banco alterado com sucesso')
     else
       renderiza_crud_js(@banco)
     end
@@ -37,7 +37,7 @@ class BancosController < ApplicationController
 
   def destroy
     @banco.destroy
-    renderiza_crud_js(@banco, 'Banco excluído com sucesso.')
+    renderiza_crud_js(@banco, 'Banco excluído com sucesso')
   end
 
   def lista_bancos

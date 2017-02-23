@@ -20,7 +20,7 @@ class SubtiposController < ApplicationController
   def create
     @subtipo = Subtipo.new(subtipo_params)
     if @subtipo.save
-      renderiza_crud_js(@subtipo, 'Subtipo criado com sucesso.')
+      renderiza_crud_js(@subtipo, 'Subtipo criado com sucesso')
     else
       renderiza_crud_js(@subtipo)
     end
@@ -28,7 +28,7 @@ class SubtiposController < ApplicationController
 
   def update
     if @subtipo.update(subtipo_params)
-      renderiza_crud_js(@subtipo, 'Subtipo alterado com sucesso.')
+      renderiza_crud_js(@subtipo, 'Subtipo alterado com sucesso')
     else
       renderiza_crud_js(@subtipo)
     end
@@ -36,7 +36,7 @@ class SubtiposController < ApplicationController
 
   def destroy
     @subtipo.destroy
-    renderiza_crud_js(@subtipo, 'Subtipo excluído com sucesso.')
+    renderiza_crud_js(@subtipo, 'Subtipo excluído com sucesso')
   end
 
   private

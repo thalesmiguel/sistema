@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    renderiza_crud_js(@user, 'Usuário excluído com sucesso.')
+    renderiza_crud_js(@user, 'Usuário excluído com sucesso')
   end
 
   private

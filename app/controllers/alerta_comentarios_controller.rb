@@ -25,7 +25,7 @@ class AlertaComentariosController < ApplicationController
 
     @alerta_comentario = @alerta.alerta_comentarios.new(alerta_comentario_params)
     if @alerta_comentario.save
-      renderiza_crud_js(@alerta, 'Comentário criado com sucesso.')
+      renderiza_crud_js(@alerta, 'Comentário criado com sucesso')
     else
       renderiza_crud_js(@alerta_comentario)
     end
@@ -33,7 +33,7 @@ class AlertaComentariosController < ApplicationController
 
   def update
     if @alerta_comentario.update(alerta_comentario_params)
-      renderiza_crud_js(@alerta_comentario, 'Comentário alterado com sucesso.')
+      renderiza_crud_js(@alerta_comentario, 'Comentário alterado com sucesso')
     else
       renderiza_crud_js(@alerta_comentario)
     end
@@ -41,7 +41,7 @@ class AlertaComentariosController < ApplicationController
 
   def destroy
     @alerta_comentario.destroy
-    renderiza_crud_js(@alerta_comentario, 'Comentário excluído com sucesso.')
+    renderiza_crud_js(@alerta_comentario, 'Comentário excluído com sucesso')
   end
 
   private

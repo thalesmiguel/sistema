@@ -54,6 +54,7 @@ Rails.application.routes.draw do
       resources :alerta_comentarios, except: [:show]
     end
 
+    resources :leiloes, except: [:show]
   end
 
   scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do

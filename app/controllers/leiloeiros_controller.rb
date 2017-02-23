@@ -26,7 +26,7 @@ class LeiloeirosController < ApplicationController
   def create
     @leiloeiro = Leiloeiro.new(leiloeiro_params)
     if @leiloeiro.save
-      renderiza_crud_js(@leiloeiro, 'Leiloeiro criado com sucesso.')
+      renderiza_crud_js(@leiloeiro, 'Leiloeiro criado com sucesso')
     else
       renderiza_crud_js(@leiloeiro)
     end
@@ -34,7 +34,7 @@ class LeiloeirosController < ApplicationController
 
   def update
     if @leiloeiro.update(leiloeiro_params)
-      renderiza_crud_js(@leiloeiro, 'Leiloeiro alterado com sucesso.')
+      renderiza_crud_js(@leiloeiro, 'Leiloeiro alterado com sucesso')
     else
       renderiza_crud_js(@leiloeiro)
     end
@@ -42,14 +42,14 @@ class LeiloeirosController < ApplicationController
 
   def destroy
     @leiloeiro.destroy
-    renderiza_crud_js(@leiloeiro, 'Leiloeiro excluído com sucesso.')
+    renderiza_crud_js(@leiloeiro, 'Leiloeiro excluído com sucesso')
   end
 
   def deleta_foto_leiloeiro
     @deleta_foto_leiloeiro = Leiloeiro.find_by_id(params[:id])
     @deleta_foto_leiloeiro.foto = nil
     if @deleta_foto_leiloeiro.save
-      renderiza_crud_js(@deleta_foto_leiloeiro, 'Foto excluída com sucesso.')
+      renderiza_crud_js(@deleta_foto_leiloeiro, 'Foto excluída com sucesso')
     end
   end
 

@@ -20,7 +20,7 @@ class CanaisController < ApplicationController
   def create
     @canal = Canal.new(canal_params)
     if @canal.save
-      renderiza_crud_js(@canal, 'Canal criado com sucesso.')
+      renderiza_crud_js(@canal, 'Canal criado com sucesso')
     else
       renderiza_crud_js(@canal)
     end
@@ -28,7 +28,7 @@ class CanaisController < ApplicationController
 
   def update
     if @canal.update(canal_params)
-      renderiza_crud_js(@canal, 'Canal alterado com sucesso.')
+      renderiza_crud_js(@canal, 'Canal alterado com sucesso')
     else
       renderiza_crud_js(@canal)
     end
@@ -36,14 +36,14 @@ class CanaisController < ApplicationController
 
   def destroy
     @canal.destroy
-    renderiza_crud_js(@canal, 'Canal excluído com sucesso.')
+    renderiza_crud_js(@canal, 'Canal excluído com sucesso')
   end
 
   def deleta_logo_canal
     @deleta_logo_canal = Canal.find_by_id(params[:id])
     @deleta_logo_canal.logo = nil
     if @deleta_logo_canal.save
-      renderiza_crud_js(@deleta_logo_canal, 'Logo excluído com sucesso.')
+      renderiza_crud_js(@deleta_logo_canal, 'Logo excluído com sucesso')
     end
   end
 

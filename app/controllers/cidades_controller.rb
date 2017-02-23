@@ -21,7 +21,7 @@ class CidadesController < ApplicationController
   def create
     @cidade = Cidade.new(cidade_params)
     if @cidade.save
-      renderiza_crud_js(@cidade, 'Cidade criada com sucesso.')
+      renderiza_crud_js(@cidade, 'Cidade criada com sucesso')
     else
       renderiza_crud_js(@cidade)
     end
@@ -29,7 +29,7 @@ class CidadesController < ApplicationController
 
   def update
     if @cidade.update(cidade_params)
-      renderiza_crud_js(@cidade, 'Cidade alterada com sucesso.')
+      renderiza_crud_js(@cidade, 'Cidade alterada com sucesso')
     else
       renderiza_crud_js(@cidade)
     end
@@ -37,7 +37,7 @@ class CidadesController < ApplicationController
 
   def destroy
     @cidade.destroy
-    renderiza_crud_js(@cidade, 'Cidade excluída com sucesso.')
+    renderiza_crud_js(@cidade, 'Cidade excluída com sucesso')
   end
 
   def update_cidades

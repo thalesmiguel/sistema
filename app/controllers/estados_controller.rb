@@ -20,7 +20,7 @@ class EstadosController < ApplicationController
   def create
     @estado = Estado.new(estado_params)
     if @estado.save
-      renderiza_crud_js(@estado, 'Estado criado com sucesso.')
+      renderiza_crud_js(@estado, 'Estado criado com sucesso')
     else
       renderiza_crud_js(@estado)
     end
@@ -28,7 +28,7 @@ class EstadosController < ApplicationController
 
   def update
     if @estado.update(estado_params)
-      renderiza_crud_js(@estado, 'Estado alterado com sucesso.')
+      renderiza_crud_js(@estado, 'Estado alterado com sucesso')
     else
       renderiza_crud_js(@estado)
     end
@@ -36,7 +36,7 @@ class EstadosController < ApplicationController
 
   def destroy
     @estado.destroy
-    renderiza_crud_js(@estado, 'Estado excluído com sucesso.')
+    renderiza_crud_js(@estado, 'Estado excluído com sucesso')
   end
 
   private

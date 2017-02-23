@@ -32,7 +32,7 @@ class FazendasController < ApplicationController
     @fazenda = @cliente.fazendas.new(fazenda_params)
     # @fazenda = Fazenda.new(fazenda_params)
     if @fazenda.save
-      renderiza_crud_js(@fazenda, 'Fazenda criado com sucesso.')
+      renderiza_crud_js(@fazenda, 'Fazenda criado com sucesso')
     else
       renderiza_crud_js(@fazenda)
     end
@@ -40,7 +40,7 @@ class FazendasController < ApplicationController
 
   def update
     if @fazenda.update(fazenda_params)
-      renderiza_crud_js(@fazenda, 'Fazenda alterado com sucesso.')
+      renderiza_crud_js(@fazenda, 'Fazenda alterado com sucesso')
     else
       renderiza_crud_js(@fazenda)
     end
@@ -48,7 +48,7 @@ class FazendasController < ApplicationController
 
   def destroy
     @fazenda.destroy
-    renderiza_crud_js(@fazenda, 'Fazenda excluído com sucesso.')
+    renderiza_crud_js(@fazenda, 'Fazenda excluído com sucesso')
   end
 
   private

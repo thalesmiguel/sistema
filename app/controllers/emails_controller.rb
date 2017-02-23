@@ -25,7 +25,7 @@ class EmailsController < ApplicationController
 
     @email = @cliente.emails.new(email_params)
     if @email.save
-      renderiza_crud_js(@email, 'Email criado com sucesso.')
+      renderiza_crud_js(@email, 'Email criado com sucesso')
     else
       renderiza_crud_js(@email)
     end
@@ -33,7 +33,7 @@ class EmailsController < ApplicationController
 
   def update
     if @email.update(email_params)
-      renderiza_crud_js(@email, 'Email alterado com sucesso.')
+      renderiza_crud_js(@email, 'Email alterado com sucesso')
     else
       renderiza_crud_js(@email)
     end
@@ -41,7 +41,7 @@ class EmailsController < ApplicationController
 
   def destroy
     @email.destroy
-    renderiza_crud_js(@email, 'Email excluído com sucesso.')
+    renderiza_crud_js(@email, 'Email excluído com sucesso')
   end
 
   private

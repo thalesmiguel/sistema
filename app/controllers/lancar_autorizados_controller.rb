@@ -25,7 +25,7 @@ class LancarAutorizadosController < ApplicationController
 
     @lancar_autorizado = @cliente.lancar_autorizados.new(lancar_autorizado_params)
     if @lancar_autorizado.save
-      renderiza_crud_js(@lancar_autorizado, 'Autorizado a Lançar criado com sucesso.')
+      renderiza_crud_js(@lancar_autorizado, 'Autorizado a Lançar criado com sucesso')
     else
       renderiza_crud_js(@lancar_autorizado)
     end
@@ -33,7 +33,7 @@ class LancarAutorizadosController < ApplicationController
 
   def update
     if @lancar_autorizado.update(lancar_autorizado_params)
-      renderiza_crud_js(@lancar_autorizado, 'Autorizado a Lançar alterado com sucesso.')
+      renderiza_crud_js(@lancar_autorizado, 'Autorizado a Lançar alterado com sucesso')
     else
       renderiza_crud_js(@lancar_autorizado)
     end
@@ -41,14 +41,14 @@ class LancarAutorizadosController < ApplicationController
 
   def destroy
     @lancar_autorizado.destroy
-    renderiza_crud_js(@lancar_autorizado, 'Autorizado a Lançar excluído com sucesso.')
+    renderiza_crud_js(@lancar_autorizado, 'Autorizado a Lançar excluído com sucesso')
   end
 
   def deleta_procuracao
     @deleta_procuracao_lancar_autorizado = LancarAutorizado.find_by_id(params[:id])
     @deleta_procuracao_lancar_autorizado.procuracao = nil
     if @deleta_procuracao_lancar_autorizado.save
-      renderiza_crud_js(@deleta_procuracao_lancar_autorizado, 'Procuração excluída com sucesso.')
+      renderiza_crud_js(@deleta_procuracao_lancar_autorizado, 'Procuração excluída com sucesso')
     end
   end
 

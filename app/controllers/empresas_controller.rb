@@ -33,7 +33,7 @@ class EmpresasController < ApplicationController
     @empresa = @cliente.empresas.new(empresa_params)
     # @empresa = Empresa.new(empresa_params)
     if @empresa.save
-      renderiza_crud_js(@empresa, 'Empresa criada com sucesso.')
+      renderiza_crud_js(@empresa, 'Empresa criada com sucesso')
     else
       renderiza_crud_js(@empresa)
     end
@@ -41,7 +41,7 @@ class EmpresasController < ApplicationController
 
   def update
     if @empresa.update(empresa_params)
-      renderiza_crud_js(@empresa, 'Empresa alterada com sucesso.')
+      renderiza_crud_js(@empresa, 'Empresa alterada com sucesso')
     else
       renderiza_crud_js(@empresa)
     end
@@ -49,7 +49,7 @@ class EmpresasController < ApplicationController
 
   def destroy
     @empresa.destroy
-    renderiza_crud_js(@empresa, 'Empresa excluída com sucesso.')
+    renderiza_crud_js(@empresa, 'Empresa excluída com sucesso')
   end
 
   private

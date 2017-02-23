@@ -25,7 +25,7 @@ class ReferenciasController < ApplicationController
 
     @referencia = @cliente.referencias.new(referencia_params)
     if @referencia.save
-      renderiza_crud_js(@referencia, 'Referência criada com sucesso.')
+      renderiza_crud_js(@referencia, 'Referência criada com sucesso')
     else
       renderiza_crud_js(@referencia)
     end
@@ -33,7 +33,7 @@ class ReferenciasController < ApplicationController
 
   def update
     if @referencia.update(referencia_params)
-      renderiza_crud_js(@referencia, 'Referência alterada com sucesso.')
+      renderiza_crud_js(@referencia, 'Referência alterada com sucesso')
     else
       renderiza_crud_js(@referencia)
     end
@@ -41,7 +41,7 @@ class ReferenciasController < ApplicationController
 
   def destroy
     @referencia.destroy
-    renderiza_crud_js(@referencia, 'Referência excluída com sucesso.')
+    renderiza_crud_js(@referencia, 'Referência excluída com sucesso')
   end
 
   private
