@@ -523,6 +523,10 @@ legend {
   max-height: 350px;
 }
 
+.card .card-action {
+  text-align: right;
+}
+
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
   color: $secondary-color
 }
@@ -622,6 +626,7 @@ legend {
 
 .modal-grande {
   max-height: 100% !important;
+  min-width: 80% !important;
   overflow: overlay;
 }
 .modal-medio {

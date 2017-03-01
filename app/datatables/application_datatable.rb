@@ -11,6 +11,11 @@ class ApplicationDatatable < AjaxDatatablesRails::Base
     ->(column) { column.table[column.field].matches("#{ (Time.parse(column.search.value).to_s(:data_banco) + "%" rescue nil) }" ) }
   end
 
+  def filtra_hora
+    # ->(column) { column.table[column.field].matches("#{ column.search.value.to_time.to_s(:data_banco) }%" ) if column.search.value.to_time }
+    ->(column) { column.table[column.field].matches("%#{ (Time.parse(column.search.value).to_s(:hora_banco) + "%" rescue nil) }" ) }
+  end
+
   def permitido?
     options[:permitido]
   end

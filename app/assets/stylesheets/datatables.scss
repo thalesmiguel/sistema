@@ -29,9 +29,14 @@
   float: right;
 }
 
-.paginate_left .dataTables_paginate {
+#leiloes_modal {
+  background-color: #fff
+}
+
+#leiloes_modal .dataTables_paginate {
   margin-top: 2em;
-  float: left;
+  margin-bottom: 1em;
+  float: right;
 }
 
 // .dataTables_processing {

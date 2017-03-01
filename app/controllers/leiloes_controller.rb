@@ -1,9 +1,9 @@
 class LeiloesController < ApplicationController
-  before_action :set_leilao, only: [:edit, :update, :destroy, :altera_status]
+  before_action :set_leilao, only: [:edit, :update, :destroy, :seleciona_leilao]
 
   def index
     respond_to do |format|
-      format.html
+      format.js { render file: "ajax/leiloes/lista_leiloes.js.erb" }
       format.json { renderiza_datatable }
     end
   end
@@ -11,23 +11,22 @@ class LeiloesController < ApplicationController
   def new
     @leilao = Leilao.new
     respond_to do |format|
-      format.js { render file: "ajax/leilaos/mostra_leilao.js.erb" }
+      format.js { render file: "ajax/leiloes/mostra_leilao.js.erb" }
     end
   end
 
   def edit
     respond_to do |format|
-      format.js { render file: "ajax/leilaos/mostra_leilao.js.erb" }
+      format.html
     end
   end
 
   def create
     @leilao = Leilao.new(leilao_params)
-    @leilao.marketing_tipos << params[:marketing_tipos] #rever
 
     if @leilao.save
       respond_to do |format|
-        format.js { render file: "ajax/leilaos/mostra_novo_leilao.js.erb" }
+        format.js { render file: "ajax/leiloes/mostra_novo_leilao.js.erb" }
       end
     else
       renderiza_crud_js(@leilao)
@@ -36,7 +35,7 @@ class LeiloesController < ApplicationController
 
   def update
     if @leilao.update(leilao_params)
-      renderiza_crud_js(@leilao, 'Leilao alterado com sucesso')
+      renderiza_crud_js(@leilao, 'Leilão alterado com sucesso')
     else
       renderiza_crud_js(@leilao)
     end
@@ -44,17 +43,13 @@ class LeiloesController < ApplicationController
 
   def destroy
     @leilao.destroy
-    # renderiza_crud_js(@leilao, 'Leilao excluído com sucesso')
-    respond_to do |format|
-      format.js { render file: "ajax/leilaos/mostra_pesquisa.js.erb" }
-    end
+    renderiza_crud_js(@leilao, 'Leilão excluído com sucesso')
   end
 
-  def altera_status
-    @leilao.ativo = !@leilao.ativo
-    @leilao.save
+  def seleciona_leilao
+    session[:leilao_id] = @leilao.id
     respond_to do |format|
-      format.js { render file: "ajax/leilaos/mostra_leilao.js.erb" }
+      format.js { render file: "ajax/leiloes/seleciona_leilao.js.erb" }
     end
   end
 

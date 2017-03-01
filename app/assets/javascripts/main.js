@@ -12,7 +12,7 @@ $(document).on('turbolinks:load', function(){
   // Materialize.updateTextFields();
 
 
-  $(document).ajaxStart(function() { Pace.restart(); });
+  $(document).ajaxStart(() => { Pace.restart() });
   $('html').on('click', function(){
     $(".yadcf-filter-wrapper").hide(200);
   })

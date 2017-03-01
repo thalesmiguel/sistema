@@ -55,6 +55,7 @@ Rails.application.routes.draw do
     end
 
     resources :leiloes, except: [:show]
+    put 'leiloes/:id/seleciona_leilao', to: 'leiloes#seleciona_leilao', as: 'seleciona_leilao'
   end
 
   scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do

@@ -165,12 +165,12 @@
 
 
               <div id="cliente-informacoes" class="row bordas p-15">
-                <% if !@cliente.new_record? %>
+                <% unless @cliente.new_record? %>
                   <div id="cliente-tabs">
 
                     <div class="col s12">
                       <ul class="tabs">
-                        <li class="tab col s3"><a href="#cliente-enderecos" class="active standby">Endereços</a></li>
+                        <li class="tab col s3"><a href="#cliente-enderecos" class="active">Endereços</a></li>
                         <li class="tab col s3"><a href="#cliente-telefones" class="standby">Telefones</a></li>
                         <li class="tab col s3"><a href="#cliente-emails" class="standby">E-mails</a></li>
                         <li class="tab col s3"><a href="#cliente-fazendas" class="standby">Fazendas</a></li>
@@ -214,7 +214,7 @@
           </div>
         </div>
       <% end %>
-      
+
     </div>
   </div>
 </div>

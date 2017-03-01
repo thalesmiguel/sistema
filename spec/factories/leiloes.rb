@@ -11,7 +11,7 @@ FactoryGirl.define do
     tipo "leilão_normal"
     testemunha_1 nil
     testemunha_2 nil
-    situacao 1
+    situacao "aguardando_confirmação"
     logo { File.new("#{Rails.root}/spec/support/fixtures/imagem.png") }
   end
 end

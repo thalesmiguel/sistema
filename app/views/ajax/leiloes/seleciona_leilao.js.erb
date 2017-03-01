@@ -1,0 +1,8 @@
+let modal = $("#leiloes_modal");
+let leilao_atual = $("#leilao_atual");
+let menu_editar = $("#menu_editar_leilao");
+
+leilao_atual.html("<%= leilao_selecionado.nome %>");
+menu_editar.html("<%= escape_javascript(link_to_icon edit_leilao_path(leilao_selecionado), 'Editar', 'mode_edit') %>");
+
+modal.closeModal();

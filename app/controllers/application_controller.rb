@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+
+  helper_method :leilao_selecionado
+
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -31,12 +34,16 @@ class ApplicationController < ActionController::Base
     ability.can? :manage, params[:controller].singularize
   end
 
-
   protected
+
+  def leilao_selecionado
+    @leilao_selecionado ||= Leilao.find(session[:leilao_id]) if session[:leilao_id]
+  end
 
   def configure_permitted_parameters
     added_attrs = [:username, :email, :admin, :password, :password_confirmation, :remember_me]
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
   end
+
 end

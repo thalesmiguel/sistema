@@ -9,22 +9,16 @@ RSpec.describe LeiloesController, type: :controller do
   describe "GET index" do
 
     it 'renderiza template :index' do
-      get :index
-      expect(response).to render_template(:index)
+      get :index, xhr: true
+      expect(response).to render_template('ajax/leiloes/lista_leiloes.js.erb')
     end
-
-    # it 'renderiza json' do
-    #   get :index, xhr: true, format: :json
-    #   expect(response).to_not be_nil
-    # end
-
   end
 
   describe "GET new" do
 
     it 'renderiza aba :new' do
       get :new, xhr: true, params: {}
-      expect(response).to render_template('ajax/leilaos/mostra_leilao.js.erb')
+      expect(response).to render_template('ajax/leiloes/mostra_leilao.js.erb')
     end
 
     it 'atribui novo Leilao para @leilao' do
@@ -34,13 +28,13 @@ RSpec.describe LeiloesController, type: :controller do
   end
 
   describe "POST create" do
-    let(:dados_validos) { FactoryGirl.attributes_for(:leilao) }
-    let(:dados_invalidos) { FactoryGirl.attributes_for(:leilao, nome: '') }
+    let(:dados_validos) { FactoryGirl.attributes_for(:leilao, logo: nil) }
+    let(:dados_invalidos) { FactoryGirl.attributes_for(:leilao, nome: '', logo: nil) }
 
     context 'dados válidos' do
       it 'renderiza novo Leilao' do
         post :create, xhr: true, params: { leilao: dados_validos }
-        expect(response).to render_template("ajax/leilaos/mostra_novo_leilao.js.erb")
+        expect(response).to render_template("ajax/leiloes/mostra_novo_leilao.js.erb")
         # expect(response).to render_template("ajax/application/crud.js.erb")
       end
 
@@ -71,8 +65,8 @@ RSpec.describe LeiloesController, type: :controller do
     let(:leilao) { FactoryGirl.create(:leilao) }
 
     it 'mostra a tela de visualização' do
-      get :edit, xhr: true, params: { id: leilao }
-      expect(response).to render_template('ajax/leilaos/mostra_leilao.js.erb')
+      get :edit, params: { id: leilao }
+      expect(response).to render_template(:edit)
     end
 
     it 'atribui o leilao selecionada para @leilao' do
@@ -85,8 +79,8 @@ RSpec.describe LeiloesController, type: :controller do
   describe "PUT update" do
     let(:leilao) { FactoryGirl.create(:leilao, nome: "Nome antigo") }
 
-    let(:dados_validos) { FactoryGirl.attributes_for(:leilao, nome: "Novo nome") }
-    let(:dados_invalidos) { FactoryGirl.attributes_for(:leilao, nome: '') }
+    let(:dados_validos) { FactoryGirl.attributes_for(:leilao, nome: "Novo nome", logo: nil) }
+    let(:dados_invalidos) { FactoryGirl.attributes_for(:leilao, nome: '', logo: nil) }
 
     context 'dados válidos' do
 
@@ -119,35 +113,31 @@ RSpec.describe LeiloesController, type: :controller do
 
   end
 
-  describe "PUT altera_status" do
-    let(:leilao_ativo) { FactoryGirl.create(:leilao, ativo: true) }
-    let(:leilao_inativo) { FactoryGirl.create(:leilao, ativo: false) }
+  describe "DELETE destroy" do
+    let(:leilao) { FactoryGirl.create(:leilao) }
 
-    it 'altera o atributo ativo para falso' do
-      put :altera_status, xhr: true, params: { id: leilao_ativo }
-      leilao_ativo.reload
-      expect(leilao_ativo.ativo).to eq(false)
+    it 'deleta Leilao da tabela' do
+      delete :destroy, xhr: true, params: { id: leilao }
+      expect(response).to render_template("ajax/application/crud.js.erb")
     end
 
-    it 'altera o atributo ativo para verdadeiro' do
-      put :altera_status, xhr: true, params: { id: leilao_inativo }
-      leilao_inativo.reload
-      expect(leilao_inativo.ativo).to eq(true)
+    it 'deleta leilao do banco de dados' do
+      delete :destroy, xhr: true, params: { id: leilao }
+      expect(Leilao.exists?(leilao.id)).to be_falsy
     end
   end
 
-  # describe "DELETE destroy" do
-  #   let(:leilao) { FactoryGirl.create(:leilao) }
-  #
-  #   it 'deleta Leilao da tabela' do
-  #     delete :destroy, xhr: true, params: { id: leilao }
-  #     expect(response).to render_template("ajax/leilaos/mostra_pesquisa.js.erb")
-  #   end
-  #
-  #   it 'deleta leilao do banco de dados' do
-  #     delete :destroy, xhr: true, params: { id: leilao }
-  #     expect(Leilao.exists?(leilao.id)).to be_falsy
-  #   end
-  # end
+  describe "PUT seleciona_leilao" do
+    let(:leilao) { FactoryGirl.create(:leilao, nome: "Nome antigo") }
 
+    it 'atribui o Leilao selecionado à session[:leilao_id]' do
+      put :seleciona_leilao, xhr: true, params: { id: leilao }
+      expect(session[:leilao_id]).to eq leilao.id
+    end
+
+    it 'renderiza template seleciona_leilao.js.erb' do
+      put :seleciona_leilao, xhr: true, params: { id: leilao }
+      expect(response).to render_template("ajax/leiloes/seleciona_leilao.js.erb")
+    end
+  end
 end

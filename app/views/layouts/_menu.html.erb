@@ -14,6 +14,23 @@
     </div>
   </li>
 
+  <li class="no-padding">
+    <ul class="collapsible collapsible-accordion">
+      <li class="bold">
+        <a class="collapsible-header waves-effect">Leilões<i class="material-icons">arrow_drop_down</i></a>
+        <div class="collapsible-body">
+          <ul>
+            <li> <%= link_to_icon leiloes_path, 'Selecionar', 'playlist_add_check', true %> </li>
+            <% if leilao_selecionado %>
+              <li id="menu_editar_leilao"> <%= link_to_icon edit_leilao_path(leilao_selecionado), 'Editar', 'mode_edit' %> </li>
+            <% end %>
+            <li> <%= link_to_icon leiloes_path, 'Cadastrar', 'fiber_new', true %> </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </li>
+
 
   <li class="no-padding">
     <ul class="collapsible collapsible-accordion">
@@ -21,26 +38,25 @@
         <a class="collapsible-header waves-effect">Cadastros<i class="material-icons">arrow_drop_down</i></a>
         <div class="collapsible-body">
           <ul>
-            <li><%= link_to "<i class='small material-icons right'>minus</i> Leilão".html_safe, leiloes_path, class:"waves-effect" %></li>
-            <li><%= link_to "<i class='small material-icons right'>people</i> Clientes".html_safe, clientes_path, class:"waves-effect" %></li>
-            <li><%= link_to "<i class='small material-icons right'>spa</i> Subtipos".html_safe, subtipos_path, class:"waves-effect" %></li>
-            <li><%= link_to "<i class='small material-icons right'>business_center</i> Eventos".html_safe, leilao_eventos_path, class:"waves-effect" %></li>
-            <li><%= link_to "<i class='small material-icons right'>flag</i> Bandeiras".html_safe, bandeiras_path, class:"waves-effect" %></li>
-            <li><%= link_to "<i class='small material-icons right'>tv</i> Canais".html_safe, canais_path, class:"waves-effect" %></li>
-            <li><%= link_to "<i class='small material-icons right'>thumbs_up_down</i> Raças".html_safe, racas_path, class:"waves-effect" %></li>
-            <li><%= link_to "<i class='small material-icons right'>person_pin_circle</i> Patrocinadores".html_safe, patrocinadores_path, class:"waves-effect" %></li>
-            <li><%= link_to "<i class='small material-icons right'>nature_people</i> Assessorias".html_safe, assessorias_path, class:"waves-effect" %></li>
-            <li><%= link_to "<i class='small material-icons right'>perm_camera_mic</i> Leiloeiros".html_safe, leiloeiros_path, class:"waves-effect" %></li>
-            <li><%= link_to "<i class='small material-icons right'>attach_money</i> Condições de Pagamento".html_safe, pagamento_condicoes_path, class:"waves-effect" %></li>
+            <li> <%= link_to_icon clientes_path, 'Clientes', 'people' %> </li>
+            <li> <%= link_to_icon subtipos_path, 'Subtipos', 'spa' %> </li>
+            <li> <%= link_to_icon leilao_eventos_path, 'Eventos', 'business_center' %> </li>
+            <li> <%= link_to_icon bandeiras_path, 'Bandeiras', 'flag' %> </li>
+            <li> <%= link_to_icon canais_path, 'Canais', 'tv' %> </li>
+            <li> <%= link_to_icon racas_path, 'Raças', 'thumbs_up_down' %> </li>
+            <li> <%= link_to_icon patrocinadores_path, 'Patrocinadores', 'person_pin_circle' %> </li>
+            <li> <%= link_to_icon assessorias_path, 'Assessorias', 'nature_people' %> </li>
+            <li> <%= link_to_icon leiloeiros_path, 'Leiloeiros', 'perm_camera_mic' %> </li>
+            <li> <%= link_to_icon pagamento_condicoes_path, 'Condições de Pagamento', 'attach_money' %> </li>
             <li class="no-padding">
               <ul class="collapsible collapsible-accordion">
                 <li class="bold">
                   <a class="collapsible-header waves-effect">Planejamento<i class="material-icons">arrow_drop_down</i></a>
                   <div class="collapsible-body">
                     <ul>
-                      <li><%= link_to "<i class='small material-icons right'>work</i> Funções".html_safe, funcoes_path, class:"waves-effect p-l-50 p-r-0" %></li>
-                      <li><%= link_to "<i class='small material-icons right'>directions_bike</i> Uniformes".html_safe, uniformes_path, class:"waves-effect p-l-50 p-r-0" %></li>
-                      <li><%= link_to "<i class='small material-icons right'>directions_car</i> Veículos".html_safe, veiculos_path, class:"waves-effect p-l-50 p-r-0" %></li>
+                      <li> <%= link_to_icon funcoes_path, 'Funções', 'work' %> </li>
+                      <li> <%= link_to_icon uniformes_path, 'Uniformes', 'directions_bike' %> </li>
+                      <li> <%= link_to_icon veiculos_path, 'Veículos', 'directions_car' %> </li>
                     </ul>
                   </div>
                 </li>
@@ -51,8 +67,6 @@
       </li>
     </ul>
   </li>
-
-  <li><a href="#!">Second Link</a></li>
 
   <li><div class="divider"></div></li>
   <li><a class="subheader">Subheader</a></li>
@@ -66,9 +80,9 @@
           <a class="collapsible-header waves-effect">Cadastros<i class="material-icons">arrow_drop_down</i></a>
           <div class="collapsible-body">
             <ul>
-              <li><%= link_to "<i class='small material-icons right'>place</i> Cidades".html_safe, cidades_path, class:"waves-effect" %></li>
-              <li><%= link_to "<i class='small material-icons right'>satellite</i> Estados".html_safe, estados_path, class:"waves-effect" %></li>
-              <li><%= link_to "<i class='small material-icons right'>account_balance</i> Bancos".html_safe, bancos_path, class:"waves-effect" %></li>
+              <li> <%= link_to_icon cidades_path, 'Cidades', 'place' %> </li>
+              <li> <%= link_to_icon estados_path, 'Estados', 'satellite' %> </li>
+              <li> <%= link_to_icon bancos_path, 'Bancos', 'account_balance' %> </li>
             </ul>
           </div>
         </li>
@@ -83,7 +97,7 @@
           <a class="collapsible-header waves-effect">Administração<i class="material-icons">arrow_drop_down</i></a>
           <div class="collapsible-body">
             <ul>
-              <li><%= link_to "<i class='small material-icons right'>account_circle</i> Usuários".html_safe, users_path, class:"waves-effect" %></li>
+              <li> <%= link_to_icon users_path, 'Usuários', 'account_circle' %> </li>
             </ul>
           </div>
         </li>
