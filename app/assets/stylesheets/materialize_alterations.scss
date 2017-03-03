@@ -1021,3 +1021,15 @@ input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]),
     vertical-align: middle;
     margin-left: 5px;
 }
+
+.switch label input[type=checkbox]:checked+.lever:after {
+  background-color: lighten( $secondary-color, 5% );
+}
+.switch label input[type=checkbox]:checked+.lever {
+  background-color: lighten( $secondary-color, 10% );
+}
+
+.center-icon {
+  display: inline-flex;
+  vertical-align: middle;
+}

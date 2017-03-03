@@ -34,8 +34,8 @@
           <fieldset>
             <div class="input-field col s2" style="display: flex;">
               <% if @canal.logo.file? %>
-                <%=  %>
-                <%= link_to image_tag(@canal.logo.url(:thumb)), @canal.logo.url(:original, false), :target => "_blank" %>
+                <%= image_tag @canal.logo.url(), class: "materialboxed", width: 250 %>
+                <%#= link_to image_tag(@canal.logo.url()), @canal.logo.url(:original, false), :target => "_blank" %>
                 <%= link_to('<i class="material-icons red-text">clear</i>'.html_safe, {action: :deleta_logo_canal, id: @canal.id},
                             method: :put, remote: true, data: { confirm: 'Tem certeza?' }) %>
               <% end %>
@@ -43,8 +43,6 @@
             </div>
           </fieldset>
         </div>
-
-
 
       </div>
 

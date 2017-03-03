@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function(){
+$(document).on('ready', function(){
   // carrega_datatable_id_automatico_sem_controles("#alerta_comentarios-table", ".alerta_comentario-form", ".excluir-alerta_comentario", [], [0,1]);
 
   $(document).off("dblclick", "#alerta_comentarios-table tr[id^=alerta_comentario]")

@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function(){
+$(document).on('ready', function(){
   carrega_datatable("users","user", ["username","email","created_at","updated_at"], []);
 
   $(document).off("dblclick", "#users-table tr[id^=user]")

@@ -56,10 +56,11 @@ Rails.application.routes.draw do
 
     resources :leiloes, except: [:show]
     put 'leiloes/:id/seleciona_leilao', to: 'leiloes#seleciona_leilao', as: 'seleciona_leilao'
+    put 'leiloes/:id/deleta_logo_leilao', to: 'leiloes#deleta_logo_leilao', as: 'deleta_logo_leilao'
   end
 
   scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
-    get 'datatable_i18n', to: 'datatables#datatable_i18n'
+    get '/datatable_i18n', to: 'datatables#datatable_i18n'
   end
   # get '*path', to: redirect("/#{I18n.default_locale}/%{path}"), constraints: lambda { |req| !req.path.starts_with? "/#{I18n.default_locale}/" }
   # get '', to: redirect("/#{I18n.default_locale}")

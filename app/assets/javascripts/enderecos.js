@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function(){
+$(document).on('ready', function(){
   $(document).off("dblclick", "#enderecos-table tr[id^=endereco]")
   $(document).on("dblclick", "#enderecos-table tr[id^=endereco]", function(){
     var id = $(this).attr("id");

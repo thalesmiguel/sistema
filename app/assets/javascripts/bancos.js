@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function(){
+$(document).on('ready', function(){
   carrega_datatable("bancos","banco", ["codigo","nome"], []);
 
   $(document).off("dblclick", "#bancos-table tr[id^=banco]")

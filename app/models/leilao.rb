@@ -46,4 +46,26 @@ class Leilao < ApplicationRecord
   enum modalidade: { recinto: 0, virtual: 1, virtual_com_ponto_de_apoio: 2 }
   enum tipo: { leilão_normal: 0, sub_leilão: 1, leilão_internet: 2, shopping_internet: 3, leilão_webcasting: 4, leilão_com_pré_lance: 5, leilão_doação: 6 }
   enum situacao: { aguardando_confirmação: 0, liberado_planejamento: 1, liberado_empresa: 2, realizado: 3, cancelado: 4 }
+
+
+  def estado
+    cidade.nil? ? 0 : cidade.estado_id
+  end
+
+  def data_inicio
+    super.strftime "%d/%m/%Y %H:%M" unless super.nil?
+  end
+
+  def data_fim
+    super.strftime "%d/%m/%Y %H:%M" unless super.nil? 
+  end
+
+  def nome_agenda
+    (super == "" || super.nil?) ? nome : super
+  end
+
+  def nome_site
+    (super == "" || super.nil?) ? nome : super
+  end
+
 end

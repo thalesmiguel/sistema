@@ -31,8 +31,8 @@
           <fieldset>
             <div class="input-field col s2" style="display: flex;">
               <% if @bandeira.logo.file? %>
-                <%=  %>
-                <%= link_to image_tag(@bandeira.logo.url(:thumb)), @bandeira.logo.url(:original, false), :target => "_blank" %>
+                <%= image_tag @bandeira.logo.url(), class: "materialboxed", width: 250 %>
+                <%#= link_to image_tag(@bandeira.logo.url()), @bandeira.logo.url(:original, false), :target => "_blank" %>
                 <%= link_to('<i class="material-icons red-text">clear</i>'.html_safe, {action: :deleta_logo_bandeira, id: @bandeira.id},
                             method: :put, remote: true, data: { confirm: 'Tem certeza?' }) %>
               <% end %>

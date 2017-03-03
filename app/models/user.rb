@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  audited
+  trimmed_fields :nome, :username, :email
+  rolify
 
   has_many :testemunha_1, class_name: "Leilao", foreign_key: :testemunha_1_id
   has_many :testemunha_2, class_name: "Leilao", foreign_key: :testemunha_2_id
@@ -7,8 +10,6 @@ class User < ApplicationRecord
   has_many :alertas
   has_many :audits
 
-  audited
-  rolify
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -16,6 +17,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :username, :presence => true, :uniqueness => { :case_sensitive => false }
+  validates :nome, :presence => true, :uniqueness => { :case_sensitive => false }
   validate :validate_username
   validate :validate_email
 
@@ -36,14 +38,14 @@ class User < ApplicationRecord
   end
 
   def validate_username
-    if User.where(email: username).exists?
+    if User.where(email: username).where.not(id: id).exists?
       errors.add(:username, :invalid)
     end
   end
 
   def validate_email
     if !email.empty?
-      if User.where(email: email).exists?
+      if User.where(email: email).where.not(id: id).exists?
         errors.add(:email, :invalid)
       end
     end

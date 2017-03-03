@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function(){
+$(document).on('ready', function(){
   var campos = ["nome","especie"];
   carrega_datatable_filtro("racas","raca", campos, []);
 

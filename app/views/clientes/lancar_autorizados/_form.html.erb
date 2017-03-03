@@ -36,8 +36,7 @@
           <fieldset>
             <div class="input-field col s2" style="display: flex;">
               <% if @lancar_autorizado.procuracao.file? %>
-                <%=  %>
-                <%= link_to image_tag(@lancar_autorizado.procuracao.url(:thumb)), @lancar_autorizado.procuracao.url(:original, false), :target => "_blank" %>
+                <%= link_to image_tag(@lancar_autorizado.procuracao.url()), @lancar_autorizado.procuracao.url(:original, false), :target => "_blank" %>
                 <%= link_to('<i class="material-icons red-text">clear</i>'.html_safe, {action: :deleta_procuracao, id: @lancar_autorizado.id},
                             method: :put, remote: true, data: { confirm: 'Tem certeza?' }) %>
               <% end %>

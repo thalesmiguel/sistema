@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function(){
+$(document).on('ready', function(){
   $(document).off('click', '#alertas-somente-ativos, #alertas-exibir-todos')
   $(document).on('click', '#alertas-somente-ativos, #alertas-exibir-todos', function(){
     $("#alertas-table").dataTable().fnDraw();

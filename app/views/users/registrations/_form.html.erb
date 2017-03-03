@@ -3,35 +3,62 @@
     <div class="p-20 modal-border">
       <div class="row card-content m-b-0 p-b-0 p-l-30 p-r-30">
         <div class="row">
-          <div class="input-field col s12">
+          <div class="input-field col s12 m3">
             <%= f.text_field :username, required:"" %>
             <%= f.label :usuário %>
           </div>
-          <div class="input-field col s12">
+          <div class="input-field col s12 m3">
             <%= f.email_field :email %>
             <%= f.label :email %>
           </div>
-          <div class="input-field col s12">
-            <%= f.password_field :password, autocomplete: "off" %>
-            <%= f.label :senha %>
-            <% if @minimum_password_length %>
-              <em class="aviso"><%= @minimum_password_length %> caracteres no mínimo</em>
+          <div class="user_border">
+            <div class="input-field col s12 m6">
+              <%= f.password_field :password, autocomplete: "off" %>
+              <%= f.label :password, "Senha" %>
+              <% if @minimum_password_length %>
+                <em class="aviso"><%= @minimum_password_length %> caracteres no mínimo</em>
+              <% end %>
+            </div>
+            <div class="input-field col s12 m6">
+              <%= f.password_field :password_confirmation, autocomplete: "off" %>
+              <%= f.label :confirmar_senha %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 m3">
+            <%= f.text_field :nome, required:"" %>
+            <%= f.label :nome %>
+          </div>
+        </div>
+
+        <fieldset class="p-b-30">
+          <legend>Permisões</legend>
+          <div class="row">
+            <% @roles.each do | role | %>
+              <div class="input-field col s3 m2">
+                <%= hidden_field_tag role, 0, id: '' %>
+                <div class="switch">
+                  <label>
+                    <i class="red-text material-icons center-icon">remove_circle</i>
+                    <%= check_box_tag role, 1, @user.has_role?(role.downcase), class: 'filled-in hide' %>
+                    <span class="lever"></span>
+                    <i class="green-text material-icons center-icon">add_circle</i>
+                  </label>
+                </div>
+                <%= label_tag role, nil, class: "active" %>
+              </div>
             <% end %>
           </div>
-          <div class="input-field col s12">
-            <%= f.password_field :password_confirmation, autocomplete: "off" %>
-            <%= f.label :confirmar_senha %>
-          </div>
-          <!-- TODO: Verificar a documentação do Devise para unificar as telas padrões de CREATE e UPDATE -->
-          <!-- <%# if !@user.new_record? %>
-            <div class="input-field col s12">
-              <%#= f.password_field :current_password, autocomplete: "off" %>
-              <%#= f.label :senha_atual %> <em class="aviso">(Senha atual para confirmar as alterações)</em>
-            </div>
-          <%# end %> -->
+        </fieldset>
 
-        </div>
       </div>
+
+      <%#= check_box_tag "cliente[marketing_tipos][]", marketing_tipo, @cliente.marketing_tipos.include?(marketing_tipo), id: "cliente_marketing_tipos_#{marketing_tipo}", class: 'filled-in' %>
+      <%#= label_tag "cliente_marketing_tipos_#{marketing_tipo}", marketing_tipo.humanize %>
+
+      <%#= f.label :marketing_tipos, "Tipos de Marketing", class: "active p-t-25" %>
+      <%#= check_box_tag "cliente[marketing_tipos][]", "", true, id: "cliente_marketing_tipos_#{""}", class: 'filled-in hide' %>
 
       <div class="modal-footer">
         <%= button_tag "Salvar", class:"btn waves-effect waves-light" %>

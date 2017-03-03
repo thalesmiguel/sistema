@@ -9,6 +9,9 @@ class LeiloesController < ApplicationController
   end
 
   def new
+    @estados = Estado.all
+    @cidades = Cidade.where("estado_id = ?", @estados.first)
+
     @leilao = Leilao.new
     respond_to do |format|
       format.js { render file: "ajax/leiloes/mostra_leilao.js.erb" }
@@ -16,6 +19,8 @@ class LeiloesController < ApplicationController
   end
 
   def edit
+    @estados = Estado.all
+    @cidades = @leilao.cidade ? Cidade.where("estado_id = ?", @leilao.cidade.estado_id) : Cidade.where("estado_id = ?", @estados.first)
     respond_to do |format|
       format.html
     end
@@ -50,6 +55,14 @@ class LeiloesController < ApplicationController
     session[:leilao_id] = @leilao.id
     respond_to do |format|
       format.js { render file: "ajax/leiloes/seleciona_leilao.js.erb" }
+    end
+  end
+
+  def deleta_logo_leilao
+    @deleta_logo_leilao = Leilao.find_by_id(params[:id])
+    @deleta_logo_leilao.logo = nil
+    if @deleta_logo_leilao.save
+      renderiza_crud_js(@deleta_logo_leilao, 'Logomarca excluída com sucesso')
     end
   end
 

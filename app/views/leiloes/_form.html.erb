@@ -1,16 +1,100 @@
 <%= form_for @leilao, remote: true, html: { class: "leilao-form col s12 validate" } do |f| %>
   <div class="row card-content m-b-0 p-b-0 p-l-30 p-r-30">
+
     <div class="row">
-      <div class="input-field col s4">
+      <div class="input-field col s2 m1">
+        <%= f.text_field :id, disabled: true %>
+        <%= f.label :id, "Código" %>
+      </div>
+      <div class="input-field col s10 m4">
         <%= f.text_field :nome, required:"" %>
         <%= f.label :nome, "Nome" %>
       </div>
+      <div class="input-field col s12 m3">
+        <%= f.text_field :nome_agenda %>
+        <%= f.label :nome_agenda, "Nome Agenda" %>
+      </div>
+      <div class="input-field col s12 m4">
+        <%= f.text_field :nome_site %>
+        <%= f.label :nome_site, "Nome Site" %>
+      </div>
     </div>
+
+    <div class="row">
+      <div class="input-field col s12 m3">
+        <%= f.select :categoria, Leilao.categorias.map { |k, v| [k.humanize, k]}, class: "material-select" %>
+        <%= f.label :categoria, class: "active" %>
+      </div>
+      <div class="input-field col s12 m3">
+        <%= f.select :modalidade, Leilao.modalidades.map { |k, v| [k.humanize, k]}, class: "material-select" %>
+        <%= f.label :modalidade, class: "active" %>
+      </div>
+      <div class="input-field col s12 m3">
+        <%= f.select :tipo, Leilao.tipos.map { |k, v| [k.humanize, k]}, class: "material-select" %>
+        <%= f.label :tipo, class: "active" %>
+      </div>
+      <div class="input-field col s12 m3">
+        <%= f.select :situacao, Leilao.situacoes.map { |k, v| [k.humanize, k]}, class: "material-select" %>
+        <%= f.label :situacao, class: "active" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12 m2">
+        <%= f.select :estado, @estados.collect {|estado| [(estado.nome), estado.id]} %>
+        <%= f.label :estado, class: "active" %>
+      </div>
+      <div class="input-field col s12 m4">
+        <%= f.select :cidade_id, @cidades.collect {|cidade| [cidade.nome, cidade.id]} %>
+        <%= f.label :cidade_id, class: "active" %>
+      </div>
+      <div class="input-field col s12 m3">
+        <%= f.text_field :data_inicio, class:"data_hora" %>
+        <%= f.label :data_inicio, "Data Inicial" %>
+      </div>
+      <div class="input-field col s12 m3">
+        <%= f.text_field :data_fim, class:"data_hora" %>
+        <%= f.label :data_fim, "Data Final" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12 m3">
+        <%= f.select :testemunha_1_id, User.all.map { |k, v| [k.nome.titleize, k.id]}, class: "material-select" %>
+        <%= f.label :testemunha_1_id, class: "active" %>
+      </div>
+      <div class="input-field col s12 m3">
+        <%= f.select :testemunha_2_id, User.all.map { |k, v| [k.nome.titleize, k.id]}, class: "material-select" %>
+        <%= f.label :testemunha_2_id, class: "active" %>
+      </div>
+
+      <div class="file-field input-field col s3">
+        <div class="btn">
+          <span>Logomarca</span>
+          <%= f.file_field :logo %>
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text">
+        </div>
+      </div>
+
+      <fieldset>
+        <div class="input-field col s3" style="display: flex;">
+          <% if @leilao.logo.file? %>
+            <%= image_tag @leilao.logo.url(), class: "materialboxed", width: 250 %>
+            <%= link_to('<i class="material-icons red-text">clear</i>'.html_safe, {action: :deleta_logo_leilao, id: @leilao.id},
+                        method: :put, remote: true, data: { confirm: 'Tem certeza?' }) %>
+          <% end %>
+          <%= label_tag "Logomarca", nil, class: "active" %>
+        </div>
+      </fieldset>
+    </div>
+
   </div>
 
   <div class="card-action">
     <%= button_tag "Salvar", class:"btn waves-effect waves-light" if can? :manage, :leilao %>
-    <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#leilao_modal').closeModal()", type: 'button' %>
+    <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", type: 'reset' %>
 
     <% if !@leilao.new_record? %>
       <%= link_to "Excluir", leilao_path(@leilao), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',

@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function(){
+$(document).on('ready', function(){
   var campos = ["nome","sigla","created_at","created_by","updated_at","updated_by"];
   carrega_datatable_filtro("estados","estado", campos, [3,5]);
 

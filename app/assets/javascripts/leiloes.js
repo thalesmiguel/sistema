@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', () => {
+$(document).on('ready', () => {
   // let campos = ["nome","evento","recinto","cidade_nome","estado_sigla","data_inicio","hora_inicio"];
   // carrega_datatable_filtro("leiloes","leilao", campos, []);
 
@@ -10,4 +10,7 @@ $(document).on('turbolinks:load', () => {
   });
 
   cidades_dropdown('leilao');
+  $('select').material_select();
+  mascaras();
+  $('.materialboxed').materialbox();
 });

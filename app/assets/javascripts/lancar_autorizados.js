@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function(){
+$(document).on('ready', function(){
   $(document).off("dblclick", "#lancar_autorizados-table tr[id^=lancar_autorizado]")
   $(document).on("dblclick", "#lancar_autorizados-table tr[id^=lancar_autorizado]", function(){
     var id = $(this).attr("id");

@@ -23,8 +23,8 @@
           <fieldset>
             <div class="input-field col s2" style="display: flex;">
               <% if @patrocinador.logo.file? %>
-                <%=  %>
-                <%= link_to image_tag(@patrocinador.logo.url(:thumb)), @patrocinador.logo.url(:original, false), :target => "_blank" %>
+                <%= image_tag @patrocinador.logo.url(), class: "materialboxed", width: 250 %>
+                <%#= link_to image_tag(@patrocinador.logo.url()), @patrocinador.logo.url(:original, false), :target => "_blank" %>
                 <%= link_to('<i class="material-icons red-text">clear</i>'.html_safe, {action: :deleta_logo_patrocinador, id: @patrocinador.id},
                             method: :put, remote: true, data: { confirm: 'Tem certeza?' }) %>
               <% end %>

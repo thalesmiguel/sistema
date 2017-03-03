@@ -22,8 +22,8 @@ class LeilaoDatatable < ApplicationDatatable
         recinto: record.nome,
         cidade_nome: record.cidade_nome,
         estado_sigla: record.estado_sigla,
-        data_inicio: record.data_inicio.to_s,
-        hora_inicio: record.try(:data_inicio).try(:to_time).try(:to_s, :time), 
+        data_inicio: record.try(:data_inicio).try(:to_time).try(:to_s),
+        hora_inicio: record.try(:data_inicio).try(:to_time).try(:to_s, :time),
 
         DT_RowId: "leilao_#{record.id}",
       }

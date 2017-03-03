@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function(){
+$(document).on('ready', function(){
   var campos = ["nome"];
   carrega_datatable_filtro("canais","canal", campos, []);
 
@@ -6,7 +6,7 @@ $(document).on('turbolinks:load', function(){
   $(document).on("dblclick", "#canais-table tr[id^=canal]", function(){
     var id = $(this).attr("id");
     var url = "/canais/" + id.replace("canal_", "") + "/editar"
-    $.ajax({ type: "GET", url: url });
+    $.ajax({ type: "GET", url: url }).done( () => $('.materialboxed').materialbox());
   });
 
 });

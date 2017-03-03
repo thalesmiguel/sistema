@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', () => {
+$(document).on('ready', () => {
   var campos = ["nome"];
   carrega_datatable_filtro("patrocinadores","patrocinador", campos, []);
 
@@ -6,7 +6,7 @@ $(document).on('turbolinks:load', () => {
   $(document).on("dblclick", "#patrocinadores-table tr[id^=patrocinador]", (e) => {
     var id = $(e.currentTarget).attr("id");
     var url = "/patrocinadores/" + id.replace("patrocinador_", "") + "/editar"
-    $.ajax({ type: "GET", url: url });
+    $.ajax({ type: "GET", url: url }).done( () => $('.materialboxed').materialbox());
   });
 
 });

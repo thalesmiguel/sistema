@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function(){
+$(document).on('ready', function(){
   var campos = ["nome","sexo","created_at","updated_at"];
   carrega_datatable_filtro("uniformes","uniforme", campos, []);
 

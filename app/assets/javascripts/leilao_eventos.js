@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function(){
+$(document).on('ready', function(){
   var campos = ["nome","data_inicio","data_fim"];
   carrega_datatable_filtro("leilao_eventos","leilao_evento", campos, []);
 

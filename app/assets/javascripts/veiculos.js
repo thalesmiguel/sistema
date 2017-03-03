@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function(){
+$(document).on('ready', function(){
   var campos = ["modelo","ano","placa","combustivel","ocupantes","media","disponivel_viagem"];
   carrega_datatable_filtro("veiculos","veiculo", campos, []);
 

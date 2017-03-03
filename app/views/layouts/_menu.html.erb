@@ -21,9 +21,11 @@
         <div class="collapsible-body">
           <ul>
             <li> <%= link_to_icon leiloes_path, 'Selecionar', 'playlist_add_check', true %> </li>
-            <% if leilao_selecionado %>
-              <li id="menu_editar_leilao"> <%= link_to_icon edit_leilao_path(leilao_selecionado), 'Editar', 'mode_edit' %> </li>
-            <% end %>
+            <li id="menu_editar_leilao">
+              <% if leilao_selecionado %>
+                <%= link_to_icon edit_leilao_path(leilao_selecionado), 'Editar', 'mode_edit' %>
+              <% end %>
+            </li>
             <li> <%= link_to_icon leiloes_path, 'Cadastrar', 'fiber_new', true %> </li>
           </ul>
         </div>

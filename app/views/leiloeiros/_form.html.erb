@@ -7,7 +7,7 @@
             <%= f.text_field :nome_contrato, required:"" %>
             <%= f.label :nome_contrato, "Nome" %>
           </div>
-          <div class="input-field col s4">
+          <div class="input-field col s3">
             <%= f.text_field :razao_social, required:"" %>
             <%= f.label :razao_social, "Razão Social" %>
           </div>
@@ -23,10 +23,10 @@
           </div>
 
           <fieldset>
-            <div class="input-field col s2" style="display: flex;">
+            <div class="input-field col s3" style="display: flex;">
               <% if @leiloeiro.foto.file? %>
-                <%=  %>
-                <%= link_to image_tag(@leiloeiro.foto.url(:thumb)), @leiloeiro.foto.url(:original, false), :target => "_blank" %>
+                <%= image_tag @leiloeiro.foto.url(), class: "materialboxed", width: 250 %>
+                <%#= link_to image_tag(@leiloeiro.foto.url()), @leiloeiro.foto.url(:original, false), :target => "_blank" %>
                 <%= link_to('<i class="material-icons red-text">clear</i>'.html_safe, {action: :deleta_foto_leiloeiro, id: @leiloeiro.id},
                             method: :put, remote: true, data: { confirm: 'Tem certeza?' }) %>
               <% end %>

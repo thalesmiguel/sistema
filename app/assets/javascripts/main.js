@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function(){
+$(document).on('ready', function(){
   // $('.modal-trigger').leanModal();
 
   $('select.yadcf-filter').material_select();
@@ -355,12 +355,14 @@ function carrega_datatable_sem_controles(modelo, modelo_singular, campos, campos
 
 function mascaras() {
   $(".data").unmask();
+  $(".data_hora").unmask();
   $(".cpf").unmask();
   $(".cnpj").unmask();
   $(".rg").unmask();
   $(".cep").unmask();
 
   $(".data").mask("99/99/9999", {placeholder: " "});
+  $('.data_hora').mask('99/99/9999 99:99', {placeholder: " "});
   $(".cpf").mask("999.999.999-**", {placeholder: " "});
   $(".cnpj").mask("99.999.999/9999-**", {placeholder: " "});
   $(".rg").mask("99.999.999-*", {placeholder: " "});
@@ -368,17 +370,18 @@ function mascaras() {
 }
 
 function cidades_dropdown(model){
-  return $(document).on('change', '#' + model + '_estado', function(evt) {
-    return $.ajax('cidades/update_cidades', {
+  $(document).off('change', '#' + model + '_estado')
+  $(document).on('change', '#' + model + '_estado', function(evt) {
+    $.ajax('/cidades/update_cidades', {
       format: 'js',
       type: 'GET',
       dataType: 'script',
       data: {
         estado_id: $("#" + model + "_estado option:selected").val(),
-        model: model
+        model: model,
       },
       error: function(jqXHR, textStatus, errorThrown) {
-        // return console.log("AJAX Error: " + textStatus);
+        console.log("AJAX Error: " + errorThrown);
       },
       success: function(data, textStatus, jqXHR) {
         // return console.log("Dynamic state select OK!");

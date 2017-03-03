@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function(){
+$(document).on('ready', function(){
   $('ul.tabs').tabs();
 
   let campos = ["ativo","cadastro_tipo","cpf_cnpj","nome","apelido","ficticio","cidade_nome","estado_sigla"];

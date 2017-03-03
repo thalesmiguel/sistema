@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function(){
+$(document).on('ready', function(){
   var campos = ["nome","tipo","parcelas","captacoes","frequencia","entrada"];
   carrega_datatable_filtro("pagamento_condicoes","pagamento_condicao", campos, []);
 

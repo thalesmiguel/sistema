@@ -18,12 +18,10 @@ class UsersController < ApplicationController
 
   def authorize_admin
     return unless !current_user.admin?
-    redirect_to root_path, alert: 'Admins only!'
+    redirect_to root_path, alert: 'Somente Para Admistradores!!!'
   end
 
   def set_user
     @user = User.find(params[:id])
   end
-
-
 end

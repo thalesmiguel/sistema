@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function(){
+$(document).on('ready', function(){
   var campos = ["id","nome"];
   carrega_datatable_filtro("subtipos","subtipo", campos, []);
 

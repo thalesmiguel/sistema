@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function(){
+$(document).on('ready', function(){
   var campos = ["nome","sigla"];
   carrega_datatable_filtro("bandeiras","bandeira", campos, []);
 
@@ -6,7 +6,7 @@ $(document).on('turbolinks:load', function(){
   $(document).on("dblclick", "#bandeiras-table tr[id^=bandeira]", function(){
     var id = $(this).attr("id");
     var url = "/bandeiras/" + id.replace("bandeira_", "") + "/editar"
-    $.ajax({ type: "GET", url: url });
+    $.ajax({ type: "GET", url: url }).done( () => $('.materialboxed').materialbox());
   });
 
 });
