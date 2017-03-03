@@ -52,12 +52,17 @@ class Leilao < ApplicationRecord
     cidade.nil? ? 0 : cidade.estado_id
   end
 
+  def local
+    # TODO: Adicionar o endereço do recinto
+    cidade.nome + "/" + cidade.estado_sigla if cidade
+  end
+
   def data_inicio
     super.strftime "%d/%m/%Y %H:%M" unless super.nil?
   end
 
   def data_fim
-    super.strftime "%d/%m/%Y %H:%M" unless super.nil? 
+    super.strftime "%d/%m/%Y %H:%M" unless super.nil?
   end
 
   def nome_agenda

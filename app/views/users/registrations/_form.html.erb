@@ -33,7 +33,7 @@
         </div>
 
         <fieldset class="p-b-30">
-          <legend>Permisões</legend>
+          <legend>Nível de Acesso</legend>
           <div class="row">
             <% @roles.each do | role | %>
               <div class="input-field col s3 m2">
@@ -51,15 +51,7 @@
             <% end %>
           </div>
         </fieldset>
-
       </div>
-
-      <%#= check_box_tag "cliente[marketing_tipos][]", marketing_tipo, @cliente.marketing_tipos.include?(marketing_tipo), id: "cliente_marketing_tipos_#{marketing_tipo}", class: 'filled-in' %>
-      <%#= label_tag "cliente_marketing_tipos_#{marketing_tipo}", marketing_tipo.humanize %>
-
-      <%#= f.label :marketing_tipos, "Tipos de Marketing", class: "active p-t-25" %>
-      <%#= check_box_tag "cliente[marketing_tipos][]", "", true, id: "cliente_marketing_tipos_#{""}", class: 'filled-in hide' %>
-
       <div class="modal-footer">
         <%= button_tag "Salvar", class:"btn waves-effect waves-light" %>
         <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#user_modal').closeModal()", type: 'button' %>

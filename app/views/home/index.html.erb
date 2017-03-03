@@ -1,0 +1,85 @@
+<div class="row">
+
+  <div class="col left" id="home_central">
+    <div class="card">
+      <div class="card-image waves-effect waves-block waves-light">
+        <%= image_tag "central_logo.jpg", class: "activator z-depth-1", style: 'height:250px;width:auto;' %>
+      </div>
+      <div class="card-content">
+        <span class="card-title activator grey-text text-darken-4">Central Leilões LTDA</span>
+      </div>
+      <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">Central Leilões LTDA<i class="material-icons right">close</i></span>
+
+        <table class="highlight no-select">
+          <tr>
+            <td class="p-b-0"> <b>CNPJ</b> </td>
+            <td class="p-b-0"> 01.709.383/000-34 </td>
+          </tr>
+          <tr>
+            <td class="p-b-0"> <b>I.E.</b> </td>
+            <td class="p-b-0"> ISENTO </td>
+          </tr>
+          <tr>
+            <td class="p-b-0"> <b>Fone</b> </td>
+            <td class="p-b-0"> (18) 3608-0999 </td>
+          </tr>
+          <tr>
+            <td class="p-b-0"> <b>Endereço</b> </td>
+            <td class="p-b-0"> Rua Frei Felicissimo Maria de Prada, 165 </td>
+          </tr>
+          <tr>
+            <td class="p-b-0"> </td>
+            <td class="p-b-0"> Bairro Higienópolis </td>
+          </tr>
+          <tr>
+            <td class="p-b-0"> </td>
+            <td class="p-b-0"> Araçatuba - SP </td>
+          </tr>
+          <tr>
+            <td class="p-b-0"> <b>CEP</b> </td>
+            <td class="p-b-0"> 16010-650 </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <% unless leilao_selecionado %>
+    <div class="col right" id="home_selecionar_leilao">
+      <div class="card" style="width:340px; height:340px;">
+      </div>
+    </div>
+  <% end %>
+
+  <div class="col right" id="home_leilao_selecionado">
+    <%= render partial: "leilao_selecionado" if leilao_selecionado %>
+  </div>
+
+</div>
+
+<div class="card p-30">
+
+  <div class="row m-b-0">
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+      dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+      dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+      dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+      dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+  </div>
+</div>

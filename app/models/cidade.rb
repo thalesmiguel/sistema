@@ -11,4 +11,8 @@ class Cidade < ApplicationRecord
   has_many :leiloeiros
 
   validates :nome, presence: true, uniqueness: { scope: :estado_id, message: 'já cadastrada' }
+
+  def estado_sigla
+    estado.sigla
+  end
 end

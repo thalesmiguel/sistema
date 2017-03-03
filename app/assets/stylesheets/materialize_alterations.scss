@@ -1033,3 +1033,15 @@ input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]),
   display: inline-flex;
   vertical-align: middle;
 }
+
+.text-right {
+  text-align: -webkit-right;
+}
+
+.card .card-content .card-title i {
+  line-height: 32px;
+}
+
+.no-select {
+  cursor: default;
+}

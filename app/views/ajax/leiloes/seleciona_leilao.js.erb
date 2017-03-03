@@ -1,8 +1,12 @@
 let modal = $("#leiloes_modal");
 let leilao_atual = $("#leilao_atual");
 let menu_editar = $("#menu_editar_leilao");
+let home_leilao_selecionado = $("#home_leilao_selecionado");
+let home_selecionar_leilao = $("#home_selecionar_leilao");
 
 leilao_atual.html("<%= leilao_selecionado.nome %>");
 menu_editar.html("<%= escape_javascript(link_to_icon edit_leilao_path(leilao_selecionado), 'Editar', 'mode_edit') %>");
+home_leilao_selecionado.html("<%= escape_javascript(render partial: '/home/leilao_selecionado') %>");
+home_selecionar_leilao.remove();
 
 modal.closeModal();
