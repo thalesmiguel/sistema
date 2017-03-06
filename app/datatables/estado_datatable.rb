@@ -17,9 +17,9 @@ class EstadoDatatable < ApplicationDatatable
         nome: record.nome,
         sigla: record.sigla,
         created_at: record.created_at.to_s(:data_formatada),
-        created_by: record.audits.first.user.username,
+        created_by: created_by(record),
         updated_at: record.updated_at.to_s(:data_formatada),
-        updated_by: record.audits.last.user.username,
+        updated_by: updated_by(record),
         DT_RowId: "estado_#{record.id}",
       }
     end
@@ -29,7 +29,11 @@ class EstadoDatatable < ApplicationDatatable
     Estado.all
   end
 
-  def permitido?
-    options[:permitido]
+  def created_by(record)
+    record.audits.first.user.username unless record.audits.first.nil?
+  end
+
+  def updated_by(record)
+    record.audits.last.user.username unless record.audits.last.nil?
   end
 end

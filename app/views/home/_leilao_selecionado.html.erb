@@ -1,5 +1,5 @@
 <div class="card">
-  <div class="card-image waves-effect waves-block waves-light">
+  <div class="card-image waves-effect waves-block waves-light borda-inferior">
     <%= image_tag leilao_selecionado.logo.url(), class: "activator z-depth-1", style: 'height:250px;width:auto;' %>
   </div>
   <div class="card-content">
@@ -9,20 +9,20 @@
     <span class="card-title grey-text text-darken-4"> <%= leilao_selecionado.nome %> <i class="material-icons right">close</i></span>
     <table class="highlight no-select">
       <tr>
-        <td class="p-b-0"> <b>Tipo</b> </td>
-        <td class="p-b-0"> <%= leilao_selecionado.tipo.titleize %> </td>
+        <td class="p-5"> <b>Categoria</b> </td>
+        <td class="p-5"> <%= leilao_selecionado.categoria.titleize %> </td>
       </tr>
       <tr>
-        <td class="p-b-0"> <b>Modalidade</b> </td>
-        <td class="p-b-0"> <%= leilao_selecionado.modalidade.titleize %> </td>
+        <td class="p-5"> <b>Modalidade</b> </td>
+        <td class="p-5"> <%= leilao_selecionado.modalidade.titleize %> </td>
       </tr>
       <tr>
-        <td class="p-b-0"> <b>Data</b> </td>
-        <td class="p-b-0"> <%= leilao_selecionado.data_inicio %> </td>
+        <td class="p-5"> <b>Data</b> </td>
+        <td class="p-5"> <%= leilao_selecionado.data_inicio %> </td>
       </tr>
       <tr>
-        <td class="p-b-0"> <b>Local</b> </td>
-        <td class="p-b-0"> <%= leilao_selecionado.local %> </td>
+        <td class="p-5"> <b>Local</b> </td>
+        <td class="p-5"> <%= leilao_selecionado.local %> </td>
       </tr>
     </table>
   </div>

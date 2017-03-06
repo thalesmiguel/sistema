@@ -167,7 +167,7 @@ function carrega_datatable_filtro(modelo, modelo_singular, campos, campos_sem_bu
       { orderable: false, targets: campos_sem_busca_ordenacao },
       { searchable: false, targets: campos_sem_busca_ordenacao }
     ],
-    language: { sUrl: "datatable_i18n" },
+    language: { sUrl: "/datatable_i18n" },
     drawCallback: function( settings ) {
       $('.paginate_button').addClass("waves-effect waves-light");
       $('.dataTables_length select' ).material_select();

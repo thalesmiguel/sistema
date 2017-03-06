@@ -54,9 +54,12 @@ Rails.application.routes.draw do
       resources :alerta_comentarios, except: [:show]
     end
 
-    resources :leiloes, except: [:show]
     put 'leiloes/:id/seleciona_leilao', to: 'leiloes#seleciona_leilao', as: 'seleciona_leilao'
     put 'leiloes/:id/deleta_logo_leilao', to: 'leiloes#deleta_logo_leilao', as: 'deleta_logo_leilao'
+    resources :leiloes, except: [:show] do
+      resources :leilao_observacoes, except: [:show]
+      put 'leilao_observacoes/:id/altera_status', to: 'leilao_observacoes#altera_status', as: 'altera_status_observacao'
+    end
   end
 
   scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do

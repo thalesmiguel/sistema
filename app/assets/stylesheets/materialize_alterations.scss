@@ -8,6 +8,7 @@ $warning-color: color("orange", "darken-3") !default;
 
 $bg-color: #f5f5f5;
 
+$borda : rgb(221,221,221);
 // $secondary-color: color("green", "lighten-1") !default;
 // $input-focus-color: $primary-color !default;
 
@@ -505,13 +506,17 @@ input[type="date"] {
 }
 
 .bordas {
-  border: 1px solid rgb(221,221,221);
+  border: 1px solid $borda;
+}
+
+.borda-inferior {
+  border-bottom: 1px solid $borda;
 }
 
 .bordas-laterais {
-  border-top: 1px solid rgb(221,221,221);
-  border-left: 1px solid rgb(221,221,221);
-  border-right: 1px solid rgb(221,221,221);
+  border-top: 1px solid $borda;
+  border-left: 1px solid $borda;
+  border-right: 1px solid $borda;
 }
 
 
@@ -996,6 +1001,7 @@ footer {
   position: fixed;
   bottom: 0px;
   width: 100%;
+  z-index: 1000;
 }
 // Fixed Footer & Header
 

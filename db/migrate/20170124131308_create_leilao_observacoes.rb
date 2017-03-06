@@ -3,7 +3,7 @@ class CreateLeilaoObservacoes < ActiveRecord::Migration[5.0]
     create_table :leilao_observacoes do |t|
       t.text :descricao
       t.references :user, foreign_key: true
-      t.boolean :ativo
+      t.boolean :ativo, default: true
       t.references :leilao, foreign_key: true
 
       t.timestamps

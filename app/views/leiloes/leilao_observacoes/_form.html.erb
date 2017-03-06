@@ -1,0 +1,28 @@
+<%= form_for [@leilao, @leilao_observacao], remote: true, html: { class: "leilao_observacao-form col s12 validate" } do |f| %>
+  <div class="modal-content">
+    <div class="p-20 modal-border">
+      <div class="row card-content m-b-0 p-b-0 p-l-30 p-r-30">
+        <%= f.hidden_field :user_id, value: current_user.id %>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <%= f.text_area :descricao, rows: 12, class: 'materialize-textarea limita-text-area' %>
+            <%= f.label :descricao, "Descrição" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <%= button_tag "Salvar", class:"btn waves-effect waves-light" if can? :manage, :leilao_observacao %>
+        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#leilao_observacao_modal').closeModal()", type: 'button' %>
+
+        <% if !@leilao_observacao.new_record? %>
+          <%= link_to "Excluir", leilao_leilao_observacao_path(@leilao, @leilao_observacao), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',
+                      data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a exclusão?')) } if can? :manage, :leilao_observacao %>
+          <%= btn_alterar_status %>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+<% end %>

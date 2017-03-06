@@ -1,4 +1,4 @@
-class AlertaComentarioDatatable < AjaxDatatablesRails::Base
+class AlertaComentarioDatatable < ApplicationDatatable
 
   def view_columns
     @view_columns ||= {
@@ -24,7 +24,4 @@ class AlertaComentarioDatatable < AjaxDatatablesRails::Base
     AlertaComentario.where(alerta_id: options[:alerta])
   end
 
-  def permitido?
-    options[:permitido]
-  end
 end

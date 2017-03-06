@@ -323,10 +323,10 @@ ActiveRecord::Schema.define(version: 20170206134202) do
   create_table "leilao_observacoes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "descricao",  limit: 65535
     t.integer  "user_id"
-    t.boolean  "ativo"
+    t.boolean  "ativo",                    default: true
     t.integer  "leilao_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.index ["leilao_id"], name: "index_leilao_observacoes_on_leilao_id", using: :btree
     t.index ["user_id"], name: "index_leilao_observacoes_on_user_id", using: :btree
   end

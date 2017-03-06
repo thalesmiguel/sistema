@@ -1,5 +1,7 @@
+<div id="leilao_observacao_modal" class="modal bottom-sheet modal-grande"></div>
+
 <%= form_for @leilao, remote: true, html: { class: "leilao-form col s12 validate" } do |f| %>
-  <div class="row card-content m-b-0 p-b-0 p-l-30 p-r-30">
+  <div class="row card-content p-b-0 p-l-30 p-r-30">
 
     <div class="row">
       <div class="input-field col s2 m1">
@@ -79,16 +81,24 @@
       </div>
 
       <fieldset>
-        <div class="input-field col s3" style="display: flex;">
+        <legend>Logomarca</legend>
+        <div class="input-field col s12" style="display: flex;">
           <% if @leilao.logo.file? %>
             <%= image_tag @leilao.logo.url(), class: "materialboxed", width: 250 %>
             <%= link_to('<i class="material-icons red-text">clear</i>'.html_safe, {action: :deleta_logo_leilao, id: @leilao.id},
                         method: :put, remote: true, data: { confirm: 'Tem certeza?' }) %>
           <% end %>
-          <%= label_tag "Logomarca", nil, class: "active" %>
         </div>
       </fieldset>
     </div>
+
+    <fieldset>
+      <legend>Observações</legend>
+      <div class="row">
+        <div id="leilao-leilao_observacoes"></div>
+        <%= render partial: 'leiloes/leilao_observacoes/index' %>
+      </div>
+    </fieldset>
 
   </div>
 
