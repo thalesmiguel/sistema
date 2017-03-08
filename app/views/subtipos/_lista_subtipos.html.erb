@@ -1,0 +1,40 @@
+<div class="card p-t-15 p-b-70 p-l-30 p-r-30 m-b-0 m-t-0">
+
+  <table id="leilao_subtipo_lotes-table" class="highlight bordered" data-source="<%= subtipos_path(format: :json) %>">
+    <thead>
+      <tr>
+        <th width="25%">Código</th>
+        <th width="75%">Nome</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+</div>
+
+<script type="text/javascript">
+  $(document).off("dblclick", "#leilao_subtipo_lotes-table tr[id^=subtipo]");
+  $(document).on("dblclick", "#leilao_subtipo_lotes-table tr[id^=subtipo]", function(){
+    let id_hidden_input = $(this).attr("id");
+    let $id = $("#leilao_subtipo_lotes_id");
+
+    let modal = $("#leilao_subtipo_lotes_modal");
+    let nome_input = $("#leilao_subtipo_lotes_nome");
+    let nome_label = $("label[for='leilao_subtipo_lotes_nome']");
+
+    let $row = $(this).closest("tr");
+    let $nome = $row.find("td:nth-child(2)");
+
+    $id.val(id_hidden_input.replace("subtipo_", ""));
+
+    $.each($nome, function() {
+      nome_input.val($nome.text());
+    });
+
+    nome_label.addClass("active");
+    $("#limpa_subtipo_lotes").addClass("active");
+    $("#salvar_leilao").prop("disabled", false)
+    modal.closeModal();
+  });
+</script>

@@ -81,4 +81,8 @@ class Leilao < ApplicationRecord
     leilao_anterior.nil? ? "" : leilao_anterior.nome
   end
 
+  def subtipo_lotes_nome
+    subtipo_lotes.nil? ? "" : subtipo_lotes.nome
+  end
+
 end

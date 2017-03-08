@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'cidades/update_cidades', as: 'update_cidades'
   get 'bancos/lista_bancos', as: 'lista_bancos'
   get 'leilao_eventos/lista_eventos', as: 'lista_eventos'
+  get 'subtipos/lista_subtipos', as: 'lista_subtipos'
 
   scope path_names: { new: "novo", edit: "editar" } do
     resources :estados, except: [:show]

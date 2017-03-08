@@ -1,16 +1,25 @@
 <div class="row">
-  <div class="input-field col s12 m3">
+  <div class="input-field col s12 m4">
+    <%= f.hidden_field :subtipo_lotes_id %>
+
+    <%= f.text_field :subtipo_lotes_nome, readonly: true, class: "pointer", id: "leilao_subtipo_lotes_nome" %>
+    <%= f.label :subtipo_lotes_nome, "Subtipo Padrão dos Lotes", for: 'leilao_subtipo_lotes_nome' %>
+    <%= label_tag nil, '<i class="material-icons">clear</i>'.html_safe, id: 'limpa_subtipo_lotes', class: 'pointer', style: 'left: 90%; text-align: right;' %>
+  </div>
+
+  <div class="input-field col s12 m4">
     <%= f.hidden_field :leilao_evento_id %>
 
     <%= f.text_field :evento_nome, readonly: true, class: "pointer", id: "leilao_leilao_evento_nome" %>
     <%= f.label :evento_nome, "Evento", for: 'leilao_leilao_evento_nome' %>
-    <%= label_tag nil, '<i class="material-icons">cancel</i>'.html_safe, id: 'limpa_evento', class: 'pointer', style: 'left: 90%; text-align: right;' %>
+    <%= label_tag nil, '<i class="material-icons">clear</i>'.html_safe, id: 'limpa_evento', class: 'pointer', style: 'left: 90%; text-align: right;' %>
   </div>
-  <div class="input-field col s12 m3">
+
+  <div class="input-field col s12 m4">
     <%= f.hidden_field :leilao_anterior_id %>
 
     <%= f.text_field :leilao_anterior_nome, readonly: true, class: "pointer", id: "leilao_leilao_anterior_nome" %>
     <%= f.label :leilao_anterior_nome, "Leilão Anterior", for: 'leilao_leilao_anterior_nome' %>
-    <%= label_tag nil, '<i class="material-icons">cancel</i>'.html_safe, id: 'limpa_leilao_anterior', class: 'pointer', style: 'left: 90%; text-align: right;' %>
+    <%= label_tag nil, '<i class="material-icons">clear</i>'.html_safe, id: 'limpa_leilao_anterior', class: 'pointer', style: 'left: 90%; text-align: right;' %>
   </div>
 </div>

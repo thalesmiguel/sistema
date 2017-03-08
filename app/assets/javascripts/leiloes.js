@@ -24,6 +24,7 @@ $(document).on('ready', () => {
     $("#leilao_leilao_evento_id").val("");
     $("#leilao_leilao_evento_nome").val("");
     $("label[for='leilao_leilao_evento_nome']").removeClass("active");
+    $("#limpa_evento").removeClass("active");
     $("#salvar_leilao").prop("disabled", false)
   });
 
@@ -44,9 +45,28 @@ $(document).on('ready', () => {
     $("#leilao_leilao_anterior_id").val("");
     $("#leilao_leilao_anterior_nome").val("");
     $("label[for='leilao_leilao_anterior_nome']").removeClass("active");
+    $("#limpa_leilao_anterior").removeClass("active");
     $("#salvar_leilao").prop("disabled", false)
   });
 
+  $(document).off("click", "#leilao_subtipo_lotes_nome");
+  $(document).on("click", "#leilao_subtipo_lotes_nome", () => {
+    var url = "/subtipos/lista_subtipos"
+    $.ajax({ type: "GET", url: url,
+      success: () => {
+        carrega_datatable("leilao_subtipo_lotes","leilao_subtipo_lote", ["id","nome"], []);
+      }
+    });
+  });
+
+  $("#limpa_subtipo_lotes").off("click");
+  $("#limpa_subtipo_lotes").on("click", () => {
+    $("#leilao_subtipo_lotes_id").val("");
+    $("#leilao_subtipo_lotes_nome").val("");
+    $("label[for='leilao_subtipo_lotes_nome']").removeClass("active");
+    $("#limpa_subtipo_lotes").removeClass("active");
+    $("#salvar_leilao").prop("disabled", false)
+  });
 
   $('#leilaoTabs').tabs({
     onShow: (tab) => { $('ul.tabs').tabs(); }

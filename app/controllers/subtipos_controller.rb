@@ -39,6 +39,10 @@ class SubtiposController < ApplicationController
     renderiza_crud_js(@subtipo, 'Subtipo excluído com sucesso')
   end
 
+  def lista_subtipos
+    mostra_modal(caminho: "lista_subtipos", model: "leilao_subtipo_lotes")
+  end
+
   private
 
     def set_subtipo
