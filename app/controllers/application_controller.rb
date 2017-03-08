@@ -25,8 +25,9 @@ class ApplicationController < ActionController::Base
   end
 
   # Usado nos Data Tables
-  def renderiza_datatable(classe = params[:controller].camelize.singularize)
-    render json: "#{classe}Datatable".constantize.new(view_context, { permitido: permitido? })
+  def renderiza_datatable(classe: params[:controller].camelize.singularize, options: {})
+    render json: "#{classe}Datatable".constantize.new(view_context, options)
+    # render json: "#{classe}Datatable".constantize.new(view_context, { permitido: permitido? })
   end
 
   def permitido?

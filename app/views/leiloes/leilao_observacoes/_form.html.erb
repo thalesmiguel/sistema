@@ -18,7 +18,7 @@
 
         <% if !@leilao_observacao.new_record? %>
           <%= link_to "Excluir", leilao_leilao_observacao_path(@leilao, @leilao_observacao), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',
-                      data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a exclusão?')) } if can? :manage, :leilao_observacao %>
+                      data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a exclusão?')) } if can? :manage, :all %>
           <%= btn_alterar_status %>
         <% end %>
 

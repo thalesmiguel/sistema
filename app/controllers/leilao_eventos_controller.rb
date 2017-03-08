@@ -39,6 +39,11 @@ class LeilaoEventosController < ApplicationController
     renderiza_crud_js(@leilao_evento, 'Evento excluído com sucesso')
   end
 
+  def lista_eventos
+    mostra_modal(caminho: "lista_eventos")
+  end
+
+
   private
 
     def set_leilao_evento

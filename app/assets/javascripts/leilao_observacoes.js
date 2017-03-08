@@ -1,6 +1,6 @@
 $(document).on('ready', () => {
-  var campos = ["created_at","descricao", "ativo"];
-  carrega_datatable_filtro("leilao_observacoes","leilao_observacao", campos);
+  var campos = ["created_at","descricao","created_by","updated_by","ativo"];
+  carrega_datatable_filtro("leilao_observacoes","leilao_observacao", campos, [2,3]);
 
   $(document).off("dblclick", "#leilao_observacoes-table tr[id^=leilao_observacao]")
   $(document).on("dblclick", "#leilao_observacoes-table tr[id^=leilao_observacao]", (e) => {

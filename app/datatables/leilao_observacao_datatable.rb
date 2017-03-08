@@ -17,6 +17,8 @@ class LeilaoObservacaoDatatable < ApplicationDatatable
         created_at: record.created_at.to_s(:data_formatada),
         descricao: record.descricao,
         ativo: boolean_pt(record.ativo),
+        created_by: created_by(record),
+        updated_by: updated_by(record),
         DT_RowId: "leilao_observacao_#{record.id}",
       }
     end
@@ -24,5 +26,13 @@ class LeilaoObservacaoDatatable < ApplicationDatatable
 
   def get_raw_records
     LeilaoObservacao.where(leilao_id: options[:leilao])
+  end
+
+  def created_by(record)
+    record.audits.first.user.username unless record.audits.first.nil?
+  end
+
+  def updated_by(record)
+    record.audits.last.user.username unless record.audits.last.nil?
   end
 end

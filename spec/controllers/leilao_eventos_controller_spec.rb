@@ -123,4 +123,17 @@ RSpec.describe LeilaoEventosController, type: :controller do
 
   end
 
+  describe "GET lista_eventos" do
+    it 'renderiza template :mostra_modal' do
+      get :lista_eventos, xhr: true
+      expect(response).to render_template('ajax/application/mostra_modal.js.erb')
+    end
+
+    it 'renderiza json' do
+      get :lista_eventos, xhr: true
+      expect(response).to_not be_nil
+    end
+
+  end
+
 end

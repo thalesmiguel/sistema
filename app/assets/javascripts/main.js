@@ -236,7 +236,7 @@ function carrega_datatable(modelo, modelo_singular, campos, campos_sem_busca_ord
       { orderable: false, targets: campos_sem_busca_ordenacao },
       { searchable: false, targets: campos_sem_busca_ordenacao }
     ],
-    language: { sUrl: "datatable_i18n" },
+    language: { sUrl: "/datatable_i18n" },
     drawCallback: function( settings ) {
       $('.paginate_button').addClass("waves-effect waves-light");
       $('select').not('.yadcf-filter').material_select();
@@ -269,7 +269,7 @@ function carrega_datatable_sem_controles(modelo, modelo_singular, campos, campos
       { orderable: false, targets: campos_sem_busca_ordenacao },
       { searchable: false, targets: campos_sem_busca_ordenacao }
     ],
-    language: { sUrl: "datatable_i18n" },
+    language: { sUrl: "/datatable_i18n" },
     drawCallback: function( settings ) {
       $('.paginate_button').addClass("waves-effect waves-light");
       $('select').not('.yadcf-filter').material_select();

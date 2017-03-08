@@ -4,7 +4,7 @@ class LeiloesController < ApplicationController
   def index
     respond_to do |format|
       format.js { render file: "ajax/leiloes/lista_leiloes.js.erb" }
-      format.json { renderiza_datatable }
+      format.json { renderiza_datatable(options: { id: flash[:id_datatables] }) }
     end
   end
 
@@ -22,7 +22,7 @@ class LeiloesController < ApplicationController
     @estados = Estado.all
     @cidades = @leilao.cidade ? Cidade.where("estado_id = ?", @leilao.cidade.estado_id) : Cidade.where("estado_id = ?", @estados.first)
     respond_to do |format|
-      format.html
+      format.html { render :form }
     end
   end
 
@@ -64,6 +64,11 @@ class LeiloesController < ApplicationController
     if @deleta_logo_leilao.save
       renderiza_crud_js(@deleta_logo_leilao, 'Logomarca excluída com sucesso')
     end
+  end
+
+  def lista_leiloes_anteriores
+    flash[:id_datatables] = params[:id]
+    mostra_modal(model: "leilao_leiloes_anteriores", caminho: "lista_leiloes_anteriores")
   end
 
   private

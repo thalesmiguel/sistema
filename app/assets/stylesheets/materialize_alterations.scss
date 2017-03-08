@@ -1051,3 +1051,24 @@ input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]),
 .no-select {
   cursor: default;
 }
+
+.waves-effect {
+  z-index: auto !important;
+}
+
+table.condensed td {
+  padding: 5px 5px;
+}
+
+.pointer {
+  cursor: pointer !important;
+}
+
+input[type=text][readonly="readonly"] {
+  color: inherit;
+  border-bottom: 1px solid #9e9e9e;
+}
+
+input[type=text][readonly="readonly"] + label {
+  color: #9e9e9e;
+}

@@ -1,0 +1,45 @@
+<div class="card p-t-15 p-b-70 p-l-30 p-r-30 m-b-0 m-t-0">
+
+  <table id="leiloes_anteriores-table" class="highlight bordered" data-source="<%= leiloes_path(format: :json) %>">
+    <thead>
+      <tr>
+        <th width="18%">Nome <%= filtro_dt %> </th>
+        <th width="18%">Recinto <%= filtro_dt %> </th>
+        <th width="10%">Evento <%= filtro_dt %> </th>
+        <th width="18%">Local <%= filtro_dt %> </th>
+        <th width="7%">UF <%= filtro_dt %> </th>
+        <th width="10%">Data <%= filtro_dt %> </th>
+        <th width="9%">Hora <%= filtro_dt %> </th>
+        <th width="10%">Categoria <%= filtro_dt %> </th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+</div>
+
+<script type="text/javascript">
+  $(document).off("dblclick", "#leiloes_anteriores-table tr[id^=leilao]");
+  $(document).on("dblclick", "#leiloes_anteriores-table tr[id^=leilao]", function(){
+    let id_hidden_input = $(this).attr("id");
+    let $id = $("#leilao_leilao_anterior_id");
+
+    let modal = $("#leilao_leiloes_anteriores_modal");
+    let nome_input = $("#leilao_leilao_anterior_nome");
+    let nome_label = $("label[for='leilao_leilao_anterior_nome']");
+
+    let $row = $(this).closest("tr");
+    let $nome = $row.find("td:nth-child(1)");
+
+    $id.val(id_hidden_input.replace("leilao_", ""));
+
+    $.each($nome, function() {
+      nome_input.val($nome.text());
+    });
+
+    nome_label.addClass("active");
+    $("#salvar_leilao").prop("disabled", false)
+    modal.closeModal();
+  });
+</script>

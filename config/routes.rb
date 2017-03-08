@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   get 'cidades/update_cidades', as: 'update_cidades'
   get 'bancos/lista_bancos', as: 'lista_bancos'
+  get 'leilao_eventos/lista_eventos', as: 'lista_eventos'
 
   scope path_names: { new: "novo", edit: "editar" } do
     resources :estados, except: [:show]
@@ -56,6 +57,7 @@ Rails.application.routes.draw do
 
     put 'leiloes/:id/seleciona_leilao', to: 'leiloes#seleciona_leilao', as: 'seleciona_leilao'
     put 'leiloes/:id/deleta_logo_leilao', to: 'leiloes#deleta_logo_leilao', as: 'deleta_logo_leilao'
+    get 'leiloes/:id/lista_leiloes_anteriores', to: 'leiloes#lista_leiloes_anteriores', as: 'lista_leiloes_anteriores'
     resources :leiloes, except: [:show] do
       resources :leilao_observacoes, except: [:show]
       put 'leilao_observacoes/:id/altera_status', to: 'leilao_observacoes#altera_status', as: 'altera_status_observacao'

@@ -1,11 +1,13 @@
 <div class="p-t-0 p-b-20 p-l-30 p-r-30">
-  <table id="leilao_observacoes-table" class="highlight bordered"
+  <table id="leilao_observacoes-table" class="highlight bordered condensed"
   data-source="<%= leilao_leilao_observacoes_path(@leilao_observacoes, leilao_id: @leilao, format: :json) %>">
     <thead>
       <tr>
-        <th width="10%">Data</th>
-        <th width="80%">Descrição</th>
-        <th width="10%">Ativo</th>
+        <th width="15%">Data</th>
+        <th width="60%">Descrição</th>
+        <th width="10%">Criado por</th>
+        <th width="10%">Alterado por</th>
+        <th width="5%">Ativo</th>
       </tr>
     </thead>
     <tbody>
@@ -17,7 +19,7 @@
       <div class="col s6 valign">
       </div>
       <div class="col s6 valign right-align">
-        <%= link_to_new new_leilao_leilao_observacao_path(@leilao), true, "", "Nova Observação" if can? :manage, :leilao %>
+        <%= link_to_new new_leilao_leilao_observacao_path(@leilao), true, "", "Nova Obs" if can? :manage, :leilao %>
       </div>
     </div>
   </div>

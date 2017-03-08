@@ -1,0 +1,16 @@
+<div class="row card-content p-b-0 p-t-0 p-l-30 p-r-30">
+
+  <div class="col s12">
+    <ul class="tabs">
+      <li class="tab col s6"><a class="active" href="#leiloes_dados_adicionais">Dados Adicionais</a></li>
+      <li class="tab col s6"><a href="#leilao_detalhes">Detalhes</a></li>
+    </ul>
+  </div>
+  <div id="leiloes_dados_adicionais" class="col s12 p-t-30">
+    <%= render partial: 'dados_adicionais', locals: { f: f } %>
+  </div>
+  <div id="leilao_detalhes" class="col s12">
+    <%= render partial: 'detalhes', locals: { f: f } %>
+  </div>
+
+</div>

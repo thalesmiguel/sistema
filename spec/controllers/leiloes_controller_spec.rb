@@ -66,7 +66,7 @@ RSpec.describe LeiloesController, type: :controller do
 
     it 'mostra a tela de visualização' do
       get :edit, params: { id: leilao }
-      expect(response).to render_template(:edit)
+      expect(response).to render_template(:form)
     end
 
     it 'atribui o leilao selecionada para @leilao' do
@@ -138,6 +138,21 @@ RSpec.describe LeiloesController, type: :controller do
     it 'renderiza template seleciona_leilao.js.erb' do
       put :seleciona_leilao, xhr: true, params: { id: leilao }
       expect(response).to render_template("ajax/leiloes/seleciona_leilao.js.erb")
+    end
+  end
+
+  describe "GET lista_leiloes" do
+    let(:leilao) { FactoryGirl.create(:leilao) }
+    let(:leilao_anterior) { FactoryGirl.create(:leilao) }
+
+    it 'renderiza template :mostra_modal' do
+      get :lista_leiloes_anteriores, xhr: true, params: { id: leilao }
+      expect(response).to render_template('ajax/application/mostra_modal.js.erb')
+    end
+
+    it 'renderiza json' do
+      get :lista_leiloes_anteriores, xhr: true, params: { id: leilao }
+      expect(response).to_not be_nil
     end
   end
 end

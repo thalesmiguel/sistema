@@ -73,4 +73,12 @@ class Leilao < ApplicationRecord
     (super == "" || super.nil?) ? nome : super
   end
 
+  def evento_nome
+    leilao_evento.nil? ? "" : leilao_evento.nome
+  end
+
+  def leilao_anterior_nome
+    leilao_anterior.nil? ? "" : leilao_anterior.nome
+  end
+
 end
