@@ -32,7 +32,7 @@
 
       <div class="modal-footer">
         <%= button_tag "Salvar", class:"btn waves-effect waves-light" if can? :manage, :alerta %>
-        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#alerta_modal').closeModal()", type: 'button' %>
+        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "fecha_modal('#alerta_modal')", type: 'button' %>
 
         <% if !@alerta.new_record? %>
           <%= link_to "Excluir", cliente_alerta_path(@cliente, @alerta), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',

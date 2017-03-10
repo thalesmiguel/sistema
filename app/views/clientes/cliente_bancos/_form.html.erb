@@ -7,11 +7,11 @@
           <div class="input-field col s12 m3">
             <%= f.hidden_field :banco_id %>
 
-            <%= f.text_field :banco_codigo, disabled: true %>
+            <%= f.text_field :banco_codigo, readonly: true, class: "pointer" %>
             <%= f.label :banco_codigo, "Cód. Banco" %>
           </div>
           <div class="input-field col s12 m3">
-            <%= f.text_field :banco_nome, disabled: true %>
+            <%= f.text_field :banco_nome, readonly: true %>
             <%= f.label :banco_nome, "Banco" %>
           </div>
           <div class="input-field col s12 m3">
@@ -84,7 +84,7 @@
 
       <div class="modal-footer">
         <%= button_tag "Salvar", class:"btn waves-effect waves-light", id:"salvar-cliente-banco" if can? :manage, :cliente_banco %>
-        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#cliente_banco_modal').closeModal()", type: 'button' %>
+        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "fecha_modal('#cliente_banco_modal')", type: 'button' %>
         <%#= button_tag "Cancelar", class:"btn-flat waves-effect waves-light btn-cancelar ", type: :reset %>
 
           <% if !@cliente_banco.new_record? %>

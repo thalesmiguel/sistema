@@ -48,7 +48,7 @@
 
       <div class="modal-footer">
         <%= button_tag "Salvar", class:"btn waves-effect waves-light" if can? :manage, :canal %>
-        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#canal_modal').closeModal()", type: 'button' %>
+        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "fecha_modal('#canal_modal')", type: 'button' %>
 
         <% if !@canal.new_record? %>
           <%= link_to "Excluir", canal_path(@canal), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',

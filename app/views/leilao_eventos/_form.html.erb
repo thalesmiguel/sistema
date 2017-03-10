@@ -23,7 +23,7 @@
 
       <div class="modal-footer">
         <%= button_tag "Salvar", class:"btn waves-effect waves-light" if can? :manage, :leilao_evento %>
-        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#leilao_evento_modal').closeModal()", type: 'button' %>
+        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "fecha_modal('#leilao_evento_modal')", type: 'button' %>
 
         <% if !@leilao_evento.new_record? %>
           <%= link_to "Excluir", leilao_evento_path(@leilao_evento), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',

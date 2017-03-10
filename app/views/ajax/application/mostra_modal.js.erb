@@ -1,10 +1,14 @@
 var modal = $("#<%= model %>_modal");
 
 modal.html("<%= escape_javascript(render partial: caminho ) %>");
-modal.openModal();
-
-Materialize.updateTextFields();
-$('select').not('.yadcf-filter').material_select();
-valida_formulario();
-mascaras();
-limita_text_area();
+// modal.openModal();
+modal.modal({
+  ready: (modal, trigger) => {
+    Materialize.updateTextFields();
+    $('select').not('.yadcf-filter').material_select();
+    valida_formulario();
+    mascaras();
+    limita_text_area();
+  }
+});
+modal.modal("open");

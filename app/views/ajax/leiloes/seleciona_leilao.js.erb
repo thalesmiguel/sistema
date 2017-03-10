@@ -9,4 +9,5 @@ menu_editar.html("<%= escape_javascript(link_to_icon edit_leilao_path(leilao_sel
 home_leilao_selecionado.html("<%= escape_javascript(render partial: '/home/leilao_selecionado') %>");
 home_selecionar_leilao.remove();
 
-modal.closeModal();
+modal.modal();
+modal.modal("close");

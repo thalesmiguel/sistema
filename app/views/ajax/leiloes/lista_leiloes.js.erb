@@ -4,4 +4,5 @@ modal.html("<%= escape_javascript(render partial: 'leiloes') %>");
 let campos = ["nome","evento","recinto","cidade_nome","estado_sigla","data_inicio","hora_inicio","categoria"];
 carrega_datatable_filtro("leiloes","leilao", campos, []);
 
-modal.openModal();
+modal.modal();
+modal.modal("open");

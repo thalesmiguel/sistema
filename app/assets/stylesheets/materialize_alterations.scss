@@ -26,6 +26,7 @@ $mediaMinWidth: 960px;
   nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
     height: 100px !important;
     line-height: 100px !important;
+    min-height: inherit;
   }
 }
 
@@ -40,6 +41,7 @@ $mediaMinWidth: 960px;
   footer.page-footer .footer-copyright {
     height: 25px;
     line-height: 25px;
+    min-height: inherit;
   }
 }
 
@@ -54,6 +56,7 @@ $mediaMinWidth: 960px;
   footer.page-footer .footer-copyright {
     height: 35px;
     line-height: 35px;
+    min-height: inherit;
   }
 }
 
@@ -804,7 +807,7 @@ body.small-sidebar {
 }
 
 .input-field label.active {
-  font-size: 1em;
+  font-size: 1em !important;
 }
 
 label {
@@ -902,11 +905,17 @@ span.name, span.email {
 }
 
 // Vertical Tabs
+.tabs .tab a {
+  padding: inherit;
+}
+
 .tabs-vertical .tabs {
   height: auto;
   -ms-flex-direction: column;
   -webkit-flex-direction: column;
-  flex-direction: column; }
+  flex-direction: column;
+}
+
 .tabs-vertical .tab {
   text-indent: 1em;
   width: 100%;
@@ -922,31 +931,41 @@ span.name, span.email {
   padding: 0;
   margin: 0;
   text-transform: uppercase;
-  text-overflow: ellipsis; }
-  .tabs-vertical .tab .active {
-    -moz-transition: border-color .5s ease;
-    -o-transition: border-color .5s ease;
-    -webkit-transition: border-color .5s ease;
-    transition: border-color .5s ease;
-    border-right: 5px solid darken($secondary-color, 10%) ;
-    color: darken($secondary-color, 10%); }
-  .tabs-vertical .tab a {
-    color: $secondary-color;
-    display: block;
-    width: 100%;
-    height: 100%;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    -webkit-transition: color 0.28s ease;
-    -moz-transition: color 0.28s ease;
-    -o-transition: color 0.28s ease;
-    -ms-transition: color 0.28s ease;
-    transition: color 0.28s ease; }
-    .tabs-vertical .tab a:hover {
-      color: lighten($secondary-color, 8%); }
-  .tabs-vertical .tab.disabled a {
-    color: #9e9e9e;
-    cursor: default; }
+  text-overflow: ellipsis;
+}
+
+.tabs-vertical .tab .active {
+  -moz-transition: border-color .5s ease;
+  -o-transition: border-color .5s ease;
+  -webkit-transition: border-color .5s ease;
+  transition: border-color .5s ease;
+  border-right: 5px solid lighten($primary-color, 10%) ;
+  color: lighten($primary-color, 10%);
+}
+
+.tabs-vertical .tab a {
+  color: $secondary-color;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-transition: color 0.28s ease;
+  -moz-transition: color 0.28s ease;
+  -o-transition: color 0.28s ease;
+  -ms-transition: color 0.28s ease;
+  transition: color 0.28s ease;
+}
+
+.tabs-vertical .tab a:hover {
+  color: darken($secondary-color, 8%);
+}
+
+.tabs-vertical .tab.disabled a {
+  color: #9e9e9e;
+  cursor: default;
+}
+
 .tabs-vertical .indicator {
   display: none; }
 // Vertical Tabs
@@ -1044,6 +1063,10 @@ input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]),
   text-align: -webkit-right;
 }
 
+.card .card-content {
+  padding: 20px;
+}
+
 .card .card-content .card-title i {
   line-height: 32px;
 }
@@ -1054,6 +1077,7 @@ input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]),
 
 .waves-effect {
   z-index: auto !important;
+  will-change: opacity, transform;
 }
 
 table.condensed td {
@@ -1071,4 +1095,44 @@ input[type=text][readonly="readonly"] {
 
 input[type=text][readonly="readonly"] + label {
   color: #9e9e9e;
+}
+
+textarea {
+  height: 7rem;
+  max-height: 7rem;
+  max-width: 100%;
+  border-left: initial;
+  border-right: initial;
+  border-top: initial;
+}
+
+textarea:focus {
+  outline: initial;
+}
+
+.tabs {
+  background-color: transparent;
+  display: flex;
+}
+
+.select-wrapper span.caret {
+  color: initial;
+  position: absolute;
+  right: 0;
+  top: 16px;
+  bottom: initial;
+  font-size: 10px;
+  line-height: inherit;
+}
+
+nav .button-collapse {
+  margin: 0 10px;
+}
+
+nav .button-collapse i {
+  font-size: 2.7rem;
+}
+
+.brand-logo {
+  margin: 0 !important;
 }

@@ -45,7 +45,7 @@
 
       <div class="modal-footer">
         <%= button_tag "Salvar", class:"btn waves-effect waves-light" if can? :manage, :pagamento_condicao %>
-        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#pagamento_condicao_modal').closeModal()", type: 'button' %>
+        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "fecha_modal('#pagamento_condicao_modal')", type: 'button' %>
 
         <% if !@pagamento_condicao.new_record? %>
           <%= link_to "Excluir", pagamento_condicao_path(@pagamento_condicao), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',

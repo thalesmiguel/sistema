@@ -19,7 +19,7 @@
 
       <div class="modal-footer">
         <%= button_tag "Salvar", class:"btn waves-effect waves-light" if can? :manage, :banco %>
-        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#banco_modal').closeModal()", type: 'button' %>
+        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "fecha_modal('#banco_modal')", type: 'button' %>
 
         <% if !@banco.new_record? %>
           <%= link_to "Excluir", banco_path(@banco), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',

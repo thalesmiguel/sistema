@@ -1,16 +1,33 @@
-<div class="row card-content p-b-0 p-t-0 p-l-30 p-r-30">
-
-  <div class="col s12">
-    <ul class="tabs">
-      <li class="tab col s6"><a class="active" href="#leiloes_dados_adicionais">Dados Adicionais</a></li>
-      <li class="tab col s6"><a href="#leilao_detalhes">Detalhes</a></li>
-    </ul>
-  </div>
-  <div id="leiloes_dados_adicionais" class="col s12 p-t-30">
+<div class="card-tabs">
+  <ul class="tabs tabs-fixed-width">
+    <li class="tab"><a href="#leiloes_dados_adicionais" class="active">Dados Adicionais</a></li>
+    <li class="tab"><a class="" href="#leilao_detalhes">Detalhes</a></li>
+  <div class="indicator"></div></ul>
+</div>
+<div class="card-content">
+  <div id="leiloes_dados_adicionais" class="active" style="display: block;">
     <%= render partial: 'dados_adicionais', locals: { f: f } %>
   </div>
-  <div id="leilao_detalhes" class="col s12">
+  <div id="leilao_detalhes" style="display: none;">
     <%= render partial: 'detalhes', locals: { f: f } %>
   </div>
+</div>
 
+
+<div class="card blue">
+  <div class="card-content white-text">
+    <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+  </div>
+  <div class="card-tabs">
+    <ul class="tabs tabs-fixed-width tabs-transparent">
+      <li class="tab"><a href="#test1" class="active">Test 1</a></li>
+      <li class="tab"><a class="" href="#test2">Test 2</a></li>
+      <li class="tab"><a href="#test3" class="">Test 3</a></li>
+    <div class="indicator" style="right: 347px; left: 0px;"></div></ul>
+  </div>
+  <div class="card-content blue lighten-5">
+    <div id="test1" class="active" style="display: block;">Test 1</div>
+    <div id="test2" class="" style="display: none;">Test 2</div>
+    <div id="test3" class="" style="display: none;">Test 3</div>
+  </div>
 </div>

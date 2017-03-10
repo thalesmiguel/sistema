@@ -23,3 +23,10 @@
     <%= label_tag nil, '<i class="material-icons">clear</i>'.html_safe, id: 'limpa_leilao_anterior', class: 'pointer', style: 'left: 90%; text-align: right;' %>
   </div>
 </div>
+
+<div class="row">
+  <div class="input-field col s12">
+    <%= f.text_area :observacao_nota_mapa, rows: 4, class: 'browser-dafault limita-text-area' %>
+    <%= f.label :observacao_nota_mapa, "Observações para NOTAS DE LEILÃO e MAPA DE COMPRAS" %>
+  </div>
+</div>

@@ -117,7 +117,7 @@
 
       <div class="modal-footer">
         <%= button_tag "Salvar", class:"btn waves-effect waves-light" if can? :manage, :leiloeiro %>
-        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#leiloeiro_modal').closeModal()", type: 'button' %>
+        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "fecha_modal('#leiloeiro_modal')", type: 'button' %>
 
         <% if !@leiloeiro.new_record? %>
           <%= link_to "Excluir", leiloeiro_path(@leiloeiro), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',

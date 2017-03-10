@@ -1,18 +1,21 @@
-$(document).on('ready', function(){
+$(document).on('ready', () => {
   $(document).off("dblclick", "#cliente_bancos-table tr[id^=cliente_banco]")
-  $(document).on("dblclick", "#cliente_bancos-table tr[id^=cliente_banco]", function(){
-    var id = $(this).attr("id");
-    var cliente = $("#cliente_bancos-table").data('cliente-cliente_banco')
-    var url = "clientes/" + cliente + "/cliente_bancos/" + id.replace("cliente_banco_", "") + "/editar"
+  $(document).on("dblclick", "#cliente_bancos-table tr[id^=cliente_banco]", (e) => {
+    let id = $(e.currentTarget).attr("id");
+    let cliente = $("#cliente_bancos-table").data('cliente-cliente_banco')
+    let url = "clientes/" + cliente + "/cliente_bancos/" + id.replace("cliente_banco_", "") + "/editar"
     $.ajax({ type: "GET", url: url });
   });
 
-  $(document).off("dblclick", "#cliente_banco_banco_codigo")
-  $(document).on("dblclick", "#cliente_banco_banco_codigo", function(){
-    var url = "/bancos/lista_bancos"
+  $(document).off("click", "#cliente_banco_banco_codigo")
+  $(document).on("click", "#cliente_banco_banco_codigo", () => {
+    let url = "/bancos/lista_bancos"
     $.ajax({ type: "GET", url: url,
-      success: function(){
-        carrega_datatable("bancos","banco", ["codigo","nome"], []);
+      success: () => {
+        setTimeout(() => {
+          carrega_datatable("bancos","banco", ["codigo","nome"], []);
+        }, 200)
+
       }
     });
   });
@@ -20,9 +23,9 @@ $(document).on('ready', function(){
   cidades_dropdown('cliente_banco');
 
   $(document).off("click", "a[href='#cliente-cliente_bancos'].standby")
-  $(document).on("click", "a[href='#cliente-cliente_bancos'].standby", function(){
+  $(document).on("click", "a[href='#cliente-cliente_bancos'].standby", (e) => {
     var campos = ["banco_codigo","banco_nome","agencia","conta_corrente","cidade_nome","estado_sigla","correntista_nome","correntista_cpf_cnpj","observacao","created_at","primario","ativo"];
     carrega_datatable_filtro("cliente_bancos","cliente_banco", campos, []);
-    $(this).removeClass("standby");
+    $(e.currentTarget).removeClass("standby");
   })
 });

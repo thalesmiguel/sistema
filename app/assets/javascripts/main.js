@@ -51,11 +51,12 @@ $(function() {
     message = link.attr('data-confirm');
     html = "<div id=\"modal1\" class=\"modal\" style=\"z-index: 1003; width: 30%; display: block; opacity: 1; transform: scaleX(1); top: 10%;\"> <div class=\"modal-content\"><h4>Atenção</h4><p>" + message + "</p></div><div class=\"modal-footer\"><a class=\"modal-action modal-close btn danger-color waves-effect waves-light confirm\">Confirmar</a><a class=\"modal-action modal-close waves-effect waves-light btn secondary-color close m-r-5\">Cancelar</a></div></div>";
     $('body').append(html);
-    $('#modal1').openModal({
+    $('#modal1').modal({
       complete: function() {
         $('#modal1').remove();
       }
     });
+    $('#modal1').modal("open");
     return $('#modal1 .confirm').on('click', function() {
       return $.rails.confirmed(link);
     });
@@ -281,78 +282,6 @@ function carrega_datatable_sem_controles(modelo, modelo_singular, campos, campos
   });
 };
 
-// function carrega_datatable_id_automatico(id_tabela, classe_formulario, classe_excluir, colunas_nao_clicaveis, colunas_com_dados) {
-//
-//   var lista_colunas_com_dados = []
-//   $.each(colunas_com_dados, function( index, value ) {
-//     lista_colunas_com_dados.push({data: value.toString()})
-//   });
-//
-//   var tabela = $(id_tabela).dataTable({
-//     processing: true,
-//     serverSide: true,
-//     ajax: $(id_tabela).data('source'),
-//     pagingType: "full_numbers",
-//     autoWidth: false,
-//     columnDefs: [ { orderable: false, targets: colunas_nao_clicaveis } ],
-//     columns: lista_colunas_com_dados,
-//     language: {
-//       sUrl: "datatable_i18n"
-//     },
-//     drawCallback: function( settings ) {
-//       $('.paginate_button').addClass("waves-effect");
-//       $('select').material_select();
-//       // $('.tooltipped').tooltip({delay: 1000});
-//     },
-//   });
-//
-//   $(document).on('ajax:complete', classe_formulario, function(){
-//     tabela.fnDraw();
-//     // tabela.fnStandingRedraw();
-//   });
-//   $(document).on('ajax:complete', classe_excluir, function(){
-//     tabela.fnDraw();
-//   });
-// };
-
-// function carrega_datatable_id_automatico_sem_controles(id_tabela, classe_formulario, classe_excluir, colunas_nao_clicaveis, colunas_com_dados) {
-//
-//   var lista_colunas_com_dados = []
-//   $.each(colunas_com_dados, function( index, value ) {
-//     lista_colunas_com_dados.push({data: value.toString()})
-//   });
-//
-//   var tabela = $(id_tabela).dataTable({
-//     paging:   false,
-//     ordering: true,
-//     info:     false,
-//     searching:   false,
-//     processing: true,
-//     serverSide: true,
-//     ajax: $(id_tabela).data('source'),
-//     pagingType: "full_numbers",
-//     autoWidth: false,
-//     columnDefs: [ { orderable: false, targets: colunas_nao_clicaveis } ],
-//     columns: lista_colunas_com_dados,
-//     language: {
-//       sUrl: "datatable_i18n"
-//     },
-//     drawCallback: function( settings ) {
-//       $('.paginate_button').addClass("waves-effect");
-//       $('select').material_select();
-//       // $('.tooltipped').tooltip({delay: 1000});
-//     },
-//   });
-//
-//   $(document).on('ajax:complete', classe_formulario, function(){
-//     tabela.fnDraw();
-//     // tabela.fnStandingRedraw();
-//   });
-//   $(document).on('ajax:complete', classe_excluir, function(){
-//     tabela.fnDraw();
-//   });
-// };
-
 function mascaras() {
   $(".data").unmask();
   $(".data_hora").unmask();
@@ -388,4 +317,9 @@ function cidades_dropdown(model){
       }
     });
   });
+}
+
+let fecha_modal = (modelo) => {
+  $(modelo).modal();
+  $(modelo).modal("close");
 }

@@ -45,7 +45,7 @@
 
       <div class="modal-footer">
         <%= button_tag "Salvar", class:"btn waves-effect waves-light" if can? :manage, :bandeira %>
-        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#bandeira_modal').closeModal()", type: 'button' %>
+        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "fecha_modal('#bandeira_modal')", type: 'button' %>
 
         <% if !@bandeira.new_record? %>
           <%= link_to "Excluir", bandeira_path(@bandeira), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',

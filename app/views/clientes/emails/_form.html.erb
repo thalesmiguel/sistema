@@ -38,7 +38,7 @@
 
       <div class="modal-footer">
         <%= button_tag "Salvar", class:"btn waves-effect waves-light" if can? :manage, :email %>
-        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#email_modal').closeModal()", type: 'button' %>
+        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "fecha_modal('#email_modal')", type: 'button' %>
 
         <% if !@email.new_record? %>
           <%= link_to "Excluir", cliente_email_path(@cliente, @email), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',

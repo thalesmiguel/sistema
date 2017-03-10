@@ -54,7 +54,7 @@
       </div>
       <div class="modal-footer">
         <%= button_tag "Salvar", class:"btn waves-effect waves-light" %>
-        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#user_modal').closeModal()", type: 'button' %>
+        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "fecha_modal('#user_modal')", type: 'button' %>
 
         <% if !@user.new_record? %>
           <%= link_to "Excluir", user_path(@user), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',

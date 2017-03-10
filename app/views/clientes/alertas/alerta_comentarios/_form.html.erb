@@ -13,7 +13,7 @@
 
       <div class="modal-footer">
         <%= button_tag "Salvar", class:"btn waves-effect waves-light" if can? :manage, :alerta_comentario %>
-        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#alerta_comentario_modal').closeModal()", type: 'button' %>
+        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "fecha_modal('#alerta_comentario_modal')", type: 'button' %>
 
         <% if !@alerta_comentario.new_record? %>
           <%= link_to "Excluir", alerta_alerta_comentario_path(@alerta, @alerta_comentario), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',

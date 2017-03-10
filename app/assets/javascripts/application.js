@@ -14,7 +14,8 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require extenso
-//= require materialize-sprockets
+//= require materialize
+
 //= require pace.min
 
 //= require dataTables/jquery.dataTables

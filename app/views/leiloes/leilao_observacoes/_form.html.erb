@@ -14,7 +14,7 @@
 
       <div class="modal-footer">
         <%= button_tag "Salvar", class:"btn waves-effect waves-light" if can? :manage, :leilao_observacao %>
-        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#leilao_observacao_modal').closeModal()", type: 'button' %>
+        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "fecha_modal('#leilao_observacao_modal')", type: 'button' %>
 
         <% if !@leilao_observacao.new_record? %>
           <%= link_to "Excluir", leilao_leilao_observacao_path(@leilao, @leilao_observacao), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',

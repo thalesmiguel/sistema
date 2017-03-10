@@ -1,4 +1,4 @@
-<div class="card-panel p-b-30 p-l-30 p-r-30">
+<div class="card-panel p-b-0 p-t-0 p-l-30 p-r-30">
   <div class="row m-b-0">
     <div class="valign-wrapper">
 
@@ -163,13 +163,11 @@
                 </div>
               </div>
 
-
-              <div id="cliente-informacoes" class="row bordas p-15">
+              <div id="cliente-informacoes" class="row bordas p-b-15">
                 <% unless @cliente.new_record? %>
                   <div id="cliente-tabs">
-
-                    <div class="col s12">
-                      <ul class="tabs">
+                    <div class="card-tabs">
+                      <ul class="tabs tabs-fixed-width">
                         <li class="tab col s3"><a href="#cliente-enderecos" class="active">Endereços</a></li>
                         <li class="tab col s3"><a href="#cliente-telefones" class="standby">Telefones</a></li>
                         <li class="tab col s3"><a href="#cliente-emails" class="standby">E-mails</a></li>
@@ -179,38 +177,40 @@
                         <li class="tab col s3"><a href="#cliente-lancar_autorizados" class="standby">Autorizados</a></li>
                         <li class="tab col s3"><a href="#cliente-racas" class="standby">Raças</a></li>
                         <li class="tab col s3"><a href="#cliente-empresas" class="standby">Empresas</a></li>
+                        <div class="indicator"></div>
                       </ul>
                     </div>
-                    <div id="cliente-enderecos" class="col s12 p-t-20"></div>
-                    <div id="cliente-telefones" class="col s12 p-t-20"></div>
-                    <div id="cliente-emails" class="col s12 p-t-20"></div>
-                    <div id="cliente-fazendas" class="col s12 p-t-20"></div>
-                    <div id="cliente-cliente_bancos" class="col s12 p-t-20"></div>
-                    <div id="cliente-referencias" class="col s12 p-t-20"></div>
-                    <div id="cliente-lancar_autorizados" class="col s12 p-t-20"></div>
-                    <div id="cliente-racas" class="col s12 p-t-20"></div>
-                    <div id="cliente-empresas" class="col s12 p-t-20"></div>
+                    <div class="card-content">
+                      <div id="cliente-enderecos" class="active col s12 p-t-20" style="display: block;"></div>
+                      <div id="cliente-telefones" class="col s12 p-t-20" style="display: none;"></div>
+                      <div id="cliente-emails" class="col s12 p-t-20" style="display: none;"></div>
+                      <div id="cliente-fazendas" class="col s12 p-t-20" style="display: none;"></div>
+                      <div id="cliente-cliente_bancos" class="col s12 p-t-20" style="display: none;"></div>
+                      <div id="cliente-referencias" class="col s12 p-t-20" style="display: none;"></div>
+                      <div id="cliente-lancar_autorizados" class="col s12 p-t-20" style="display: none;"></div>
+                      <div id="cliente-racas" class="col s12 p-t-20" style="display: none;"></div>
+                      <div id="cliente-empresas" class="col s12 p-t-20" style="display: none;"></div>
+                    </div>
                   </div>
                 <% end %>
               </div>
 
-            </div>
+              <%= button_tag "Salvar", class:"btn waves-effect waves-light btn-right" %>
+              <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5 btn-right", type: 'reset' %>
 
-            <%= button_tag "Salvar", class:"btn waves-effect waves-light btn-right" %>
-            <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5 btn-right", type: 'reset' %>
+              <% if !cliente.new_record? %>
+                <% if cliente.ativo %>
+                  <%= link_to "Inativar", altera_status_cliente_path(cliente), method: 'put', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5 btn-right',
+                        data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a inativação?')) } if can? :manage, :cliente %>
+                <% else %>
+                  <%= link_to "Ativar", altera_status_cliente_path(cliente), method: 'put', remote: true, class: 'btn warning-color waves-effect waves-light m-r-5 btn-right',
+                        data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a ativação?')) } if can? :manage, :cliente %>
+                <% end %>
 
-            <% if !cliente.new_record? %>
-              <% if cliente.ativo %>
-                <%= link_to "Inativar", altera_status_cliente_path(cliente), method: 'put', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5 btn-right',
-                      data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a inativação?')) } if can? :manage, :cliente %>
-              <% else %>
-                <%= link_to "Ativar", altera_status_cliente_path(cliente), method: 'put', remote: true, class: 'btn warning-color waves-effect waves-light m-r-5 btn-right',
-                      data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a ativação?')) } if can? :manage, :cliente %>
+                <%= link_to "Excluir", cliente_path(cliente), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5 btn-right',
+                      data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a inativação?')) } if can? :manage, :all %>
               <% end %>
-
-              <%= link_to "Excluir", cliente_path(cliente), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5 btn-right',
-                    data: { confirm: t('.confirm', :default => t("helpers.links.confirm", default: 'Confirmar a inativação?')) } if can? :manage, :all %>
-            <% end %>
+            </div>
           </div>
         </div>
       <% end %>

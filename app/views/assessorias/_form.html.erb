@@ -43,7 +43,7 @@
 
       <div class="modal-footer">
         <%= button_tag "Salvar", class:"btn waves-effect waves-light" if can? :manage, :assessoria %>
-        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "$('#assessoria_modal').closeModal()", type: 'button' %>
+        <%= button_tag "Cancelar", class:"btn-flat waves-effect m-r-5", onclick: "fecha_modal('#assessoria_modal')", type: 'button' %>
 
         <% if !@assessoria.new_record? %>
           <%= link_to "Excluir", assessoria_path(@assessoria), method: 'delete', remote: true, class: 'btn danger-color waves-effect waves-light m-r-5',
