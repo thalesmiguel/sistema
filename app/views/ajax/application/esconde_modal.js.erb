@@ -1,4 +1,5 @@
 var modal = $("#<%= model %>_modal");
-modal.closeModal({out_duration: 500});
+modal.modal({out_duration: 500});
+modal.modal("close");
 
 valida_formulario();

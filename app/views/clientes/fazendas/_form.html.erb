@@ -15,6 +15,11 @@
 
           <div class="row">
             <div class="input-field col s12 m2">
+              <%= f.text_field :cep, class: "cep" %>
+              <%= f.label :cep %>
+            </div>
+
+            <div class="input-field col s12 m2">
               <%= f.select :estado, @estados.collect {|estado| [(estado.nome), estado.id]} %>
               <%= f.label :estado, class: "active" %>
             </div>
@@ -22,11 +27,6 @@
             <div class="input-field col s12 m4">
               <%= f.select :cidade_id, @cidades.collect {|cidade| [cidade.nome, cidade.id]} %>
               <%= f.label :cidade_id, class: "active" %>
-            </div>
-
-            <div class="input-field col s12 m2">
-              <%= f.text_field :cep, class: "cep" %>
-              <%= f.label :cep %>
             </div>
 
             <div class="input-field col s12 m4">
@@ -37,8 +37,8 @@
 
           <div class="row">
             <div class="input-field col s12 m8">
-              <%= f.text_field :endereco %>
-              <%= f.label :endereco %>
+              <%= f.text_field :logradouro %>
+              <%= f.label :logradouro %>
             </div>
 
             <div class="input-field col s12 m4">
@@ -111,13 +111,13 @@
           </fieldset>
         </div>
 
-        <div class="row">
+        <div class="row p-t-15">
           <div class="input-field col s12 m2">
-            <%= text_field_tag 'vendas' %>
+            <%= text_field_tag 'vendas', "", readonly: true %>
             <%= label_tag 'vendas' %>
           </div>
           <div class="input-field col s12 m2">
-            <%= text_field_tag 'compras' %>
+            <%= text_field_tag 'compras', "", readonly: true %>
             <%= label_tag 'compras' %>
           </div>
           <div class="input-field col s12 m2">

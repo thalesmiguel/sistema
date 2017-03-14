@@ -6,7 +6,7 @@ class CreateLeiloeiros < ActiveRecord::Migration[5.0]
       t.string :cpf
       t.string :cnpj
       t.string :sindicato
-      t.string :endereco
+      t.string :logradouro
       t.references :cidade, foreign_key: true
       t.string :cep
       t.string :email

@@ -28,4 +28,12 @@ class ApplicationDatatable < AjaxDatatablesRails::Base
     (1 if boolean == 'verdadeiro') || (0 if boolean == 'falso') || -1
   end
 
+  def created_by(record)
+    record.audits.first.user.username unless record.audits.first.user.nil?
+  end
+
+  def updated_by(record)
+    record.audits.last.user.username unless record.audits.last.user.nil?
+  end
+
 end

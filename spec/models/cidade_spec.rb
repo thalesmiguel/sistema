@@ -28,6 +28,12 @@ RSpec.describe Cidade, type: :model do
       expect(cidade.valid?).to be_truthy
     end
 
+    it 'has_many Bairros' do
+      primeiro_bairro = FactoryGirl.create(:bairro, cidade: cidade)
+      segundo_bairro = FactoryGirl.create(:bairro, cidade: cidade)
+      expect(cidade.bairros).to eq([primeiro_bairro, segundo_bairro])
+    end
+
     it 'has_many Endereços' do
       primeiro_endereco = FactoryGirl.create(:endereco, cidade: cidade, cliente: cliente)
       segundo_endereco = FactoryGirl.create(:endereco, primario: false, cidade: cidade, cliente: cliente)

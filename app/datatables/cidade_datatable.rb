@@ -28,12 +28,4 @@ class CidadeDatatable < ApplicationDatatable
   def get_raw_records
     Cidade.joins(:estado)
   end
-
-  def created_by(record)
-    record.audits.first.user.username unless record.audits.first.nil?
-  end
-
-  def updated_by(record)
-    record.audits.last.user.username unless record.audits.last.nil?
-  end
 end

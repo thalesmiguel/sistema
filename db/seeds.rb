@@ -9,5 +9,3 @@
 user = User.create(username: "thales.miguel", password: "miguel")
 user.add_role("admin")
 
-estado = Estado.create(nome: "São Paulo", sigla: "SP")
-cidade = Cidade.create(nome: "Araçatuba", estado: estado)

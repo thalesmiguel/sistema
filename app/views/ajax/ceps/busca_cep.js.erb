@@ -1,0 +1,41 @@
+let logradouro = $('input[id$="_logradouro"]');
+let logradouro_label = logradouro.parent().find("label");
+
+let complemento = $('input[id$="_complemento"]');
+let complemento_label = complemento.parent().find("label");
+
+let bairro = $('input[id$="_bairro"]');
+let bairro_label = bairro.parent().find("label");
+
+let estado = $('select[id$="_estado"]');
+
+let cidade = $('select[id$="_cidade_id"]');
+
+logradouro.val("<%= @logradouro.nome %>")
+logradouro_label.addClass("active");
+
+complemento.val("<%= @logradouro.complemento %>")
+complemento_label.addClass("active");
+
+bairro.val("<%= @logradouro.bairro.nome %>")
+bairro_label.addClass("active");
+
+estado.val("<%= @logradouro.bairro.cidade.estado.id %>")
+estado.material_select();
+
+let posicao = estado.attr("id").indexOf("_")
+let model = estado.attr("id").substr(0, posicao);
+$.ajax('/cidades/update_cidades', {
+  type: 'GET',
+  data: {
+    estado_id: "<%= @logradouro.bairro.cidade.estado.id %>",
+    model: model,
+  },
+  error: function(jqXHR, textStatus, errorThrown) {
+    console.log("AJAX Error: " + errorThrown);
+  },
+  success: function(data, textStatus, jqXHR) {
+    cidade.val("<%= @logradouro.bairro.cidade.id %>");
+    cidade.material_select();
+  }
+});

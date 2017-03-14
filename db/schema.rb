@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170206134202) do
+ActiveRecord::Schema.define(version: 20170313123937) do
 
   create_table "alerta_comentarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "descricao",  limit: 65535
@@ -63,6 +63,14 @@ ActiveRecord::Schema.define(version: 20170206134202) do
     t.index ["created_at"], name: "index_audits_on_created_at", using: :btree
     t.index ["request_uuid"], name: "index_audits_on_request_uuid", using: :btree
     t.index ["user_id", "user_type"], name: "user_index", using: :btree
+  end
+
+  create_table "bairros", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "nome"
+    t.integer  "cidade_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cidade_id"], name: "index_bairros_on_cidade_id", using: :btree
   end
 
   create_table "bancos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -182,14 +190,14 @@ ActiveRecord::Schema.define(version: 20170206134202) do
     t.string   "caixa_postal"
     t.string   "bairro"
     t.integer  "cidade_id"
-    t.string   "pais"
+    t.string   "pais",         default: "Brasil"
     t.string   "cep"
     t.string   "aos_cuidados"
     t.boolean  "primario",     default: true
     t.boolean  "ativo",        default: true
     t.integer  "cliente_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.index ["cidade_id"], name: "index_enderecos_on_cidade_id", using: :btree
     t.index ["cliente_id"], name: "index_enderecos_on_cliente_id", using: :btree
   end
@@ -206,7 +214,7 @@ ActiveRecord::Schema.define(version: 20170206134202) do
     t.integer  "cidade_id"
     t.string   "cep"
     t.integer  "tipo"
-    t.string   "endereco"
+    t.string   "logradouro"
     t.string   "area"
     t.text     "observacao",         limit: 65535
     t.string   "inscricao_estadual"
@@ -378,7 +386,7 @@ ActiveRecord::Schema.define(version: 20170206134202) do
     t.string   "cpf"
     t.string   "cnpj"
     t.string   "sindicato"
-    t.string   "endereco"
+    t.string   "logradouro"
     t.integer  "cidade_id"
     t.string   "cep"
     t.string   "email"
@@ -424,6 +432,16 @@ ActiveRecord::Schema.define(version: 20170206134202) do
     t.datetime "updated_at",                         null: false
     t.index ["cidade_id"], name: "index_leiloes_on_cidade_id", using: :btree
     t.index ["leilao_evento_id"], name: "index_leiloes_on_leilao_evento_id", using: :btree
+  end
+
+  create_table "logradouros", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "nome"
+    t.integer  "cep"
+    t.string   "complemento"
+    t.integer  "bairro_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["bairro_id"], name: "index_logradouros_on_bairro_id", using: :btree
   end
 
   create_table "pagamento_condicoes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -652,6 +670,7 @@ ActiveRecord::Schema.define(version: 20170206134202) do
   add_foreign_key "alerta_comentarios", "alertas"
   add_foreign_key "alertas", "clientes"
   add_foreign_key "alertas", "users"
+  add_foreign_key "bairros", "cidades"
   add_foreign_key "cidades", "estados"
   add_foreign_key "cliente_bancos", "bancos"
   add_foreign_key "cliente_bancos", "cidades"
@@ -687,6 +706,7 @@ ActiveRecord::Schema.define(version: 20170206134202) do
   add_foreign_key "leiloeiros", "cidades"
   add_foreign_key "leiloes", "cidades"
   add_foreign_key "leiloes", "leilao_eventos"
+  add_foreign_key "logradouros", "bairros"
   add_foreign_key "pagamento_parcelas", "pagamento_condicoes"
   add_foreign_key "planejamento_escalas", "funcoes"
   add_foreign_key "planejamento_escalas", "uniformes"

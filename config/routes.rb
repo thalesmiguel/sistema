@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get 'leilao_eventos/lista_eventos', as: 'lista_eventos'
   get 'subtipos/lista_subtipos', as: 'lista_subtipos'
 
+  get 'ceps/:cep/buscar', to: 'ceps#buscar', as: 'buscar_cep'
+
   scope path_names: { new: "novo", edit: "editar" } do
     resources :estados, except: [:show]
     resources :cidades, except: [:show]

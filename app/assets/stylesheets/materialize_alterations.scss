@@ -635,7 +635,8 @@ legend {
 .modal-grande {
   max-height: 100% !important;
   min-width: 80% !important;
-  overflow: overlay;
+  overflow: visible;
+  // overflow: overlay;
 }
 .modal-medio {
   max-height: 70% !important;

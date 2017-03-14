@@ -8,7 +8,7 @@ class CreateEnderecos < ActiveRecord::Migration[5.0]
       t.string :caixa_postal
       t.string :bairro
       t.references :cidade, foreign_key: true
-      t.string :pais
+      t.string :pais, default: "Brasil"
       t.string :cep
       t.string :aos_cuidados
       t.boolean :primario, default: true

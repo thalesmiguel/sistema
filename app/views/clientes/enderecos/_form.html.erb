@@ -9,6 +9,11 @@
             <%= f.label :tipo, class: "active" %>
           </div>
 
+          <div class="input-field col s12 m2">
+            <%= f.text_field :cep, class: "cep" %>
+            <%= f.label :cep %>
+          </div>
+
           <div class="input-field col s12 m4">
             <%= f.text_field :logradouro, required:"" %>
             <%= f.label :logradouro %>
@@ -22,11 +27,6 @@
           <div class="input-field col s12 m2">
             <%= f.text_field :complemento %>
             <%= f.label :complemento %>
-          </div>
-
-          <div class="input-field col s12 m2">
-            <%= f.text_field :caixa_postal %>
-            <%= f.label :caixa_postal %>
           </div>
         </div>
 
@@ -52,9 +52,10 @@
           </div>
 
           <div class="input-field col s12 m2">
-            <%= f.text_field :cep, class: "cep" %>
-            <%= f.label :cep %>
+            <%= f.text_field :caixa_postal %>
+            <%= f.label :caixa_postal %>
           </div>
+
         </div>
 
         <div class="row">

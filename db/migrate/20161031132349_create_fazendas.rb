@@ -5,7 +5,7 @@ class CreateFazendas < ActiveRecord::Migration[5.0]
       t.references :cidade, foreign_key: true
       t.string :cep
       t.integer :tipo
-      t.string :endereco
+      t.string :logradouro
       t.string :area
       t.text :observacao
       t.string :inscricao_estadual

@@ -3,6 +3,7 @@ class Cidade < ApplicationRecord
   trimmed_fields :nome
 
   belongs_to :estado
+  has_many :bairros
   has_many :enderecos
   has_many :fazendas
   has_many :cliente_bancos

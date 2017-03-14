@@ -51,9 +51,14 @@
         </div>
 
         <div class="row">
-          <div class="input-field col s12 m4">
-            <%= f.text_field :endereco %>
-            <%= f.label :endereco %>
+          <div class="input-field col s12 m3">
+            <%= f.text_field :cep, class: "cep" %>
+            <%= f.label :cep %>
+          </div>
+
+          <div class="input-field col s12 m3">
+            <%= f.text_field :logradouro %>
+            <%= f.label :logradouro %>
           </div>
           <div class="input-field col s12 m3">
             <%= f.select :estado, @estados.collect {|estado| [(estado.nome), estado.id]} %>
@@ -63,17 +68,9 @@
             <%= f.select :cidade_id, @cidades.collect {|cidade| [cidade.nome, cidade.id]} %>
             <%= f.label :cidade_id, class: "active" %>
           </div>
-          <div class="input-field col s12 m2">
-            <%= f.text_field :cep, class: "cep" %>
-            <%= f.label :cep %>
-          </div>
         </div>
 
         <div class="row">
-          <div class="input-field col s12 m4">
-            <%= f.text_field :email %>
-            <%= f.label :email %>
-          </div>
           <div class="input-field col s12 m3">
             <%= f.text_field :telefone %>
             <%= f.label :telefone %>
@@ -82,7 +79,11 @@
             <%= f.text_field :fax %>
             <%= f.label :fax %>
           </div>
-          <div class="input-field col s12 m2">
+          <div class="input-field col s12 m3">
+            <%= f.text_field :email %>
+            <%= f.label :email %>
+          </div>
+          <div class="input-field col s12 m3">
             <%= f.text_field :sigla %>
             <%= f.label :sigla %>
           </div>

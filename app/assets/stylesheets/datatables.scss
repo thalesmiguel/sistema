@@ -29,6 +29,13 @@
   float: right;
 }
 
+.paginate_button.current {
+  background-color: #4db6ac
+}
+.paginate_button.current:hover {
+  background-color: #80cbc4
+}
+
 #leiloes_modal {
   background-color: #fff
 }
